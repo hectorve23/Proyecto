@@ -2,22 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD_Clientes;
-
-import servix.Login_CRUD_empleados.*;
+package servix.Login_CRUD.empleados;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogLoginClientes extends javax.swing.JDialog {
+public class JDialogLoginEmpleados extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginClientes.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEmpleados.class.getName());
 
     /**
      * Creates new form JDialogLoginEmpleados
      */
-    public JDialogLoginClientes(java.awt.Frame parent, boolean modal) {
+    public JDialogLoginEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -39,7 +37,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButtonRecuperarContrasena = new javax.swing.JButton();
-        jButtonCrearCuenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,14 +70,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
             }
         });
         jPanel2.add(jButtonRecuperarContrasena);
-
-        jButtonCrearCuenta.setText("Crear cuenta");
-        jButtonCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCrearCuentaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonCrearCuenta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,10 +105,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -145,7 +130,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogLoginClientes dialog = new JDialogLoginClientes(new javax.swing.JFrame(), true);
+                JDialogLoginEmpleados dialog = new JDialogLoginEmpleados(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -158,7 +143,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCrearCuenta;
     private javax.swing.JButton jButtonRecuperarContrasena;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

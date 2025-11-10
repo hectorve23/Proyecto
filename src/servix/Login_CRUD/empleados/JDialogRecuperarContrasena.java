@@ -2,20 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD_empleados;
+package servix.Login_CRUD.empleados;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogCrearCuenta extends javax.swing.JDialog {
+public class JDialogRecuperarContrasena extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogCrearCuenta.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogRecuperarContrasena.class.getName());
 
     /**
-     * Creates new form JDialogCrearCuenta
+     * Creates new form JDialogRecuperarContrasena
      */
-    public JDialogCrearCuenta(java.awt.Frame parent, boolean modal) {
+    public JDialogRecuperarContrasena(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -70,7 +70,7 @@ public class JDialogCrearCuenta extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogCrearCuenta dialog = new JDialogCrearCuenta(new javax.swing.JFrame(), true);
+                JDialogRecuperarContrasena dialog = new JDialogRecuperarContrasena(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
