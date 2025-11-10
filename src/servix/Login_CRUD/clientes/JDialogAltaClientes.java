@@ -7,6 +7,7 @@ package servix.Login_CRUD.clientes;
 import java.sql.Connection;
 import servix.Cliente;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import servix.ConexionBBDD;
 /**
  *
@@ -144,10 +145,7 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
                                      jTextFieldMail.getText(),
                                      jTextFieldUsuario.getText(),
                                      jTextFieldContrasena.getText());
-            
            
-
-
         }else{
             
         }
@@ -156,6 +154,28 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAltaActionPerformed
     
     public void anadirCliente(Cliente n){
+        PreparedStatement ps = null;
+            nueva = new ConexionBBDD();
+            conexion=nueva.getConnection();
+            
+            String sql = "INSERT into Cliente (nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES(?,?,?,?,?,?,?)";
+            
+        try {
+            ps= conexion.prepareStatement(sql);
+            ps.setString(1, jTextFieldNombre.getText());
+            ps.setString(2, jTextFieldApellido1.getText());
+            ps.setString(3,  jTextFieldApellido2.getText());
+            ps.setString(4,  jTextFieldTelefono.getText());
+            ps.setString(5,  jTextFieldMail.getText());
+            ps.setString(6,  jTextFieldUsuario.getText());
+            ps.setString(7,   jTextFieldContrasena.getText());
+            System.out.println("Añadido");
+        } catch (SQLException ex) {
+            System.getLogger(JDialogAltaClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+            
+                               
+                                    
         
     }
     /**
