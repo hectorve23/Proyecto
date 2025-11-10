@@ -17,8 +17,8 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDialogLoginEmpleados
      */
-    public JDialogLoginClientes(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public JDialogLoginClientes(java.awt.Frame parent) {
+        super(parent);
         initComponents();
     }
 
