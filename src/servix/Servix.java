@@ -30,9 +30,8 @@ public class Servix extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        logo = new javax.swing.JLabel();
-        tituloApp = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
+        jLabelTituloApp = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -51,17 +50,13 @@ public class Servix extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(600, 450));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servix_logo_recortado.png"))); // NOI18N
-        jPanel2.add(logo, java.awt.BorderLayout.LINE_START);
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servix_logo_recortado.png"))); // NOI18N
+        jPanel2.add(jLabelLogo, java.awt.BorderLayout.LINE_START);
 
-        tituloApp.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        tituloApp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloApp.setText("SERVIX");
-        jPanel2.add(tituloApp, java.awt.BorderLayout.CENTER);
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Tu aplicacion de restaurantes");
-        jPanel2.add(jLabel2, java.awt.BorderLayout.PAGE_END);
+        jLabelTituloApp.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabelTituloApp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTituloApp.setText("SERVIX");
+        jPanel2.add(jLabelTituloApp, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -71,25 +66,22 @@ public class Servix extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 321, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -121,11 +113,10 @@ public class Servix extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelTituloApp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel logo;
-    private javax.swing.JLabel tituloApp;
     // End of variables declaration//GEN-END:variables
 }
