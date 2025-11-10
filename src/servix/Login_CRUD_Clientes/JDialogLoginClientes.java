@@ -145,7 +145,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogLoginClientes dialog = new JDialogLoginClientes(new javax.swing.JFrame(), true);
+                JDialogLoginClientes dialog = new JDialogLoginClientes(new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

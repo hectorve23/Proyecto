@@ -32,8 +32,8 @@ public class JFrameServix extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabelLogo = new javax.swing.JLabel();
         jLabelTituloApp = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -53,16 +53,17 @@ public class JFrameServix extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(600, 450));
         jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servix_logo_recortado.png"))); // NOI18N
-        jPanel2.add(jLabelLogo, java.awt.BorderLayout.LINE_START);
 
         jLabelTituloApp.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabelTituloApp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTituloApp.setText("SERVIX");
         jPanel2.add(jLabelTituloApp, java.awt.BorderLayout.CENTER);
+
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servix_logo_recortado.png"))); // NOI18N
+        jPanel2.add(jLabelLogo, java.awt.BorderLayout.LINE_START);
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -75,7 +76,7 @@ public class JFrameServix extends javax.swing.JFrame {
         jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 100, 5));
 
         jButtonEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonEmpleado.setText("Soy un cliente");
+        jButtonEmpleado.setText("Soy un empleado");
         jButtonEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEmpleadoActionPerformed(evt);
@@ -84,7 +85,7 @@ public class JFrameServix extends javax.swing.JFrame {
         jPanel3.add(jButtonEmpleado);
 
         jButtonCliente.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jButtonCliente.setText("Soy un empleado");
+        jButtonCliente.setText("Soy un cliente");
         jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonClienteActionPerformed(evt);
@@ -117,7 +118,7 @@ public class JFrameServix extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
