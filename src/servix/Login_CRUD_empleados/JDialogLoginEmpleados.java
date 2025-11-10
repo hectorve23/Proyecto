@@ -47,7 +47,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         jLabel5.setText("INICIAR SESION");
         jPanel1.add(jLabel5, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
         jLabel3.setText("Usuario");
         jPanel2.add(jLabel3);
