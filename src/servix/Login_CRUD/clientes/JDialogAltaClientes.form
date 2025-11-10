@@ -83,7 +83,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldApellido1">
         </Component>
-        <Component class="javax.swing.JLabel" name="Provincia">
+        <Component class="javax.swing.JLabel" name="SegundoApellido">
           <Properties>
             <Property name="text" type="java.lang.String" value="Segundo apellido"/>
           </Properties>
@@ -92,13 +92,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
+            <Property name="text" type="java.lang.String" value="Telefono"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldTelefono">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>

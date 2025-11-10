@@ -4,9 +4,10 @@
  */
 package servix.Login_CRUD.clientes;
 
-import java.util.Date;
+import java.sql.Connection;
 import servix.Cliente;
-
+import java.sql.PreparedStatement;
+import servix.ConexionBBDD;
 /**
  *
  * @author DAM2Alu11
@@ -19,6 +20,8 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
      * Creates new form JDialogAltaClientes
      */
     JDialogLoginClientes jdialogPadre;
+    ConexionBBDD nueva;
+    Connection conexion;
     
     public JDialogAltaClientes(java.awt.Dialog parent) {
         super(parent);
@@ -41,7 +44,7 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
         jTextFieldNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldApellido1 = new javax.swing.JTextField();
-        Provincia = new javax.swing.JLabel();
+        SegundoApellido = new javax.swing.JLabel();
         jTextFieldApellido2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
@@ -69,14 +72,12 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
         jPanel1.add(jLabel3);
         jPanel1.add(jTextFieldApellido1);
 
-        Provincia.setText("Segundo apellido");
-        jPanel1.add(Provincia);
+        SegundoApellido.setText("Segundo apellido");
+        jPanel1.add(SegundoApellido);
         jPanel1.add(jTextFieldApellido2);
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Telefono");
         jPanel1.add(jLabel4);
-
-        jTextFieldTelefono.setText("jTextField1");
         jPanel1.add(jTextFieldTelefono);
 
         jLabel5.setText("Mail");
@@ -126,19 +127,37 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- //String nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login;
+    
     private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
-        Cliente nuevo  = new Cliente(jTextFieldNombre.getText(),
+        if(jTextFieldNombre.getText().length()<=20 &&
+           jTextFieldApellido1.getText().length()<=20 &&
+           jTextFieldApellido2.getText().length()<=20 &&
+           jTextFieldTelefono.getText().length()<=15 &&
+           jTextFieldMail.getText().length()<=40 &&
+           jTextFieldUsuario.getText().length()<=20 &&
+           jTextFieldContrasena.getText().length()<=255){
+            
+            Cliente nuevo  = new Cliente(jTextFieldNombre.getText(),
                                      jTextFieldApellido1.getText(),
                                      jTextFieldApellido2.getText(),
                                      jTextFieldTelefono.getText(),
                                      jTextFieldMail.getText(),
                                      jTextFieldUsuario.getText(),
                                      jTextFieldContrasena.getText());
-       // jdialogPadre.addCliente(nuevo);
+            
+           
+
+
+        }else{
+            
+        }
+           
         dispose();
     }//GEN-LAST:event_jButtonAltaActionPerformed
-
+    
+    public void anadirCliente(Cliente n){
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -174,10 +193,12 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+        
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Provincia;
+    private javax.swing.JLabel SegundoApellido;
     private javax.swing.JButton jButtonAlta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

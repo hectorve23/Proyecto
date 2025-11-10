@@ -30,8 +30,8 @@ public class Servix extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabelLogo = new javax.swing.JLabel();
         jLabelTituloApp = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -50,13 +50,13 @@ public class Servix extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(600, 450));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servix_logo_recortado.png"))); // NOI18N
-        jPanel2.add(jLabelLogo, java.awt.BorderLayout.LINE_START);
-
         jLabelTituloApp.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabelTituloApp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTituloApp.setText("SERVIX");
         jPanel2.add(jLabelTituloApp, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/servix/imagenes/servix_logo_recortado.png"))); // NOI18N
+        jPanel2.add(jLabel1, java.awt.BorderLayout.LINE_START);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -113,7 +113,7 @@ public class Servix extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelTituloApp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
