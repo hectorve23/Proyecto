@@ -46,7 +46,7 @@ public class ConexionBBDD {
 
     }
 
-    private void conectar() {
+    public void conectar() {
         String url = "";
         try {
 

@@ -4,7 +4,7 @@
  */
 package servix;
 
-import servix.Login_CRUD.clientes.JDialogLoginClientes;
+import servix.Login_CRUD.Clientes.JDialogLoginClientes;
 
 
 
