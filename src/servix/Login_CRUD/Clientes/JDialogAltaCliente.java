@@ -2,32 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.clientes;
+package servix.Login_CRUD.Clientes;
 
 import java.sql.Connection;
-import servix.Cliente;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import servix.Cliente;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
+import java.sql.*;
+
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogAltaClientes extends javax.swing.JDialog {
+public class JDialogAltaCliente extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAltaClientes.class.getName());
-
-    /**
-     * Creates new form JDialogAltaClientes
-     */
-    JDialogLoginClientes jdialogPadre;
     ConexionBBDD nueva;
     Connection conexion;
     
-    public JDialogAltaClientes(java.awt.Dialog parent) {
-        super(parent);
-        jdialogPadre=(JDialogLoginClientes)parent;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAltaCliente.class.getName());
+
+    /**
+     * Creates new form JDialogAltaCliente
+     */
+    
+    JFrameServix padre;
+    public JDialogAltaCliente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        padre= (JFrameServix) parent;
         initComponents();
+        
     }
 
     /**
@@ -39,31 +43,41 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldApellido1 = new javax.swing.JTextField();
-        SegundoApellido = new javax.swing.JLabel();
+        Provincia = new javax.swing.JLabel();
         jTextFieldApellido2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextFieldTelefono = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldMail = new javax.swing.JTextField();
+        jTextFieldTelefono = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldUsuario = new javax.swing.JTextField();
+        jTextFieldCorreo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextFieldContrasena = new javax.swing.JTextField();
+        jTextFieldUser = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPasswordFieldContrasena1 = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        jPasswordFieldContrasena2 = new javax.swing.JPasswordField();
         jButtonAlta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NUEVO CLIENTE");
+        jLabel1.setText("CREAR CUENTA");
 
-        jPanel1.setLayout(new java.awt.GridLayout(7, 2, 10, 10));
+        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 10, 10));
 
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
@@ -73,27 +87,31 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
         jPanel1.add(jLabel3);
         jPanel1.add(jTextFieldApellido1);
 
-        SegundoApellido.setText("Segundo apellido");
-        jPanel1.add(SegundoApellido);
+        Provincia.setText("Segundo apellido");
+        jPanel1.add(Provincia);
         jPanel1.add(jTextFieldApellido2);
 
-        jLabel4.setText("Telefono");
-        jPanel1.add(jLabel4);
+        jLabel5.setText("Telefono");
+        jPanel1.add(jLabel5);
         jPanel1.add(jTextFieldTelefono);
 
-        jLabel5.setText("Mail");
-        jPanel1.add(jLabel5);
-        jPanel1.add(jTextFieldMail);
-
-        jLabel6.setText("Usuario");
+        jLabel6.setText("Correo");
         jPanel1.add(jLabel6);
-        jPanel1.add(jTextFieldUsuario);
+        jPanel1.add(jTextFieldCorreo);
 
-        jLabel7.setText("Contraseña");
+        jLabel7.setText("Usuario");
         jPanel1.add(jLabel7);
-        jPanel1.add(jTextFieldContrasena);
+        jPanel1.add(jTextFieldUser);
 
-        jButtonAlta.setText("Aceptar");
+        jLabel4.setText("Contraseña");
+        jPanel1.add(jLabel4);
+        jPanel1.add(jPasswordFieldContrasena1);
+
+        jLabel8.setText("Introduzca de nuevo la contraseña");
+        jPanel1.add(jLabel8);
+        jPanel1.add(jPasswordFieldContrasena2);
+
+        jButtonAlta.setText("Alta");
         jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAltaActionPerformed(evt);
@@ -111,8 +129,13 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(708, Short.MAX_VALUE)
+                    .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(11, 11, 11)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,63 +144,52 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(366, Short.MAX_VALUE)
+                    .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(52, 52, 52)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+      this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
     private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
-        if(jTextFieldNombre.getText().length()<=20 &&
-           jTextFieldApellido1.getText().length()<=20 &&
-           jTextFieldApellido2.getText().length()<=20 &&
-           jTextFieldTelefono.getText().length()<=15 &&
-           jTextFieldMail.getText().length()<=40 &&
-           jTextFieldUsuario.getText().length()<=20 &&
-           jTextFieldContrasena.getText().length()<=255){
-            
-            Cliente nuevo  = new Cliente(jTextFieldNombre.getText(),
-                                     jTextFieldApellido1.getText(),
-                                     jTextFieldApellido2.getText(),
-                                     jTextFieldTelefono.getText(),
-                                     jTextFieldMail.getText(),
-                                     jTextFieldUsuario.getText(),
-                                     jTextFieldContrasena.getText());
-           
-        }else{
-            
-        }
-           
-        dispose();
-    }//GEN-LAST:event_jButtonAltaActionPerformed
-    
-    public void anadirCliente(Cliente n){
-        PreparedStatement ps = null;
-            nueva = new ConexionBBDD();
-            conexion=nueva.getConnection();
-            
-            String sql = "INSERT into Cliente (nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES(?,?,?,?,?,?,?)";
-            
+        /////////Comprobar que los datos estan bien pasados 
+       
+        Cliente c = new Cliente(jTextFieldNombre.getText(),
+                                jTextFieldApellido1.getText(),
+                                jTextFieldApellido2.getText(),
+                                jTextFieldTelefono.getText(),
+                                jTextFieldCorreo.getText(),
+                                jTextFieldUser.getText(),
+                                String.valueOf(jPasswordFieldContrasena1.getPassword()));
+        System.out.println(c.toString());
+        this.setVisible(false);
+      
         try {
-            ps= conexion.prepareStatement(sql);
+            nueva.conectar();
+            String sql= "INSERT INTO Cliente VALUES (?,?,?,?,?,?,?)";
+            PreparedStatement ps= conexion.prepareStatement(sql);
             ps.setString(1, jTextFieldNombre.getText());
-            ps.setString(2, jTextFieldApellido1.getText());
-            ps.setString(3,  jTextFieldApellido2.getText());
-            ps.setString(4,  jTextFieldTelefono.getText());
-            ps.setString(5,  jTextFieldMail.getText());
-            ps.setString(6,  jTextFieldUsuario.getText());
-            ps.setString(7,   jTextFieldContrasena.getText());
-            System.out.println("Añadido");
-        } catch (SQLException ex) {
-            System.getLogger(JDialogAltaClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+            ps.setString(2, jTextFieldApellido2.getText());
+            ps.setString(3, jTextFieldTelefono.getText());
+            ps.setString(4, jTextFieldCorreo.getText());
+            ps.setString(5, jTextFieldUser.getText());
+            ps.setString(6, String.valueOf(jPasswordFieldContrasena1.getPassword())); // !!!!!!!!!!!!!!!!!!!!!ENCRIPTAR
             
-                               
-                                    
-        
-    }
+        } catch (SQLException ex) {
+            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_jButtonAltaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,7 +215,7 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogAltaClientes dialog = new JDialogAltaClientes(new javax.swing.JDialog());
+                JDialogAltaCliente dialog = new JDialogAltaCliente(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -213,13 +225,16 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-        
-       
     }
+    
+   
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SegundoApellido;
+    private javax.swing.JLabel Provincia;
     private javax.swing.JButton jButtonAlta;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -227,13 +242,15 @@ public class JDialogAltaClientes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordFieldContrasena1;
+    private javax.swing.JPasswordField jPasswordFieldContrasena2;
     private javax.swing.JTextField jTextFieldApellido1;
     private javax.swing.JTextField jTextFieldApellido2;
-    private javax.swing.JTextField jTextFieldContrasena;
-    private javax.swing.JTextField jTextFieldMail;
+    private javax.swing.JTextField jTextFieldCorreo;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefono;
-    private javax.swing.JTextField jTextFieldUsuario;
+    private javax.swing.JTextField jTextFieldUser;
     // End of variables declaration//GEN-END:variables
 }
