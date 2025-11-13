@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD_Clientes;
+package servix.Login_CRUD.clientes;
 
-import servix.Login_CRUD_empleados.*;
+
+
 
 /**
  *

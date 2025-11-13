@@ -6,6 +6,8 @@ package servix;
 
 import servix.Login_CRUD.clientes.JDialogLoginClientes;
 
+
+
 /**
  *
  * @author DAM2Alu15
@@ -139,7 +141,7 @@ public class JFrameServix extends javax.swing.JFrame {
 
     private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
         // TODO add your handling code here:
-        JDialogLoginClientes jdlc = new JDialogLoginClientes(this);
+        JDialogLoginClientes jdlc = new JDialogLoginClientes(this, true);
         jdlc.setVisible(true);
     }//GEN-LAST:event_jButtonClienteActionPerformed
 
