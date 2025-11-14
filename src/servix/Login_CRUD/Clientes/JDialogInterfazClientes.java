@@ -4,7 +4,10 @@
  */
 package servix.Login_CRUD.Clientes;
 
+
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
 import servix.ConexionBBDD;
 
 /**
@@ -18,6 +21,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDialogInterfazClientes
      */
+    DefaultTableModel dtm;
+    ConexionBBDD nueva;
+    Connection conexion;
+    
+    public void cargaTabla(){
+        try {
+            PreparedStatement ps = conexion.prepareStatement("SELECT * FROM reserva WHERE id_cliente = ?");
+            nueva.selectSQL(ps, dtm);
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -35,6 +51,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         jPanelPadre = new javax.swing.JPanel();
         jPanelVerReservas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanelNuevaReserva = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
@@ -55,6 +72,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelPadre.setLayout(new java.awt.CardLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
         jPanelVerReservas.setLayout(jPanelVerReservasLayout);
@@ -210,10 +240,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelPadre;
     private javax.swing.JPanel jPanelVerReservas;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldHora;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNumeroComensales;
     // End of variables declaration//GEN-END:variables
+
+    
 }
