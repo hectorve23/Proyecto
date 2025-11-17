@@ -30,6 +30,8 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
     public JDialogAltaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         padre= (JFrameServix) parent;
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
         initComponents();
         
     }
