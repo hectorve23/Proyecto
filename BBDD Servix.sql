@@ -41,10 +41,10 @@ CREATE TABLE alergeno_plato(
 
 CREATE TABLE Encargado(
 	id_encargado INT PRIMARY KEY auto_increment,
-    nombre VARCHAR(20) NOT NULL,
-    apellido1 VARCHAR(20) NOT NULL,
-    apellido2 VARCHAR(20),
-    telefono VARCHAR(15) NOT NULL,
+	nombre VARCHAR(30) NOT NULL,
+    apellido1 VARCHAR(30) NOT NULL,
+    apellido2 VARCHAR(30),
+	telefono VARCHAR(15) NOT NULL,
     correo VARCHAR(40) NOT NULL,
     usuario_login VARCHAR(20) NOT NULL,
     contrasenya_login VARCHAR(255) NOT NULL
@@ -52,9 +52,9 @@ CREATE TABLE Encargado(
 
 CREATE TABLE Cliente(
 	id_cliente INT PRIMARY KEY auto_increment,
-	nombre VARCHAR(20) NOT NULL,
-    apellido1 VARCHAR(20) NOT NULL,
-    apellido2 VARCHAR(20),
+	nombre VARCHAR(30) NOT NULL,
+    apellido1 VARCHAR(30) NOT NULL,
+    apellido2 VARCHAR(30),
 	telefono VARCHAR(15) NOT NULL,
     correo VARCHAR(40) NOT NULL,
     usuario_login VARCHAR(20) NOT NULL,
@@ -63,9 +63,9 @@ CREATE TABLE Cliente(
 
 CREATE TABLE Camarero(
 	id_camarero INT PRIMARY KEY auto_increment,
-	nombre VARCHAR(20) NOT NULL,
-    apellido1 VARCHAR(20) NOT NULL,
-    apellido2 VARCHAR(20),
+	nombre VARCHAR(30) NOT NULL,
+    apellido1 VARCHAR(30) NOT NULL,
+    apellido2 VARCHAR(30),
 	telefono VARCHAR(15) NOT NULL,
     usuario_login VARCHAR(20) NOT NULL,
     contrasenya_login VARCHAR(255) NOT NULL
