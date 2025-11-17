@@ -2,17 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.clientes;
+package servix.Login_CRUD.Clientes;
 
+import java.awt.Frame;
+import java.sql.Connection;
+import java.sql.SQLException;
+import servix.ConexionBBDD;
+import java.sql.*;
 
-
-
-/**
+/*
  *
  * @author DAM2Alu11
  */
 public class JDialogLoginClientes extends javax.swing.JDialog {
-    
+   
+    Frame parent;
+    ConexionBBDD nueva;
+    Connection conexion;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginClientes.class.getName());
 
     /**
@@ -20,6 +26,8 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
      */
     public JDialogLoginClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
         initComponents();
     }
 
@@ -36,9 +44,11 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFielduser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordFieldContransena = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonIniciarSesion = new javax.swing.JButton();
         jButtonRecuperarContrasena = new javax.swing.JButton();
         jButtonCrearCuenta = new javax.swing.JButton();
 
@@ -51,21 +61,24 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         jLabel5.setText("INICIAR SESION");
         jPanel1.add(jLabel5, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
+        jPanel2.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
 
         jLabel3.setText("Usuario");
         jPanel2.add(jLabel3);
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField2);
+        jPanel2.add(jTextFielduser);
 
         jLabel4.setText("Contraseña");
         jPanel2.add(jLabel4);
-        jPanel2.add(jPasswordField1);
+        jPanel2.add(jPasswordFieldContransena);
+        jPanel2.add(jLabel1);
+
+        jButtonIniciarSesion.setText("Iniciar sesion");
+        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarSesionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonIniciarSesion);
 
         jButtonRecuperarContrasena.setText("Recordar contraseña");
         jButtonRecuperarContrasena.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +105,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(252, Short.MAX_VALUE)
+                .addContainerGap(251, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(220, 220, 220))
         );
@@ -113,13 +126,16 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRecuperarContrasenaActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-        // TODO add your handling code here:
+       JDialogAltaCliente jdac= new JDialogAltaCliente(parent, true);
+       jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
+
+    private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
+       if(comprobarDatos(jTextFielduser.getText(), String.valueOf(jPasswordFieldContransena.toString()))){
+           
+       }
+    }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,13 +176,35 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearCuenta;
+    private javax.swing.JButton jButtonIniciarSesion;
     private javax.swing.JButton jButtonRecuperarContrasena;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField jPasswordFieldContransena;
+    private javax.swing.JTextField jTextFielduser;
     // End of variables declaration//GEN-END:variables
+
+    private boolean comprobarDatos(String user, String contrasena) {
+ 
+        try {
+            nueva.conectar();
+            String sql= "SELECT * FROM Cliente WHERE usuario_login = ?";
+            PreparedStatement ps= conexion.prepareStatement(sql);
+            ps.setString(1, user);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) { 
+                int id = rs.getInt("id_cliente"); 
+            }
+           
+        } catch (SQLException ex) {
+            System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+           
+       nueva.cerrar();
+       return false;
+    }
 }
