@@ -11,20 +11,20 @@ CREATE TABLE Alergeno(
 );
 
 CREATE TABLE Menu(
-	id_menu VARCHAR(2) PRIMARY KEY
+	id_menu INT PRIMARY KEY auto_increment
 );
 
 CREATE TABLE Plato(
-	id_plato VARCHAR(3) PRIMARY KEY,
+	id_plato  INT PRIMARY KEY auto_increment,
     nombre VARCHAR(40) NOT NULL,
     precio FLOAT NOT NULL,
     categoria ENUM("bebida", "entrante", "primer_plato", "segundo_plato", "postre") NOT NULL,
-    id_menu VARCHAR(2),
+    id_menu INT,
     FOREIGN KEY (id_menu) REFERENCES Menu(id_menu)
 );
 
 CREATE TABLE ingrediente_plato(
-	id_plato VARCHAR(3) NOT NULL,
+	id_plato INT,
     nombre_ingrediente VARCHAR(30) NOT NULL,
     PRIMARY KEY (id_plato, nombre_ingrediente),
     FOREIGN KEY (id_plato) REFERENCES Plato(id_plato),
@@ -32,11 +32,11 @@ CREATE TABLE ingrediente_plato(
 );
 
 CREATE TABLE alergeno_plato(
-	id_plato VARCHAR(3) NOT NULL,
-    nombre_alergeno VARCHAR(30) NOT NULL,
+	id_plato INT,
+    nombre_alergeno VARCHAR(30),
     PRIMARY KEY (id_plato, nombre_alergeno),
     FOREIGN KEY (id_plato) REFERENCES Plato(id_plato),
-    FOREIGN KEY (id_plato) REFERENCES Alergeno(nombre_alergeno)
+    FOREIGN KEY (nombre_alergeno) REFERENCES Alergeno(nombre_alergeno)
 );
 
 CREATE TABLE Encargado(
@@ -62,7 +62,7 @@ CREATE TABLE Cliente(
 );
 
 CREATE TABLE Camarero(
-	id_camarero VARCHAR(5) PRIMARY KEY,
+	id_camarero INT PRIMARY KEY auto_increment,
 	nombre VARCHAR(20) NOT NULL,
     apellido1 VARCHAR(20) NOT NULL,
     apellido2 VARCHAR(20),
@@ -84,19 +84,19 @@ CREATE TABLE Restaurante(
 );
 
 CREATE TABLE Mesa(
-	id_mesa VARCHAR(5) PRIMARY KEY,
+	id_mesa  INT PRIMARY KEY auto_increment,
     capacidad INT NOT NULL,
     estado BOOLEAN NOT NULL
 );
 
 CREATE TABLE Reserva(
-	id_reserva VARCHAR(5) PRIMARY KEY,
+	id_reserva INT PRIMARY KEY auto_increment,
     estado_reserva ENUM ("pendiente", "confirmada", "cancelada") NOT NULL,
     n_comensales INT NOT NULL,
     hora TIME NOT NULL,
     fecha DATE NOT NULL,
     id_cliente INT NOT NULL,
-    id_mesa VARCHAR(5),
+    id_mesa INT,
     id_encargado INT NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
     FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa),
