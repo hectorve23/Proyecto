@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import servix.ConexionBBDD;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /*
  *
@@ -189,22 +190,33 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean comprobarDatos(String user, String contrasena) {
- 
-        try {
-            nueva.conectar();
-            String sql= "SELECT * FROM Cliente WHERE usuario_login = ?";
-            PreparedStatement ps= conexion.prepareStatement(sql);
-            ps.setString(1, user);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) { 
-                int id = rs.getInt("id_cliente"); 
+        if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
+           
+            JOptionPane.showConfirmDialog(rootPane,
+                                        "Porfavor rellene todos los campo ", 
+                                        "Error", 
+                                        JOptionPane.OK_CANCEL_OPTION, 
+                                        JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else{
+            try {
+                nueva.conectar();
+                String sql= "SELECT * FROM Cliente WHERE usuario_login = ?";
+                PreparedStatement ps= conexion.prepareStatement(sql);
+                ps.setString(1, user);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) { 
+                    int id = rs.getInt("id_cliente");
+                }
+                
+                System.out.println("id");
+
+            } catch (SQLException ex) {
+                System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
-           
-        } catch (SQLException ex) {
-            System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+
+           nueva.cerrar();
+           return false;
         }
-           
-       nueva.cerrar();
-       return false;
     }
 }
