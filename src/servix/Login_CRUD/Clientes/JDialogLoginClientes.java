@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import servix.ConexionBBDD;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import servix.Seguridad;
 
 /*
  *
@@ -190,33 +191,39 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean comprobarDatos(String user, String contrasena) {
-        if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
-           
-            JOptionPane.showConfirmDialog(rootPane,
-                                        "Porfavor rellene todos los campo ", 
-                                        "Error", 
-                                        JOptionPane.OK_CANCEL_OPTION, 
-                                        JOptionPane.ERROR_MESSAGE);
+        if (user == null || user.isEmpty() || contrasena == null || contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Por favor rellene todos los campos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return false;
-        }else{
-            try {
-                nueva.conectar();
-                String sql= "SELECT * FROM Cliente WHERE usuario_login = ?";
-                PreparedStatement ps= conexion.prepareStatement(sql);
-                ps.setString(1, user);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) { 
-                    int id = rs.getInt("id_cliente");
-                }
-                
-                System.out.println("id");
+        }
 
-            } catch (SQLException ex) {
-                System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        try {
+            nueva.conectar();
+            String sql = "SELECT id_cliente, contrasena_login FROM Cliente WHERE usuario_login = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, user);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id_cliente");
+                String contrasenaHash = rs.getString("contrasena_login");
+
+                if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
+                    return true;
+                }
             }
 
-           nueva.cerrar();
-           return false;
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+             System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            nueva.cerrar(); // ✅ cerrar conexión siempre
         }
+
+        return false; // si no se encontró usuario o contraseña incorrecta
     }
+
 }
