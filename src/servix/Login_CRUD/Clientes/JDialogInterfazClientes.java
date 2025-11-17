@@ -8,6 +8,7 @@ package servix.Login_CRUD.Clientes;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 
 /**
@@ -22,10 +23,16 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
      * Creates new form JDialogInterfazClientes
      */
     DefaultTableModel dtm;
-    ConexionBBDD nueva;
-    Connection conexion;
-    int id;
+    ConexionBBDD nueva = null;
+    Connection conexion = null;
     
+    public JDialogInterfazClientes(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        this.nueva = new ConexionBBDD();
+        this.conexion = nueva.getConnection();
+        this.dtm = new DefaultTableModel();
+        initComponents();
+    }
     public void cargaTabla(){
         try {
             PreparedStatement ps = conexion.prepareStatement("SELECT * FROM reserva WHERE id_cliente = ?");
@@ -34,12 +41,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-    
-    public JDialogInterfazClientes(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,12 +56,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jTable1 = new javax.swing.JTable();
         jPanelNuevaReserva = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
+        jSpinnerFecha = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldFecha = new javax.swing.JTextField();
+        jSpinnerHora = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldHora = new javax.swing.JTextField();
         jTextFieldNumeroComensales = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanelOpciones = new javax.swing.JPanel();
@@ -101,16 +102,22 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jLabel3.setText("Fecha");
         jPanelNuevaReserva.add(jLabel3);
-        jPanelNuevaReserva.add(jTextFieldNombre);
+
+        jSpinnerFecha.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1763381041563L), null, java.util.Calendar.DAY_OF_MONTH));
+        jSpinnerFecha.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerFecha, "dd/MM/yyyy"));
+        jPanelNuevaReserva.add(jSpinnerFecha);
 
         jLabel4.setText("Hora");
         jPanelNuevaReserva.add(jLabel4);
-        jPanelNuevaReserva.add(jTextFieldFecha);
+
+        jSpinnerHora.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerHora.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerHora, "HH:mm"));
+        jPanelNuevaReserva.add(jSpinnerHora);
 
         jLabel5.setText("Numero de comensales");
         jPanelNuevaReserva.add(jLabel5);
-        jPanelNuevaReserva.add(jTextFieldHora);
         jPanelNuevaReserva.add(jTextFieldNumeroComensales);
+        jPanelNuevaReserva.add(jLabel1);
 
         jButtonValidar.setText("VALIDAR");
         jButtonValidar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -175,17 +182,23 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        ConexionBBDD cb = new ConexionBBDD();
-        cb.conectar();
-        id=1;
+        String usuario="hector"; // Esto tendra que ser recogido de el JDialog anterior
         try {
             PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
-                    + "SELECT ?, ?, ?, ?, ?, ?, ?"
-                    + "FROM cliente "
-                    + "WHERE usuario_login=?");
-            ps.setInt(1, id);
-            ps.setString(2, "confirmada");
-            //ps.setInt(3, jTextFieldNumeroComensales.getText());
+                    + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
+                    + " SELECT ?, ?, ?, ?, id_cliente"
+                    + " FROM cliente "
+                    + " WHERE usuario_login=?");
+            ps.setString(1, "confirmada");
+            ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
+            ps.setString(3, jSpinnerHora.getValue().toString());
+            ps.setString(4, jSpinnerFecha.getValue().toString());
+            ps.setString(5, usuario);
+            int filas = ps.executeUpdate();
+            if(filas==1){
+               // JOptionPane vent = new JOptionPane(this,"Reserva registrada");
+               // vent
+            }
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -232,6 +245,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JButton jButtonNuevaReserva;
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVerReservas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -241,10 +255,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JPanel jPanelPadre;
     private javax.swing.JPanel jPanelVerReservas;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerFecha;
+    private javax.swing.JSpinner jSpinnerHora;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldFecha;
-    private javax.swing.JTextField jTextFieldHora;
-    private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNumeroComensales;
     // End of variables declaration//GEN-END:variables
 

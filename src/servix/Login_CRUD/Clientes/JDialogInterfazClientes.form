@@ -103,23 +103,39 @@
                 <Property name="text" type="java.lang.String" value="Fecha"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldNombre">
+            <Component class="javax.swing.JSpinner" name="jSpinnerFecha">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="now" minimum="1763381041563" stepSize="5" type="date"/>
+                </Property>
+                <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+                  <SpinnerEditor format="dd/MM/yyyy" type="1"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hora"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldFecha">
+            <Component class="javax.swing.JSpinner" name="jSpinnerHora">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="now" stepSize="5" type="date"/>
+                </Property>
+                <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+                  <SpinnerEditor format="HH:mm" type="1"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Numero de comensales"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldHora">
-            </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNumeroComensales">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
             </Component>
             <Component class="javax.swing.JButton" name="jButtonValidar">
               <Properties>
