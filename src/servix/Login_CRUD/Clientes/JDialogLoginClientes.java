@@ -134,9 +134,14 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 
     private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
-       if(comprobarDatos(jTextFielduser.getText(), String.valueOf(jPasswordFieldContransena.toString()))){
+        char[] contrasena = jPasswordFieldContransena.getPassword();
+         String stringContrasena = new String(contrasena);
+        if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
+           //JDialogLoginClientes jdlc = new JDialogLoginClientes()
            
-       }
+        }else{
+            
+        }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     /**
@@ -191,15 +196,17 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private boolean comprobarDatos(String user, String contrasena) {
-        if (user == null || user.isEmpty() || contrasena == null || contrasena.isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane,
-                    "Por favor rellene todos los campos",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
+        boolean correcto=false;
         try {
+            if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
+           
+            JOptionPane.showConfirmDialog(rootPane,
+                                        "Porfavor rellene todos los campos", 
+                                        "Error", 
+                                        JOptionPane.OK_CANCEL_OPTION, 
+                                        JOptionPane.ERROR_MESSAGE);
+            }   
+            
             nueva.conectar();
             String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -209,10 +216,18 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
             if (rs.next()) {
                 int id = rs.getInt("id_cliente");
                 String contrasenaHash = rs.getString("contrasenya_login");
-
+                System.out.println(id);
+                System.out.println(contrasena);
                 if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
-                    return true;
+                    correcto= true;
                 }
+            }else{
+                 JOptionPane.showConfirmDialog(rootPane,
+                                        "Usuario o contraseña incorrectos", 
+                                        "Error", 
+                                        JOptionPane.OK_CANCEL_OPTION, 
+                                        JOptionPane.ERROR_MESSAGE);
+                  correcto =  false; // si no se encontró usuario o contraseña incorrecta
             }
 
             rs.close();
@@ -222,8 +237,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         } finally {
             nueva.cerrar();
         }
-
-        return false; // si no se encontró usuario o contraseña incorrecta
+       return correcto;
     }
 
 }

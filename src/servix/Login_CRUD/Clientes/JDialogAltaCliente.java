@@ -10,6 +10,8 @@ import servix.Cliente;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
 import java.sql.*;
+import javax.swing.JOptionPane;
+import servix.Seguridad;
 
 /**
  *
@@ -164,31 +166,45 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
-        /////////Comprobar que los datos estan bien pasados 
-       
-        Cliente c = new Cliente(jTextFieldNombre.getText(),
-                                jTextFieldApellido1.getText(),
-                                jTextFieldApellido2.getText(),
-                                jTextFieldTelefono.getText(),
-                                jTextFieldCorreo.getText(),
-                                jTextFieldUser.getText(),
-                                String.valueOf(jPasswordFieldContrasena1.getPassword()));
-        System.out.println(c.toString());
-        this.setVisible(false);
-      
-        try {
-            nueva.conectar();
-            String sql= "INSERT INTO Cliente VALUES (?,?,?,?,?,?,?)";
-            PreparedStatement ps= conexion.prepareStatement(sql);
-            ps.setString(1, jTextFieldNombre.getText());
-            ps.setString(2, jTextFieldApellido2.getText());
-            ps.setString(3, jTextFieldTelefono.getText());
-            ps.setString(4, jTextFieldCorreo.getText());
-            ps.setString(5, jTextFieldUser.getText());
-            ps.setString(6, String.valueOf(jPasswordFieldContrasena1.getPassword())); // !!!!!!!!!!!!!!!!!!!!!ENCRIPTAR
+        String nombre = jTextFieldNombre.getText();
+        String apellido1 = jTextFieldApellido1.getText();
+        String apellido2 = jTextFieldApellido2.getText();
+        String telefono = jTextFieldTelefono.getText();
+        String correo = jTextFieldCorreo.getText();
+        String user =  jTextFieldUser.getText();
+        char[] contrasena = jPasswordFieldContrasena1.getPassword();
+        String stringContrasena = new String(contrasena);
+        String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena); // contraseña ya encriptada
+        
+        if(nombre.equals("") || apellido1.equals("") || telefono.equals("") || correo.equals("") || user.equals("") || contrasenaEncriptada.equals("")){
+             JOptionPane.showConfirmDialog(rootPane,
+                                        "Porfavor rellene todos los campos", 
+                                        "Error", 
+                                        JOptionPane.OK_CANCEL_OPTION, 
+                                        JOptionPane.ERROR_MESSAGE);
+       // }if(nombre.length()<50 || apellido1.length()<50 || ){
             
-        } catch (SQLException ex) {
-            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }else{
+       
+            Cliente c = new Cliente(nombre, apellido1, apellido2, telefono, correo, user, contrasenaEncriptada);
+            System.out.println(c.toString());
+            this.setVisible(false);
+
+
+            try {
+                nueva.conectar();
+                String sql= "INSERT INTO Cliente VALUES (?,?,?,?,?,?,?)";
+                PreparedStatement ps= conexion.prepareStatement(sql);
+                ps.setString(1, jTextFieldNombre.getText());
+                ps.setString(2, jTextFieldApellido2.getText());
+                ps.setString(3, jTextFieldTelefono.getText());
+                ps.setString(4, jTextFieldCorreo.getText());
+                ps.setString(5, jTextFieldUser.getText());
+                ps.setString(6, contrasenaEncriptada);
+
+            } catch (SQLException ex) {
+                System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonAltaActionPerformed
 

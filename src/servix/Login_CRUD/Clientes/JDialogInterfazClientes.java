@@ -14,7 +14,7 @@ import servix.ConexionBBDD;
  *
  * @author DAM2Alu15
  */
-public class JDialogInterfazClientes extends javax.swing.JDialog {
+public class JDialogInterfazClientes extends javax.swing.JDialog{
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName());
 
@@ -184,8 +184,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        ConexionBBDD conexion = new ConexionBBDD();
-        conexion.conectar();
+        ConexionBBDD cb = new ConexionBBDD();
+        cb.conectar();
+        
+       // PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva")
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
     /**
