@@ -201,14 +201,14 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
 
         try {
             nueva.conectar();
-            String sql = "SELECT id_cliente, contrasena_login FROM Cliente WHERE usuario_login = ?";
+            String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 int id = rs.getInt("id_cliente");
-                String contrasenaHash = rs.getString("contrasena_login");
+                String contrasenaHash = rs.getString("contrasenya_login");
 
                 if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                     return true;
@@ -220,7 +220,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         } catch (SQLException ex) {
              System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } finally {
-            nueva.cerrar(); // ✅ cerrar conexión siempre
+            nueva.cerrar();
         }
 
         return false; // si no se encontró usuario o contraseña incorrecta
