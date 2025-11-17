@@ -14,7 +14,7 @@ import servix.ConexionBBDD;
  *
  * @author DAM2Alu15
  */
-public class JDialogInterfazClientes extends JDialogLoginClientes{
+public class JDialogInterfazClientes extends javax.swing.JDialog{
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName());
 
@@ -187,7 +187,7 @@ public class JDialogInterfazClientes extends JDialogLoginClientes{
         ConexionBBDD cb = new ConexionBBDD();
         cb.conectar();
         
-        PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva")
+       // PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva")
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
     /**

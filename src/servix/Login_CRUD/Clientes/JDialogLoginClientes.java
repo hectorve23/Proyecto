@@ -134,7 +134,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
 
     private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
        if(comprobarDatos(jTextFielduser.getText(), String.valueOf(jPasswordFieldContransena.toString()))){
-           
+           //JDialogLoginClientes jdlc = new JDialogLoginClientes()
        }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
@@ -193,7 +193,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
            
             JOptionPane.showConfirmDialog(rootPane,
-                                        "Porfavor rellene todos los campo ", 
+                                        "Porfavor rellene todos los campos", 
                                         "Error", 
                                         JOptionPane.OK_CANCEL_OPTION, 
                                         JOptionPane.ERROR_MESSAGE);
