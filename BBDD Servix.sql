@@ -40,7 +40,7 @@ CREATE TABLE alergeno_plato(
 );
 
 CREATE TABLE Encargado(
-	id_encargado VARCHAR(2) PRIMARY KEY,
+	id_encargado INT PRIMARY KEY auto_increment,
     nombre VARCHAR(20) NOT NULL,
     apellido1 VARCHAR(20) NOT NULL,
     apellido2 VARCHAR(20),
@@ -51,7 +51,7 @@ CREATE TABLE Encargado(
 );
 
 CREATE TABLE Cliente(
-	id_cliente VARCHAR(5) PRIMARY KEY,
+	id_cliente INT PRIMARY KEY auto_increment,
 	nombre VARCHAR(20) NOT NULL,
     apellido1 VARCHAR(20) NOT NULL,
     apellido2 VARCHAR(20),
@@ -79,7 +79,7 @@ CREATE TABLE Restaurante(
     cierre INT NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     direccion VARCHAR(75) NOT NULL,
-	id_encargado VARCHAR(2) NOT NULL,
+	id_encargado INT NOT NULL,
     FOREIGN KEY (id_encargado) REFERENCES Encargado(id_encargado)
 );
 
@@ -95,9 +95,9 @@ CREATE TABLE Reserva(
     n_comensales INT NOT NULL,
     hora TIME NOT NULL,
     fecha DATE NOT NULL,
-    id_cliente VARCHAR(5) NOT NULL,
+    id_cliente INT NOT NULL,
     id_mesa VARCHAR(5),
-    id_encargado VARCHAR(2) NOT NULL,
+    id_encargado INT NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
     FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa),
     FOREIGN KEY (id_encargado) REFERENCES Encargado(id_encargado)
