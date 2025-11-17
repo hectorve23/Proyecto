@@ -44,9 +44,9 @@ CREATE TABLE Encargado(
 	nombre VARCHAR(30) NOT NULL,
     apellido1 VARCHAR(30) NOT NULL,
     apellido2 VARCHAR(30),
-	telefono VARCHAR(15) NOT NULL,
+	telefono VARCHAR(30) NOT NULL,
     correo VARCHAR(40) NOT NULL,
-    usuario_login VARCHAR(20) NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     contrasenya_login VARCHAR(255) NOT NULL
 );
 
@@ -55,9 +55,9 @@ CREATE TABLE Cliente(
 	nombre VARCHAR(30) NOT NULL,
     apellido1 VARCHAR(30) NOT NULL,
     apellido2 VARCHAR(30),
-	telefono VARCHAR(15) NOT NULL,
+	telefono VARCHAR(30) NOT NULL,
     correo VARCHAR(40) NOT NULL,
-    usuario_login VARCHAR(20) NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     contrasenya_login VARCHAR(255) NOT NULL
 );
 
@@ -66,8 +66,8 @@ CREATE TABLE Camarero(
 	nombre VARCHAR(30) NOT NULL,
     apellido1 VARCHAR(30) NOT NULL,
     apellido2 VARCHAR(30),
-	telefono VARCHAR(15) NOT NULL,
-    usuario_login VARCHAR(20) NOT NULL,
+	telefono VARCHAR(30) NOT NULL,
+    usuario_login VARCHAR(30) NOT NULL,
     contrasenya_login VARCHAR(255) NOT NULL
 );
 
