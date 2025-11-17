@@ -24,6 +24,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     DefaultTableModel dtm;
     ConexionBBDD nueva;
     Connection conexion;
+    int id;
     
     public void cargaTabla(){
         try {
@@ -53,18 +54,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanelNuevaReserva = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldApellidos = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldFecha = new javax.swing.JTextField();
+        jTextFieldNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldHora = new javax.swing.JTextField();
+        jTextFieldFecha = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jTextFieldHora = new javax.swing.JTextField();
         jTextFieldNumeroComensales = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonNuevaReserva = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
@@ -101,26 +99,18 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jPanelNuevaReserva.setLayout(new java.awt.GridLayout(6, 2, 10, 10));
 
-        jLabel1.setText("Nombre");
-        jPanelNuevaReserva.add(jLabel1);
-        jPanelNuevaReserva.add(jTextFieldNombre);
-
-        jLabel2.setText("Apellidos");
-        jPanelNuevaReserva.add(jLabel2);
-        jPanelNuevaReserva.add(jTextFieldApellidos);
-
         jLabel3.setText("Fecha");
         jPanelNuevaReserva.add(jLabel3);
-        jPanelNuevaReserva.add(jTextFieldFecha);
+        jPanelNuevaReserva.add(jTextFieldNombre);
 
         jLabel4.setText("Hora");
         jPanelNuevaReserva.add(jLabel4);
-        jPanelNuevaReserva.add(jTextFieldHora);
+        jPanelNuevaReserva.add(jTextFieldFecha);
 
         jLabel5.setText("Numero de comensales");
         jPanelNuevaReserva.add(jLabel5);
+        jPanelNuevaReserva.add(jTextFieldHora);
         jPanelNuevaReserva.add(jTextFieldNumeroComensales);
-        jPanelNuevaReserva.add(jLabel6);
 
         jButtonValidar.setText("VALIDAR");
         jButtonValidar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -130,6 +120,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             }
         });
         jPanelNuevaReserva.add(jButtonValidar);
+        jPanelNuevaReserva.add(jLabel6);
 
         jPanelPadre.add(jPanelNuevaReserva, "card3");
 
@@ -186,8 +177,18 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         // TODO add your handling code here:
         ConexionBBDD cb = new ConexionBBDD();
         cb.conectar();
-        
-        //PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva")
+        id=1;
+        try {
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
+                    + "SELECT ?, ?, ?, ?, ?, ?, ?"
+                    + "FROM cliente "
+                    + "WHERE usuario_login=?");
+            ps.setInt(1, id);
+            ps.setString(2, "confirmada");
+            //ps.setInt(3, jTextFieldNumeroComensales.getText());
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
     /**
@@ -231,8 +232,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JButton jButtonNuevaReserva;
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVerReservas;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -243,7 +242,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JPanel jPanelVerReservas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldApellidos;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldHora;
     private javax.swing.JTextField jTextFieldNombre;
