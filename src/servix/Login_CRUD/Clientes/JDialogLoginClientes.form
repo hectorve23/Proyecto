@@ -91,7 +91,13 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPasswordFieldContransena">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JButton" name="jButtonCrearCuenta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Crear cuenta"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearCuentaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonIniciarSesion">
           <Properties>
@@ -99,22 +105,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonIniciarSesionActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonRecuperarContrasena">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Recordar contrase&#xf1;a"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRecuperarContrasenaActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonCrearCuenta">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Crear cuenta"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearCuentaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

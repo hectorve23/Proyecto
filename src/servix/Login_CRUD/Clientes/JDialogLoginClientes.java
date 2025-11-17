@@ -49,10 +49,8 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         jTextFielduser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPasswordFieldContransena = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonIniciarSesion = new javax.swing.JButton();
-        jButtonRecuperarContrasena = new javax.swing.JButton();
         jButtonCrearCuenta = new javax.swing.JButton();
+        jButtonIniciarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,23 +70,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         jLabel4.setText("Contraseña");
         jPanel2.add(jLabel4);
         jPanel2.add(jPasswordFieldContransena);
-        jPanel2.add(jLabel1);
-
-        jButtonIniciarSesion.setText("Iniciar sesion");
-        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIniciarSesionActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonIniciarSesion);
-
-        jButtonRecuperarContrasena.setText("Recordar contraseña");
-        jButtonRecuperarContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRecuperarContrasenaActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonRecuperarContrasena);
 
         jButtonCrearCuenta.setText("Crear cuenta");
         jButtonCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +78,14 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
             }
         });
         jPanel2.add(jButtonCrearCuenta);
+
+        jButtonIniciarSesion.setText("Iniciar sesion");
+        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarSesionActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonIniciarSesion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,10 +112,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonRecuperarContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecuperarContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonRecuperarContrasenaActionPerformed
 
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
        JDialogAltaCliente jdac= new JDialogAltaCliente(parent, true);
@@ -184,8 +169,6 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearCuenta;
     private javax.swing.JButton jButtonIniciarSesion;
-    private javax.swing.JButton jButtonRecuperarContrasena;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -200,44 +183,42 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         try {
             if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
            
-            JOptionPane.showConfirmDialog(rootPane,
-                                        "Porfavor rellene todos los campos", 
-                                        "Error", 
-                                        JOptionPane.OK_CANCEL_OPTION, 
-                                        JOptionPane.ERROR_MESSAGE);
-            }   
+                JOptionPane.showConfirmDialog(rootPane,
+                                            "Porfavor rellene todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+            }else{   
             
-            nueva.conectar();
-            String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, user);
-            ResultSet rs = ps.executeQuery();
+                nueva.conectar();
+                String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
+                PreparedStatement ps = conexion.prepareStatement(sql);
+                ps.setString(1, user);
+                ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                int id = rs.getInt("id_cliente");
-                String contrasenaHash = rs.getString("contrasenya_login");
-                System.out.println(id);
-                System.out.println(contrasena);
-                if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
-                    correcto= true;
+                if (rs.next()) {
+                    int id = rs.getInt("id_cliente");
+                    String contrasenaHash = rs.getString("contrasenya_login");
+                    if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
+                        correcto= true;
+                    }
+                }else{
+                     JOptionPane.showConfirmDialog(rootPane,
+                                            "Usuario o contraseña incorrectos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+                      correcto =  false; // si no se encontró usuario o contraseña incorrecta
                 }
-            }else{
-                 JOptionPane.showConfirmDialog(rootPane,
-                                        "Usuario o contraseña incorrectos", 
-                                        "Error", 
-                                        JOptionPane.OK_CANCEL_OPTION, 
-                                        JOptionPane.ERROR_MESSAGE);
-                  correcto =  false; // si no se encontró usuario o contraseña incorrecta
+
+                rs.close();
+                ps.close();
+            } //else
+            } catch (SQLException ex) {
+                 System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            } finally {
+                nueva.cerrar();
             }
-
-            rs.close();
-            ps.close();
-        } catch (SQLException ex) {
-             System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } finally {
-            nueva.cerrar();
-        }
-       return correcto;
-    }
-
+           return correcto;
+    } //comprobar datos
 }

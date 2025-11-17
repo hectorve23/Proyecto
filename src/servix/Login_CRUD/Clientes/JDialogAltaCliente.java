@@ -134,12 +134,9 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(708, Short.MAX_VALUE)
-                    .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(11, 11, 11)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,15 +144,12 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(366, Short.MAX_VALUE)
-                    .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(52, 52, 52)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -173,40 +167,88 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
         String correo = jTextFieldCorreo.getText();
         String user =  jTextFieldUser.getText();
         char[] contrasena = jPasswordFieldContrasena1.getPassword();
-        String stringContrasena = new String(contrasena);
-        String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena); // contraseña ya encriptada
+        char[] contrasena2 = jPasswordFieldContrasena2.getPassword();
         
-        if(nombre.equals("") || apellido1.equals("") || telefono.equals("") || correo.equals("") || user.equals("") || contrasenaEncriptada.equals("")){
-             JOptionPane.showConfirmDialog(rootPane,
-                                        "Porfavor rellene todos los campos", 
-                                        "Error", 
-                                        JOptionPane.OK_CANCEL_OPTION, 
-                                        JOptionPane.ERROR_MESSAGE);
-       // }if(nombre.length()<50 || apellido1.length()<50 || ){
-            
-        }else{
+        String stringContrasena1 = new String(contrasena);
+        String stringContrasena2 = new String(contrasena2);
        
-            Cliente c = new Cliente(nombre, apellido1, apellido2, telefono, correo, user, contrasenaEncriptada);
-            System.out.println(c.toString());
-            this.setVisible(false);
+        if(!existeUsuario(user)){
+            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
+                JOptionPane.showConfirmDialog(rootPane,
+                                            "Porfavor rellene todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+           }else{
+                if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || correo.length() > 40 || user.length() > 30){
+                 JOptionPane.showConfirmDialog(rootPane,
+                                            "Ningun campo puede exceder los 30 caracteres", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+                }else{
+                    if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
+                         String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                        Cliente c = new Cliente(nombre, apellido1, apellido2, telefono, correo, user, contrasenaEncriptada);
+                         System.out.println(c.toString());
+                         this.setVisible(false);
 
+                         try {
+                             nueva.conectar();
+                             String sql= "INSERT INTO Cliente(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?,?)";
+                             PreparedStatement ps= conexion.prepareStatement(sql);
+                             ps.setString(1, jTextFieldNombre.getText());
+                             ps.setString(2, jTextFieldApellido1.getText());
+                             ps.setString(3, jTextFieldApellido2.getText());
+                             ps.setString(4, jTextFieldTelefono.getText());
+                             ps.setString(5, jTextFieldCorreo.getText());
+                             ps.setString(6, jTextFieldUser.getText());
+                             ps.setString(7, contrasenaEncriptada);
 
-            try {
-                nueva.conectar();
-                String sql= "INSERT INTO Cliente VALUES (?,?,?,?,?,?,?)";
-                PreparedStatement ps= conexion.prepareStatement(sql);
-                ps.setString(1, jTextFieldNombre.getText());
-                ps.setString(2, jTextFieldApellido2.getText());
-                ps.setString(3, jTextFieldTelefono.getText());
-                ps.setString(4, jTextFieldCorreo.getText());
-                ps.setString(5, jTextFieldUser.getText());
-                ps.setString(6, contrasenaEncriptada);
-
-            } catch (SQLException ex) {
-                System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                             ps.executeUpdate();
+                             ps.close();
+                             conexion.close();
+                         } catch (SQLException ex) {
+                             System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                         }
+                    }else{
+                         JOptionPane.showConfirmDialog(rootPane,
+                                                 "Las contraseñas no coinciden", 
+                                                 "Error", 
+                                                 JOptionPane.OK_CANCEL_OPTION, 
+                                                 JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
+        }else{
+             JOptionPane.showConfirmDialog(rootPane,
+                                                 "El usuario " + user + " ya existe", 
+                                                 "Error", 
+                                                 JOptionPane.OK_CANCEL_OPTION, 
+                                                 JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAltaActionPerformed
+
+    public boolean existeUsuario(String usuario){
+        boolean existe= false;
+        try {    
+            nueva.conectar();
+            String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) 
+                existe = true;
+                        
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return existe;
+    }
+
 
     /**
      * @param args the command line arguments
