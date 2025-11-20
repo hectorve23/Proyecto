@@ -196,7 +196,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             ps.setString(5, usuario);
             int filas = ps.executeUpdate();
             if(filas==1){
-               // JOptionPane vent = new JOptionPane(this,"Reserva registrada");
+               JOptionPane vent = new JOptionPane();
                // vent
             }
         } catch (SQLException ex) {

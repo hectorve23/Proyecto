@@ -30,6 +30,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         super(parent, modal);
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        this.setBounds(parent.getBounds());
         initComponents();
     }
 
