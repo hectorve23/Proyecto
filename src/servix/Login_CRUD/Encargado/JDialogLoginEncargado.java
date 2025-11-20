@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.empleados;
+package servix.Login_CRUD.Encargado;
 
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
@@ -163,13 +163,13 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
             }else{   
             
                 nueva.conectar();
-                String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
+                String sql = "SELECT * FROM Encargado WHERE usuario_login = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, user);
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_cliente");
+                    int id = rs.getInt("id_encargado");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
