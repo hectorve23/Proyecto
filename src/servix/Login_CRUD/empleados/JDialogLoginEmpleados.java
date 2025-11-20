@@ -4,15 +4,14 @@
  */
 package servix.Login_CRUD.empleados;
 
-import com.sun.jdi.connect.spi.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
-import servix.Login_CRUD.Clientes.JDialogLoginClientes;
 import servix.Seguridad;
+import java.sql.Connection;
 
 /**
  *
@@ -20,6 +19,7 @@ import servix.Seguridad;
  */
 public class JDialogLoginEmpleados extends javax.swing.JDialog {
     
+    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEmpleados.class.getName());
@@ -28,12 +28,10 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
      * Creates new form JDialogLoginEmpleados
      */
     
-    JFrameServix padre;
     public JDialogLoginEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        padre= (JFrameServix) parent;
         nueva = new ConexionBBDD();
-        //conexion=nueva.getConnection();
+        conexion=nueva.getConnection();
         initComponents();
     }
 
@@ -53,7 +51,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         jTextFielduser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPasswordFieldContransena = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jButtonIniciarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -74,13 +72,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         jLabel4.setText("Contraseña");
         jPanel2.add(jLabel4);
         jPanel2.add(jPasswordFieldContransena);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField1);
+        jPanel2.add(jLabel1);
 
         jButtonIniciarSesion.setText("Iniciar sesion");
         jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -120,16 +112,9 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
          String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-           //JDialogLoginClientes jdlc = new JDialogLoginClientes()
            
-        }else{
-            
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,13 +166,13 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
             }else{   
             
                 nueva.conectar();
-                String sql = "SELECT * FROM Cliente WHERE usuario_login = ?";
+                String sql = "SELECT * FROM Camarero WHERE usuario_login = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, user);
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_cliente");
+                    int id = rs.getInt("id_empleado");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
@@ -205,7 +190,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 ps.close();
             } //else
             } catch (SQLException ex) {
-                 System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                 System.getLogger(JDialogLoginEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             } finally {
                 nueva.cerrar();
             }
@@ -214,13 +199,13 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIniciarSesion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordFieldContransena;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFielduser;
     // End of variables declaration//GEN-END:variables
 }
