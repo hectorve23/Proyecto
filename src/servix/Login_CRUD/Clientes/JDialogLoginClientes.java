@@ -122,10 +122,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
          String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-           //JDialogLoginClientes jdlc = new JDialogLoginClientes()
            
-        }else{
-            
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
