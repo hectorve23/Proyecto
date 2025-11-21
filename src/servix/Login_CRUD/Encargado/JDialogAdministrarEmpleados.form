@@ -90,10 +90,18 @@
             <Property name="text" type="java.lang.String" value="Eliminar empleado"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jButtonEditarEmpleado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton3"/>
+            <Property name="text" type="java.lang.String" value="Editar empleado"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonEditarMiPerfil">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Editar mi perfil"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarMiPerfilActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

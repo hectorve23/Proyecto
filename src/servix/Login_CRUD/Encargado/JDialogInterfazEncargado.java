@@ -35,6 +35,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButtonAdministrarMenu = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -48,7 +49,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jLabel2.setText("¿Qué deseas hacer?");
 
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0, 30, 30));
+        jPanel2.setLayout(new java.awt.GridLayout(2, 2, 30, 30));
 
         jButton1.setText("Administrar empleados");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,6 +63,9 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButton2.setText("Administrar reservas");
         jPanel2.add(jButton2);
         jButton2.getAccessibleContext().setAccessibleName("jButtonAdministrarReservas");
+
+        jButtonAdministrarMenu.setText("Administrar menu");
+        jPanel2.add(jButtonAdministrarMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,10 +91,10 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,6 +144,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAdministrarMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
