@@ -191,13 +191,36 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                     + " WHERE usuario_login=?");
             ps.setString(1, "confirmada");
             ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
-            ps.setString(3, jSpinnerHora.getValue().toString());
-            ps.setString(4, jSpinnerFecha.getValue().toString());
+            
+            java.sql.Date fechaHora = (java.sql.Date) jSpinnerHora.getValue(); 
+            Time horaSQL = new java.sql.Time(fechaHora.getTime());
+            ps.setTime(3, horaSQL);
+            
+            Date fecha = (Date) jSpinnerFecha.getValue();  
+            Date fechaSQL = new Date(fecha.getTime());
+            ps.setDate(4, fechaSQL);
+            
             ps.setString(5, usuario);
+            
+            System.out.println(String.valueOf(jSpinnerHora.getValue()));
+            System.out.println(String.valueOf(jSpinnerFecha.getValue()));
+            
+            System.out.println(jSpinnerHora.getValue().toString());
+            System.out.println(jSpinnerFecha.getValue().toString());
             int filas = ps.executeUpdate();
             if(filas==1){
-               JOptionPane vent = new JOptionPane();
-               // vent
+               JOptionPane.showConfirmDialog(rootPane,
+                                            "Reserva registrada", 
+                                            "", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showConfirmDialog(rootPane,
+                                            "Ha habido un error", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
