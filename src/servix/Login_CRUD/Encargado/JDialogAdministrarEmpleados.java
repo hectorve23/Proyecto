@@ -4,11 +4,17 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import java.awt.Frame;
+import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
+
+   
 /**
  *
  * @author DAM2Alu11
  */
 public class JDialogAdministrarEmpleados extends javax.swing.JDialog {
+    
+    Frame parent;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAdministrarEmpleados.class.getName());
 
@@ -34,7 +40,8 @@ public class JDialogAdministrarEmpleados extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jButtonAñadirEmpleado = new javax.swing.JButton();
         jButtonEliminarEmpleado = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonEditarEmpleado = new javax.swing.JButton();
+        jButtonEditarMiPerfil = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,8 +65,16 @@ public class JDialogAdministrarEmpleados extends javax.swing.JDialog {
         jButtonEliminarEmpleado.setText("Eliminar empleado");
         jPanel2.add(jButtonEliminarEmpleado);
 
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3);
+        jButtonEditarEmpleado.setText("Editar empleado");
+        jPanel2.add(jButtonEditarEmpleado);
+
+        jButtonEditarMiPerfil.setText("Editar mi perfil");
+        jButtonEditarMiPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarMiPerfilActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonEditarMiPerfil);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,8 +103,13 @@ public class JDialogAdministrarEmpleados extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAñadirEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirEmpleadoActionPerformed
-        // TODO add your handling code here:
+        JDialogAltaEmpleados jdae= new JDialogAltaEmpleados(parent, true);
+        jdae.setVisible(true);
     }//GEN-LAST:event_jButtonAñadirEmpleadoActionPerformed
+
+    private void jButtonEditarMiPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarMiPerfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarMiPerfilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,8 +149,9 @@ public class JDialogAdministrarEmpleados extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAñadirEmpleado;
+    private javax.swing.JButton jButtonEditarEmpleado;
+    private javax.swing.JButton jButtonEditarMiPerfil;
     private javax.swing.JButton jButtonEliminarEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
