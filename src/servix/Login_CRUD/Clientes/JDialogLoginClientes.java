@@ -21,6 +21,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     Frame parent;
     ConexionBBDD nueva;
     Connection conexion;
+    int id;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginClientes.class.getName());
 
     /**
@@ -123,7 +124,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
          String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-           
+           JDialogInterfazClientes jdic = new JDialogInterfazClientes(parent, true, id);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
@@ -195,7 +196,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_cliente");
+                    id = rs.getInt("id_cliente");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
