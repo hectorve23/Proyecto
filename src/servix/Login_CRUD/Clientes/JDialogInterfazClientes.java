@@ -32,15 +32,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
+        jTableReservas.setModel(dtm);
+        cargaTabla();
         initComponents();
-    }
-    public void cargaTabla(){
-        try {
-            PreparedStatement ps = conexion.prepareStatement("SELECT * FROM reserva WHERE id_cliente = ?");
-            nueva.selectSQL(ps, dtm);
-        } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,8 +47,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jPanelPadre = new javax.swing.JPanel();
         jPanelVerReservas = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableReservas = new javax.swing.JTable();
         jPanelNuevaReserva = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jSpinnerFecha = new javax.swing.JSpinner();
@@ -73,7 +67,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jPanelPadre.setLayout(new java.awt.CardLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -84,17 +78,23 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTableReservas);
 
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
         jPanelVerReservas.setLayout(jPanelVerReservasLayout);
         jPanelVerReservasLayout.setHorizontalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         jPanelVerReservasLayout.setVerticalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(165, 165, 165))
         );
 
         jPanelPadre.add(jPanelVerReservas, "card2");
@@ -280,12 +280,22 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JPanel jPanelOpciones;
     private javax.swing.JPanel jPanelPadre;
     private javax.swing.JPanel jPanelVerReservas;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinnerFecha;
     private javax.swing.JSpinner jSpinnerHora;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableReservas;
     private javax.swing.JTextField jTextFieldNumeroComensales;
     // End of variables declaration//GEN-END:variables
-
+    
+    public void cargaTabla(){
+        try {
+            PreparedStatement ps = conexion.prepareStatement(
+                    "SELECT * FROM reserva"
+            );
+            nueva.selectSQL(ps, dtm);
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
     
 }
