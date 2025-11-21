@@ -192,13 +192,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             ps.setString(1, "confirmada");
             ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
             
-           /* Date fechaHora = (Date) jSpinnerHora.getValue(); 
+            java.sql.Date fechaHora = (java.sql.Date) jSpinnerHora.getValue(); 
             Time horaSQL = new java.sql.Time(fechaHora.getTime());
             ps.setTime(3, horaSQL);
             
-            Date fecha = (Date) jSpinnerFecha.getValue();     // java.util.Date
+            Date fecha = (Date) jSpinnerFecha.getValue();  
             Date fechaSQL = new Date(fecha.getTime());
-            ps.setDate(4, fechaSQL);*/
+            ps.setDate(4, fechaSQL);
             
             ps.setString(5, usuario);
             
