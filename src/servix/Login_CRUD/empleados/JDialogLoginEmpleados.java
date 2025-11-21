@@ -182,7 +182,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_empleado");
+                    int id = rs.getInt("id_camarero");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;

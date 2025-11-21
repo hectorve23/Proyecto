@@ -6,7 +6,6 @@ package servix.Login_CRUD.Clientes;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import servix.Cliente;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
 import java.sql.*;
@@ -189,8 +188,6 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
                 }else{
                     if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
                          String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
-                        Cliente c = new Cliente(nombre, apellido1, apellido2, telefono, correo, user, contrasenaEncriptada);
-                         System.out.println(c.toString());
                          this.setVisible(false);
 
                          try {
