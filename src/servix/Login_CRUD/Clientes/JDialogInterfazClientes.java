@@ -8,6 +8,7 @@ package servix.Login_CRUD.Clientes;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 
@@ -184,6 +185,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         // TODO add your handling code here:
         String usuario="hector"; // Esto tendra que ser recogido de el JDialog anterior
         try {
+            System.out.println(String.valueOf(jSpinnerHora.getValue()));
+            System.out.println(String.valueOf(jSpinnerFecha.getValue()));
             PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
                     + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
                     + " SELECT ?, ?, ?, ?, id_cliente"
@@ -192,18 +195,18 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             ps.setString(1, "confirmada");
             ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
             
-            java.sql.Date fechaHora = (java.sql.Date) jSpinnerHora.getValue(); 
-            Time horaSQL = new java.sql.Time(fechaHora.getTime());
-            ps.setTime(3, horaSQL);
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaSQL = formatoFecha.format(jSpinnerFecha.getValue());
+
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+            String horaSQL = formatoHora.format(jSpinnerHora.getValue());
             
-            Date fecha = (Date) jSpinnerFecha.getValue();  
-            Date fechaSQL = new Date(fecha.getTime());
-            ps.setDate(4, fechaSQL);
+            ps.setString(3, horaSQL);
+            ps.setString(4, fechaSQL);
             
             ps.setString(5, usuario);
             
-            System.out.println(String.valueOf(jSpinnerHora.getValue()));
-            System.out.println(String.valueOf(jSpinnerFecha.getValue()));
+            
             
             System.out.println(jSpinnerHora.getValue().toString());
             System.out.println(jSpinnerFecha.getValue().toString());
