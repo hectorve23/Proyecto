@@ -2,32 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.empleados;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package servix.Login_CRUD.Encargado;
+
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
+import java.sql.*;
+import servix.Login_CRUD.Clientes.JDialogLoginClientes;
 import servix.Seguridad;
-import java.sql.Connection;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogLoginEmpleados extends javax.swing.JDialog {
+public class JDialogLoginEncargado extends javax.swing.JDialog {
     
-    JFrameServix padre;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEncargado.class.getName());
     ConexionBBDD nueva;
     Connection conexion;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEmpleados.class.getName());
-
-    /**
-     * Creates new form JDialogLoginEmpleados
-     */
     
-    public JDialogLoginEmpleados(java.awt.Frame parent, boolean modal) {
+    /**
+     * Creates new form JDialogLoginEncargado
+     */
+    public JDialogLoginEncargado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
@@ -73,11 +69,6 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         jPanel2.add(jPasswordFieldContransena);
 
         jButtonEncargado.setText("Soy encargado");
-        jButtonEncargado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEncargadoActionPerformed(evt);
-            }
-        });
         jPanel2.add(jButtonEncargado);
 
         jButtonIniciarSesion.setText("Iniciar sesion");
@@ -94,10 +85,10 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(250, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(221, 221, 221))
         );
@@ -116,15 +107,11 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
 
     private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
         char[] contrasena = jPasswordFieldContransena.getPassword();
-         String stringContrasena = new String(contrasena);
+        String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-           
+
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
-
-    private void jButtonEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncargadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEncargadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +138,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogLoginEmpleados dialog = new JDialogLoginEmpleados(new javax.swing.JFrame(), true);
+                JDialogLoginEncargado dialog = new JDialogLoginEncargado(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -163,9 +150,9 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         });
     }
     
-    private boolean comprobarDatos(String user, String contrasena) {
-        boolean correcto=false;
-        try {
+    public boolean comprobarDatos(String user, String contrasena){
+        boolean correcto= false;
+         try {
             if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
            
                 JOptionPane.showConfirmDialog(rootPane,
@@ -176,13 +163,13 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
             }else{   
             
                 nueva.conectar();
-                String sql = "SELECT * FROM Camarero WHERE usuario_login = ?";
+                String sql = "SELECT * FROM Encargado WHERE usuario_login = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, user);
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_empleado");
+                    int id = rs.getInt("id_encargado");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
@@ -200,12 +187,13 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 ps.close();
             } //else
             } catch (SQLException ex) {
-                 System.getLogger(JDialogLoginEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                 System.getLogger(JDialogLoginClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             } finally {
                 nueva.cerrar();
             }
            return correcto;
-    } //comprobar datos
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncargado;
