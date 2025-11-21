@@ -4,6 +4,7 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import java.sql.*;
@@ -17,6 +18,7 @@ import servix.Seguridad;
 public class JDialogLoginEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEncargado.class.getName());
+    Frame parent;
     ConexionBBDD nueva;
     Connection conexion;
     
@@ -109,7 +111,8 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-
+            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(parent, true);
+            jdie.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 

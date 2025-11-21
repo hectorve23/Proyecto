@@ -114,6 +114,14 @@
             <Property name="text" type="java.lang.String" value="Administrar menu"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="jButtonInterfazEmpleados">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jButton3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInterfazEmpleadosActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel3">

@@ -36,6 +36,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButtonAdministrarMenu = new javax.swing.JButton();
+        jButtonInterfazEmpleados = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -66,6 +67,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jButtonAdministrarMenu.setText("Administrar menu");
         jPanel2.add(jButtonAdministrarMenu);
+
+        jButtonInterfazEmpleados.setText("jButton3");
+        jButtonInterfazEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInterfazEmpleadosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonInterfazEmpleados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +112,10 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonInterfazEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterfazEmpleadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInterfazEmpleadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,6 +158,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAdministrarMenu;
+    private javax.swing.JButton jButtonInterfazEmpleados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
