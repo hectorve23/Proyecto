@@ -66,7 +66,12 @@ public class JDialogEmpleados extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonBajaEmpleado);
 
-        jButtonEditarEmpleado.setText("Editar empleado");
+        jButtonEditarEmpleado.setText("Visualizar y editar empleados");
+        jButtonEditarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarEmpleadoActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonEditarEmpleado);
 
         jButtonAceptar.setText("Aceptar");
@@ -112,6 +117,10 @@ public class JDialogEmpleados extends javax.swing.JDialog {
         JDialogBajaEmpleados jdbe = new JDialogBajaEmpleados(parent, true);
         jdbe.setVisible(true);
     }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
+
+    private void jButtonEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments

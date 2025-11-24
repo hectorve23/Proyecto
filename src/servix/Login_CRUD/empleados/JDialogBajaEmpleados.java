@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.Login_CRUD.Encargado.JDialogLoginEncargado;
 import servix.Seguridad;
 
 /**
@@ -242,9 +241,11 @@ public class JDialogBajaEmpleados extends javax.swing.JDialog {
                    String contrasenaHash = rs.getString("contrasenya_login");
                 
                     if (!user.isEmpty() && Seguridad.checkPassword(contrasena, contrasenaHash)) {
-                    String sql = "DELETE FROM Camarero WHERE usuario_login  = ? ";
+                    String sql = "DELETE FROM Camarero WHERE usuario_login = ? ";
                     PreparedStatement ps = conexion.prepareStatement(sql);
-                    ps.setString(1, user);            
+                    ps.setString(1, user);    
+                    ps.executeUpdate();
+
                     ps.close();
                     }
                 }

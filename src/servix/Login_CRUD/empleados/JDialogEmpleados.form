@@ -102,8 +102,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonEditarEmpleado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Editar empleado"/>
+            <Property name="text" type="java.lang.String" value="Visualizar y editar empleados"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarEmpleadoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
