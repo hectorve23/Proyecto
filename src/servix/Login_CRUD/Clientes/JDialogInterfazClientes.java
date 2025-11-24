@@ -29,12 +29,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
         jTableReservas.setModel(dtm);
         cargaTabla();
-        initComponents();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,9 +49,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelVerReservas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableReservas = new javax.swing.JTable();
+        jButtonAnularReserva = new javax.swing.JButton();
+        jButtonEditarReserva = new javax.swing.JButton();
         jPanelNuevaReserva = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jSpinnerFecha = new javax.swing.JSpinner();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jSpinnerHora = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
@@ -80,6 +82,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         ));
         jScrollPane2.setViewportView(jTableReservas);
 
+        jButtonAnularReserva.setText("Anular reserva");
+        jButtonAnularReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnularReservaActionPerformed(evt);
+            }
+        });
+
+        jButtonEditarReserva.setText("Editar reserva");
+
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
         jPanelVerReservas.setLayout(jPanelVerReservasLayout);
         jPanelVerReservasLayout.setHorizontalGroup(
@@ -88,13 +99,23 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 .addContainerGap(87, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94))
+            .addGroup(jPanelVerReservasLayout.createSequentialGroup()
+                .addGap(271, 271, 271)
+                .addComponent(jButtonAnularReserva)
+                .addGap(35, 35, 35)
+                .addComponent(jButtonEditarReserva)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelVerReservasLayout.setVerticalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(165, 165, 165))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAnularReserva)
+                    .addComponent(jButtonEditarReserva))
+                .addGap(130, 130, 130))
         );
 
         jPanelPadre.add(jPanelVerReservas, "card2");
@@ -103,10 +124,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jLabel3.setText("Fecha");
         jPanelNuevaReserva.add(jLabel3);
-
-        jSpinnerFecha.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), new java.util.Date(1763381041563L), null, java.util.Calendar.DAY_OF_MONTH));
-        jSpinnerFecha.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerFecha, "dd/MM/yyyy"));
-        jPanelNuevaReserva.add(jSpinnerFecha);
+        jPanelNuevaReserva.add(jDateChooser);
 
         jLabel4.setText("Hora");
         jPanelNuevaReserva.add(jLabel4);
@@ -183,20 +201,21 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        String usuario="hector"; // Esto tendra que ser recogido de el JDialog anterior
+        int id=1; // Esto tendra que ser recogido de el JDialog anterior
         try {
             System.out.println(String.valueOf(jSpinnerHora.getValue()));
-            System.out.println(String.valueOf(jSpinnerFecha.getValue()));
+            System.out.println(jDateChooser.getDate());
             PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
                     + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
-                    + " SELECT ?, ?, ?, ?, id_cliente"
-                    + " FROM cliente "
-                    + " WHERE usuario_login=?");
+                    + " VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, "confirmada");
             ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
             
+            java.util.Date mfecha = jDateChooser.getDate();
+            long lfecha = mfecha.getTime();
+            Date fecha = new Date(lfecha);
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSQL = formatoFecha.format(jSpinnerFecha.getValue());
+            String fechaSQL = formatoFecha.format(fecha);
 
             SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
             String horaSQL = formatoHora.format(jSpinnerHora.getValue());
@@ -204,12 +223,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             ps.setString(3, horaSQL);
             ps.setString(4, fechaSQL);
             
-            ps.setString(5, usuario);
+            ps.setInt(5, id);
             
             
             
             System.out.println(jSpinnerHora.getValue().toString());
-            System.out.println(jSpinnerFecha.getValue().toString());
+            System.out.println(jDateChooser.getDate().toString());
             int filas = ps.executeUpdate();
             if(filas==1){
                JOptionPane.showConfirmDialog(rootPane,
@@ -229,6 +248,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
+
+    private void jButtonAnularReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularReservaActionPerformed
+        // TODO add your handling code here:
+        int id=1; // Esto tendra que ser recogido de el JDialog anterior
+        if(jTableReservas.getSelectedRowCount()> 0){
+            int[] seleccionados = jTableReservas.getSelectedRows();
+            for (int i = jTableReservas.getSelectedRowCount()-1; i >= 0; i--) {
+                dtm.removeRow(jTableReservas.convertRowIndexToModel(seleccionados[i]));
+                System.out.println(seleccionados[i]);
+                //PreparedStatement ps = conexion.prepareStatement("DELETE FROM reservas WHERE id_cliente=? AND id")
+            }
+        }
+    }//GEN-LAST:event_jButtonAnularReservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,9 +300,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAnularReserva;
+    private javax.swing.JButton jButtonEditarReserva;
     private javax.swing.JButton jButtonNuevaReserva;
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVerReservas;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -281,7 +316,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JPanel jPanelPadre;
     private javax.swing.JPanel jPanelVerReservas;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinnerFecha;
     private javax.swing.JSpinner jSpinnerHora;
     private javax.swing.JTable jTableReservas;
     private javax.swing.JTextField jTextFieldNumeroComensales;
@@ -290,7 +324,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public void cargaTabla(){
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT * FROM reserva"
+                    "SELECT fecha AS Fecha, hora AS Hora, n_comensales AS Comensales FROM reserva"
             );
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
