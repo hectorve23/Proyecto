@@ -21,7 +21,8 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
     Frame parent;
     ConexionBBDD nueva;
     Connection conexion;
-    
+    String nombre= null;
+    int id;
     /**
      * Creates new form JDialogLoginEncargado
      */
@@ -154,6 +155,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
     }
     
     public boolean comprobarDatos(String user, String contrasena){
+        nombre= user;
         boolean correcto= false;
          try {
             if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
@@ -172,7 +174,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_encargado");
+                    id = rs.getInt("id_encargado");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
@@ -197,7 +199,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
            return correcto;
     }
     
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncargado;
     private javax.swing.JButton jButtonIniciarSesion;

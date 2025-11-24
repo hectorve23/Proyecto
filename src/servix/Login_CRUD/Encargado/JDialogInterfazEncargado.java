@@ -4,6 +4,9 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import java.awt.Frame;
+import servix.Login_CRUD.empleados.JDialogEmpleados;
+
 /**
  *
  * @author DAM2Alu11
@@ -11,7 +14,7 @@ package servix.Login_CRUD.Encargado;
 public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
-
+    Frame parent;
     /**
      * Creates new form JDialogInterfazEncargado
      */
@@ -33,8 +36,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonAdministrarEmpleados = new javax.swing.JButton();
+        jButtonAdministrarReservas = new javax.swing.JButton();
         jButtonAdministrarMenu = new javax.swing.JButton();
         jButtonInterfazEmpleados = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -45,30 +48,30 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("BIENVENIDO !!");
+        jLabel1.setText("Bienvenido/a!!\n");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jLabel2.setText("¿Qué deseas hacer?");
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 2, 30, 30));
 
-        jButton1.setText("Administrar empleados");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdministrarEmpleados.setText("Administrar empleados");
+        jButtonAdministrarEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAdministrarEmpleadosActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.getAccessibleContext().setAccessibleName("jButtonAdministrarEmpleados");
+        jPanel2.add(jButtonAdministrarEmpleados);
+        jButtonAdministrarEmpleados.getAccessibleContext().setAccessibleName("jButtonAdministrarEmpleados");
 
-        jButton2.setText("Administrar reservas");
-        jPanel2.add(jButton2);
-        jButton2.getAccessibleContext().setAccessibleName("jButtonAdministrarReservas");
+        jButtonAdministrarReservas.setText("Administrar reservas");
+        jPanel2.add(jButtonAdministrarReservas);
+        jButtonAdministrarReservas.getAccessibleContext().setAccessibleName("jButtonAdministrarReservas");
 
         jButtonAdministrarMenu.setText("Administrar menu");
         jPanel2.add(jButtonAdministrarMenu);
 
-        jButtonInterfazEmpleados.setText("jButton3");
+        jButtonInterfazEmpleados.setText("Ver interfaz empleados");
         jButtonInterfazEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInterfazEmpleadosActionPerformed(evt);
@@ -109,9 +112,10 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
+        JDialogEmpleados jde = new JDialogEmpleados(parent, true);
+        jde.setVisible(true);
+    }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
     private void jButtonInterfazEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterfazEmpleadosActionPerformed
         // TODO add your handling code here:
@@ -155,9 +159,9 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAdministrarEmpleados;
     private javax.swing.JButton jButtonAdministrarMenu;
+    private javax.swing.JButton jButtonAdministrarReservas;
     private javax.swing.JButton jButtonInterfazEmpleados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
