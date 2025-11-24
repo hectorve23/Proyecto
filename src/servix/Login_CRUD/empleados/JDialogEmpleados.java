@@ -2,23 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.Encargado;
+package servix.Login_CRUD.empleados;
 
 import java.awt.Frame;
-import servix.Login_CRUD.empleados.JDialogEmpleados;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogInterfazEncargado extends javax.swing.JDialog {
+public class JDialogEmpleados extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogEmpleados.class.getName());
     Frame parent;
     /**
-     * Creates new form JDialogInterfazEncargado
+     * Creates new form JDialogEmpleados
      */
-    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal) {
+    public JDialogEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -34,50 +33,48 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButtonAdministrarEmpleados = new javax.swing.JButton();
-        jButtonAdministrarReservas = new javax.swing.JButton();
-        jButtonAdministrarMenu = new javax.swing.JButton();
-        jButtonInterfazEmpleados = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jButtonAltaEmpleado = new javax.swing.JButton();
+        jButtonBajaEmpleado = new javax.swing.JButton();
+        jButtonEditarEmpleado = new javax.swing.JButton();
+        jButtonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Bienvenido/a!!\n");
+        jLabel1.setText("Administrar empleados");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setText("¿Qué deseas hacer?");
+        jPanel2.setLayout(new java.awt.GridLayout(2, 2, 40, 40));
 
-        jPanel2.setLayout(new java.awt.GridLayout(2, 2, 30, 30));
-
-        jButtonAdministrarEmpleados.setText("Administrar empleados");
-        jButtonAdministrarEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAltaEmpleado.setText("Añadir empleado");
+        jButtonAltaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAdministrarEmpleadosActionPerformed(evt);
+                jButtonAltaEmpleadoActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonAdministrarEmpleados);
-        jButtonAdministrarEmpleados.getAccessibleContext().setAccessibleName("jButtonAdministrarEmpleados");
+        jPanel2.add(jButtonAltaEmpleado);
 
-        jButtonAdministrarReservas.setText("Administrar reservas");
-        jPanel2.add(jButtonAdministrarReservas);
-        jButtonAdministrarReservas.getAccessibleContext().setAccessibleName("jButtonAdministrarReservas");
-
-        jButtonAdministrarMenu.setText("Administrar menu");
-        jPanel2.add(jButtonAdministrarMenu);
-
-        jButtonInterfazEmpleados.setText("Ver interfaz empleados");
-        jButtonInterfazEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBajaEmpleado.setText("Despedir empleado");
+        jButtonBajaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInterfazEmpleadosActionPerformed(evt);
+                jButtonBajaEmpleadoActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonInterfazEmpleados);
+        jPanel2.add(jButtonBajaEmpleado);
+
+        jButtonEditarEmpleado.setText("Visualizar y editar empleados");
+        jButtonEditarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarEmpleadoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonEditarEmpleado);
+
+        jButtonAceptar.setText("Aceptar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,38 +85,42 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
-        JDialogEmpleados jde = new JDialogEmpleados(parent, true);
-        jde.setVisible(true);
-    }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
+    private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
+       JDialogAltaEmpleados jdae = new JDialogAltaEmpleados( parent, true);
+       jdae.setVisible(true);
+    }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed
 
-    private void jButtonInterfazEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterfazEmpleadosActionPerformed
+    private void jButtonBajaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaEmpleadoActionPerformed
+        JDialogBajaEmpleados jdbe = new JDialogBajaEmpleados(parent, true);
+        jdbe.setVisible(true);
+    }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
+
+    private void jButtonEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEmpleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonInterfazEmpleadosActionPerformed
+    }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,7 +147,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogInterfazEncargado dialog = new JDialogInterfazEncargado(new javax.swing.JFrame(), true);
+                JDialogEmpleados dialog = new JDialogEmpleados(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -159,13 +160,11 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAdministrarEmpleados;
-    private javax.swing.JButton jButtonAdministrarMenu;
-    private javax.swing.JButton jButtonAdministrarReservas;
-    private javax.swing.JButton jButtonInterfazEmpleados;
+    private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonAltaEmpleado;
+    private javax.swing.JButton jButtonBajaEmpleado;
+    private javax.swing.JButton jButtonEditarEmpleado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

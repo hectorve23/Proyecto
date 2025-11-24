@@ -4,6 +4,7 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import java.awt.Frame;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import java.sql.*;
@@ -17,9 +18,11 @@ import servix.Seguridad;
 public class JDialogLoginEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEncargado.class.getName());
+    Frame parent;
     ConexionBBDD nueva;
     Connection conexion;
-    
+    String nombre= null;
+    int id;
     /**
      * Creates new form JDialogLoginEncargado
      */
@@ -109,7 +112,8 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-
+            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(parent, true);
+            jdie.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
@@ -151,6 +155,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
     }
     
     public boolean comprobarDatos(String user, String contrasena){
+        nombre= user;
         boolean correcto= false;
          try {
             if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
@@ -169,7 +174,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_encargado");
+                    id = rs.getInt("id_encargado");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
@@ -194,7 +199,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
            return correcto;
     }
     
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncargado;
     private javax.swing.JButton jButtonIniciarSesion;
