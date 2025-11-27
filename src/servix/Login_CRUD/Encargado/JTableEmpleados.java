@@ -144,7 +144,21 @@ public class JTableEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed
 
     private void jButtonBajaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaEmpleadoActionPerformed
-        JDialogBajaEmpleados jdbe = new JDialogBajaEmpleados(padre, true);
+        int fila = jTableEmpleados.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showConfirmDialog(rootPane,
+                                            "Debe seleccionar una linea para eliminar" , 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.QUESTION_MESSAGE);
+            return;
+        }
+
+        // Obtener ID de la fila seleccionada
+        int id = (int) dtm.getValueAt(fila, 0);
+
+        JDialogBajaEmpleados jdbe = new JDialogBajaEmpleados(padre, true, id);
         jdbe.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
