@@ -58,7 +58,7 @@
               <Font name="Segoe UI" size="36" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="INICIAR SESION"/>
+            <Property name="text" type="java.lang.String" value="ENCARGADOS"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -93,8 +93,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonEncargado">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Soy encargado"/>
+            <Property name="text" type="java.lang.String" value="Soy empleado"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEncargadoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonIniciarSesion">
           <Properties>

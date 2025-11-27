@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package servix.Login_CRUD.empleados;
+import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import servix.ConexionBBDD;
 import servix.JFrameServix;
 import servix.Seguridad;
 import java.sql.Connection;
+import servix.Login_CRUD.Encargado.JDialogLoginEncargado;
 
 /**
  *
@@ -21,6 +23,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
     JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEmpleados.class.getName());
 
     /**
@@ -32,6 +35,8 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         initComponents();
+        this.processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); // si se cierra otra pestaña se cierra esta
+
     }
 
     /**
@@ -123,7 +128,9 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     private void jButtonEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncargadoActionPerformed
-        // TODO add your handling code here:
+        JDialogLoginEncargado jdle = new JDialogLoginEncargado(padre, true);
+        jdle.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonEncargadoActionPerformed
 
     /**

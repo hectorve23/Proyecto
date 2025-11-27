@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
+import servix.Empleado;
 import servix.Seguridad;
 
 /**
@@ -19,11 +21,9 @@ import servix.Seguridad;
 public class JDialogBajaEmpleados extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogBajaEmpleados.class.getName());
-    String nombre;
-    String apellido;
     ConexionBBDD nueva;
     Connection conexion;
-    String user;
+    int id;
     
     /**
      * Creates new form JDialogBajaEmpleados
@@ -115,18 +115,17 @@ public class JDialogBajaEmpleados extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+     
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        user= jTextFieldUser.getText();
         char[] contrasena = jPasswordFieldContrasena.getPassword();
-          String stringContrasena = new String(contrasena);
         int opcion = JOptionPane.showConfirmDialog(rootPane,
-                                            "Esta seguro de que quiere eliminar al empleado " + seleccionarDatos(user) , 
+                                            "Esta seguro de que quiere eliminar al empleado " + seleccionarDatos(id) , 
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.QUESTION_MESSAGE);
         
         if(opcion == JOptionPane.YES_OPTION){
-           eliminarEmpleados(user, stringContrasena); 
+           eliminarEmpleados(id); 
         }
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
@@ -182,74 +181,45 @@ public class JDialogBajaEmpleados extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldUser;
     // End of variables declaration//GEN-END:variables
     
-    public String seleccionarDatos(String user){
-        String nombreApellido = "";
-         try {
-            if(user.isEmpty() || user.equals("")){
-           
-                JOptionPane.showConfirmDialog(rootPane,
-                                            "Porfavor rellene todos los campos", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
-            }else{   
-            
-                nueva.conectar();
-                String sql = "SELECT nombre, apellido1 FROM Camarero WHERE usuario_login = ?";
-                PreparedStatement ps = conexion.prepareStatement(sql);
-                ps.setString(1, user);
-                ResultSet rs = ps.executeQuery();
-
-                if (rs.next()) {
-                    String nombre= rs.getString("nombre");
-                    String apellido = rs.getString("apellido1");
-                    nombreApellido = nombre + " " + apellido;
-                }else{
-                     JOptionPane.showConfirmDialog(rootPane,
-                                            "Usuario o contraseña incorrectos", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
-                }
-                    
-                rs.close();
-                ps.close();
-            } //else
-            } catch (SQLException ex) {
-                 System.getLogger(JDialogBajaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            } finally {
-                nueva.cerrar();
-            }
-         return nombreApellido;
-    }
-    
-    public void eliminarEmpleados(String user, String contrasena){
+    public String seleccionarDatos(int id){
+        String nombreApellido = null;
         try {
             nueva.conectar();
-            if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
-           
+            String sql = "SELECT nombre, apellido1 FROM Camarero WHERE id_camarero = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                String nombre= rs.getString("nombre");
+                String apellido = rs.getString("apellido1");
+                nombreApellido = nombre + " " + apellido;
+            }else{
                 JOptionPane.showConfirmDialog(rootPane,
-                                            "Porfavor rellene todos los campos", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
-            }else{   
-                String sql1="SELECT * FROM Encargado";
-                PreparedStatement select =conexion.prepareStatement(sql1);
-                ResultSet rs = select.executeQuery();
-                if(rs.next()){
-                   String contrasenaHash = rs.getString("contrasenya_login");
-                
-                    if (!user.isEmpty() && Seguridad.checkPassword(contrasena, contrasenaHash)) {
-                    String sql = "DELETE FROM Camarero WHERE usuario_login = ? ";
+                        "No existe ese empleado",
+                        "Error",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            
+            rs.close();
+            ps.close();
+            return nombreApellido;
+        } catch (SQLException ex) {
+            System.getLogger(JDialogBajaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return nombreApellido;
+    }
+    
+    public void eliminarEmpleados(int id){
+        try {
+            nueva.conectar();
+                    String sql = "DELETE FROM Camarero WHERE id_camarero = ? ";
                     PreparedStatement ps = conexion.prepareStatement(sql);
-                    ps.setString(1, user);    
+                    ps.setInt(1, id );    
                     ps.executeUpdate();
 
                     ps.close();
-                    }
-                }
-            }
         } catch (SQLException ex) {
              System.getLogger(JDialogBajaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);   
         }
