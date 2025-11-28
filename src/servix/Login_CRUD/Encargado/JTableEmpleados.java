@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.Empleado;
+import servix.Login_CRUD.empleados.EliminarEmpleados;
 import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
-import servix.Login_CRUD.empleados.JDialogBajaEmpleados;
 import servix.Login_CRUD.empleados.JDialogEditarEmpleados;
 
 /**
@@ -36,6 +36,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     DefaultTableModel dtm;
     ArrayList<Empleado> lista = new ArrayList<>();
     ArrayList<Empleado> seleccionados = new ArrayList<>();
+    EliminarEmpleados eliminar = new EliminarEmpleados();
     
     public JTableEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -155,11 +156,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
             return;
         }
 
-        // Obtener ID de la fila seleccionada
-        int id = (int) dtm.getValueAt(fila, 0);
-
-        JDialogBajaEmpleados jdbe = new JDialogBajaEmpleados(padre, true, id);
-        jdbe.setVisible(true);
+        eliminar.eliminarEmpleados((String) dtm.getValueAt(fila, 0));
         recargarTabla();
     }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
 
@@ -202,7 +199,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     
     public void cargarEmpleados(){
         try{
-           
+             lista.clear();
             nueva.conectar();
             String sql = "SELECT * FROM Camarero";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -241,8 +238,8 @@ public class JTableEmpleados extends javax.swing.JDialog {
         }
     }
     public void recargarTabla() {
-    dtm.setRowCount(0); // limpia la tabla
-    cargarEmpleados();        // vuelve a cargar empleados
+    dtm.setRowCount(0);
+    cargarEmpleados();// vuelve a cargar empleados
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
