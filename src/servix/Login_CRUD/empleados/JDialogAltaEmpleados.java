@@ -8,7 +8,9 @@ package servix.Login_CRUD.empleados;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
+import servix.Empleado;
 import servix.JFrameServix;
+import servix.Login_CRUD.Encargado.JTableEmpleados;
 import servix.Seguridad;
 /**
  *
@@ -18,7 +20,7 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
     
     ConexionBBDD nueva;
     Connection conexion;
-    
+    JTableEmpleados tabla;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAltaEmpleados.class.getName());
 
     /**
@@ -177,14 +179,16 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
                             nueva.conectar();
                             String sql= "INSERT INTO Camarero(nombre, apellido1, apellido2, telefono, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?)";
                             PreparedStatement ps= conexion.prepareStatement(sql);
-                            ps.setString(1, jTextFieldNombre.getText());
-                            ps.setString(2, jTextFieldApellido1.getText());
-                            ps.setString(3, jTextFieldApellido2.getText());
-                            ps.setString(4, jTextFieldTelefono.getText());
-                            ps.setString(5, jTextFieldUser.getText());
+                            ps.setString(1, nombre);
+                            ps.setString(2, apellido1);
+                            ps.setString(3, apellido2);
+                            ps.setString(4, telefono);
+                            ps.setString(5, user);
                             ps.setString(6, contrasenaEncriptada);
 
                             ps.executeUpdate();
+                            Empleado e = new Empleado(nombre, apellido1, apellido2, telefono, user);
+                            
                             ps.close();
                             conexion.close();
                         } catch (SQLException ex) {
@@ -206,6 +210,7 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.ERROR_MESSAGE);
         }
+      
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
     public boolean existeUsuario(String usuario){

@@ -5,7 +5,6 @@
 package servix.Login_CRUD.Encargado;
 
 import java.awt.Frame;
-import servix.Login_CRUD.empleados.JDialogEmpleados;
 
 /**
  *
@@ -14,7 +13,7 @@ import servix.Login_CRUD.empleados.JDialogEmpleados;
 public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
-    Frame parent;
+    Frame padre;
     /**
      * Creates new form JDialogInterfazEncargado
      */
@@ -113,8 +112,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
-        JDialogEmpleados jde = new JDialogEmpleados(parent, true);
-        jde.setVisible(true);
+        JTableEmpleados jtee= new JTableEmpleados(padre, true);
+        jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
     private void jButtonInterfazEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterfazEmpleadosActionPerformed

@@ -31,6 +31,15 @@ public class Empleado {
         this.usuario_login = usuario_login;
     }
 
+    public Empleado(String nombre, String apellido1, String apellido2,  String telefono, String usuario_login) {
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.telefono = telefono;
+        this.usuario_login = usuario_login;
+    }
+      
+
     public int getId_camarero() {
         return id_camarero;
     }

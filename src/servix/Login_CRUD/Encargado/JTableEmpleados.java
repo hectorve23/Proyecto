@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.empleados;
+package servix.Login_CRUD.Encargado;
 
 import java.awt.Frame;
 import java.sql.Connection;
@@ -10,28 +10,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.Empleado;
+import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
+import servix.Login_CRUD.empleados.JDialogBajaEmpleados;
+import servix.Login_CRUD.empleados.JDialogEditarEmpleados;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JTableEditarEmpleados extends javax.swing.JDialog {
+public class JTableEmpleados extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JTableEditarEmpleados.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JTableEmpleados.class.getName());
 
     /**
      * Creates new form JDialogEditarEmpleados
      */
     
-    Frame parent;
+    Frame padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;
+    ArrayList<Empleado> lista = new ArrayList<>();
+    ArrayList<Empleado> seleccionados = new ArrayList<>();
     
-    public JTableEditarEmpleados(java.awt.Frame parent, boolean modal) {
+    public JTableEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();
@@ -39,7 +45,7 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
         dtm= new DefaultTableModel();
         jTableEmpleados.setModel(dtm);
         dtm.setColumnIdentifiers(Empleado.getColumnas());
-        empleados();
+        cargarEmpleados();
     }
 
     /**
@@ -54,7 +60,9 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEmpleados = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButtonEditar = new javax.swing.JButton();
+        jButtonAltaEmpleado = new javax.swing.JButton();
+        jButtonBajaEmpleado = new javax.swing.JButton();
+        jButtonEditarEmpleado = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -72,13 +80,29 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableEmpleados);
 
-        jButtonEditar.setText("Edita");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAltaEmpleado.setText("Añadir");
+        jButtonAltaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
+                jButtonAltaEmpleadoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEditar);
+        jPanel1.add(jButtonAltaEmpleado);
+
+        jButtonBajaEmpleado.setText("Eliminar");
+        jButtonBajaEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajaEmpleadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBajaEmpleado);
+
+        jButtonEditarEmpleado.setText("Editar");
+        jButtonEditarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarEmpleadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonEditarEmpleado);
 
         jButtonCancelar.setText("Cancelar");
         jPanel1.add(jButtonCancelar);
@@ -107,10 +131,37 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(parent, true);
+    private void jButtonEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEmpleadoActionPerformed
+        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(padre, true);
         jdee.setVisible(true);
-    }//GEN-LAST:event_jButtonEditarActionPerformed
+        recargarTabla();
+    }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
+
+    private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
+        JDialogAltaEmpleados jdae = new JDialogAltaEmpleados(padre, true);
+        jdae.setVisible(true);
+        recargarTabla();
+    }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed
+
+    private void jButtonBajaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaEmpleadoActionPerformed
+        int fila = jTableEmpleados.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showConfirmDialog(rootPane,
+                                            "Debe seleccionar una linea para eliminar" , 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.QUESTION_MESSAGE);
+            return;
+        }
+
+        // Obtener ID de la fila seleccionada
+        int id = (int) dtm.getValueAt(fila, 0);
+
+        JDialogBajaEmpleados jdbe = new JDialogBajaEmpleados(padre, true, id);
+        jdbe.setVisible(true);
+        recargarTabla();
+    }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,7 +188,7 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JTableEditarEmpleados dialog = new JTableEditarEmpleados(new javax.swing.JFrame(), true);
+                JTableEmpleados dialog = new JTableEmpleados(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -149,9 +200,9 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
         });
     }
     
-    public void empleados(){
+    public void cargarEmpleados(){
         try{
-            ArrayList<Empleado> lista = new ArrayList<>();
+           
             nueva.conectar();
             String sql = "SELECT * FROM Camarero";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -176,14 +227,29 @@ public class JTableEditarEmpleados extends javax.swing.JDialog {
                     dtm.addRow(lista.get(i).devuelveFila());
                 }
         } catch (SQLException ex) {
-            System.getLogger(JTableEditarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(JTableEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
                    
     }
+    
+    public void empleadosSeleccionados(){
+         if(jTableEmpleados.getSelectedRowCount()>0){
+            int[] seleccionados = jTableEmpleados.getSelectedRows();
+            for (int i = jTableEmpleados.getSelectedRowCount()-1; i >= 0; i--) {
+                dtm.removeRow(seleccionados[i]);
+            }
+        }
+    }
+    public void recargarTabla() {
+    dtm.setRowCount(0); // limpia la tabla
+    cargarEmpleados();        // vuelve a cargar empleados
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAltaEmpleado;
+    private javax.swing.JButton jButtonBajaEmpleado;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonEditarEmpleado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;

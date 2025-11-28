@@ -5,6 +5,7 @@
 package servix;
 
 import servix.Login_CRUD.Clientes.JDialogLoginClientes;
+import servix.Login_CRUD.empleados.JDialogLoginEmpleados;
 
 /**
  *
@@ -103,7 +104,8 @@ public class JFrameServix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmpleadoActionPerformed
-        // TODO add your handling code here:
+        JDialogLoginEmpleados jdle = new JDialogLoginEmpleados(this,true);
+        jdle.setVisible(true);
         
     }//GEN-LAST:event_jButtonEmpleadoActionPerformed
 

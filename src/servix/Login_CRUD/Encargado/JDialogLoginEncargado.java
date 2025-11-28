@@ -5,10 +5,12 @@
 package servix.Login_CRUD.Encargado;
 
 import java.awt.Frame;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import java.sql.*;
 import servix.Login_CRUD.Clientes.JDialogLoginClientes;
+import servix.Login_CRUD.empleados.JDialogLoginEmpleados;
 import servix.Seguridad;
 
 /**
@@ -18,7 +20,7 @@ import servix.Seguridad;
 public class JDialogLoginEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEncargado.class.getName());
-    Frame parent;
+    Frame padre;
     ConexionBBDD nueva;
     Connection conexion;
     String nombre= null;
@@ -31,6 +33,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         initComponents();
+
     }
 
     /**
@@ -58,7 +61,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("INICIAR SESION");
+        jLabel5.setText("ENCARGADOS");
         jPanel1.add(jLabel5, java.awt.BorderLayout.CENTER);
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
@@ -71,7 +74,12 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         jPanel2.add(jLabel4);
         jPanel2.add(jPasswordFieldContransena);
 
-        jButtonEncargado.setText("Soy encargado");
+        jButtonEncargado.setText("Soy empleado");
+        jButtonEncargado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEncargadoActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonEncargado);
 
         jButtonIniciarSesion.setText("Iniciar sesion");
@@ -112,10 +120,15 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(parent, true);
+            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
             jdie.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
+
+    private void jButtonEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncargadoActionPerformed
+        JDialogLoginEmpleados jdle= new JDialogLoginEmpleados(padre, true);
+        jdle.setVisible(true);
+    }//GEN-LAST:event_jButtonEncargadoActionPerformed
 
     /**
      * @param args the command line arguments
