@@ -22,6 +22,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     ConexionBBDD nueva;
     Connection conexion;
     int id;
+  
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginClientes.class.getName());
 
     /**
@@ -31,10 +32,12 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         super(parent, modal);
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        this.setBounds(parent.getBounds());
+      
         initComponents();
     }
+    
 
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,7 +127,8 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
          String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-           JDialogInterfazClientes jdic = new JDialogInterfazClientes(parent, true);
+           //cliente.setId_cliente(jTextFielduser.getText());
+           JDialogInterfazClientes jdic = new JDialogInterfazClientes(parent, true, id);
            jdic.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed

@@ -9,19 +9,26 @@ package servix.Login_CRUD.Clientes;
  * @author DAM2Alu15
  */
 public class Cliente {
-    int id_cliente;
+    String id_cliente;
+    
 
-    public Cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
+    public Cliente() {
     }
     
-    public int getId_cliente() {
+    public Cliente(String id_cliente, String contrasena) {
+        this.id_cliente = id_cliente;
+        
+    }
+    
+    public String getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(int id_cliente) {
+    public void setId_cliente(String id_cliente) {
         this.id_cliente = id_cliente;
     }
+    
+    
     
     
 }

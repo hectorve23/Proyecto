@@ -27,8 +27,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     DefaultTableModel dtm2;
     ConexionBBDD nueva = null;
     Connection conexion = null;
+    int id;
     
-    public JDialogInterfazClientes(java.awt.Frame parent, boolean modal) {
+    public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         this.nueva = new ConexionBBDD();
@@ -37,9 +38,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.dtm2 = new DefaultTableModel();
         jTableReservas.setModel(dtm);
         jTableMenu.setModel(dtm2);
+        this.id = id;
         cargaTablaReservas();
         cargaTablaMenu();
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +103,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelBotonesDeleteUpdate.add(jButtonAnularReserva);
 
         jButtonEditarReserva.setText("Editar reserva");
+        jButtonEditarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarReservaActionPerformed(evt);
+            }
+        });
         jPanelBotonesDeleteUpdate.add(jButtonEditarReserva);
 
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
@@ -253,7 +261,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        int id=1; // Esto tendra que ser recogido de el JDialog anterior
+        //int id = Integer.parseInt(cliente.getId_cliente()); // Esto tendra que ser recogido de el JDialog anterior
         try {
             System.out.println(String.valueOf(jSpinnerHora.getValue()));
             System.out.println(jDateChooser.getDate());
@@ -303,7 +311,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
     private void jButtonAnularReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularReservaActionPerformed
         // TODO add your handling code here:
-        int id=1; // Esto tendra que ser recogido de el JDialog anterior
+      
         if(jTableReservas.getSelectedRowCount()==1){
             int fila = jTableReservas.getSelectedRow();
             Object id_reserva_objeto = jTableReservas.getValueAt(fila, 0);
@@ -341,42 +349,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_jButtonAnularReservaActionPerformed
 
+    private void jButtonEditarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarReservaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonEditarReservaActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JDialogInterfazClientes dialog = new JDialogInterfazClientes(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnularReserva;
@@ -406,7 +387,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     // End of variables declaration//GEN-END:variables
     
     public void cargaTablaReservas(){
-        int id=1; //RECOGER DE JDIALOG ANTERIOR
+        //int id = Integer.parseInt(cliente.getId_cliente()); //RECOGER DE JDIALOG ANTERIOR
         try {
             PreparedStatement ps = conexion.prepareStatement(
                     "SELECT id_reserva AS Numero, fecha AS Fecha, hora AS Hora, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
