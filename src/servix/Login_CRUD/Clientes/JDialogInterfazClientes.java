@@ -191,10 +191,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 321, Short.MAX_VALUE)
             .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelMenuLayout.createSequentialGroup()
-                    .addGap(31, 31, 31)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(76, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         jPanelPadre.add(jPanelMenu, "card4");
@@ -258,7 +257,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelPadre.repaint();
         jPanelPadre.revalidate();
     }//GEN-LAST:event_actualizarPanel
-
+    public void recargarTabla() {
+        dtm.setRowCount(0);
+        dtm.setColumnCount(0);
+        cargaTablaReservas();
+    }
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
         //int id = Integer.parseInt(cliente.getId_cliente()); // Esto tendra que ser recogido de el JDialog anterior
@@ -296,6 +299,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                             "", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.INFORMATION_MESSAGE);
+               recargarTabla();
             }
             else{
                 JOptionPane.showConfirmDialog(rootPane,
@@ -307,6 +311,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
     private void jButtonAnularReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularReservaActionPerformed
@@ -350,8 +355,21 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     }//GEN-LAST:event_jButtonAnularReservaActionPerformed
 
     private void jButtonEditarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarReservaActionPerformed
-        // TODO add your handling code here:
+        if(jTableReservas.getSelectedRowCount() == 1){
+            
+            int fila = jTableReservas.getSelectedRow();
+
+            int id_reserva = Integer.parseInt(jTableReservas.getValueAt(fila, 0).toString());
+            String fecha = jTableReservas.getValueAt(fila, 1).toString();
+            String hora = jTableReservas.getValueAt(fila, 2).toString();
+            int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 3).toString());
+
+            JDialogEditarReserva jdic = new JDialogEditarReserva(this, true, id_reserva, fecha, hora, n_comensales);
+            jdic.setVisible(true);
+
+            recargarTabla();
         
+        }      
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
 
     /**

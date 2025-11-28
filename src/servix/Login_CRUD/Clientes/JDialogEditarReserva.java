@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package servix.Login_CRUD.Clientes;
-
+import java.sql.*;
+import servix.ConexionBBDD;
 /**
  *
- * @author DAM2Alu15
+ * @author valde
  */
 public class JDialogEditarReserva extends javax.swing.JDialog {
     
@@ -15,10 +16,25 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     /**
      * Creates new form JDialogEditarReserva
      */
-    public JDialogEditarReserva(java.awt.Frame parent, boolean modal) {
+    private int idReserva;
+    private String fecha;
+    private String hora;
+    private int nComensales;
+    private Connection conexion;
+    
+    public JDialogEditarReserva(java.awt.Dialog parent, boolean modal, int idReserva, String fecha, String hora, int nComensales) {
         super(parent, modal);
         initComponents();
+        this.idReserva = idReserva;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.nComensales = nComensales;
+        
+        ConexionBBDD nuevaConexion = new ConexionBBDD();
+        this.conexion = nuevaConexion.getConnection();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,39 +64,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JDialogEditarReserva dialog = new JDialogEditarReserva(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
