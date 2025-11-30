@@ -278,6 +278,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
         }
+        else if(mfecha.before(new java.util.Date())){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "La fecha no puede ser anterior a hoy", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
         else{
             try {
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"

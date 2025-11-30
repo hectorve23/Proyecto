@@ -144,7 +144,12 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Rellena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        else if(mfecha.before(new java.util.Date())){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "La fecha no puede ser anterior a hoy", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+}
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             String fechaSQL = formatoFecha.format(mfecha);
