@@ -23,12 +23,19 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
     /**
      * Creates new form JDialogEditarEmpleadps
      */
-    public JDialogEditarEmpleados(java.awt.Frame parent, boolean modal) {
+    public JDialogEditarEmpleados(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         cargarComboBox();
+        jComboBoxId.setSelectedItem(id);  // Selecciona la fila correcta
+        cargarDatosEmpleado(id);
+        jComboBoxId.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxCambioID(evt);
+             }
+        });
     }
 
     /**
@@ -153,7 +160,7 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
     }
 
     
-     private void jComboBoxIDItemStateChanged(java.awt.event.ItemEvent evt) {                                             
+     private void jComboBoxCambioID(java.awt.event.ItemEvent evt) {                                             
        if(jComboBoxId.getSelectedItem() != null){
            try {
                int id = Integer.parseInt(jComboBoxId.getSelectedItem().toString());
@@ -173,52 +180,54 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
                System.getLogger(JDialogEditarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
            }
        }
-    }         
+    }    
+     
+    private void cargarDatosEmpleado(String id) {
+        try {
+            String sql = "SELECT * FROM Camarero WHERE id_camarero = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, Integer.parseInt(id));
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                jTextFieldNombre.setText(rs.getString("nombre"));
+                jTextFieldApellido1.setText(rs.getString("apellido1"));
+                jTextFieldApellido2.setText(rs.getString("apellido2"));
+                jTextFieldTelefono.setText(rs.getString("telefono"));
+                jTextFieldUser.setText(rs.getString("usuario_login"));
+            }
+        } catch (SQLException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
      
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        
+        try {
+            String sql = "UPDATE Camarero SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, usuario_login = ? WHERE id_camarero = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, jTextFieldNombre.getText());
+            ps.setString(2, jTextFieldApellido1.getText());
+            ps.setString(3, jTextFieldApellido2.getText());
+            ps.setString(4, jTextFieldTelefono.getText());
+            ps.setString(5, jTextFieldUser.getText());
+            ps.setInt(6, Integer.parseInt(jComboBoxId.getSelectedItem().toString()));
+            
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            System.getLogger(JDialogEditarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JDialogEditarEmpleados dialog = new JDialogEditarEmpleados(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    public void windowClosing(java.awt.event.WindowEvent e) {
+       System.exit(0);
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Provincia;

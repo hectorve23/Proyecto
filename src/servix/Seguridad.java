@@ -17,4 +17,5 @@ public class Seguridad {
     public static boolean checkPassword(String password, String hashed) {
         return BCrypt.checkpw(password, hashed);
     }
+    
 }

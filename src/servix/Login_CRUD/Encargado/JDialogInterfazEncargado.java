@@ -5,6 +5,8 @@
 package servix.Login_CRUD.Encargado;
 
 import java.awt.Frame;
+import servix.JFrameServix;
+import servix.Login_CRUD.empleados.JTableInterfazEmpleados;
 
 /**
  *
@@ -14,12 +16,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
     Frame padre;
+    String user;
     /**
      * Creates new form JDialogInterfazEncargado
      */
-    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal) {
+    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
+        this.user=user;
     }
 
     /**
@@ -38,14 +42,15 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButtonAdministrarEmpleados = new javax.swing.JButton();
         jButtonAdministrarReservas = new javax.swing.JButton();
         jButtonAdministrarMenu = new javax.swing.JButton();
-        jButtonInterfazEmpleados = new javax.swing.JButton();
+        jButtonVerReservas = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButtonCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido/a!!\n");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
@@ -64,19 +69,36 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButtonAdministrarEmpleados.getAccessibleContext().setAccessibleName("jButtonAdministrarEmpleados");
 
         jButtonAdministrarReservas.setText("Administrar reservas");
+        jButtonAdministrarReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdministrarReservasActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonAdministrarReservas);
         jButtonAdministrarReservas.getAccessibleContext().setAccessibleName("jButtonAdministrarReservas");
 
         jButtonAdministrarMenu.setText("Administrar menu");
-        jPanel2.add(jButtonAdministrarMenu);
-
-        jButtonInterfazEmpleados.setText("Ver interfaz empleados");
-        jButtonInterfazEmpleados.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdministrarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInterfazEmpleadosActionPerformed(evt);
+                jButtonAdministrarMenuActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonInterfazEmpleados);
+        jPanel2.add(jButtonAdministrarMenu);
+
+        jButtonVerReservas.setText("Ver reservas del dia");
+        jButtonVerReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerReservasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonVerReservas);
+
+        jButtonCerrarSesion.setText("Cerrar Sesion");
+        jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,10 +110,12 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,7 +129,9 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -116,52 +142,38 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
-    private void jButtonInterfazEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterfazEmpleadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonInterfazEmpleadosActionPerformed
+    private void jButtonVerReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerReservasActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(padre, true, user);
+        jtie.setVisible(true);
+    }//GEN-LAST:event_jButtonVerReservasActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        JFrameServix jfs = new JFrameServix();
+        jfs.setVisible(true);
+    }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JDialogInterfazEncargado dialog = new JDialogInterfazEncargado(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(padre, true, user);
+        jdgr.setVisible(true);
+    }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
+
+    private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
+       
+        
+    }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdministrarEmpleados;
     private javax.swing.JButton jButtonAdministrarMenu;
     private javax.swing.JButton jButtonAdministrarReservas;
-    private javax.swing.JButton jButtonInterfazEmpleados;
+    private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonVerReservas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -50,16 +50,12 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         jTextFieldNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldApellido1 = new javax.swing.JTextField();
-        Provincia = new javax.swing.JLabel();
+        Apellido2 = new javax.swing.JLabel();
         jTextFieldApellido2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldUser = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jPasswordFieldContrasena1 = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
-        jPasswordFieldContrasena2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,7 +77,7 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CREAR CUENTA DE EMPLEADO");
 
-        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 10, 10));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 2, 10, 10));
 
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
@@ -91,8 +87,8 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         jPanel1.add(jLabel3);
         jPanel1.add(jTextFieldApellido1);
 
-        Provincia.setText("Segundo apellido");
-        jPanel1.add(Provincia);
+        Apellido2.setText("Segundo apellido");
+        jPanel1.add(Apellido2);
         jPanel1.add(jTextFieldApellido2);
 
         jLabel5.setText("Telefono");
@@ -102,14 +98,6 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         jLabel7.setText("Usuario");
         jPanel1.add(jLabel7);
         jPanel1.add(jTextFieldUser);
-
-        jLabel4.setText("Contraseña");
-        jPanel1.add(jLabel4);
-        jPanel1.add(jPasswordFieldContrasena1);
-
-        jLabel8.setText("Introduzca de nuevo la contraseña");
-        jPanel1.add(jLabel8);
-        jPanel1.add(jPasswordFieldContrasena2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,14 +138,9 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         String apellido2 = jTextFieldApellido2.getText();
         String telefono = jTextFieldTelefono.getText();
         String user =  jTextFieldUser.getText();
-        char[] contrasena = jPasswordFieldContrasena1.getPassword();
-        char[] contrasena2 = jPasswordFieldContrasena2.getPassword();
-
-        String stringContrasena1 = new String(contrasena);
-        String stringContrasena2 = new String(contrasena2);
 
         if(!existeUsuario(user)){
-            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
+            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || user.isEmpty()){
                 JOptionPane.showConfirmDialog(rootPane,
                     "Porfavor rellene todos los campos",
                     "Error",
@@ -171,10 +154,9 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
                         JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.ERROR_MESSAGE);
                 }else{
-                    if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
-                        String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                        String contrasenaEncriptada = Seguridad.hashPassword("1234"); // contraseña ya encriptada
                         this.setVisible(false);
-
+                        System.out.println(contrasenaEncriptada);
                         try {
                             nueva.conectar();
                             String sql= "INSERT INTO Camarero(nombre, apellido1, apellido2, telefono, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?)";
@@ -194,15 +176,8 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
                         } catch (SQLException ex) {
                             System.getLogger(JDialogAltaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                         }
-                    }else{
-                        JOptionPane.showConfirmDialog(rootPane,
-                            "Las contraseñas no coinciden",
-                            "Error",
-                            JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }
         }else{
             JOptionPane.showConfirmDialog(rootPane,
                 "El usuario " + user + " ya existe",
@@ -275,19 +250,15 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Provincia;
+    private javax.swing.JLabel Apellido2;
     private javax.swing.JButton jButtonAlta;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordFieldContrasena1;
-    private javax.swing.JPasswordField jPasswordFieldContrasena2;
     private javax.swing.JTextField jTextFieldApellido1;
     private javax.swing.JTextField jTextFieldApellido2;
     private javax.swing.JTextField jTextFieldNombre;

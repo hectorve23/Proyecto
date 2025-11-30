@@ -23,6 +23,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
     JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
+    int id;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEmpleados.class.getName());
 
@@ -57,6 +58,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         jPasswordFieldContransena = new javax.swing.JPasswordField();
         jButtonEncargado = new javax.swing.JButton();
         jButtonIniciarSesion = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,13 +69,13 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         jLabel5.setText("INICIAR SESION");
         jPanel1.add(jLabel5, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
         jLabel3.setText("Usuario");
         jPanel2.add(jLabel3);
         jPanel2.add(jTextFielduser);
 
-        jLabel4.setText("Contraseña");
+        jLabel4.setText("Contraseña*");
         jPanel2.add(jLabel4);
         jPanel2.add(jPasswordFieldContransena);
 
@@ -93,6 +95,8 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonIniciarSesion);
 
+        jLabel1.setText("* si es tu primera vez iniciando sesion la contraseña es 1234");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,8 +107,10 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(221, 221, 221))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(228, 228, 228))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,8 +118,10 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,7 +131,17 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
          String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-           
+            if(comprobarInicioSesion(jTextFielduser.getText())==false){
+                this.setVisible(false);
+                this.dispose();
+                JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(padre, true, jTextFielduser.getText());
+                jdcc.setVisible(true);
+            }else{
+                this.setVisible(false);
+                this.dispose();
+                JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(padre, true, jTextFielduser.getText());
+                jtie.setVisible(true);
+            } 
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
@@ -189,7 +207,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    int id = rs.getInt("id_camarero");
+                    id = rs.getInt("id_camarero");
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
@@ -205,18 +223,39 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
 
                 rs.close();
                 ps.close();
-            } //else
-            } catch (SQLException ex) {
-                 System.getLogger(JDialogLoginEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            } finally {
-                nueva.cerrar();
             }
+        } catch (SQLException ex) {
+             System.getLogger(JDialogLoginEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            nueva.cerrar();
+        }
            return correcto;
     } //comprobar datos
+    
+    public boolean comprobarInicioSesion(String user){
+        try {
+            nueva.conectar();
+            String sql = "SELECT haIniciadoSesion FROM Camarero WHERE usuario_login = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, user);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                if(rs.getBoolean("haIniciadoSesion")==false){
+                    return false;
+                }
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(JTableInterfazEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncargado;
     private javax.swing.JButton jButtonIniciarSesion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

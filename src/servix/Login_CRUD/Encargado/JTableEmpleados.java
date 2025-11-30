@@ -35,7 +35,6 @@ public class JTableEmpleados extends javax.swing.JDialog {
     Connection conexion;
     DefaultTableModel dtm;
     ArrayList<Empleado> lista = new ArrayList<>();
-    ArrayList<Empleado> seleccionados = new ArrayList<>();
     EliminarEmpleados eliminar = new EliminarEmpleados();
     
     public JTableEmpleados(java.awt.Frame parent, boolean modal) {
@@ -106,6 +105,11 @@ public class JTableEmpleados extends javax.swing.JDialog {
         jPanel1.add(jButtonEditarEmpleado);
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonCancelar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,7 +137,15 @@ public class JTableEmpleados extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEmpleadoActionPerformed
-        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(padre, true);
+        int fila = jTableEmpleados.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un empleado para editar.");
+            return;
+        }
+
+        String id = dtm.getValueAt(fila, 0).toString();
+
+        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(padre, true, id);
         jdee.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
@@ -159,6 +171,10 @@ public class JTableEmpleados extends javax.swing.JDialog {
         eliminar.eliminarEmpleados((String) dtm.getValueAt(fila, 0));
         recargarTabla();
     }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,7 +215,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     
     public void cargarEmpleados(){
         try{
-             lista.clear();
+            lista.clear();
             nueva.conectar();
             String sql = "SELECT * FROM Camarero";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -222,7 +238,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
             for (int i = 0; i < lista.size(); i++) {
                     dtm.addRow(lista.get(i).devuelveFila());
-                }
+            }
         } catch (SQLException ex) {
             System.getLogger(JTableEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }

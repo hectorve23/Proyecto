@@ -120,7 +120,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, jTextFielduser.getText());
             jdie.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed

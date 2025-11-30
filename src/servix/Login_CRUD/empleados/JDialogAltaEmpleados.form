@@ -86,7 +86,7 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
         <Property name="columns" type="int" value="2"/>
         <Property name="horizontalGap" type="int" value="10"/>
-        <Property name="rows" type="int" value="8"/>
+        <Property name="rows" type="int" value="5"/>
         <Property name="verticalGap" type="int" value="10"/>
       </Layout>
       <SubComponents>
@@ -104,7 +104,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldApellido1">
         </Component>
-        <Component class="javax.swing.JLabel" name="Provincia">
+        <Component class="javax.swing.JLabel" name="Apellido2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Segundo apellido"/>
           </Properties>
@@ -124,20 +124,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldUser">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordFieldContrasena1">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Introduzca de nuevo la contrase&#xf1;a"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordFieldContrasena2">
         </Component>
       </SubComponents>
     </Container>
