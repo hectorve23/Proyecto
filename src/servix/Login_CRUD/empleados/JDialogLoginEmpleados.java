@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 import servix.Seguridad;
 import java.sql.Connection;
 import servix.Login_CRUD.Encargado.JDialogLoginEncargado;
@@ -20,7 +19,6 @@ import servix.Login_CRUD.Encargado.JDialogLoginEncargado;
  */
 public class JDialogLoginEmpleados extends javax.swing.JDialog {
     
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     int id;
@@ -134,27 +132,22 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
             if(comprobarInicioSesion(jTextFielduser.getText())==false){
                 this.setVisible(false);
                 this.dispose();
-                JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(padre, true, jTextFielduser.getText());
+                JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(this, true, jTextFielduser.getText());
                 jdcc.setVisible(true);
             }else{
                 this.setVisible(false);
                 this.dispose();
-                JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(padre, true, jTextFielduser.getText());
+                JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true, jTextFielduser.getText());
                 jtie.setVisible(true);
             } 
         }else{
-            JOptionPane.showConfirmDialog(rootPane,
-                                   "Usuario o contraseña incorrectos", 
-                                   "Error", 
-                                   JOptionPane.OK_CANCEL_OPTION, 
-                                   JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     private void jButtonEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncargadoActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogLoginEncargado jdle = new JDialogLoginEncargado(padre, true);
+        JDialogLoginEncargado jdle = new JDialogLoginEncargado(this, true);
         jdle.setVisible(true);
     }//GEN-LAST:event_jButtonEncargadoActionPerformed
 
@@ -217,7 +210,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                 return true;
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableInterfazEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(JDialogLoginEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return true;
     }

@@ -15,12 +15,11 @@ import servix.mesas.JTableAdministrarMesas;
 public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
-    JFrameServix padre;
     String user;
     /**
      * Creates new form JDialogInterfazEncargado
      */
-    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal, String user) {
+    public JDialogInterfazEncargado(java.awt.Dialog parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
         this.user=user;
@@ -149,14 +148,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jtee= new JTableEmpleados(padre, true);
+        JTableEmpleados jtee= new JTableEmpleados(this, true);
         jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
     private void jButtonVerReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(padre, true, user);
+        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true, user);
         jtie.setVisible(true);
     }//GEN-LAST:event_jButtonVerReservasActionPerformed
 
@@ -170,21 +169,21 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(padre, true, user);
+        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(this, true, user);
         jdgr.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
 
     private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(this, true);
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
     private void jButtonAdministrarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMesasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableAdministrarMesas jtam = new JTableAdministrarMesas(padre, true, user);
+        JTableAdministrarMesas jtam = new JTableAdministrarMesas(this, true, user);
         jtam.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
     

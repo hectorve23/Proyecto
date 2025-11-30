@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author albap
+ * @author DAM2ALU11
  */
 public class JDialogBajaCliente extends javax.swing.JDialog {
     
@@ -22,12 +22,11 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     /**
      * Creates new form JDialogBajaCliente
      */
-    JFrameServix padre;
     int id;
     ConexionBBDD nueva;
     Connection conexion;
     
-    public JDialogBajaCliente(java.awt.Frame parent, boolean modal, int id) {
+    public JDialogBajaCliente(java.awt.Dialog parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         this.id=id;
@@ -193,7 +192,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazClientes jdic = new JDialogInterfazClientes(padre, true, id);
+        JDialogInterfazClientes jdic = new JDialogInterfazClientes(this, true, id);
         jdic.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 

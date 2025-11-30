@@ -2,41 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.empleados;
+package servix.Login_CRUD.Encargado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
-import servix.Login_CRUD.Encargado.JTableEmpleados;
+import servix.Seguridad;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogEditarEmpleados extends javax.swing.JDialog {
+public class JDialogEditarEncargado extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogEditarEmpleados.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogEditarEncargado.class.getName());
+    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     /**
      * Creates new form JDialogEditarEmpleadps
      */
-    public JDialogEditarEmpleados(java.awt.Dialog parent, boolean modal, String id) {
+    public JDialogEditarEncargado(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        cargarComboBox();
-        jComboBoxId.setSelectedItem(id);  // Selecciona la fila correcta
-        cargarDatosEmpleado(id);
-        jComboBoxId.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBoxCambioID(evt);
-             }
-        });
     }
 
     /**
@@ -52,8 +47,6 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBoxId = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -62,8 +55,14 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
         jTextFieldApellido2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldCorreo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldUser = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPasswordFieldCtn1 = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        jPasswordFieldCtn2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,15 +82,9 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EDITAR CUENTA DE EMPLEADO");
+        jLabel1.setText("EDITAR CUENTA DE ENCARGADO");
 
-        jPanel1.setLayout(new java.awt.GridLayout(6, 2, 10, 10));
-
-        jLabel4.setText("Id");
-        jPanel1.add(jLabel4);
-
-        jComboBoxId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBoxId);
+        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 10, 10));
 
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
@@ -109,9 +102,21 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
         jPanel1.add(jLabel5);
         jPanel1.add(jTextFieldTelefono);
 
+        jLabel6.setText("Correo");
+        jPanel1.add(jLabel6);
+        jPanel1.add(jTextFieldCorreo);
+
         jLabel7.setText("Usuario");
         jPanel1.add(jLabel7);
         jPanel1.add(jTextFieldUser);
+
+        jLabel4.setText("Contraseña");
+        jPanel1.add(jLabel4);
+        jPanel1.add(jPasswordFieldCtn1);
+
+        jLabel8.setText("Vuelve a introducir la contraseña");
+        jPanel1.add(jLabel8);
+        jPanel1.add(jPasswordFieldCtn2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,81 +150,68 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void cargarComboBox() {
-        try {
-            String sql = "SELECT id_camarero FROM Camarero";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            jComboBoxId.removeAllItems();
-            while (rs.next()) {
-                jComboBoxId.addItem(String.valueOf(rs.getInt("id_camarero")));
-            }
-        } catch (SQLException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
-
-    
-     private void jComboBoxCambioID(java.awt.event.ItemEvent evt) {                                             
-       if(jComboBoxId.getSelectedItem() != null){
-           try {
-               int id = Integer.parseInt(jComboBoxId.getSelectedItem().toString());
-               String sql = "SELECT * FROM Camarero WHERE id_camarero = ?";
-               PreparedStatement ps = conexion.prepareStatement(sql);
-               ps.setInt(1, id);
-               ResultSet rs = ps.executeQuery();
-               
-                if (rs.next()) {
-                      jTextFieldNombre.setText(rs.getString("nombre"));
-                      jTextFieldApellido1.setText(rs.getString("apellido1"));
-                      jTextFieldApellido2.setText(rs.getString("apellido2"));
-                      jTextFieldTelefono.setText(rs.getString("telefono"));
-                      jTextFieldUser.setText(rs.getString("usuario_login"));
-                  }
-           } catch (SQLException ex) {
-               System.getLogger(JDialogEditarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-           }
-       }
-    }    
-     
-    private void cargarDatosEmpleado(String id) {
-        try {
-            String sql = "SELECT * FROM Camarero WHERE id_camarero = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, Integer.parseInt(id));
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                jTextFieldNombre.setText(rs.getString("nombre"));
-                jTextFieldApellido1.setText(rs.getString("apellido1"));
-                jTextFieldApellido2.setText(rs.getString("apellido2"));
-                jTextFieldTelefono.setText(rs.getString("telefono"));
-                jTextFieldUser.setText(rs.getString("usuario_login"));
-            }
-        } catch (SQLException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
-
-     
+       
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        try {
-            String sql = "UPDATE Camarero SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, usuario_login = ? WHERE id_camarero = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, jTextFieldNombre.getText());
-            ps.setString(2, jTextFieldApellido1.getText());
-            ps.setString(3, jTextFieldApellido2.getText());
-            ps.setString(4, jTextFieldTelefono.getText());
-            ps.setString(5, jTextFieldUser.getText());
-            ps.setInt(6, Integer.parseInt(jComboBoxId.getSelectedItem().toString()));
-            
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            System.getLogger(JDialogEditarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+       String nombre = jTextFieldNombre.getText();
+        String apellido1 = jTextFieldApellido1.getText();
+        String apellido2 = jTextFieldApellido2.getText();
+        String telefono = jTextFieldTelefono.getText();
+        String correo = jTextFieldCorreo.getText();
+        String user =  jTextFieldUser.getText();
+        char[] contrasena = jPasswordFieldCtn1.getPassword();
+        char[] contrasena2 = jPasswordFieldCtn2.getPassword();
+        
+        String stringContrasena1 = new String(contrasena);
+        String stringContrasena2 = new String(contrasena2);
+       
+       if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
+                JOptionPane.showConfirmDialog(rootPane,
+                                            "Porfavor rellene todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+        }else{
+            if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || correo.length() > 40 || user.length() > 30){
+             JOptionPane.showConfirmDialog(rootPane,
+                                        "Ningun campo puede exceder los 30 caracteres", 
+                                        "Error", 
+                                        JOptionPane.OK_CANCEL_OPTION, 
+                                        JOptionPane.ERROR_MESSAGE);
+            }else{
+                if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
+                     String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                     this.setVisible(false);
+
+                     try {
+                         nueva.conectar();
+
+                            String sql = "UPDATE Encargado SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, correo = ?, usuario_login = ?, contrasenya_login = ?, haIniciadoSesion= true WHERE id_encargado = 1";
+                            PreparedStatement ps = conexion.prepareStatement(sql);
+                            ps.setString(1, jTextFieldNombre.getText());
+                            ps.setString(2, jTextFieldApellido1.getText());
+                            ps.setString(3, jTextFieldApellido2.getText());
+                            ps.setString(4, jTextFieldTelefono.getText());
+                            ps.setString(5, jTextFieldCorreo.getText());
+                            ps.setString(6, jTextFieldUser.getText());
+                            ps.setString(7, contrasenaEncriptada);
+
+                            ps.executeUpdate();
+                            ps.close();
+                            
+                            JDialogLoginEncargado jdle = new JDialogLoginEncargado(padre, true);
+                            jdle.setVisible(true);
+                    } catch (SQLException ex) {
+                         System.getLogger(JDialogEditarEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    }
+                }else{
+                     JOptionPane.showConfirmDialog(rootPane,
+                                             "Las contraseñas no coinciden", 
+                                             "Error", 
+                                             JOptionPane.OK_CANCEL_OPTION, 
+                                             JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
-        dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -237,16 +229,20 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
     private javax.swing.JLabel Provincia;
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JComboBox<String> jComboBoxId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordFieldCtn1;
+    private javax.swing.JPasswordField jPasswordFieldCtn2;
     private javax.swing.JTextField jTextFieldApellido1;
     private javax.swing.JTextField jTextFieldApellido2;
+    private javax.swing.JTextField jTextFieldCorreo;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefono;
     private javax.swing.JTextField jTextFieldUser;

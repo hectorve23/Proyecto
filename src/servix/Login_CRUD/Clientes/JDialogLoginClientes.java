@@ -18,7 +18,6 @@ import servix.Seguridad;
  */
 public class JDialogLoginClientes extends javax.swing.JDialog {
    
-    Frame parent;
     ConexionBBDD nueva;
     Connection conexion;
     int id;
@@ -28,7 +27,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDialogLoginEmpleados
      */
-    public JDialogLoginClientes(java.awt.Frame parent, boolean modal) {
+    public JDialogLoginClientes(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
@@ -119,7 +118,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-       JDialogAltaCliente jdac= new JDialogAltaCliente(parent, true);
+       JDialogAltaCliente jdac= new JDialogAltaCliente(this, true);
        jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 
@@ -128,7 +127,7 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
          String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
            //cliente.setId_cliente(jTextFielduser.getText());
-           JDialogInterfazClientes jdic = new JDialogInterfazClientes(parent, true, id);
+           JDialogInterfazClientes jdic = new JDialogInterfazClientes(this, true, id);
            jdic.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed

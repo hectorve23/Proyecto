@@ -30,14 +30,13 @@ public class JTableEmpleados extends javax.swing.JDialog {
      * Creates new form JDialogEditarEmpleados
      */
     
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;
     ArrayList<Empleado> lista = new ArrayList<>();
     EliminarEmpleados eliminar = new EliminarEmpleados();
     
-    public JTableEmpleados(java.awt.Frame parent, boolean modal) {
+    public JTableEmpleados(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();
@@ -147,7 +146,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
         this.setVisible(false);
         this.dispose();
-        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(padre, true, id);
+        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(this, true, id);
         jdee.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
@@ -155,7 +154,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogAltaEmpleados jdae = new JDialogAltaEmpleados(padre, true);
+        JDialogAltaEmpleados jdae = new JDialogAltaEmpleados(this, true);
         jdae.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed

@@ -28,7 +28,6 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     /**
      * Creates new form JDialogGestionarReservas
      */
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtmPendientes;
@@ -36,7 +35,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     DefaultTableModel dtmCanceladas;
     ArrayList<Reserva> lista = new ArrayList<>();
     String user;
-    public JDialogGestionarReservas(java.awt.Frame parent, boolean modal, String user) {
+    public JDialogGestionarReservas(java.awt.Dialog parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
         this.user= user;
@@ -312,7 +311,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, user);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true, user);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 

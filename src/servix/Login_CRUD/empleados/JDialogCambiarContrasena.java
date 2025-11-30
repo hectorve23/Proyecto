@@ -10,6 +10,7 @@ import servix.ConexionBBDD;
 import servix.Seguridad;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JDialog;
 import servix.JFrameServix;
 
 /**
@@ -23,12 +24,11 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCambiarContrasena
      */
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     String user;
     
-    public JDialogCambiarContrasena(java.awt.Frame parent, boolean modal, String user) {
+    public JDialogCambiarContrasena(java.awt.Dialog parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
         this.user=user;
@@ -129,7 +129,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
                 ps.setString(2, user);
 
                 ps.executeUpdate();
-                JDialogLoginEmpleados jdle= new JDialogLoginEmpleados(padre, true);
+                JDialogLoginEmpleados jdle= new JDialogLoginEmpleados(this, true);
                 jdle.setVisible(true);
                 dispose();
             } catch (SQLException ex) {

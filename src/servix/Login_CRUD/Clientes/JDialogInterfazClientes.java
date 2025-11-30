@@ -33,7 +33,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public JDialogInterfazClientes() {
         
     }
-    public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
+    public JDialogInterfazClientes(java.awt.Dialog parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         this.nueva = new ConexionBBDD();
@@ -399,7 +399,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private void jButtonBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaClienteActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogBajaCliente jdbc = new JDialogBajaCliente(padre, true, id);
+        JDialogBajaCliente jdbc = new JDialogBajaCliente(this, true, id);
         jdbc.setVisible(true);
     }//GEN-LAST:event_jButtonBajaClienteActionPerformed
 

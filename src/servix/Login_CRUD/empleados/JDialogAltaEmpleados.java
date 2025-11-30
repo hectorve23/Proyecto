@@ -17,7 +17,6 @@ import servix.Seguridad;
  */
 public class JDialogAltaEmpleados extends javax.swing.JDialog {
     
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     JTableEmpleados tabla;
@@ -26,7 +25,7 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
     /**
      * Creates new form JDialogAltaEmpleados
      */
-    public JDialogAltaEmpleados(java.awt.Frame parent, boolean modal) {
+    public JDialogAltaEmpleados(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
@@ -210,7 +209,7 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jte = new JTableEmpleados(padre, true);
+        JTableEmpleados jte = new JTableEmpleados(this, true);
         jte.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

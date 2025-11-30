@@ -13,6 +13,7 @@ public class Seguridad {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
    
+    
     // comprobar la contraseña haseada de la base de datos
     public static boolean checkPassword(String password, String hashed) {
         return BCrypt.checkpw(password, hashed);

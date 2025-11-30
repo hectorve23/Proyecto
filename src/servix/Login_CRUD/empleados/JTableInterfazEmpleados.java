@@ -4,7 +4,6 @@
  */
 package servix.Login_CRUD.empleados;
 
-import java.awt.Frame;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,14 +26,13 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     /**
      * Creates new form JDialogInterfazEmpleados
      */
-   JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;
     ArrayList<Reserva> lista = new ArrayList<>();
     java.sql.Date fecha_sql;
     
-    public JTableInterfazEmpleados(java.awt.Frame parent, boolean modal, String user) {
+    public JTableInterfazEmpleados(java.awt.Dialog parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();

@@ -27,10 +27,8 @@ public class JDialogAltaCliente extends javax.swing.JDialog {
      * Creates new form JDialogAltaCliente
      */
     
-    JFrameServix padre;
-    public JDialogAltaCliente(java.awt.Frame parent, boolean modal) {
+    public JDialogAltaCliente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        padre= (JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         initComponents();
