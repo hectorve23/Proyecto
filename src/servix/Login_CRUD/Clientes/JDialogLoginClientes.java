@@ -27,6 +27,14 @@ public class JDialogLoginClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDialogLoginEmpleados
      */
+    public JDialogLoginClientes(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
+      
+        initComponents();
+    }
+    
     public JDialogLoginClientes(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         nueva = new ConexionBBDD();

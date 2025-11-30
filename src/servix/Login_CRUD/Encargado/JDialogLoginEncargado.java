@@ -27,6 +27,14 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
     /**
      * Creates new form JDialogLoginEncargado
      */
+    public JDialogLoginEncargado(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
+        initComponents();
+
+    }
+    
     public JDialogLoginEncargado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         nueva = new ConexionBBDD();

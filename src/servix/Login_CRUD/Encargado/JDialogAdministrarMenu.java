@@ -32,7 +32,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     ConexionBBDD nueva = null;
     Connection conexion = null;
     
-    public JDialogAdministrarMenu(java.awt.Frame parent, boolean modal) {
+    public JDialogAdministrarMenu(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.nueva = new ConexionBBDD();

@@ -6,7 +6,6 @@ package servix;
 
 import servix.Login_CRUD.Clientes.JDialogLoginClientes;
 import servix.Login_CRUD.empleados.JDialogLoginEmpleados;
-import static servix.Seguridad.hashPassword;
 
 /**
  *

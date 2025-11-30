@@ -29,6 +29,15 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
      * Creates new form JDialogLoginEmpleados
      */
     
+    public JDialogLoginEmpleados(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
+        initComponents();
+        this.processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); // si se cierra otra pestaña se cierra esta
+
+    }
+    
     public JDialogLoginEmpleados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         nueva = new ConexionBBDD();

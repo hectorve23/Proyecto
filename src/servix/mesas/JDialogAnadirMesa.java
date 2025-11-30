@@ -23,7 +23,7 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
      */
     ConexionBBDD nueva;
     Connection conexion;
-    public JDialogAnadirMesa(java.awt.Frame parent, boolean modal) {
+    public JDialogAnadirMesa(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();
