@@ -4,14 +4,13 @@
  */
 package servix.Login_CRUD.empleados;
 
-import java.awt.Frame;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import servix.Seguridad;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import servix.JFrameServix;
 
 /**
  *
@@ -24,7 +23,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
     /**
      * Creates new form JDialogCambiarContrasena
      */
-    Frame padre;
+    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     String user;

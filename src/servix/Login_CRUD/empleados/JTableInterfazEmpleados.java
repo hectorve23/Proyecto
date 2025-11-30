@@ -14,6 +14,7 @@ import servix.Reserva;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import servix.JFrameServix;
 
 /**
  *
@@ -26,7 +27,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     /**
      * Creates new form JDialogInterfazEmpleados
      */
-    Frame padre;
+   JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;

@@ -218,7 +218,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
-                      correcto =  false; // si no se encontró usuario o contraseña incorrecta
+                      correcto =  false;
                 }
 
                 rs.close();

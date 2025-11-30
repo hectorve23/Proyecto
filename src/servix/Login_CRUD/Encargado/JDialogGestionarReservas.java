@@ -4,7 +4,6 @@
  */
 package servix.Login_CRUD.Encargado;
 
-import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 import servix.Reserva;
 
 /**
@@ -26,7 +26,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     /**
      * Creates new form JDialogGestionarReservas
      */
-    Frame padre;
+    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtmPendientes;

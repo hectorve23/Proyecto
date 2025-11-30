@@ -4,7 +4,6 @@
  */
 package servix.Login_CRUD.Encargado;
 
-import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.Empleado;
+import servix.JFrameServix;
 import servix.Login_CRUD.empleados.EliminarEmpleados;
 import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
 import servix.Login_CRUD.empleados.JDialogEditarEmpleados;
@@ -30,7 +30,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
      * Creates new form JDialogEditarEmpleados
      */
     
-    Frame padre;
+    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;

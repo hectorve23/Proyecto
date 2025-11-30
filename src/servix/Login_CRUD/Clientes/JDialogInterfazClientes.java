@@ -4,13 +4,13 @@
  */
 package servix.Login_CRUD.Clientes;
 
-
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 
 /**
  *
@@ -23,6 +23,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     /**
      * Creates new form JDialogInterfazClientes
      */
+    JFrameServix padre;
     DefaultTableModel dtm;
     DefaultTableModel dtm2;
     ConexionBBDD nueva = null;
@@ -76,6 +77,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jButtonNuevaReserva = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
         jButtonVerMenu = new javax.swing.JButton();
+        jButtonBajaCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,7 +119,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             .addGroup(jPanelVerReservasLayout.createSequentialGroup()
                 .addGap(124, 124, 124)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(24, 134, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -126,7 +128,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(152, 152, 152))
         );
@@ -221,6 +223,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             }
         });
         jPanelOpciones.add(jButtonVerMenu);
+
+        jButtonBajaCliente.setText("Eliminar cuenta");
+        jButtonBajaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajaClienteActionPerformed(evt);
+            }
+        });
+        jPanelOpciones.add(jButtonBajaCliente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -372,6 +382,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         }      
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
 
+    private void jButtonBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaClienteActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        JDialogBajaCliente jdbc = new JDialogBajaCliente(padre, true, id);
+        jdbc.setVisible(true);
+    }//GEN-LAST:event_jButtonBajaClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -379,6 +396,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnularReserva;
+    private javax.swing.JButton jButtonBajaCliente;
     private javax.swing.JButton jButtonEditarReserva;
     private javax.swing.JButton jButtonNuevaReserva;
     private javax.swing.JButton jButtonValidar;

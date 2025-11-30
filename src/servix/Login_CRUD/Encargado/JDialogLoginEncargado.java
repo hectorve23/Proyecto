@@ -4,11 +4,10 @@
  */
 package servix.Login_CRUD.Encargado;
 
-import java.awt.Frame;
-import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import java.sql.*;
+import servix.JFrameServix;
 import servix.Login_CRUD.Clientes.JDialogLoginClientes;
 import servix.Login_CRUD.empleados.JDialogLoginEmpleados;
 import servix.Seguridad;
@@ -20,7 +19,7 @@ import servix.Seguridad;
 public class JDialogLoginEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogLoginEncargado.class.getName());
-    Frame padre;
+    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     String nombre= null;

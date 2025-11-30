@@ -4,7 +4,6 @@
  */
 package servix.Login_CRUD.Encargado;
 
-import java.awt.Frame;
 import servix.JFrameServix;
 import servix.Login_CRUD.empleados.JTableInterfazEmpleados;
 
@@ -15,7 +14,7 @@ import servix.Login_CRUD.empleados.JTableInterfazEmpleados;
 public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
-    Frame padre;
+    JFrameServix padre;
     String user;
     /**
      * Creates new form JDialogInterfazEncargado
