@@ -424,7 +424,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-     public void cargaTablaMenu(){
+    public void cargaTablaMenu(){
         try {
             PreparedStatement ps = conexion.prepareStatement(
                     "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato ORDER BY categoria"
