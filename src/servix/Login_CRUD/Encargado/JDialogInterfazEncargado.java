@@ -158,7 +158,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         JFrameServix jfs = new JFrameServix();
         jfs.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
-
+                                                  
     private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
         this.setVisible(false);
         this.dispose();
@@ -167,8 +167,10 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
 
     private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
-       
-        
+        this.setVisible(false);
+        this.dispose();
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
+        jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

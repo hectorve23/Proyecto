@@ -4,6 +4,8 @@
  */
 package servix.Login_CRUD.Clientes;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 /**
  *
@@ -32,8 +34,25 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
+        
+        cargarDatosReserva();
+        
     }
-    
+    private void cargarDatosReserva() {
+        try {
+           
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            jDateChooserFecha.setDate(sdf.parse(this.fecha));
+
+            SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm:ss");
+            jSpinnerHora.setValue(sdfHora.parse(this.hora));
+
+            jSpinnerComensales.setValue(this.nComensales);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     
 
     /**
@@ -45,21 +64,121 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
+        jSpinnerHora = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        jSpinnerComensales = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonValidar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setLayout(new java.awt.GridLayout(5, 2));
+
+        jLabel2.setText("Fecha");
+        jPanel1.add(jLabel2);
+        jPanel1.add(jDateChooserFecha);
+
+        jLabel4.setText("Hora");
+        jPanel1.add(jLabel4);
+
+        jSpinnerHora.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerHora.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerHora, "HH:mm"));
+        jPanel1.add(jSpinnerHora);
+
+        jLabel3.setText("Comensales");
+        jPanel1.add(jLabel3);
+        jPanel1.add(jSpinnerComensales);
+        jPanel1.add(jLabel5);
+        jPanel1.add(jLabel6);
+        jPanel1.add(jLabel7);
+
+        jButtonValidar.setText("Validar");
+        jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValidarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonValidar);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Editar reserva");
+        jPanel2.add(jLabel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(154, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
+        java.util.Date mfecha = jDateChooserFecha.getDate();
+        Object valorHora = jSpinnerHora.getValue();
+        Object valorComensales = jSpinnerComensales.getValue();
+
+        if(valorComensales == null || valorHora == null || mfecha == null){
+            JOptionPane.showMessageDialog(rootPane, "Rellena todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else if(mfecha.before(new java.util.Date())){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "La fecha no puede ser anterior a hoy", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+}
+        try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaSQL = formatoFecha.format(mfecha);
+
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+            String horaSQL = formatoHora.format(valorHora);
+
+            PreparedStatement ps = conexion.prepareStatement(
+                "UPDATE reserva SET fecha=?, hora=?, n_comensales=? WHERE id_reserva=?");
+
+            ps.setString(1, fechaSQL);
+            ps.setString(2, horaSQL);
+            ps.setInt(3, Integer.parseInt(valorComensales.toString()));
+            ps.setInt(4, idReserva);
+
+            if(ps.executeUpdate() == 1){
+                JOptionPane.showMessageDialog(rootPane, "Reserva actualizada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                //JDialogInterfazClientes jdic = new JDialogInterfazClientes();
+                //jdic.recargarTabla();
+                this.dispose();
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+        
+        
+    }//GEN-LAST:event_jButtonValidarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -67,5 +186,18 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonValidar;
+    private com.toedter.calendar.JDateChooser jDateChooserFecha;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSpinner jSpinnerComensales;
+    private javax.swing.JSpinner jSpinnerHora;
     // End of variables declaration//GEN-END:variables
 }

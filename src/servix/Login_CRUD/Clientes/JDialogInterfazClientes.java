@@ -30,6 +30,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     Connection conexion = null;
     int id;
     
+    public JDialogInterfazClientes() {
+        
+    }
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
@@ -274,53 +277,64 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     }
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        //int id = Integer.parseInt(cliente.getId_cliente()); // Esto tendra que ser recogido de el JDialog anterior
-        try {
-            System.out.println(String.valueOf(jSpinnerHora.getValue()));
-            System.out.println(jDateChooser.getDate());
-            PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
-                    + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
-                    + " VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, "confirmada");
-            ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
-            
-            java.util.Date mfecha = jDateChooser.getDate();
-            long lfecha = mfecha.getTime();
-            Date fecha = new Date(lfecha);
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaSQL = formatoFecha.format(fecha);
+        String comensales = jTextFieldNumeroComensales.getText();
+        java.util.Date mfecha = jDateChooser.getDate();
+        Object valorHora = jSpinnerHora.getValue();
 
-            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-            String horaSQL = formatoHora.format(jSpinnerHora.getValue());
-            
-            ps.setString(3, horaSQL);
-            ps.setString(4, fechaSQL);
-            
-            ps.setInt(5, id);
-            
-            
-            
-            System.out.println(jSpinnerHora.getValue().toString());
-            System.out.println(jDateChooser.getDate().toString());
-            int filas = ps.executeUpdate();
-            if(filas==1){
-               JOptionPane.showConfirmDialog(rootPane,
-                                            "Reserva registrada", 
-                                            "", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.INFORMATION_MESSAGE);
-               recargarTabla();
-            }
-            else{
-                JOptionPane.showConfirmDialog(rootPane,
-                                            "Ha habido un error", 
+        if(comensales.isEmpty() || mfecha==null || valorHora==null){
+            JOptionPane.showConfirmDialog(rootPane,
+                                            "Rellena todos los campos", 
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        else if(mfecha.before(new java.util.Date())){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "La fecha no puede ser anterior a hoy", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            try {
+                PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
+                        + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
+                        + " VALUES (?, ?, ?, ?, ?)");
+                
+                long lfecha = mfecha.getTime();
+                Date fecha = new Date(lfecha);
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaSQL = formatoFecha.format(fecha);
+                
+                SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+                String horaSQL = formatoHora.format(jSpinnerHora.getValue());
+                
+                ps.setString(1, "confirmada");
+                ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
+                ps.setString(3, horaSQL);
+                ps.setString(4, fechaSQL);
+                ps.setInt(5, id);
+
+                int filas = ps.executeUpdate();
+                if(filas==1){
+                   JOptionPane.showConfirmDialog(rootPane,
+                                                "Reserva registrada", 
+                                                "", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.INFORMATION_MESSAGE);
+                   recargarTabla();
+                }
+                else{
+                    JOptionPane.showConfirmDialog(rootPane,
+                                                "Ha habido un error", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
+        
         
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
@@ -434,7 +448,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-     public void cargaTablaMenu(){
+    public void cargaTablaMenu(){
         try {
             PreparedStatement ps = conexion.prepareStatement(
                     "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato ORDER BY categoria"
