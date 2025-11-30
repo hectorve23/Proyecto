@@ -176,7 +176,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, user);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true, user);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 

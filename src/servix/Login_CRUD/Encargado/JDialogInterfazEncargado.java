@@ -14,12 +14,19 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
     Frame padre;
+    String user;
     /**
      * Creates new form JDialogInterfazEncargado
      */
-    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal) {
+    public JDialogInterfazEncargado(java.awt.Dialog parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
+        this.user = user;
+    }
+    public JDialogInterfazEncargado(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        
     }
 
     /**
@@ -134,39 +141,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JDialogInterfazEncargado dialog = new JDialogInterfazEncargado(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdministrarEmpleados;
