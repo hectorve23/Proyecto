@@ -104,13 +104,14 @@ public class JFrameServix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmpleadoActionPerformed
+        this.dispose();
         JDialogLoginEmpleados jdle = new JDialogLoginEmpleados(this,true);
         jdle.setVisible(true);
         
     }//GEN-LAST:event_jButtonEmpleadoActionPerformed
 
     private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
         JDialogLoginClientes jdlc = new JDialogLoginClientes(this, true);
         jdlc.setVisible(true);
     }//GEN-LAST:event_jButtonClienteActionPerformed

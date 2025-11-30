@@ -6,6 +6,7 @@ package servix.Login_CRUD.Encargado;
 
 import servix.JFrameServix;
 import servix.Login_CRUD.empleados.JTableInterfazEmpleados;
+import servix.mesas.JTableAdministrarMesas;
 
 /**
  *
@@ -94,6 +95,11 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jPanel2.add(jButtonVerReservas);
 
         jButtonAdministrarMesas.setText("Administrar mesas");
+        jButtonAdministrarMesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdministrarMesasActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonAdministrarMesas);
 
         jButtonCerrarSesion.setText("Cerrar Sesion");
@@ -141,6 +147,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
+        this.setVisible(false);
+        this.dispose();
         JTableEmpleados jtee= new JTableEmpleados(padre, true);
         jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
@@ -173,6 +181,13 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
+    private void jButtonAdministrarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMesasActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        JTableAdministrarMesas jtam = new JTableAdministrarMesas(padre, true, user);
+        jtam.setVisible(true);
+    }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdministrarEmpleados;
     private javax.swing.JButton jButtonAdministrarMenu;

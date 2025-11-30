@@ -9,7 +9,7 @@ import java.sql.Time;
 
 /**
  *
- * @author albap
+ * @author DAM2ALU11
  */
 public class Reserva {
 

@@ -73,6 +73,11 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
 
         jTableReservasDelDia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,6 +139,12 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
         fecha_sql = new java.sql.Date(fecha);
         escribirReservas(fecha_sql);
     }//GEN-LAST:event_jButtonBuscarFechaActionPerformed
+
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonSalirActionPerformed
     
     public void escribirReservas(java.sql.Date fecha){
         try {

@@ -8,12 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
 import servix.Reserva;
+import servix.mesas.AsignarMesa;
 
 /**
  *
@@ -281,25 +283,35 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione la reserva que quiere confirmar.");
             return;
         }
-            
-         int idReserva = (int) jTablePendientes.getValueAt(fila, 0);
+       
+        int idReserva = (int) jTablePendientes.getValueAt(fila, 0);
+        int n_comensales = (int) jTablePendientes.getValueAt(fila, 2);
+        java.sql.Date fecha = (java.sql.Date) jTablePendientes.getValueAt(fila, 4);
+        Time hora = (Time) jTablePendientes.getValueAt(fila, 3);
+        
+        AsignarMesa am = new AsignarMesa();
+        if(am.buscarMesa(idReserva, n_comensales, fecha, hora)){
+            try {
+                String sql = "UPDATE Reserva SET estado_reserva = 'confirmada' WHERE id_reserva = ?";
+                PreparedStatement ps = conexion.prepareStatement(sql);
+                ps.setInt(1, idReserva);
+                ps.executeUpdate();
+                javax.swing.JOptionPane.showMessageDialog(this, "Reserva confirmada.");
+                cargarDatos();
 
-    try {
-        String sql = "UPDATE Reserva SET estado_reserva = 'confirmada' WHERE id_reserva = ?";
-        PreparedStatement ps = conexion.prepareStatement(sql);
-        ps.setInt(1, idReserva);
-        ps.executeUpdate();
-        javax.swing.JOptionPane.showMessageDialog(this, "Reserva confirmada.");
-        cargarDatos();
-
-    } catch (SQLException ex) {
-        logger.log(java.util.logging.Level.SEVERE, null, ex);
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al confirmar la reserva.");
-    }
+            } catch (SQLException ex) {
+                logger.log(java.util.logging.Level.SEVERE, null, ex);
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al confirmar la reserva.");
+            }
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "No ha mesa disponible");
+        }
         
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        this.setVisible(false);
+        this.dispose();
         JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, user);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed

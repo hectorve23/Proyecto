@@ -22,7 +22,6 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
     JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
-    String nombre= null;
     int id;
     /**
      * Creates new form JDialogLoginEncargado
@@ -119,55 +118,21 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
         char[] contrasena = jPasswordFieldContransena.getPassword();
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
+            this.setVisible(false);
+            this.dispose();
             JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, jTextFielduser.getText());
             jdie.setVisible(true);
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     private void jButtonEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncargadoActionPerformed
+        this.setVisible(false);
+        this.dispose();
         JDialogLoginEmpleados jdle= new JDialogLoginEmpleados(padre, true);
         jdle.setVisible(true);
     }//GEN-LAST:event_jButtonEncargadoActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JDialogLoginEncargado dialog = new JDialogLoginEncargado(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-    
+   
     public boolean comprobarDatos(String user, String contrasena){
-        nombre= user;
         boolean correcto= false;
          try {
             if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
