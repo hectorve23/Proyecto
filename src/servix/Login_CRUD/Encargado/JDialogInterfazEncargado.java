@@ -15,14 +15,12 @@ import servix.mesas.JTableAdministrarMesas;
 public class JDialogInterfazEncargado extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName());
-    String user;
     /**
      * Creates new form JDialogInterfazEncargado
      */
-    public JDialogInterfazEncargado(java.awt.Dialog parent, boolean modal, String user) {
+    public JDialogInterfazEncargado(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.user=user;
     }
 
     /**
@@ -155,7 +153,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonVerReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true, user);
+        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true);
         jtie.setVisible(true);
     }//GEN-LAST:event_jButtonVerReservasActionPerformed
 
@@ -169,7 +167,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(this, true, user);
+        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(this, true);
         jdgr.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
 
@@ -183,7 +181,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMesasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableAdministrarMesas jtam = new JTableAdministrarMesas(this, true, user);
+        JTableAdministrarMesas jtam = new JTableAdministrarMesas(this, true);
         jtam.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
     

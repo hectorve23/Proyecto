@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
@@ -275,6 +276,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         dtm.setColumnCount(0);
         cargaTablaReservas();
     }
+    private boolean validarHorario(Object valorHora){
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        String horaSQL = formatoHora.format(valorHora);
+
+        LocalTime horaReserva = LocalTime.parse(horaSQL);
+        LocalTime inicioComida = LocalTime.of(12, 0);
+        LocalTime finComida = LocalTime.of(16, 0);
+        LocalTime inicioCena = LocalTime.of(21, 0);
+        LocalTime finCena = LocalTime.of(23, 59);
+    
+        return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
+                (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
+}
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
         String comensales = jTextFieldNumeroComensales.getText();
@@ -294,6 +308,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
         }
+        else if(!validarHorario(valorHora)){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "La hora debe estar entre 12:00-16:00 o 21:00-23:59", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+    }
         else{
             try {
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
@@ -308,7 +328,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
                 String horaSQL = formatoHora.format(jSpinnerHora.getValue());
                 
-                ps.setString(1, "pendiente");
+                ps.setString(1, "confirmada");
                 ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
                 ps.setString(3, horaSQL);
                 ps.setString(4, fechaSQL);

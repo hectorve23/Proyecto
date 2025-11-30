@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 import servix.Reserva;
 import servix.mesas.AsignarMesa;
 
@@ -35,10 +34,9 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     DefaultTableModel dtmCanceladas;
     ArrayList<Reserva> lista = new ArrayList<>();
     String user;
-    public JDialogGestionarReservas(java.awt.Dialog parent, boolean modal, String user) {
+    public JDialogGestionarReservas(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.user= user;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtmPendientes = new DefaultTableModel();
@@ -311,7 +309,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true, user);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 

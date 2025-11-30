@@ -142,7 +142,7 @@ public class JDialogLoginEncargado extends javax.swing.JDialog {
             }else{
                 this.setVisible(false);
                 this.dispose();
-                JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true, jTextFielduser.getText());
+                JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
                 jdie.setVisible(true);
             }             
         }else{

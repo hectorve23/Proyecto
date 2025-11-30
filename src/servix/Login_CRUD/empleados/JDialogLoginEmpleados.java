@@ -146,7 +146,7 @@ public class JDialogLoginEmpleados extends javax.swing.JDialog {
             }else{
                 this.setVisible(false);
                 this.dispose();
-                JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true, jTextFielduser.getText());
+                JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true);
                 jtie.setVisible(true);
             } 
         }else{

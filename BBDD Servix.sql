@@ -102,3 +102,6 @@ CREATE TABLE Reserva(
     FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa),
     FOREIGN KEY (id_encargado) REFERENCES Encargado(id_encargado)
 );
+ALTER TABLE Camarero ADD COLUMN haIniciadoSesion BOOLEAN DEFAULT FALSE;
+ALTER TABLE Encargado ADD COLUMN haIniciadoSesion BOOLEAN DEFAULT FALSE;
+INSERT INTO Encargado(nombre, apellido1, telefono, correo, usuario_login, contrasenya_login) VALUES ("Admin", "Admin", "12334567889", "admin@gmail.com", "admin", "$2a$10$vTeqkkqwmGbctARRQcRRf.NR.yIJoh0mRnrksV36DUaZpNIoESMh.");

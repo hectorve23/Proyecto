@@ -28,14 +28,13 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
      * Creates new form JTableAdministrarMesas
      */
     
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;
     ArrayList<Mesa> lista = new ArrayList<>();
     String user;
     EliminarMesa eliminar = new EliminarMesa();
-    public JTableAdministrarMesas(java.awt.Dialog parent, boolean modal, String user) {
+    public JTableAdministrarMesas(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.user=user;
@@ -176,7 +175,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true, user);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
@@ -192,7 +191,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione una mesa para editar.");
         }else{
             String id = dtm.getValueAt(fila, 0).toString();
-            JDialogEditarMesa jdem= new JDialogEditarMesa(padre, true, user, id );
+            JDialogEditarMesa jdem= new JDialogEditarMesa(this, true, id );
             jdem.setVisible(true);
             recargarTabla();
         }      

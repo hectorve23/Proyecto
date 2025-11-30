@@ -23,14 +23,11 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
     /**
      * Creates new form JDialogEditarMesa
      */
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
-    String user;
-    public JDialogEditarMesa(java.awt.Frame parent, boolean modal, String user, String id) {
+    public JDialogEditarMesa(java.awt.Dialog parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
-        this.user=user;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         cargarComboBox();

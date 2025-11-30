@@ -13,7 +13,6 @@ import servix.Reserva;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import servix.JFrameServix;
 
 /**
  *
@@ -32,7 +31,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     ArrayList<Reserva> lista = new ArrayList<>();
     java.sql.Date fecha_sql;
     
-    public JTableInterfazEmpleados(java.awt.Dialog parent, boolean modal, String user) {
+    public JTableInterfazEmpleados(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         nueva = new ConexionBBDD();
@@ -41,7 +40,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
         jTableReservasDelDia.setModel(dtm);
         dtm.setColumnIdentifiers(Reserva.getColumnas());
         rellenarDiaHoy();
-        jLabel1.setText("Bienvenido/a " + user);
+        jLabel1.setText("Bienvenido/a");
     }
 
     /**

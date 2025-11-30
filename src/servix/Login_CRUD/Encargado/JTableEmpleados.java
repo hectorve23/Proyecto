@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.Empleado;
-import servix.JFrameServix;
 import servix.Login_CRUD.empleados.EliminarEmpleados;
 import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
 import servix.Login_CRUD.empleados.JDialogEditarEmpleados;
@@ -144,16 +143,13 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
         String id = dtm.getValueAt(fila, 0).toString();
 
-        this.setVisible(false);
-        this.dispose();
         JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(this, true, id);
         jdee.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
-        this.setVisible(false);
-        this.dispose();
+       
         JDialogAltaEmpleados jdae = new JDialogAltaEmpleados(this, true);
         jdae.setVisible(true);
         recargarTabla();
@@ -177,6 +173,8 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
+        jdie.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public void cargarEmpleados(){
