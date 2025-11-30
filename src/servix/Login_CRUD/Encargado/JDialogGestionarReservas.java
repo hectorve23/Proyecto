@@ -75,8 +75,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                     rs.getTime("hora"),
                     rs.getDate("fecha"),
                     rs.getInt("id_cliente"),
-                    rs.getInt("id_mesa"),
-                    rs.getInt("id_encargado")
+                    rs.getInt("id_mesa")
                 );
 
                 String estado = r.getEstado_reserva().toLowerCase();
@@ -279,7 +278,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         int fila = jTablePendientes.getSelectedRow();
         
         if (fila == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un empleado para editar.");
+            JOptionPane.showMessageDialog(this, "Seleccione la reserva que quiere confirmar.");
             return;
         }
             

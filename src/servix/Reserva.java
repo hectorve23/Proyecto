@@ -19,10 +19,9 @@ public class Reserva {
     Time hora;
     Date fecha;
     int id_cliente;
-    int id_mesa;  
-    int id_encargado;
+    int id_mesa;
 
-    public Reserva(int id_reserva, String estado_reserva, int n_comensales, Time hora, Date fecha, int id_cliente, Integer id_mesa, int id_encargado) {
+    public Reserva(int id_reserva, String estado_reserva, int n_comensales, Time hora, Date fecha, int id_cliente, Integer id_mesa) {
         this.id_reserva = id_reserva;
         this.estado_reserva = estado_reserva;
         this.n_comensales = n_comensales;
@@ -30,18 +29,16 @@ public class Reserva {
         this.fecha = fecha;
         this.id_cliente = id_cliente;
         this.id_mesa = id_mesa;
-        this.id_encargado = id_encargado;
     }
 
     //Sin id
-    public Reserva(String estado_reserva, int n_comensales, Time hora, Date fecha, int id_cliente, Integer id_mesa, int id_encargado) {
+    public Reserva(String estado_reserva, int n_comensales, Time hora, Date fecha, int id_cliente, Integer id_mesa) {
         this.estado_reserva = estado_reserva;
         this.n_comensales = n_comensales;
         this.hora = hora;
         this.fecha = fecha;
         this.id_cliente = id_cliente;
         this.id_mesa = id_mesa;
-        this.id_encargado = id_encargado;
     }
 
     public int getId_reserva() {
@@ -99,14 +96,6 @@ public class Reserva {
     public void setId_mesa(Integer id_mesa) {
         this.id_mesa = id_mesa;
     }
-
-    public int getId_encargado() {
-        return id_encargado;
-    }
-
-    public void setId_encargado(int id_encargado) {
-        this.id_encargado = id_encargado;
-    }
     
     public static String[] getColumnas() {
         return new String[]{
@@ -116,8 +105,7 @@ public class Reserva {
             "Hora",
             "Fecha",
             "ID Cliente",
-            "ID Mesa",
-            "ID Encargado"
+            "ID Mesa"
         };
     }
 
@@ -129,8 +117,7 @@ public class Reserva {
             hora,
             fecha,
             id_cliente,
-            id_mesa,
-            id_encargado
+            id_mesa
         };
     }
 }

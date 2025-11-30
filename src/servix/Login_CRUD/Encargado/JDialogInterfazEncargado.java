@@ -42,6 +42,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButtonAdministrarReservas = new javax.swing.JButton();
         jButtonAdministrarMenu = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
+        jButtonAdministrarMesas = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButtonCerrarSesion = new javax.swing.JButton();
 
@@ -92,6 +93,9 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonVerReservas);
 
+        jButtonAdministrarMesas.setText("Administrar mesas");
+        jPanel2.add(jButtonAdministrarMesas);
+
         jButtonCerrarSesion.setText("Cerrar Sesion");
         jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,10 +129,10 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -170,6 +174,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdministrarEmpleados;
     private javax.swing.JButton jButtonAdministrarMenu;
+    private javax.swing.JButton jButtonAdministrarMesas;
     private javax.swing.JButton jButtonAdministrarReservas;
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonVerReservas;
