@@ -68,6 +68,11 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButtonAdministrarReservas.getAccessibleContext().setAccessibleName("jButtonAdministrarReservas");
 
         jButtonAdministrarMenu.setText("Administrar menu");
+        jButtonAdministrarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdministrarMenuActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonAdministrarMenu);
 
         jButtonInterfazEmpleados.setText("Ver interfaz empleados");
@@ -119,6 +124,12 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonInterfazEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInterfazEmpleadosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonInterfazEmpleadosActionPerformed
+
+    private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
+        // TODO add your handling code here:
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, rootPaneCheckingEnabled);
+        jdam.setVisible(true);
+    }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
     /**
      * @param args the command line arguments
