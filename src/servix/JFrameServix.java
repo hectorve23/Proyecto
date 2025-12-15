@@ -4,9 +4,6 @@
  */
 package servix;
 
-import servix.Login_CRUD.Clientes.JDialogLoginClientes;
-import servix.Login_CRUD.empleados.JDialogLoginEmpleados;
-
 /**
  *
  * @author DAM2Alu15
@@ -32,89 +29,112 @@ public class JFrameServix extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButtonEmpleado = new javax.swing.JButton();
-        jButtonCliente = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFielduser = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPasswordFieldContransena = new javax.swing.JPasswordField();
+        jButtonCrearCuenta = new javax.swing.JButton();
+        jButtonIniciarSesion = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setBackground(new java.awt.Color(15, 174, 188));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jButtonEmpleado.setText("Soy empleado");
-        jButtonEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/LogoSinFondo.png"))); // NOI18N
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel2, new java.awt.GridBagConstraints());
+
+        jPanel3.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
+
+        jLabel3.setText("Usuario");
+        jPanel3.add(jLabel3);
+        jPanel3.add(jTextFielduser);
+
+        jLabel4.setText("Contraseña");
+        jPanel3.add(jLabel4);
+        jPanel3.add(jPasswordFieldContransena);
+
+        jButtonCrearCuenta.setText("Crear cuenta");
+        jButtonCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEmpleadoActionPerformed(evt);
+                jButtonCrearCuentaActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonEmpleado);
+        jPanel3.add(jButtonCrearCuenta);
 
-        jButtonCliente.setText("Soy cliente");
-        jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
+        jButtonIniciarSesion.setText("Iniciar sesion");
+        jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClienteActionPerformed(evt);
+                jButtonIniciarSesionActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCliente);
+        jPanel3.add(jButtonIniciarSesion);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("SERVIX");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\dam2alu15\\Documents\\NetBeansProjects\\Servix\\Proyecto\\build\\classes\\imagenes\\servix_logo_recortado.png")); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("INICIAR SESION");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(156, 156, 156)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmpleadoActionPerformed
-        this.dispose();
-        JDialogLoginEmpleados jdle = new JDialogLoginEmpleados(this,true);
-        jdle.setVisible(true);
-        
-    }//GEN-LAST:event_jButtonEmpleadoActionPerformed
+    private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
+        JDialogAltaCliente jdac= new JDialogAltaCliente(this, true);
+        jdac.setVisible(true);
+    }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 
-    private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
-        this.dispose();
-        JDialogLoginClientes jdlc = new JDialogLoginClientes(this, true);
-        jdlc.setVisible(true);
-    }//GEN-LAST:event_jButtonClienteActionPerformed
+    private void jButtonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSesionActionPerformed
+        char[] contrasena = jPasswordFieldContransena.getPassword();
+        String stringContrasena = new String(contrasena);
+        if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
+            //cliente.setId_cliente(jTextFielduser.getText());
+            JDialogInterfazClientes jdic = new JDialogInterfazClientes(this, true, id);
+            jdic.setVisible(true);
+        }
+    }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,11 +162,16 @@ public class JFrameServix extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCliente;
-    private javax.swing.JButton jButtonEmpleado;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonCrearCuenta;
+    private javax.swing.JButton jButtonIniciarSesion;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPasswordField jPasswordFieldContransena;
+    private javax.swing.JTextField jTextFielduser;
     // End of variables declaration//GEN-END:variables
 }
