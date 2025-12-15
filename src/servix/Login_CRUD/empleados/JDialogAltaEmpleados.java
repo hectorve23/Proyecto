@@ -8,7 +8,6 @@ package servix.Login_CRUD.empleados;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 import servix.Login_CRUD.Encargado.JTableEmpleados;
 import servix.Seguridad;
 /**
@@ -209,8 +208,6 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jte = new JTableEmpleados(this, true);
-        jte.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
 

@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 import servix.Login_CRUD.Encargado.JTableEmpleados;
 
 /**
@@ -225,8 +224,6 @@ public class JDialogEditarEmpleados extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jte = new JTableEmpleados (this, true);
-        jte.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public void windowClosing(java.awt.event.WindowEvent e) {

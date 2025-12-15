@@ -149,7 +149,6 @@ public class JTableEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
-       
         JDialogAltaEmpleados jdae = new JDialogAltaEmpleados(this, true);
         jdae.setVisible(true);
         recargarTabla();

@@ -13,6 +13,7 @@ import servix.Reserva;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import servix.JFrameServix;
 
 /**
  *
@@ -140,6 +141,8 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         this.setVisible(false);
         this.dispose();
+        JFrameServix jfs = new JFrameServix();
+        jfs.setVisible(true);
         
     }//GEN-LAST:event_jButtonSalirActionPerformed
     

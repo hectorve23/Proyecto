@@ -10,8 +10,6 @@ import servix.ConexionBBDD;
 import servix.Seguridad;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JDialog;
-import servix.JFrameServix;
 
 /**
  *
@@ -129,6 +127,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
                 ps.setString(2, user);
 
                 ps.executeUpdate();
+                this.setVisible(false);
                 JDialogLoginEmpleados jdle= new JDialogLoginEmpleados(this, true);
                 jdle.setVisible(true);
                 dispose();

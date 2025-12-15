@@ -328,7 +328,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
                 String horaSQL = formatoHora.format(jSpinnerHora.getValue());
                 
-                ps.setString(1, "confirmada");
+                ps.setString(1, "pendiente");
                 ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
                 ps.setString(3, horaSQL);
                 ps.setString(4, fechaSQL);
