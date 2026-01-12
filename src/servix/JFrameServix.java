@@ -4,6 +4,17 @@
  */
 package servix;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
+import servix.Login_CRUD.Usuario.JDialogCambiarContrasena;
+import servix.Login_CRUD.Empleado.JTableInterfazEmpleados;
+import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
+import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
+
 /**
  *
  * @author DAM2Alu15
@@ -15,8 +26,15 @@ public class JFrameServix extends javax.swing.JFrame {
     /**
      * Creates new form JFrameServix
      */
+    ConexionBBDD nueva;
+    Connection conexion;
+    int id;
+    String rol;
+    
     public JFrameServix() {
         initComponents();
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
     }
 
     /**
@@ -122,7 +140,7 @@ public class JFrameServix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-        JDialogAltaCliente jdac= new JDialogAltaCliente(this, true);
+        JDialogAltaUsuario jdac= new JDialogAltaUsuario();
         jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 
@@ -130,12 +148,96 @@ public class JFrameServix extends javax.swing.JFrame {
         char[] contrasena = jPasswordFieldContransena.getPassword();
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
-            //cliente.setId_cliente(jTextFielduser.getText());
-            JDialogInterfazClientes jdic = new JDialogInterfazClientes(this, true, id);
-            jdic.setVisible(true);
+            if(rol.toLowerCase().equals("cliente")){
+                JDialogInterfazClientes jdic  = new JDialogInterfazClientes();
+                jdic.setVisible(true);
+                this.setVisible(false);
+                
+            }else{
+                if(comprobarInicioSesion(jTextFielduser.getText())==false){
+                    JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(this, true, jTextFielduser.getText());
+                    jdcc.setVisible(true);
+                }else{
+                    if(rol.toLowerCase().equals("empleado")){
+
+
+                    }else{
+                        if(rol.toLowerCase().equals("encargado")){
+                            JDialogInterfazEncargado jdie  = new JDialogInterfazEncargado();
+                            jdie.setVisible(true);
+                            this.setVisible(false);
+                        }
+                    }
+                } 
+               
+            }
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
+    private boolean comprobarDatos(String user, String contrasena) {
+        boolean correcto=false;
+        try {
+            if(user.isEmpty() || user.equals("")|| contrasena.isEmpty() || contrasena.equals("")){
+                JOptionPane.showConfirmDialog(rootPane,
+                                            "Porfavor rellene todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+            }else{   
+            
+                nueva.conectar();
+                String sql = "SELECT * FROM Usuario WHERE usuario_login = ?";
+                PreparedStatement ps = conexion.prepareStatement(sql);
+                ps.setString(1, user);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    id = rs.getInt("id");
+                    rol = rs.getString("rol");
+                    String contrasenaHash = rs.getString("contrasenya_login");
+                    if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
+                        correcto= true;
+                    }
+                }else{
+                     JOptionPane.showConfirmDialog(rootPane,
+                                            "Usuario o contraseña incorrectos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+                      correcto =  false;
+                }
+
+                rs.close();
+                ps.close();
+            }
+        } catch (SQLException ex) {
+             System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } finally {
+            nueva.cerrar();
+        }
+           return correcto;
+    } //comprobar datos
+    
+     public boolean comprobarInicioSesion(String user){
+        try {
+            nueva.conectar();
+            String sql = "SELECT haIniciadoSesion FROM Usuario WHERE usuario_login = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, user);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                if(rs.getBoolean("haIniciadoSesion")==false){
+                    return false;
+                }
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.getLogger(JTableInterfazEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return true;
+    }
+     
     /**
      * @param args the command line arguments
      */
