@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
+import servix.Login_CRUD.Empleado.JDialogAltaEmpleados;
 /**
  *
  * @author DAM2ALU11

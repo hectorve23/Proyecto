@@ -1,33 +1,21 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package servix.Login_CRUD.empleados;
+package servix.Login_CRUD.Usuario;
 
-
-import java.sql.*;
-import javax.swing.JOptionPane;
-import servix.ConexionBBDD;
-import servix.Login_CRUD.Encargado.JTableEmpleados;
-import servix.Seguridad;
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogAltaEmpleados extends javax.swing.JDialog {
+public class JDialogAltaUsuario extends javax.swing.JFrame {
     
-    ConexionBBDD nueva;
-    Connection conexion;
-    JTableEmpleados tabla;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAltaEmpleados.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAltaUsuario.class.getName());
 
     /**
-     * Creates new form JDialogAltaEmpleados
+     * Creates new form JDialogAltaUsuario
      */
-    public JDialogAltaEmpleados(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
-        nueva = new ConexionBBDD();
-        conexion=nueva.getConnection();
+    public JDialogAltaUsuario() {
         initComponents();
     }
 
@@ -48,14 +36,20 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         jTextFieldNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldApellido1 = new javax.swing.JTextField();
-        Apellido2 = new javax.swing.JLabel();
+        Provincia = new javax.swing.JLabel();
         jTextFieldApellido2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldCorreo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldUser = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jPasswordFieldContrasena1 = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        jPasswordFieldContrasena2 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonAlta.setText("Alta");
         jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -73,9 +67,9 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CREAR CUENTA DE EMPLEADO");
+        jLabel1.setText("CREAR CUENTA");
 
-        jPanel1.setLayout(new java.awt.GridLayout(5, 2, 10, 10));
+        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 10, 10));
 
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
@@ -85,17 +79,29 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         jPanel1.add(jLabel3);
         jPanel1.add(jTextFieldApellido1);
 
-        Apellido2.setText("Segundo apellido");
-        jPanel1.add(Apellido2);
+        Provincia.setText("Segundo apellido");
+        jPanel1.add(Provincia);
         jPanel1.add(jTextFieldApellido2);
 
         jLabel5.setText("Telefono");
         jPanel1.add(jLabel5);
         jPanel1.add(jTextFieldTelefono);
 
+        jLabel6.setText("Correo");
+        jPanel1.add(jLabel6);
+        jPanel1.add(jTextFieldCorreo);
+
         jLabel7.setText("Usuario");
         jPanel1.add(jLabel7);
         jPanel1.add(jTextFieldUser);
+
+        jLabel4.setText("Contraseña");
+        jPanel1.add(jLabel4);
+        jPanel1.add(jPasswordFieldContrasena1);
+
+        jLabel8.setText("Introduzca de nuevo la contraseña");
+        jPanel1.add(jLabel8);
+        jPanel1.add(jPasswordFieldContrasena2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +125,7 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,46 +141,60 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
         String apellido1 = jTextFieldApellido1.getText();
         String apellido2 = jTextFieldApellido2.getText();
         String telefono = jTextFieldTelefono.getText();
+        String correo = jTextFieldCorreo.getText();
         String user =  jTextFieldUser.getText();
+        char[] contrasena = jPasswordFieldContrasena1.getPassword();
+        char[] contrasena2 = jPasswordFieldContrasena2.getPassword();
+
+        String stringContrasena1 = new String(contrasena);
+        String stringContrasena2 = new String(contrasena2);
 
         if(!existeUsuario(user)){
-            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || user.isEmpty()){
+            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
                 JOptionPane.showConfirmDialog(rootPane,
                     "Porfavor rellene todos los campos",
                     "Error",
                     JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.ERROR_MESSAGE);
             }else{
-                if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || user.length() > 30){
+                if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || correo.length() > 40 || user.length() > 30){
                     JOptionPane.showConfirmDialog(rootPane,
                         "Ningun campo puede exceder los 30 caracteres",
                         "Error",
                         JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.ERROR_MESSAGE);
                 }else{
-                        String contrasenaEncriptada = Seguridad.hashPassword("1234"); // contraseña ya encriptada
+                    if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
+                        String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
                         this.setVisible(false);
-                        System.out.println(contrasenaEncriptada);
+
                         try {
                             nueva.conectar();
-                            String sql= "INSERT INTO Camarero(nombre, apellido1, apellido2, telefono, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?)";
+                            String sql= "INSERT INTO Cliente(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?,?)";
                             PreparedStatement ps= conexion.prepareStatement(sql);
-                            ps.setString(1, nombre);
-                            ps.setString(2, apellido1);
-                            ps.setString(3, apellido2);
-                            ps.setString(4, telefono);
-                            ps.setString(5, user);
-                            ps.setString(6, contrasenaEncriptada);
+                            ps.setString(1, jTextFieldNombre.getText());
+                            ps.setString(2, jTextFieldApellido1.getText());
+                            ps.setString(3, jTextFieldApellido2.getText());
+                            ps.setString(4, jTextFieldTelefono.getText());
+                            ps.setString(5, jTextFieldCorreo.getText());
+                            ps.setString(6, jTextFieldUser.getText());
+                            ps.setString(7, contrasenaEncriptada);
 
                             ps.executeUpdate();
-                                                        
                             ps.close();
                             conexion.close();
                         } catch (SQLException ex) {
-                            System.getLogger(JDialogAltaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                         }
+                    }else{
+                        JOptionPane.showConfirmDialog(rootPane,
+                            "Las contraseñas no coinciden",
+                            "Error",
+                            JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.ERROR_MESSAGE);
                     }
                 }
+            }
         }else{
             JOptionPane.showConfirmDialog(rootPane,
                 "El usuario " + user + " ya existe",
@@ -182,47 +202,55 @@ public class JDialogAltaEmpleados extends javax.swing.JDialog {
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.ERROR_MESSAGE);
         }
-      
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
-    public boolean existeUsuario(String usuario){
-        boolean existe= false;
-        try {    
-            nueva.conectar();
-            String sql = "SELECT * FROM Camarero WHERE usuario_login = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, usuario);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) 
-                existe = true;
-                        
-            rs.close();
-            ps.close();
-        } catch (SQLException ex) {
-            System.getLogger(JDialogAltaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-        return existe;
-    }
-    
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
-        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new JDialogAltaUsuario().setVisible(true));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Apellido2;
+    private javax.swing.JLabel Provincia;
     private javax.swing.JButton jButtonAlta;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordFieldContrasena1;
+    private javax.swing.JPasswordField jPasswordFieldContrasena2;
     private javax.swing.JTextField jTextFieldApellido1;
     private javax.swing.JTextField jTextFieldApellido2;
+    private javax.swing.JTextField jTextFieldCorreo;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldTelefono;
     private javax.swing.JTextField jTextFieldUser;

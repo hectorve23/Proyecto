@@ -5,7 +5,7 @@
 package servix.Login_CRUD.Encargado;
 
 import servix.JFrameServix;
-import servix.Login_CRUD.empleados.JTableInterfazEmpleados;
+import servix.Login_CRUD.Empleado.JTableInterfazEmpleados;
 import servix.mesas.JTableAdministrarMesas;
 
 /**

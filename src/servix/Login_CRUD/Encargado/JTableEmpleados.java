@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.Empleado;
-import servix.Login_CRUD.empleados.EliminarEmpleados;
-import servix.Login_CRUD.empleados.JDialogAltaEmpleados;
-import servix.Login_CRUD.empleados.JDialogEditarEmpleados;
+import servix.Login_CRUD.Empleado.EliminarEmpleados;
+import servix.Login_CRUD.Empleado.JDialogAltaEmpleados;
+import servix.Login_CRUD.Empleado.JDialogEditarEmpleados;
 
 /**
  *

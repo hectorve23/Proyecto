@@ -9,8 +9,8 @@ import servix.ConexionBBDD;
 import java.sql.*;
 import servix.JFrameServix;
 import servix.Login_CRUD.Clientes.JDialogLoginClientes;
-import servix.Login_CRUD.empleados.JDialogLoginEmpleados;
-import servix.Login_CRUD.empleados.JTableInterfazEmpleados;
+import servix.Login_CRUD.Empleado.JDialogLoginEmpleados;
+import servix.Login_CRUD.Empleado.JTableInterfazEmpleados;
 import servix.Seguridad;
 
 /**

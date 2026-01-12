@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
-import servix.Login_CRUD.empleados.JDialogEditarEmpleados;
+import servix.Login_CRUD.Empleado.JDialogEditarEmpleados;
 
 /**
  *
