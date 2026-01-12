@@ -153,7 +153,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonVerReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados(this, true);
+        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados();
         jtie.setVisible(true);
     }//GEN-LAST:event_jButtonVerReservasActionPerformed
 

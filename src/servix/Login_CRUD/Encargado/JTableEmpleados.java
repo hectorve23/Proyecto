@@ -15,7 +15,7 @@ import servix.ConexionBBDD;
 import servix.Empleado;
 import servix.Login_CRUD.Empleado.EliminarEmpleados;
 import servix.Login_CRUD.Empleado.JDialogAltaEmpleados;
-import servix.Login_CRUD.Empleado.JDialogEditarEmpleados;
+import servix.Login_CRUD.Usuario.JDialogEditarUsuario;
 
 /**
  *
@@ -143,7 +143,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
         String id = dtm.getValueAt(fila, 0).toString();
 
-        JDialogEditarEmpleados jdee= new JDialogEditarEmpleados(this, true, id);
+        JDialogEditarUsuario jdee= new JDialogEditarUsuario(id);
         jdee.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
@@ -172,7 +172,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado();
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

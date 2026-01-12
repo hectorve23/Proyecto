@@ -6,9 +6,7 @@ package servix.Login_CRUD.Encargado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
@@ -198,8 +196,8 @@ public class JDialogEditarEncargado extends javax.swing.JDialog {
                             ps.executeUpdate();
                             ps.close();
                             
-                            JDialogLoginEncargado jdle = new JDialogLoginEncargado(padre, true);
-                            jdle.setVisible(true);
+                            JFrameServix jfs = new JFrameServix();
+                            jfs.setVisible(true);
                     } catch (SQLException ex) {
                          System.getLogger(JDialogEditarEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                     }

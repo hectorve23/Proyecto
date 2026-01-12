@@ -309,7 +309,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado();
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 

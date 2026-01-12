@@ -25,15 +25,15 @@ public class JDialogEditarUsuario extends javax.swing.JDialog {
     /**
      * Creates new form JDialogEditarUsuario
      */
-    JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
+    String id;
     
-    public JDialogEditarUsuario(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
+    public JDialogEditarUsuario(String id) {
         initComponents();
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        this.id = id;
     }
 
     /**
@@ -241,7 +241,7 @@ public class JDialogEditarUsuario extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogEditarUsuario dialog = new JDialogEditarUsuario(new javax.swing.JDialog(), true);
+                JDialogEditarUsuario dialog = new JDialogEditarUsuario(null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
