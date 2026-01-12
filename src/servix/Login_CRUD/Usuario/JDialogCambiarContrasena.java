@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.Empleado;
+package servix.Login_CRUD.Usuario;
 
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
     Connection conexion;
     String user;
     
-    public JDialogCambiarContrasena(java.awt.Dialog parent, boolean modal, String user) {
+    public JDialogCambiarContrasena(java.awt.Frame parent, boolean modal, String user) {
         super(parent, modal);
         initComponents();
         this.user=user;
@@ -121,15 +121,13 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
            if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
              String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); 
               try {
-                String sql = "UPDATE camarero SET contrasenya_login = ?, haIniciadoSesion= true WHERE usuario_login = ?";
+                String sql = "UPDATE Usuario SET contrasenya_login = ?, haIniciadoSesion= true WHERE usuario_login = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, contrasenaEncriptada);
                 ps.setString(2, user);
 
                 ps.executeUpdate();
                 this.setVisible(false);
-                JDialogLoginEmpleados jdle= new JDialogLoginEmpleados(this, true);
-                jdle.setVisible(true);
                 dispose();
             } catch (SQLException ex) {
                  System.getLogger(JDialogCambiarContrasena.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

@@ -4,6 +4,15 @@
  */
 package servix.Login_CRUD.Usuario;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import servix.ConexionBBDD;
+import servix.Login_CRUD.Clientes.JDialogAltaCliente;
+import servix.Seguridad;
+
 /**
  *
  * @author DAM2Alu11
@@ -15,8 +24,14 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     /**
      * Creates new form JDialogAltaUsuario
      */
+    
+    ConexionBBDD nueva;
+    Connection conexion;
+    
     public JDialogAltaUsuario() {
         initComponents();
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
     }
 
     /**
@@ -137,7 +152,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
-        String nombre = jTextFieldNombre.getText();
+         String nombre = jTextFieldNombre.getText();
         String apellido1 = jTextFieldApellido1.getText();
         String apellido2 = jTextFieldApellido2.getText();
         String telefono = jTextFieldTelefono.getText();
@@ -145,62 +160,64 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         String user =  jTextFieldUser.getText();
         char[] contrasena = jPasswordFieldContrasena1.getPassword();
         char[] contrasena2 = jPasswordFieldContrasena2.getPassword();
-
+        
         String stringContrasena1 = new String(contrasena);
         String stringContrasena2 = new String(contrasena2);
-
+       
         if(!existeUsuario(user)){
             if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
                 JOptionPane.showConfirmDialog(rootPane,
-                    "Porfavor rellene todos los campos",
-                    "Error",
-                    JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.ERROR_MESSAGE);
-            }else{
+                                            "Porfavor rellene todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+           }else{
                 if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || correo.length() > 40 || user.length() > 30){
-                    JOptionPane.showConfirmDialog(rootPane,
-                        "Ningun campo puede exceder los 30 caracteres",
-                        "Error",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showConfirmDialog(rootPane,
+                                            "Ningun campo puede exceder los 30 caracteres", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
                 }else{
                     if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
-                        String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
-                        this.setVisible(false);
+                         String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                         try {
+                             nueva.conectar();
+                             String sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?)";
+                             PreparedStatement ps= conexion.prepareStatement(sql);
+                             ps.setString(1, jTextFieldNombre.getText());
+                             ps.setString(2, jTextFieldApellido1.getText());
+                             ps.setString(3, jTextFieldApellido2.getText());
+                             ps.setString(4, jTextFieldTelefono.getText());
+                             ps.setString(5, jTextFieldCorreo.getText());
+                             ps.setString(6, jTextFieldUser.getText());
+                             ps.setString(7, contrasenaEncriptada);
+                             ps.setString(8, "cliente");
 
-                        try {
-                            nueva.conectar();
-                            String sql= "INSERT INTO Cliente(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?,?)";
-                            PreparedStatement ps= conexion.prepareStatement(sql);
-                            ps.setString(1, jTextFieldNombre.getText());
-                            ps.setString(2, jTextFieldApellido1.getText());
-                            ps.setString(3, jTextFieldApellido2.getText());
-                            ps.setString(4, jTextFieldTelefono.getText());
-                            ps.setString(5, jTextFieldCorreo.getText());
-                            ps.setString(6, jTextFieldUser.getText());
-                            ps.setString(7, contrasenaEncriptada);
-
-                            ps.executeUpdate();
-                            ps.close();
-                            conexion.close();
-                        } catch (SQLException ex) {
-                            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                        }
+                             ps.executeUpdate();
+                             ps.close();
+                             conexion.close();
+                            
+                             this.setVisible(false);
+                            
+                         } catch (SQLException ex) {
+                             System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                         }
                     }else{
-                        JOptionPane.showConfirmDialog(rootPane,
-                            "Las contraseñas no coinciden",
-                            "Error",
-                            JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showConfirmDialog(rootPane,
+                                                 "Las contraseñas no coinciden", 
+                                                 "Error", 
+                                                 JOptionPane.OK_CANCEL_OPTION, 
+                                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         }else{
-            JOptionPane.showConfirmDialog(rootPane,
-                "El usuario " + user + " ya existe",
-                "Error",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.ERROR_MESSAGE);
+             JOptionPane.showConfirmDialog(rootPane,
+                                                 "El usuario " + user + " ya existe", 
+                                                 "Error", 
+                                                 JOptionPane.OK_CANCEL_OPTION, 
+                                                 JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
@@ -208,6 +225,27 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    
+    public boolean existeUsuario(String usuario){
+        boolean existe= false;
+        try {    
+            nueva.conectar();
+            String sql = "SELECT * FROM Usuario WHERE usuario_login = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) 
+                existe = true;
+                        
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return existe;
+    }
+    
     /**
      * @param args the command line arguments
      */
