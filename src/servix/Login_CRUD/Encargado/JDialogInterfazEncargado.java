@@ -18,8 +18,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     /**
      * Creates new form JDialogInterfazEncargado
      */
-    public JDialogInterfazEncargado(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
+    public JDialogInterfazEncargado() {
+       
         initComponents();
     }
 

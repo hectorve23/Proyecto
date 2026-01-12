@@ -32,8 +32,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     ArrayList<Reserva> lista = new ArrayList<>();
     java.sql.Date fecha_sql;
     
-    public JTableInterfazEmpleados(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
+    public JTableInterfazEmpleados() {
         initComponents();
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
