@@ -37,7 +37,8 @@ CREATE TABLE Usuario(
     usuario_login VARCHAR(30) NOT NULL,
     contrasenya_login VARCHAR(255) NOT NULL,
     rol ENUM ("cliente", "encargado", "empleado") NOT NULL,
-    haIniciadoSesion BOOLEAN DEFAULT FALSE
+    haIniciadoSesion BOOLEAN DEFAULT FALSE,
+    fecha_creacion DATE
 );
 
 CREATE TABLE Restaurante(
