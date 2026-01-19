@@ -5,15 +5,12 @@
 package servix.Login_CRUD.Encargado;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
-import servix.Login_CRUD.Clientes.JDialogEditarReserva;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 
 /**
@@ -264,7 +261,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
            
             String nombre = jTableMenu.getValueAt(fila, 0).toString();
 
-            JDialogEditarPlato jdep = new JDialogEditarPlato(this, true, nombre);
+            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre);
             jdep.setVisible(true);
 
             recargarTabla();
