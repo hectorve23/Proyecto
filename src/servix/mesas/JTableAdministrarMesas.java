@@ -175,12 +175,12 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(this, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado();
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButtonAnadirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnadirMesaActionPerformed
-        JDialogAnadirMesa jdam = new JDialogAnadirMesa(this, true);
+        JDialogAnadirMesa jdam = new JDialogAnadirMesa();
         jdam.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAnadirMesaActionPerformed
@@ -191,7 +191,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione una mesa para editar.");
         }else{
             String id = dtm.getValueAt(fila, 0).toString();
-            JDialogEditarMesa jdem= new JDialogEditarMesa(this, true, id );
+            JDialogEditarMesa jdem= new JDialogEditarMesa(id);
             jdem.setVisible(true);
             recargarTabla();
         }      

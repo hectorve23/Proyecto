@@ -213,7 +213,7 @@ public class JDialogEditarEncargado extends javax.swing.JDialog {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jte = new JTableEmpleados (this, true);
+        JTableEmpleados jte = new JTableEmpleados ();
         jte.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

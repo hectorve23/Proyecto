@@ -155,7 +155,7 @@ public class JFrameServix extends javax.swing.JFrame {
                 
             }else{
                 if(comprobarInicioSesion(jTextFielduser.getText())==false){
-                    JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(this, true, jTextFielduser.getText());
+                    JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(jTextFielduser.getText());
                     jdcc.setVisible(true);
                 }else{
                     if(rol.toLowerCase().equals("empleado")){
@@ -212,8 +212,6 @@ public class JFrameServix extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
              System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } finally {
-            nueva.cerrar();
         }
            return correcto;
     } //comprobar datos

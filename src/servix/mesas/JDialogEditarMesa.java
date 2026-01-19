@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
-import servix.Login_CRUD.Empleado.JDialogEditarEmpleados;
 
 /**
  *
@@ -25,8 +23,7 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
      */
     ConexionBBDD nueva;
     Connection conexion;
-    public JDialogEditarMesa(java.awt.Dialog parent, boolean modal, String id) {
-        super(parent, modal);
+    public JDialogEditarMesa(String id) {
         initComponents();
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
@@ -135,7 +132,7 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            System.getLogger(JDialogEditarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(JDialogEditarMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
@@ -192,6 +189,27 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
         }
     }
     
+     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new JDialogEditarMesa(null).setVisible(true));
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

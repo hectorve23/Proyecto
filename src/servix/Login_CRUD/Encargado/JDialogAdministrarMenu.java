@@ -29,8 +29,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     ConexionBBDD nueva = null;
     Connection conexion = null;
     
-    public JDialogAdministrarMenu(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
+    public JDialogAdministrarMenu() {
         initComponents();
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
@@ -345,6 +344,28 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new JDialogAdministrarMenu().setVisible(true));
     }
 }
 

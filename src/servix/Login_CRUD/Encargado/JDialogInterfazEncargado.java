@@ -146,7 +146,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jtee= new JTableEmpleados(this, true);
+        JTableEmpleados jtee= new JTableEmpleados();
         jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
@@ -167,14 +167,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(this, true);
+        JDialogGestionarReservas jdgr= new JDialogGestionarReservas();
         jdgr.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
 
     private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(this, true);
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu();
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
@@ -184,6 +184,28 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         JTableAdministrarMesas jtam = new JTableAdministrarMesas(this, true);
         jtam.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new JDialogInterfazEncargado().setVisible(true));
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdministrarEmpleados;
