@@ -31,6 +31,7 @@ public class JDialogEditarUsuario extends javax.swing.JDialog {
     
     public JDialogEditarUsuario(String id) {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         this.id = id;
@@ -190,7 +191,7 @@ public class JDialogEditarUsuario extends javax.swing.JDialog {
                             ps.setString(4, jTextFieldTelefono.getText());
                             ps.setString(5, jTextFieldCorreo.getText());
                             ps.setString(6, contrasenaEncriptada);
-                            ps.setString(7, sql);
+                            ps.setString(7, id);
 
                             ps.executeUpdate();
                             ps.close();

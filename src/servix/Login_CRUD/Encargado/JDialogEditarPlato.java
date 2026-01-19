@@ -27,6 +27,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
     
     public JDialogEditarPlato(String nombreCambiar) {
         initComponents();
+        this.setTitle("Servix");
         this.nombreCambiar=nombreCambiar;
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();

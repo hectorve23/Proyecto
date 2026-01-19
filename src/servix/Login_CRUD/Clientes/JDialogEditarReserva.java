@@ -26,6 +26,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     
     public JDialogEditarReserva(int idReserva, String fecha, String hora, int nComensales) {
         initComponents();
+        this.setTitle("Servix");
         this.idReserva = idReserva;
         this.fecha = fecha;
         this.hora = hora;

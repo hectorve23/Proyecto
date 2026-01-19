@@ -13,8 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.Empleado;
-import servix.Login_CRUD.Empleado.EliminarEmpleados;
-import servix.Login_CRUD.Empleado.JDialogAltaEmpleados;
+import servix.Login_CRUD.Empleado.EliminarEmpleados;import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 import servix.Login_CRUD.Usuario.JDialogEditarUsuario;
 
 /**
@@ -37,6 +36,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     
     public JTableEmpleados() {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
@@ -148,8 +148,8 @@ public class JTableEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
-        JDialogAltaEmpleados jdae = new JDialogAltaEmpleados();
-        jdae.setVisible(true);
+        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado");
+        jdau.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed
 

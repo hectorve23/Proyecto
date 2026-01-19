@@ -28,6 +28,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
     
     public JDialogCambiarContrasena(String user) {
         initComponents();
+        this.setTitle("Servix");
         this.user=user;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();

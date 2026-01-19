@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.Login_CRUD.Clientes.JDialogAltaCliente;
 import servix.Seguridad;
 
 /**
@@ -27,11 +26,14 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     
     ConexionBBDD nueva;
     Connection conexion;
+    String rol;
     
-    public JDialogAltaUsuario() {
+    public JDialogAltaUsuario(String rol) {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        this.rol = rol;
     }
 
     /**
@@ -140,7 +142,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +203,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
                              this.setVisible(false);
                             
                          } catch (SQLException ex) {
-                             System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                             System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                          }
                     }else{
                          JOptionPane.showConfirmDialog(rootPane,
@@ -241,7 +243,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
             rs.close();
             ps.close();
         } catch (SQLException ex) {
-            System.getLogger(JDialogAltaCliente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return existe;
     }
@@ -268,7 +270,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogAltaUsuario().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new JDialogAltaUsuario(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

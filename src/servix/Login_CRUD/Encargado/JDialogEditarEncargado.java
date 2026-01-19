@@ -26,6 +26,7 @@ public class JDialogEditarEncargado extends javax.swing.JDialog {
      */
     public JDialogEditarEncargado() {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
     }

@@ -21,6 +21,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     public JDialogInterfazEncargado() {
        
         initComponents();
+        this.setTitle("Servix");
     }
 
     /**

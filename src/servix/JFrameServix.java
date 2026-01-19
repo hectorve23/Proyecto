@@ -35,6 +35,7 @@ public class JFrameServix extends javax.swing.JFrame {
         initComponents();
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        this.setTitle("Servix");
     }
 
     /**
@@ -140,7 +141,7 @@ public class JFrameServix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-        JDialogAltaUsuario jdac= new JDialogAltaUsuario();
+        JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente");
         jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 

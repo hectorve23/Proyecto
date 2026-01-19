@@ -36,6 +36,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     String user;
     public JDialogGestionarReservas() {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtmPendientes = new DefaultTableModel();

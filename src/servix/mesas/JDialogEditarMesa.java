@@ -25,6 +25,7 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
     Connection conexion;
     public JDialogEditarMesa(String id) {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         cargarComboBox();

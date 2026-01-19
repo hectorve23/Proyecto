@@ -6,7 +6,6 @@ package servix.Login_CRUD.Clientes;
 
 import java.sql.Connection;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -25,12 +24,12 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     int id;
     ConexionBBDD nueva;
     Connection conexion;
-    public JDialogBajaCliente(java.awt.Dialog parent, boolean modal, int id) {
-        super(parent, modal);
+    public JDialogBajaCliente(int id) {
         initComponents();
         this.id=id;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        this.setTitle("Servix");
     }
 
     /**
@@ -225,7 +224,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JDialogBajaCliente dialog = new JDialogBajaCliente(new javax.swing.JDialog(), true, 0);
+                JDialogBajaCliente dialog = new JDialogBajaCliente(0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

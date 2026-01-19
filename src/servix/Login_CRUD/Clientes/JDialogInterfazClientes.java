@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 
 /**
  *
@@ -24,7 +23,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDialogInterfazClientes
      */
-    JFrameServix padre;
     DefaultTableModel dtm;
     DefaultTableModel dtm2;
     ConexionBBDD nueva = null;
@@ -38,6 +36,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     public JDialogInterfazClientes(java.awt.Dialog parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        this.setTitle("Servix");
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
@@ -75,29 +74,24 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jPanelMenu = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableMenu = new javax.swing.JTable();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonNuevaReserva = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
-        jButtonVerMenu = new javax.swing.JButton();
-        jButtonBajaCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelPadre.setLayout(new java.awt.CardLayout());
 
         jTableReservas.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null}
-                },
-                new String[]{
-                    "Title 1", "Title 2", "Title 3", "Title 4"
-                }
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
         ));
         jScrollPane2.setViewportView(jTableReservas);
 
@@ -110,32 +104,27 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         jPanelBotonesDeleteUpdate.add(jButtonAnularReserva);
 
         jButtonEditarReserva.setText("Editar reserva");
-        jButtonEditarReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarReservaActionPerformed(evt);
-            }
-        });
         jPanelBotonesDeleteUpdate.add(jButtonEditarReserva);
 
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
         jPanelVerReservas.setLayout(jPanelVerReservasLayout);
         jPanelVerReservasLayout.setHorizontalGroup(
-                jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelVerReservasLayout.createSequentialGroup()
-                                .addGap(124, 124, 124)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 134, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVerReservasLayout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelVerReservasLayout.setVerticalGroup(
-                jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(152, 152, 152))
+            jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
 
         jPanelPadre.add(jPanelVerReservas, "card2");
@@ -170,41 +159,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
 
         jPanelPadre.add(jPanelNuevaReserva, "card3");
 
-        jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null}
-                },
-                new String[]{
-                    "Title 1", "Title 2", "Title 3", "Title 4"
-                }
-        ));
-        jScrollPane1.setViewportView(jTableMenu);
-
-        javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
-        jPanelMenu.setLayout(jPanelMenuLayout);
-        jPanelMenuLayout.setHorizontalGroup(
-                jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 888, Short.MAX_VALUE)
-                        .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelMenuLayout.createSequentialGroup()
-                                        .addGap(50, 50, 50)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(33, Short.MAX_VALUE)))
-        );
-        jPanelMenuLayout.setVerticalGroup(
-                jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 321, Short.MAX_VALUE)
-                        .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                                        .addContainerGap()))
-        );
-
-        jPanelPadre.add(jPanelMenu, "card4");
-
         jButtonNuevaReserva.setText("Nueva reserva");
         jButtonNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,37 +175,21 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         });
         jPanelOpciones.add(jButtonVerReservas);
 
-        jButtonVerMenu.setText("Ver menu");
-        jButtonVerMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarPanel(evt);
-            }
-        });
-        jPanelOpciones.add(jButtonVerMenu);
-
-        jButtonBajaCliente.setText("Eliminar cuenta");
-        jButtonBajaCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBajaClienteActionPerformed(evt);
-            }
-        });
-        jPanelOpciones.add(jButtonBajaCliente);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanelPadre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelPadre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -417,7 +355,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     private void jButtonBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaClienteActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogBajaCliente jdbc = new JDialogBajaCliente(this, true, id);
+        JDialogBajaCliente jdbc = new JDialogBajaCliente(id);
         jdbc.setVisible(true);
     }//GEN-LAST:event_jButtonBajaClienteActionPerformed
 
@@ -426,11 +364,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnularReserva;
-    private javax.swing.JButton jButtonBajaCliente;
     private javax.swing.JButton jButtonEditarReserva;
     private javax.swing.JButton jButtonNuevaReserva;
     private javax.swing.JButton jButtonValidar;
-    private javax.swing.JButton jButtonVerMenu;
     private javax.swing.JButton jButtonVerReservas;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
@@ -439,15 +375,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanelBotonesDeleteUpdate;
-    private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelNuevaReserva;
     private javax.swing.JPanel jPanelOpciones;
     private javax.swing.JPanel jPanelPadre;
     private javax.swing.JPanel jPanelVerReservas;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinnerHora;
-    private javax.swing.JTable jTableMenu;
     private javax.swing.JTable jTableReservas;
     private javax.swing.JTextField jTextFieldNumeroComensales;
     // End of variables declaration//GEN-END:variables

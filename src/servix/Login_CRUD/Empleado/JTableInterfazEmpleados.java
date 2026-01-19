@@ -34,6 +34,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     
     public JTableInterfazEmpleados() {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();

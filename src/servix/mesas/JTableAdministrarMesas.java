@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
-import servix.JFrameServix;
 import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
 import servix.Mesa;
 
@@ -37,6 +36,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     public JTableAdministrarMesas(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setTitle("Servix");
         this.user=user;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();

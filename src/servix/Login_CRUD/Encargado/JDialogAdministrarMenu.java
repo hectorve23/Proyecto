@@ -31,6 +31,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     
     public JDialogAdministrarMenu() {
         initComponents();
+        this.setTitle("Servix");
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();

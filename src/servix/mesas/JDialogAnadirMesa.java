@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
-import servix.Login_CRUD.Empleado.JDialogAltaEmpleados;
 /**
  *
  * @author DAM2ALU11
@@ -25,8 +24,10 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
     Connection conexion;
     public JDialogAnadirMesa() {
         initComponents();
+        this.setTitle("Servix");
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
     }
 
     /**
@@ -129,7 +130,7 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
                 conexion.close();
                 this.setVisible(false);
             } catch (SQLException ex) {
-                System.getLogger(JDialogAltaEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                System.getLogger(JDialogAnadirMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             } 
         }
     }
