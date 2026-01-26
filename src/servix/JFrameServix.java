@@ -160,8 +160,8 @@ public class JFrameServix extends javax.swing.JFrame {
                     jdcc.setVisible(true);
                 }else{
                     if(rol.toLowerCase().equals("empleado")){
-
-
+                        JTableInterfazEmpleados jdie = new JTableInterfazEmpleados();
+                        jdie.setVisible(true);
                     }else{
                         if(rol.toLowerCase().equals("encargado")){
                             JDialogInterfazEncargado jdie  = new JDialogInterfazEncargado();

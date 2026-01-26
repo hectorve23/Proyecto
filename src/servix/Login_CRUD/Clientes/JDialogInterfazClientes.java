@@ -11,32 +11,33 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 
 /**
  *
  * @author DAM2Alu15
  */
-public class JDialogInterfazClientes extends javax.swing.JDialog {
-
+public class JDialogInterfazClientes extends javax.swing.JDialog{
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName());
 
     /**
      * Creates new form JDialogInterfazClientes
      */
+    //Declaracion de variables
+    JFrameServix padre;
     DefaultTableModel dtm;
     DefaultTableModel dtm2;
     ConexionBBDD nueva = null;
     Connection conexion = null;
     int id;
-
+    
     public JDialogInterfazClientes() {
-
+        
     }
-
     public JDialogInterfazClientes(java.awt.Dialog parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Servix");
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
@@ -47,7 +48,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         cargaTablaReservas();
         cargaTablaMenu();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,9 +75,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jPanelMenu = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMenu = new javax.swing.JTable();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonNuevaReserva = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
+        jButtonVerMenu = new javax.swing.JButton();
+        jButtonBajaCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,6 +110,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         jPanelBotonesDeleteUpdate.add(jButtonAnularReserva);
 
         jButtonEditarReserva.setText("Editar reserva");
+        jButtonEditarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarReservaActionPerformed(evt);
+            }
+        });
         jPanelBotonesDeleteUpdate.add(jButtonEditarReserva);
 
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
@@ -113,7 +124,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
             .addGroup(jPanelVerReservasLayout.createSequentialGroup()
                 .addGap(124, 124, 124)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(24, 134, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -122,7 +133,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(152, 152, 152))
         );
@@ -159,6 +170,41 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
 
         jPanelPadre.add(jPanelNuevaReserva, "card3");
 
+        jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableMenu);
+
+        javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
+        jPanelMenu.setLayout(jPanelMenuLayout);
+        jPanelMenuLayout.setHorizontalGroup(
+            jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 888, Short.MAX_VALUE)
+            .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelMenuLayout.createSequentialGroup()
+                    .addGap(50, 50, 50)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(33, Short.MAX_VALUE)))
+        );
+        jPanelMenuLayout.setVerticalGroup(
+            jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+            .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jPanelPadre.add(jPanelMenu, "card4");
+
         jButtonNuevaReserva.setText("Nueva reserva");
         jButtonNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +221,22 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
         });
         jPanelOpciones.add(jButtonVerReservas);
 
+        jButtonVerMenu.setText("Ver menu");
+        jButtonVerMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarPanel(evt);
+            }
+        });
+        jPanelOpciones.add(jButtonVerMenu);
+
+        jButtonBajaCliente.setText("Eliminar cuenta");
+        jButtonBajaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajaClienteActionPerformed(evt);
+            }
+        });
+        jPanelOpciones.add(jButtonBajaCliente);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,12 +251,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
                 .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Metodo que actualiza el panel del card layout segun el boton que pulses
     private void actualizarPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPanel
         // TODO add your handling code here:
         JButton jbutton = (JButton) evt.getSource();
@@ -203,70 +266,83 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
             jPanelPadre.add(jPanelVerReservas);
         } else if (jbutton == jButtonNuevaReserva) {
             jPanelPadre.add(jPanelNuevaReserva);
-        } else if (jbutton == jButtonVerMenu) {
+        } else if(jbutton == jButtonVerMenu){
             jPanelPadre.add(jPanelMenu);
         }
-
+        
         jPanelPadre.repaint();
         jPanelPadre.revalidate();
     }//GEN-LAST:event_actualizarPanel
-
+    //Este metodo se utiliza para que tras un insert o un update se actualiza el JTable sin que se dupliquen las columnas,
+    //por eso los counts a 0
     public void recargarTabla() {
         dtm.setRowCount(0);
         dtm.setColumnCount(0);
         cargaTablaReservas();
     }
-
-    private boolean validarHorario(Object valorHora) {
+    //Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario en el que el restaurante
+    //admite reservas utilizando LocalTime para cada margen y devolviendo true o false si esta dentro del horario o no
+    private boolean validarHorario(Object valorHora){
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
         String horaSQL = formatoHora.format(valorHora);
-
+        
+        //declaracion de margenes
         LocalTime horaReserva = LocalTime.parse(horaSQL);
         LocalTime inicioComida = LocalTime.of(12, 0);
         LocalTime finComida = LocalTime.of(16, 0);
         LocalTime inicioCena = LocalTime.of(21, 0);
         LocalTime finCena = LocalTime.of(23, 59);
-
-        return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0)
-                || (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
-    }
-
+        
+        //true si entra en elhorario, false si no entra
+        return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
+                (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
+}   
+    //Este boton valida la insercion de la reserva. Primero comprueba que ningun campo este vacio, despues que la fecha introducida
+    //sea vigente, es decir, que el usuario no introduzca una fecha y hora que ya ha pasado, tras eso comprueba con el metodo anterior
+    //que la hora sea valida. Si alguno de estas comprobaciones no es satisfactoria mostrara un JOptionPane indicando el error
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
         String comensales = jTextFieldNumeroComensales.getText();
         java.util.Date mfecha = jDateChooser.getDate();
         Object valorHora = jSpinnerHora.getValue();
-
-        if (comensales.isEmpty() || mfecha == null || valorHora == null) {
+        
+        //Comprobacion de si algun campo esta vacio
+        if(comensales.isEmpty() || mfecha==null || valorHora==null){
             JOptionPane.showConfirmDialog(rootPane,
-                    "Rellena todos los campos",
-                    "Error",
-                    JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.ERROR_MESSAGE);
-        } else if (mfecha.before(new java.util.Date())) {
+                                            "Rellena todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
+        //Comprobacion de fecha no pasada
+        else if(mfecha.before(new java.util.Date())){
             JOptionPane.showMessageDialog(rootPane,
-                    "La fecha no puede ser anterior a hoy",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } else if (!validarHorario(valorHora)) {
+                                            "La fecha no puede ser anterior a hoy", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
+        //Comprobacion de horario valido
+        else if(!validarHorario(valorHora)){
             JOptionPane.showMessageDialog(rootPane,
-                    "La hora debe estar entre 12:00-16:00 o 21:00-23:59",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
+                                            "La hora debe estar entre 12:00-16:00 o 21:00-23:59", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
+        //Si las comprobaciones son correctas realiza la insercion
+        else{
             try {
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
                         + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
                         + " VALUES (?, ?, ?, ?, ?)");
-
+                
                 long lfecha = mfecha.getTime();
                 Date fecha = new Date(lfecha);
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaSQL = formatoFecha.format(fecha);
-
+                
                 SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
                 String horaSQL = formatoHora.format(jSpinnerHora.getValue());
-
+                
                 ps.setString(1, "pendiente");
                 ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
                 ps.setString(3, horaSQL);
@@ -274,55 +350,58 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
                 ps.setInt(5, id);
 
                 int filas = ps.executeUpdate();
-                if (filas == 1) {
+                if(filas==1){
+                   JOptionPane.showConfirmDialog(rootPane,
+                                                "Reserva registrada", 
+                                                "", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.INFORMATION_MESSAGE);
+                   recargarTabla(); //Metodo para que la nueva reserva aparezca en el JTable de reservas
+                }
+                else{
                     JOptionPane.showConfirmDialog(rootPane,
-                            "Reserva registrada",
-                            "",
-                            JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.INFORMATION_MESSAGE);
-                    recargarTabla();
-                } else {
-                    JOptionPane.showConfirmDialog(rootPane,
-                            "Ha habido un error",
-                            "Error",
-                            JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.ERROR_MESSAGE);
+                                                "Ha habido un error", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
                 System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
-
+        
+        
     }//GEN-LAST:event_jButtonValidarActionPerformed
-
+    //Este metodo hace que al pulsar el boton de eliminar elimine la reserva seleccionada tanto del JTable como de la base de datos
     private void jButtonAnularReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularReservaActionPerformed
         // TODO add your handling code here:
-
-        if (jTableReservas.getSelectedRowCount() == 1) {
+      
+        if(jTableReservas.getSelectedRowCount()==1){//Si el usuario no ha seleccionado ninguna reserva en el JTable no hace nada
             int fila = jTableReservas.getSelectedRow();
             Object id_reserva_objeto = jTableReservas.getValueAt(fila, 0);
             int id_reserva = Integer.parseInt(id_reserva_objeto.toString());
-            try {
+             try {
                 conexion.setAutoCommit(false);
                 String sql = "DELETE FROM reserva WHERE id_reserva=? AND id_cliente=?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setInt(1, id_reserva);
                 ps.setInt(2, id);
                 int opcion = JOptionPane.showConfirmDialog(
-                        null,
-                        "¿Estas seguro de anular la reserva seleccionada?",
-                        "Confirmación",
-                        JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE
+                                                null,
+                                                "¿Estas seguro de anular la reserva seleccionada?",
+                                                "Confirmación",
+                                                JOptionPane.OK_CANCEL_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE
                 );
                 if (opcion == JOptionPane.OK_OPTION) {
-                    int resultado = ps.executeUpdate();
-                    if (resultado == 1) {
+                    int resultado=ps.executeUpdate();
+                    if(resultado==1){
                         conexion.commit();
                         dtm.removeRow(fila);
                     }
                 }
-
+                
+                
             } catch (SQLException ex) {
                 try {
                     conexion.rollback();
@@ -333,10 +412,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jButtonAnularReservaActionPerformed
-
+    //Este metodo abre el JDialog para editar la reserva seleccionada, si no ha seleccionado ninguna no hace nada
     private void jButtonEditarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarReservaActionPerformed
-        if (jTableReservas.getSelectedRowCount() == 1) {
-
+        if(jTableReservas.getSelectedRowCount() == 1){
+            
             int fila = jTableReservas.getSelectedRow();
 
             int id_reserva = Integer.parseInt(jTableReservas.getValueAt(fila, 0).toString());
@@ -348,10 +427,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
             jdic.setVisible(true);
 
             recargarTabla();
-
-        }
+        
+        }      
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
-
+    //Este metodo abre el JDialog para borrar la cuenta de cliente
     private void jButtonBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaClienteActionPerformed
         this.setVisible(false);
         this.dispose();
@@ -362,11 +441,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnularReserva;
+    private javax.swing.JButton jButtonBajaCliente;
     private javax.swing.JButton jButtonEditarReserva;
     private javax.swing.JButton jButtonNuevaReserva;
     private javax.swing.JButton jButtonValidar;
+    private javax.swing.JButton jButtonVerMenu;
     private javax.swing.JButton jButtonVerReservas;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
@@ -375,45 +458,34 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanelBotonesDeleteUpdate;
+    private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelNuevaReserva;
     private javax.swing.JPanel jPanelOpciones;
     private javax.swing.JPanel jPanelPadre;
     private javax.swing.JPanel jPanelVerReservas;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinnerHora;
+    private javax.swing.JTable jTableMenu;
     private javax.swing.JTable jTableReservas;
     private javax.swing.JTextField jTextFieldNumeroComensales;
     // End of variables declaration//GEN-END:variables
-
-    public void cargaTablaReservas() {
-        //int id = Integer.parseInt(cliente.getId_cliente()); //RECOGER DE JDIALOG ANTERIOR
+    
+    //Este metodo es el que se encarga de rellenar la tabla con la informacion de las reservas de la base de datos
+    public void cargaTablaReservas(){
+        
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT id_reserva, fecha, hora, n_comensales FROM reserva WHERE id_cliente=?"
+                    "SELECT id_reserva AS Numero, fecha AS Fecha, hora AS Hora, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
             );
             ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-            while (rs.next()) {
-                Date fecha = rs.getDate("fecha");
-                String fechaFormateada = sdf.format(fecha);
-
-                dtm.addRow(new Object[]{
-                    rs.getInt("id_reserva"),
-                    fechaFormateada,
-                    rs.getString("hora"),
-                    rs.getInt("n_comensales")
-                });
-            }
+            nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-
-    public void cargaTablaMenu() {
+    //Este metodo es el que se encarga de rellenar la tabla con la informacion del menu de la base de datos
+    public void cargaTablaMenu(){
         try {
             PreparedStatement ps = conexion.prepareStatement(
                     "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato ORDER BY categoria"
@@ -423,26 +495,5 @@ public class JDialogInterfazClientes extends javax.swing.JDialog {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogInterfazClientes().setVisible(true));
-    }
+    
 }

@@ -194,7 +194,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
                              ps.setString(5, jTextFieldCorreo.getText());
                              ps.setString(6, jTextFieldUser.getText());
                              ps.setString(7, contrasenaEncriptada);
-                             ps.setString(8, "cliente");
+                             ps.setString(8, rol);
 
                              ps.executeUpdate();
                              ps.close();

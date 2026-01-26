@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
-import servix.Empleado;
+import servix.FormatoTablas;
 import servix.Login_CRUD.Empleado.EliminarEmpleados;import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 import servix.Login_CRUD.Usuario.JDialogEditarUsuario;
+import servix.Login_CRUD.Usuario.Usuario;
 
 /**
  *
@@ -31,7 +32,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     ConexionBBDD nueva;
     Connection conexion;
     DefaultTableModel dtm;
-    ArrayList<Empleado> lista = new ArrayList<>();
+    ArrayList<Usuario> lista = new ArrayList<>();
     EliminarEmpleados eliminar = new EliminarEmpleados();
     
     public JTableEmpleados() {
@@ -41,8 +42,9 @@ public class JTableEmpleados extends javax.swing.JDialog {
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
         jTableEmpleados.setModel(dtm);
-        dtm.setColumnIdentifiers(Empleado.getColumnas());
+        dtm.setColumnIdentifiers(Usuario.getColumnas());
         cargarEmpleados();
+        formatoTabla();
     }
 
     /**
@@ -179,22 +181,24 @@ public class JTableEmpleados extends javax.swing.JDialog {
         try{
             lista.clear();
             nueva.conectar();
-            String sql = "SELECT * FROM Camarero";
+            String sql = "SELECT * FROM Usuario WHERE rol = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, "empleado");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Empleado emp = new Empleado(
-                    rs.getInt("id_camarero"),
+                Usuario usr = new Usuario(
+                    rs.getInt("id"),
                     rs.getString("nombre"),
                     rs.getString("apellido1"),
                     rs.getString("apellido2"),
                     rs.getString("telefono"),
+                    rs.getString("correo"),
                     rs.getString("usuario_login"),
                     rs.getString("contrasenya_login")
                 );
 
-                lista.add(emp);
+                lista.add(usr);
             }
 
             for(int i=0; i<lista.size(); i++) {
@@ -215,9 +219,13 @@ public class JTableEmpleados extends javax.swing.JDialog {
         }
     }
     public void recargarTabla() {
-    dtm.setRowCount(0);
-    cargarEmpleados();// vuelve a cargar empleados
-}
+        dtm.setRowCount(0);
+        cargarEmpleados();// vuelve a cargar empleados
+    }
+    
+    public void formatoTabla(){
+        jTableEmpleados.getColumnModel().getColumn(0).setCellRenderer(new FormatoTablas.FormatoInteger());
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

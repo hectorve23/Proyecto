@@ -42,6 +42,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
         dtm.setColumnIdentifiers(Reserva.getColumnas());
         rellenarDiaHoy();
         jLabel1.setText("Bienvenido/a");
+        formatoTabla();
     }
 
     /**
@@ -180,6 +181,9 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
         escribirReservas(fecha_sql);
     }
     
+    public void formatoTabla(){
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
