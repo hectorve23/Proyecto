@@ -44,7 +44,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         jTableEmpleados.setModel(dtm);
         dtm.setColumnIdentifiers(Usuario.getColumnas());
         cargarEmpleados();
-        formatoTabla();
+        aplicarFormato();
     }
 
     /**
@@ -63,6 +63,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         jButtonBajaEmpleado = new javax.swing.JButton();
         jButtonEditarEmpleado = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -103,7 +104,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonEditarEmpleado);
 
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Volver");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
@@ -111,25 +112,31 @@ public class JTableEmpleados extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonCancelar);
 
+        jLabel1.setText("Alba Pallas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         pack();
@@ -223,8 +230,11 @@ public class JTableEmpleados extends javax.swing.JDialog {
         cargarEmpleados();// vuelve a cargar empleados
     }
     
-    public void formatoTabla(){
-        jTableEmpleados.getColumnModel().getColumn(0).setCellRenderer(new FormatoTablas.FormatoInteger());
+     public void aplicarFormato(){
+        FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
+      
+        jTableEmpleados.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
+        jTableEmpleados.getColumnModel().getColumn(4).setCellRenderer(formatoInt);
     }
     
     public static void main(String args[]) {
@@ -254,6 +264,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     private javax.swing.JButton jButtonBajaEmpleado;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditarEmpleado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;

@@ -33,7 +33,10 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButtonCancelar" min="-2" pref="81" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButtonAlta" min="-2" pref="81" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel9" max="32767" attributes="0"/>
+                  <Component id="jButtonAlta" pref="81" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -50,7 +53,9 @@
                   <Component id="jButtonCancelar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jButtonAlta" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,5 +153,10 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Alba Pallas"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
+import servix.FormatoTablas;
 import servix.Reserva;
 import servix.mesas.AsignarMesa;
 
@@ -33,7 +34,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     DefaultTableModel dtmConfirmadas;
     DefaultTableModel dtmCanceladas;
     ArrayList<Reserva> lista = new ArrayList<>();
-    String user;
+    
     public JDialogGestionarReservas() {
         initComponents();
         this.setTitle("Servix");
@@ -51,6 +52,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jTableConfirmadas.setModel(dtmConfirmadas);
         jTableCanceladas.setModel(dtmCanceladas);
         cargarDatos();
+        aplicarFormato();
     }
 
     public void cargarDatos(){
@@ -58,7 +60,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             lista.clear();
             nueva.conectar();
 
-            String sql = "SELECT * FROM Reserva";
+            String sql = "SELECT * FROM Reserva ORDER BY hora";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -115,6 +117,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jButtonVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -189,8 +192,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             jPanelAceptadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAceptadasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Reservas confirmadas", jPanelAceptadas);
@@ -221,8 +224,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             jPanelRechazadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRechazadasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Reservas rechazadas", jPanelRechazadas);
@@ -243,20 +246,24 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jLabel1.setText("Gestiona las reservas");
         jPanel2.add(jLabel1, java.awt.BorderLayout.CENTER);
 
+        jLabel2.setText("Alba Pallas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonVolver)
-                .addGap(26, 26, 26))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +274,9 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonVolver)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
 
         pack();
@@ -313,6 +322,33 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
+    public void aplicarFormato(){
+        FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
+        FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
+        FormatoTablas.FormatoHora formatoHora = new FormatoTablas.FormatoHora();
+        
+        jTablePendientes.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
+        jTablePendientes.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
+        jTablePendientes.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
+        jTablePendientes.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTablePendientes.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
+        jTablePendientes.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
+        
+        jTableConfirmadas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
+        jTableConfirmadas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
+        jTableConfirmadas.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
+        jTableConfirmadas.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTableConfirmadas.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
+        jTableConfirmadas.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
+        
+        jTableCanceladas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
+        jTableCanceladas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
+        jTableCanceladas.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
+        jTableCanceladas.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTableCanceladas.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
+        jTableCanceladas.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -339,6 +375,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelAceptadas;

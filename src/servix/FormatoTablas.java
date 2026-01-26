@@ -7,9 +7,6 @@ package servix;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.text.DecimalFormat;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  *
@@ -20,6 +17,9 @@ public class FormatoTablas {
     public static class FormatoInteger extends DefaultTableCellRenderer {
         NumberFormat formatoNum = NumberFormat.getIntegerInstance();
 
+        public FormatoInteger(){
+            setHorizontalAlignment(RIGHT);
+        }
         public void setValue(Object value){
             if (value instanceof Number){
                 value = formatoNum.format(value);
@@ -28,14 +28,34 @@ public class FormatoTablas {
         }
     }
     
-    public static class FormatoFecha extends DefaultTableCellRenderer {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        
-         public void setValue(Object value){
-            if (value instanceof Number){
+   public static class FormatoFecha extends DefaultTableCellRenderer {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+
+        public FormatoFecha(){
+            setHorizontalAlignment(CENTER);
+        }
+
+        public void setValue(Object value){
+            if (value instanceof java.util.Date){
                 value = formatoFecha.format(value);
             }
             super.setValue(value);
         }
     }
+   
+   public static class FormatoHora extends DefaultTableCellRenderer {
+    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+    
+    public FormatoHora(){
+            setHorizontalAlignment(CENTER);
+    }
+    
+    public void setValue(Object value){
+        if (value instanceof java.sql.Time){
+            value = formatoHora.format(value);
+        }
+        super.setValue(value);
+    }
+}
+           
 }

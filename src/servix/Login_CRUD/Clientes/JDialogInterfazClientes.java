@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
+import servix.FormatoTablas;
 import servix.JFrameServix;
 
 /**
@@ -25,21 +26,21 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
      * Creates new form JDialogInterfazClientes
      */
     //Declaracion de variables
-    JFrameServix padre;
     DefaultTableModel dtm;
     DefaultTableModel dtm2;
-    ConexionBBDD nueva = null;
-    Connection conexion = null;
+    ConexionBBDD nueva;
+    Connection conexion;
     int id;
     
     public JDialogInterfazClientes() {
         
+        initComponents();
     }
     public JDialogInterfazClientes(java.awt.Dialog parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
-        this.nueva = new ConexionBBDD();
-        this.conexion = nueva.getConnection();
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
         this.dtm = new DefaultTableModel();
         this.dtm2 = new DefaultTableModel();
         jTableReservas.setModel(dtm);
@@ -47,6 +48,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.id = id;
         cargaTablaReservas();
         cargaTablaMenu();
+        formatoTabla();
     }
     
     /**
@@ -65,6 +67,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelBotonesDeleteUpdate = new javax.swing.JPanel();
         jButtonAnularReserva = new javax.swing.JButton();
         jButtonEditarReserva = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanelNuevaReserva = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
@@ -117,6 +120,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         });
         jPanelBotonesDeleteUpdate.add(jButtonEditarReserva);
 
+        jLabel2.setText("Héctor Valdes");
+
         javax.swing.GroupLayout jPanelVerReservasLayout = new javax.swing.GroupLayout(jPanelVerReservas);
         jPanelVerReservas.setLayout(jPanelVerReservasLayout);
         jPanelVerReservasLayout.setHorizontalGroup(
@@ -124,7 +129,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             .addGroup(jPanelVerReservasLayout.createSequentialGroup()
                 .addGap(124, 124, 124)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 134, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -132,8 +139,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelVerReservasLayout.setVerticalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelVerReservasLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(152, 152, 152))
         );
@@ -441,6 +454,27 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new JFrameServix().setVisible(true));
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -453,6 +487,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JButton jButtonVerReservas;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -494,6 +529,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+    }
+    
+    public void formatoTabla(){
+        FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
+        FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
+        FormatoTablas.FormatoHora formatoHora = new FormatoTablas.FormatoHora();
+        
+        jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
+        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
+        jTableReservas.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
+        jTableReservas.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTableReservas.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
+        jTableReservas.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
     }
     
 }
