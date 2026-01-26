@@ -537,11 +537,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         FormatoTablas.FormatoHora formatoHora = new FormatoTablas.FormatoHora();
         
         jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
-        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
-        jTableReservas.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
-        jTableReservas.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
-        jTableReservas.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
-        jTableReservas.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
+        jTableReservas.getColumnModel().getColumn(1).setCellRenderer(formatoFecha);
+        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoHora);
+        jTableReservas.getColumnModel().getColumn(3).setCellRenderer(formatoInt);
     }
     
 }

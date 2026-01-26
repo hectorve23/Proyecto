@@ -42,7 +42,6 @@ public class JTableEmpleados extends javax.swing.JDialog {
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
         jTableEmpleados.setModel(dtm);
-        dtm.setColumnIdentifiers(Usuario.getColumnas());
         cargarEmpleados();
         aplicarFormato();
     }
@@ -214,7 +213,6 @@ public class JTableEmpleados extends javax.swing.JDialog {
         } catch (SQLException ex) {
             System.getLogger(JTableEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-                   
     }
     
     public void empleadosSeleccionados(){

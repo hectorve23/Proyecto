@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import servix.ConexionBBDD;
 import servix.Seguridad;
@@ -34,6 +35,8 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         this.rol = rol;
+        comprobarLongitudTelefono();
+        comprobarLongitudes();
     }
 
     /**
@@ -69,7 +72,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonAlta.setText("Alta");
+        jButtonAlta.setText("Aceptar");
         jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAltaActionPerformed(evt);
@@ -128,18 +131,19 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAlta, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAlta, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +165,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
-         String nombre = jTextFieldNombre.getText();
+        String nombre = jTextFieldNombre.getText();
         String apellido1 = jTextFieldApellido1.getText();
         String apellido2 = jTextFieldApellido2.getText();
         String telefono = jTextFieldTelefono.getText();
@@ -175,58 +179,94 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
        
         if(!existeUsuario(user)){
             if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
+                if(nombre.isEmpty()) resaltarCampo(jTextFieldNombre); else resetearCampo(jTextFieldNombre);
+                if(apellido1.isEmpty()) resaltarCampo(jTextFieldApellido1); else resetearCampo(jTextFieldApellido1);
+                if(apellido2.isEmpty()) resaltarCampo(jTextFieldApellido2); else resetearCampo(jTextFieldApellido2);
+                if(telefono.isEmpty()) resaltarCampo(jTextFieldTelefono); else resetearCampo(jTextFieldTelefono);
+                if(correo.isEmpty()) resaltarCampo(jTextFieldCorreo); else resetearCampo(jTextFieldCorreo);
+                if(user.isEmpty()) resaltarCampo(jTextFieldUser); else resetearCampo(jTextFieldUser);
+                if(contrasena.length == 0) resaltarCampo(jPasswordFieldContrasena1); else resetearPassword(jPasswordFieldContrasena1);
+                if(contrasena2.length == 0) resaltarCampo(jPasswordFieldContrasena2); else resetearCampo(jPasswordFieldContrasena2);
+                
                 JOptionPane.showConfirmDialog(rootPane,
                                             "Porfavor rellene todos los campos", 
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
            }else{
-                if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || correo.length() > 40 || user.length() > 30){
-                 JOptionPane.showConfirmDialog(rootPane,
+                if(nombre.length() > 30 || apellido1.length() > 30 || apellido2.length() > 30 ||  telefono.length() > 30 || correo.length() > 30 || user.length() > 30){
+                    if(nombre.length() > 30) resaltarCampo(jTextFieldNombre); else resetearCampo(jTextFieldNombre);
+                    if(apellido1.length() > 30) resaltarCampo(jTextFieldApellido1);  else resetearCampo(jTextFieldApellido1);
+                    if(apellido2.length() > 30) resaltarCampo(jTextFieldApellido2); else resetearCampo(jTextFieldApellido2);
+                    if(telefono.length() > 30) resaltarCampo(jTextFieldTelefono); else resetearCampo(jTextFieldTelefono);
+                    if(correo.length() > 30) resaltarCampo(jTextFieldCorreo); else resetearCampo(jTextFieldCorreo);
+                    if(user.length() > 30) resaltarCampo(jTextFieldUser); else resetearCampo(jTextFieldUser);
+
+                    JOptionPane.showConfirmDialog(rootPane,
                                             "Ningun campo puede exceder los 30 caracteres", 
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
                 }else{
-                    if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
-                         String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
-                         try {
-                             nueva.conectar();
-                             String sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?)";
-                             PreparedStatement ps= conexion.prepareStatement(sql);
-                             ps.setString(1, jTextFieldNombre.getText());
-                             ps.setString(2, jTextFieldApellido1.getText());
-                             ps.setString(3, jTextFieldApellido2.getText());
-                             ps.setString(4, jTextFieldTelefono.getText());
-                             ps.setString(5, jTextFieldCorreo.getText());
-                             ps.setString(6, jTextFieldUser.getText());
-                             ps.setString(7, contrasenaEncriptada);
-                             ps.setString(8, rol);
+                    if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
+                        if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
+                            if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
+                                 String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                                 this.setVisible(false);
 
-                             ps.executeUpdate();
-                             ps.close();
-                             conexion.close();
-                            
-                             this.setVisible(false);
-                            
-                         } catch (SQLException ex) {
-                             System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                         }
+                                 try {
+                                     nueva.conectar();
+                                     String sql= "INSERT INTO Cliente(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?,?)";
+                                     PreparedStatement ps= conexion.prepareStatement(sql);
+                                     ps.setString(1, jTextFieldNombre.getText());
+                                     ps.setString(2, jTextFieldApellido1.getText());
+                                     ps.setString(3, jTextFieldApellido2.getText());
+                                     ps.setString(4, jTextFieldTelefono.getText());
+                                     ps.setString(5, jTextFieldCorreo.getText());
+                                     ps.setString(6, jTextFieldUser.getText());
+                                     ps.setString(7, contrasenaEncriptada);
+
+                                     ps.executeUpdate();
+                                     ps.close();
+                                     conexion.close();
+                                 } catch (SQLException ex) {
+                                     System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                                 }
+                            }else{
+                                resaltarPassword(jPasswordFieldContrasena1);
+                                resaltarPassword(jPasswordFieldContrasena2);
+                                JOptionPane.showConfirmDialog(rootPane,
+                                                        "Las contraseñas no coinciden", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                        }else{
+                            resaltarCampo(jTextFieldCorreo);
+                            JOptionPane.showConfirmDialog(rootPane,
+                                                    "Formato de correo no valido", 
+                                                    "Error", 
+                                                    JOptionPane.OK_CANCEL_OPTION, 
+                                                    JOptionPane.ERROR_MESSAGE);
+                       }
                     }else{
-                         JOptionPane.showConfirmDialog(rootPane,
-                                                 "Las contraseñas no coinciden", 
-                                                 "Error", 
-                                                 JOptionPane.OK_CANCEL_OPTION, 
-                                                 JOptionPane.ERROR_MESSAGE);
-                    }
-                }
+                        resaltarCampo(jTextFieldTelefono);
+                        JOptionPane.showConfirmDialog(rootPane,
+                                                "Formato de telefono no valido", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
+                   }
+                } 
+ 
             }
         }else{
-             JOptionPane.showConfirmDialog(rootPane,
-                                                 "El usuario " + user + " ya existe", 
-                                                 "Error", 
-                                                 JOptionPane.OK_CANCEL_OPTION, 
-                                                 JOptionPane.ERROR_MESSAGE);
+            resaltarCampo(jTextFieldUser);
+            JOptionPane.showConfirmDialog(rootPane,
+                                                "El usuario " + user + " ya existe", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
@@ -234,7 +274,6 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    
     public boolean existeUsuario(String usuario){
         boolean existe= false;
         try {    
@@ -253,6 +292,128 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
             System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return existe;
+    }
+    
+    public void comprobarLongitudTelefono(){
+        jTextFieldTelefono.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+        
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                comprobarLongitud();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                 comprobarLongitud();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                 comprobarLongitud();
+            }
+            
+            private void comprobarLongitud(){
+                if(jTextFieldTelefono.getText().length() < 9){
+                    jTextFieldTelefono.setBackground(new java.awt.Color(255, 200, 200));
+                    jTextFieldTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+                }else{
+                    jTextFieldTelefono.setBackground(java.awt.Color.WHITE);
+                    jTextFieldTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY, 1));
+                }
+            }
+            
+        });
+    }
+    
+    public void comprobarLongitudes(){
+        javax.swing.event.DocumentListener listener = new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                validarLongitud(e);
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                validarLongitud(e);
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                validarLongitud(e);
+            }
+
+            private void validarLongitud(javax.swing.event.DocumentEvent e){
+                javax.swing.text.Document doc = e.getDocument();
+                javax.swing.JTextField campo = null;
+
+                // Identificar qué campo se está editando
+                if (doc == jTextFieldNombre.getDocument()) campo = jTextFieldNombre;
+                else if (doc == jTextFieldApellido1.getDocument()) campo = jTextFieldApellido1;
+                else if (doc == jTextFieldApellido2.getDocument()) campo = jTextFieldApellido2;
+                else if (doc == jTextFieldCorreo.getDocument()) campo = jTextFieldCorreo;
+                else if (doc == jTextFieldUser.getDocument()) campo = jTextFieldUser;
+
+                if(campo != null){
+                    if(campo.getText().length() > 30){
+                        campo.setBackground(new java.awt.Color(255, 200, 200));
+                        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
+                    }else{
+                        campo.setBackground(java.awt.Color.WHITE);
+                        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY, 1));
+                    }
+                }
+            }
+        };
+
+        // Aplicar el listener a todos los campos con límite de 30 caracteres
+        jTextFieldNombre.getDocument().addDocumentListener(listener);
+        jTextFieldApellido1.getDocument().addDocumentListener(listener);
+        jTextFieldApellido2.getDocument().addDocumentListener(listener);
+        jTextFieldCorreo.getDocument().addDocumentListener(listener);
+        jTextFieldUser.getDocument().addDocumentListener(listener);
+    }
+    
+    private static final Pattern PATTERN_EMAIL = Pattern.compile( //Patron para validar el email
+        "^[A-Za-z0-9_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" // se permiten letras, simbolos, tiene que haber un @
+                                                          // y un . , el dominio tiene que tener 2 letras
+    );
+    
+    private static final Pattern PATTERN_TELEFONO = Pattern.compile( //Patron para validar el telefono
+        "^[0-9]{9}$" // 9 Numeros del 0-9
+    );
+
+     public static boolean validarEmail(String correo) { //Compobamos que el correo cumpla el patron
+        if (!PATTERN_EMAIL.matcher(correo).matches()) { 
+            return false;
+        }
+        return true;
+    }
+     
+    public static boolean validarTelefono(String telefono) { //Comprobamos que el telefono cumpla el patron
+        if (!PATTERN_TELEFONO.matcher(telefono).matches()) {
+            return false;
+        }
+        return true;
+    }
+    
+    private void resaltarCampo(javax.swing.JTextField campo) {
+        campo.setBackground(new java.awt.Color(255, 200, 200));
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));    
+    }
+    
+    private void resetearCampo(javax.swing.JTextField campo) {
+        campo.setBackground(java.awt.Color.WHITE);
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY, 1));
+    }
+    
+    private void resaltarPassword(javax.swing.JPasswordField campo) {
+        campo.setBackground(new java.awt.Color(255, 200, 200));
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));    
+    }
+    
+     private void resetearPassword(javax.swing.JPasswordField campo) {
+        campo.setBackground(java.awt.Color.WHITE);
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY, 1));
     }
     
     /**
