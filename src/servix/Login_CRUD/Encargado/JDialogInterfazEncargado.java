@@ -4,8 +4,11 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 import servix.JFrameServix;
-import servix.Login_CRUD.Empleado.JTableInterfazEmpleados;
+import servix.Login_CRUD.Empleado.JTableInterfazEmpleado;
 import servix.mesas.JTableAdministrarMesas;
 
 /**
@@ -18,10 +21,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     /**
      * Creates new form JDialogInterfazEncargado
      */
-    public JDialogInterfazEncargado() {
-       
+    JFrameServix padre;
+    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         this.setTitle("Servix");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
+        this.padre = (JFrameServix) parent;
     }
 
     /**
@@ -153,14 +160,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jtee= new JTableEmpleados();
+        JTableEmpleados jtee = new JTableEmpleados(padre, true);
         jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
     private void jButtonVerReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableInterfazEmpleados jtie = new JTableInterfazEmpleados();
+        JTableInterfazEmpleado jtie = new JTableInterfazEmpleado("encargado", padre, true);
         jtie.setVisible(true);
     }//GEN-LAST:event_jButtonVerReservasActionPerformed
 
@@ -174,44 +181,39 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogGestionarReservas jdgr= new JDialogGestionarReservas();
+        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(padre, true);
         jdgr.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
 
     private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu();
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
     private void jButtonAdministrarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMesasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableAdministrarMesas jtam = new JTableAdministrarMesas(this, true);
+        JTableAdministrarMesas jtam = new JTableAdministrarMesas(padre, true);
         jtam.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
     
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+   public static void main(String args[]) {
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogInterfazEncargado().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

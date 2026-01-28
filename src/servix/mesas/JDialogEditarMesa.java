@@ -4,11 +4,15 @@
  */
 package servix.mesas;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 
 /**
  *
@@ -23,9 +27,14 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
      */
     ConexionBBDD nueva;
     Connection conexion;
-    public JDialogEditarMesa(String id) {
+    JFrameServix padre;
+    public JDialogEditarMesa(String id, java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
+        this.padre= (JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         cargarComboBox();
@@ -197,26 +206,21 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
         }
     }
     
-     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+    public static void main(String args[]) {
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogEditarMesa(null).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
     
 

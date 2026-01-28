@@ -4,6 +4,7 @@
  */
 package servix.Login_CRUD.Empleado;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,16 +14,19 @@ import servix.Reserva;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 import servix.FormatoTablas;
 import servix.JFrameServix;
+import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
 
 /**
  *
     * @author DAM2ALU11
  */
-public class JTableInterfazEmpleados extends javax.swing.JDialog {
+public class JTableInterfazEmpleado extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JTableInterfazEmpleados.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JTableInterfazEmpleado.class.getName());
 
     /**
      * Creates new form JDialogInterfazEmpleados
@@ -32,10 +36,17 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     DefaultTableModel dtm;
     ArrayList<Reserva> lista = new ArrayList<>();
     java.sql.Date fecha_sql;
+    JFrameServix padre;
+    String rol;
     
-    public JTableInterfazEmpleados() {
+    public JTableInterfazEmpleado(String rol, java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
+        this.padre = (JFrameServix) parent;
+        this.rol= rol;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
@@ -148,12 +159,18 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonBuscarFechaActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        this.setVisible(false);
-        this.dispose();
-        JFrameServix jfs = new JFrameServix();
-        jfs.setVisible(true);
-        
-        
+        if(rol.equalsIgnoreCase("encargado")){
+            jButtonSalir.setText("Volver");
+            this.setVisible(false);
+            this.dispose();
+            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+            jdie.setVisible(true);
+        }else if(rol.equalsIgnoreCase("empleado")){
+            this.setVisible(false);
+            this.dispose();
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        }        
     }//GEN-LAST:event_jButtonSalirActionPerformed
     
     public void escribirReservas(java.sql.Date fecha){
@@ -181,7 +198,7 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
                 dtm.addRow(lista.get(i).devuelveFila());
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableInterfazEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
     
@@ -202,26 +219,22 @@ public class JTableInterfazEmpleados extends javax.swing.JDialog {
         jTableReservasDelDia.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
         jTableReservasDelDia.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
      }
+     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JTableInterfazEmpleados().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
     
 

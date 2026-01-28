@@ -4,12 +4,16 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import java.sql.*;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 
 /**
  *
@@ -25,8 +29,11 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
     String nombreCambiar;
     Connection conexion;
     
-    public JDialogEditarPlato(String nombreCambiar) {
+    public JDialogEditarPlato(String nombreCambiar,java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.nombreCambiar=nombreCambiar;
         ConexionBBDD nuevaConexion = new ConexionBBDD();
@@ -162,25 +169,20 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogEditarPlato("").setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

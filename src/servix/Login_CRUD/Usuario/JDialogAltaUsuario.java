@@ -4,20 +4,25 @@
  */
 package servix.Login_CRUD.Usuario;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 import servix.Seguridad;
 
 /**
  *
  * @author DAM2Alu11
  */
-public class JDialogAltaUsuario extends javax.swing.JFrame {
+public class JDialogAltaUsuario extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JDialogAltaUsuario.class.getName());
 
@@ -28,15 +33,24 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     ConexionBBDD nueva;
     Connection conexion;
     String rol;
+    JFrameServix padre;
     
-    public JDialogAltaUsuario(String rol) {
+    public JDialogAltaUsuario(String rol, java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
+        this.getContentPane().setBackground(Color.decode("#EFF7FB"));
+        jPanel1.setBackground(Color.decode("#FAFAFA"));
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         this.rol = rol;
+        this.padre=(JFrameServix) parent;
         comprobarLongitudTelefono();
         comprobarLongitudes();
+        enterEnFormulario();
+        camposObligatorios();
     }
 
     /**
@@ -52,27 +66,32 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         jButtonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelApellido1 = new javax.swing.JLabel();
         jTextFieldApellido1 = new javax.swing.JTextField();
-        Provincia = new javax.swing.JLabel();
+        jLabelApellido2 = new javax.swing.JLabel();
         jTextFieldApellido2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelTelefono = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelCorreo = new javax.swing.JLabel();
         jTextFieldCorreo = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
         jTextFieldUser = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelContrasena1 = new javax.swing.JLabel();
         jPasswordFieldContrasena1 = new javax.swing.JPasswordField();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelContrasena2 = new javax.swing.JLabel();
         jPasswordFieldContrasena2 = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(239, 247, 251));
 
+        jButtonAlta.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonAlta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAlta.setForeground(new java.awt.Color(219, 219, 255));
         jButtonAlta.setText("Aceptar");
+        jButtonAlta.setBorderPainted(false);
         jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAltaActionPerformed(evt);
@@ -88,40 +107,51 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CREAR CUENTA");
+        jLabel1.setText("Registrarse");
 
-        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 10, 10));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(14, 168, 219), 1, true));
+        jPanel1.setForeground(new java.awt.Color(250, 250, 250));
+        jPanel1.setToolTipText("");
+        jPanel1.setLayout(new java.awt.GridLayout(8, 2, 30, 10));
 
-        jLabel2.setText("Nombre");
-        jPanel1.add(jLabel2);
+        jLabelNombre.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelNombre.setText("Nombre");
+        jPanel1.add(jLabelNombre);
         jPanel1.add(jTextFieldNombre);
 
-        jLabel3.setText("Primer apellido");
-        jPanel1.add(jLabel3);
+        jLabelApellido1.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelApellido1.setText("Primer apellido");
+        jPanel1.add(jLabelApellido1);
         jPanel1.add(jTextFieldApellido1);
 
-        Provincia.setText("Segundo apellido");
-        jPanel1.add(Provincia);
+        jLabelApellido2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelApellido2.setText("Segundo apellido");
+        jPanel1.add(jLabelApellido2);
         jPanel1.add(jTextFieldApellido2);
 
-        jLabel5.setText("Telefono");
-        jPanel1.add(jLabel5);
+        jLabelTelefono.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelTelefono.setText("Telefono");
+        jPanel1.add(jLabelTelefono);
         jPanel1.add(jTextFieldTelefono);
 
-        jLabel6.setText("Correo");
-        jPanel1.add(jLabel6);
+        jLabelCorreo.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelCorreo.setText("Correo");
+        jPanel1.add(jLabelCorreo);
         jPanel1.add(jTextFieldCorreo);
 
-        jLabel7.setText("Usuario");
-        jPanel1.add(jLabel7);
+        jLabelUsuario.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelUsuario.setText("Usuario");
+        jPanel1.add(jLabelUsuario);
         jPanel1.add(jTextFieldUser);
 
-        jLabel4.setText("Contraseña");
-        jPanel1.add(jLabel4);
+        jLabelContrasena1.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelContrasena1.setText("Contraseña");
+        jPanel1.add(jLabelContrasena1);
         jPanel1.add(jPasswordFieldContrasena1);
 
-        jLabel8.setText("Introduzca de nuevo la contraseña");
-        jPanel1.add(jLabel8);
+        jLabelContrasena2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelContrasena2.setText("Introduzca de nuevo la contraseña");
+        jPanel1.add(jLabelContrasena2);
         jPanel1.add(jPasswordFieldContrasena2);
 
         jLabel9.setText("Alba Pallas");
@@ -132,18 +162,19 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAlta, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                        .addGap(15, 15, 15))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(73, 73, 73))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +182,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +247,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
 
                                  try {
                                      nueva.conectar();
-                                     String sql= "INSERT INTO Cliente(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login) VALUES (?,?,?,?,?,?,?)";
+                                     String sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?)";
                                      PreparedStatement ps= conexion.prepareStatement(sql);
                                      ps.setString(1, jTextFieldNombre.getText());
                                      ps.setString(2, jTextFieldApellido1.getText());
@@ -225,6 +256,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
                                      ps.setString(5, jTextFieldCorreo.getText());
                                      ps.setString(6, jTextFieldUser.getText());
                                      ps.setString(7, contrasenaEncriptada);
+                                     ps.setString(8, rol);
 
                                      ps.executeUpdate();
                                      ps.close();
@@ -240,6 +272,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
                                                         "Error", 
                                                         JOptionPane.OK_CANCEL_OPTION, 
                                                         JOptionPane.ERROR_MESSAGE);
+                                jPasswordFieldContrasena1.requestFocus();
                             }
                         }else{
                             resaltarCampo(jTextFieldCorreo);
@@ -271,7 +304,7 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public boolean existeUsuario(String usuario){
@@ -398,7 +431,9 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     
     private void resaltarCampo(javax.swing.JTextField campo) {
         campo.setBackground(new java.awt.Color(255, 200, 200));
-        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));    
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));  
+        campo.requestFocus();
+        campo.setText("");
     }
     
     private void resetearCampo(javax.swing.JTextField campo) {
@@ -408,7 +443,8 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
     
     private void resaltarPassword(javax.swing.JPasswordField campo) {
         campo.setBackground(new java.awt.Color(255, 200, 200));
-        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));    
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2)); 
+        campo.requestFocus();
     }
     
      private void resetearPassword(javax.swing.JPasswordField campo) {
@@ -416,44 +452,179 @@ public class JDialogAltaUsuario extends javax.swing.JFrame {
         campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY, 1));
     }
     
+    private void enterEnFormulario(){
+        
+        //Nombre -> Apellido1
+        jTextFieldNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jTextFieldApellido1.requestFocus();
+                }
+            }
+        });
+
+        //Apellido1 -> Apellido2 - Apellido1 ->Nombre
+        jTextFieldApellido1.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jTextFieldApellido2.requestFocus();
+                }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                    jTextFieldNombre.requestFocus();
+                }
+            }
+        });
+
+        // Apellido2 -> Teléfono - Apellido2 -> Apellido1
+        jTextFieldApellido2.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jTextFieldTelefono.requestFocus();
+                }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                    jTextFieldApellido1.requestFocus();
+                }
+            }
+        });
+
+        // Teléfono -> Correo - Telefono -> Apellido 2
+        jTextFieldTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jTextFieldCorreo.requestFocus();
+                }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                    jTextFieldApellido2.requestFocus();
+                }
+            }
+        });
+
+        // Correo -> Usuario - Correo -> Telefono
+        jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jTextFieldUser.requestFocus();
+                }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                    jTextFieldTelefono.requestFocus();
+                }
+            }
+        });
+
+        // User -> Contraseña1 - User -> Correo
+        jTextFieldUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jPasswordFieldContrasena1.requestFocus();
+                }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                    jTextFieldCorreo.requestFocus();
+                }
+            }
+        });
+
+        // Contraseña1 -> Contraseña2 - Contraseña1 -> User
+        jPasswordFieldContrasena1.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jPasswordFieldContrasena2.requestFocus();
+                }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                    jTextFieldUser.requestFocus();
+                }
+            }
+        });
+
+        // Contraseña2 -> Botón Aceptar - Contraseña2 -> Contraseña1
+        jPasswordFieldContrasena2.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jButtonAlta.requestFocus(); 
+                }
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
+                     jPasswordFieldContrasena1.requestFocus();
+                }
+            }
+        });
+        
+        //Aceptar -> Cancelar - Aceptar -> Contraseña2
+        jButtonAlta.addKeyListener(new java.awt.event.KeyAdapter(){
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt){
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT){
+                    jButtonCancelar.requestFocus();
+                }   
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
+                    jPasswordFieldContrasena2.requestFocus();
+                }
+            }
+        });
+        
+        //Cancelar -> Aceptar - Cancelar -> Contraeña2
+        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter(){
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt){
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT){
+                    jButtonAlta.requestFocus();
+                }   
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
+                    jPasswordFieldContrasena2.requestFocus();
+                }
+            }
+        });
+    }
+    
+    private void camposObligatorios(){
+    jLabelNombre.setText("<html>Nombre <font color='red'>*</font></html>");
+    jLabelApellido1.setText("<html>Primer apellido <font color='red'>*</font></html>");
+    jLabelTelefono.setText("<html>Telefono <font color='red'>*</font></html>");
+    jLabelCorreo.setText("<html>Correo <font color='red'>*</font></html>");
+    jLabelUsuario.setText("<html>Usuario <font color='red'>*</font></html>");
+    jLabelContrasena1.setText("<html>Contraseña <font color='red'>*</font></html>");
+    jLabelContrasena2.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+   public static void main(String args[]) {
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogAltaUsuario(null).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Provincia;
     private javax.swing.JButton jButtonAlta;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelApellido1;
+    private javax.swing.JLabel jLabelApellido2;
+    private javax.swing.JLabel jLabelContrasena1;
+    private javax.swing.JLabel jLabelContrasena2;
+    private javax.swing.JLabel jLabelCorreo;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordFieldContrasena1;
     private javax.swing.JPasswordField jPasswordFieldContrasena2;

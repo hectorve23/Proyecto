@@ -4,14 +4,18 @@
  */
 package servix;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import servix.Login_CRUD.Usuario.JDialogCambiarContrasena;
-import servix.Login_CRUD.Empleado.JTableInterfazEmpleados;
+import servix.Login_CRUD.Empleado.JTableInterfazEmpleado;
 import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
 import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 
@@ -31,11 +35,18 @@ public class JFrameServix extends javax.swing.JFrame {
     int id;
     String rol;
     
-    public JFrameServix() {
-        initComponents();
-        nueva = new ConexionBBDD();
-        conexion=nueva.getConnection();
-        this.setTitle("Servix");
+    public JFrameServix(){
+        try {
+            initComponents();
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+            ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+            this.setIconImage(icon.getImage());
+            nueva = new ConexionBBDD();
+            conexion=nueva.getConnection();
+            this.setTitle("Servix");
+        } catch (UnsupportedLookAndFeelException ex) {
+            System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 
     /**
@@ -150,7 +161,7 @@ public class JFrameServix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-        JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente");
+        JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente", this, true);
         jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 
@@ -165,15 +176,15 @@ public class JFrameServix extends javax.swing.JFrame {
                 
             }else{
                 if(comprobarInicioSesion(jTextFielduser.getText())==false){
-                    JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(jTextFielduser.getText());
+                    JDialogCambiarContrasena jdcc = new JDialogCambiarContrasena(jTextFielduser.getText(), this, true);
                     jdcc.setVisible(true);
                 }else{
                     if(rol.toLowerCase().equals("empleado")){
-                        JTableInterfazEmpleados jdie = new JTableInterfazEmpleados();
+                        JTableInterfazEmpleado jdie = new JTableInterfazEmpleado("empleado", this, true);
                         jdie.setVisible(true);
                     }else{
                         if(rol.toLowerCase().equals("encargado")){
-                            JDialogInterfazEncargado jdie  = new JDialogInterfazEncargado();
+                            JDialogInterfazEncargado jdie  = new JDialogInterfazEncargado(this, true);
                             jdie.setVisible(true);
                             this.setVisible(false);
                         }
@@ -241,7 +252,7 @@ public class JFrameServix extends javax.swing.JFrame {
                 return true;
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableInterfazEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
         return true;
     }
@@ -256,13 +267,8 @@ public class JFrameServix extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

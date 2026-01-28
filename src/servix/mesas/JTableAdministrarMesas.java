@@ -4,14 +4,18 @@
  */
 package servix.mesas;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
 import servix.Mesa;
 
@@ -33,11 +37,15 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     ArrayList<Mesa> lista = new ArrayList<>();
     String user;
     EliminarMesa eliminar = new EliminarMesa();
-    public JTableAdministrarMesas(java.awt.Dialog parent, boolean modal) {
+    JFrameServix padre;
+    public JTableAdministrarMesas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.user=user;
+        this.padre=(JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
@@ -183,12 +191,12 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado();
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButtonAnadirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnadirMesaActionPerformed
-        JDialogAnadirMesa jdam = new JDialogAnadirMesa();
+        JDialogAnadirMesa jdam = new JDialogAnadirMesa(padre, true);
         jdam.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAnadirMesaActionPerformed
@@ -199,7 +207,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione una mesa para editar.");
         }else{
             String id = dtm.getValueAt(fila, 0).toString();
-            JDialogEditarMesa jdem= new JDialogEditarMesa(id);
+            JDialogEditarMesa jdem= new JDialogEditarMesa(id, padre, true);
             jdem.setVisible(true);
             recargarTabla();
         }      
@@ -219,6 +227,24 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         dtm.setRowCount(0);
         cargarMesas();
     }
+    
+    public static void main(String args[]) {
+        /* Set the FlatLaf look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        try {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
+    }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnadirMesa;

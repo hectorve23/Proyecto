@@ -4,13 +4,17 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
+import servix.JFrameServix;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 
 /**
@@ -28,13 +32,17 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     DefaultTableModel dtm;
     ConexionBBDD nueva = null;
     Connection conexion = null;
-    
-    public JDialogAdministrarMenu() {
+    JFrameServix padre;
+    public JDialogAdministrarMenu(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
+        this.padre = (JFrameServix) parent;
         jTableMenu.setModel(dtm);
         cargaTablaMenu();
     }
@@ -261,7 +269,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
            
             String nombre = jTableMenu.getValueAt(fila, 0).toString();
 
-            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre);
+            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, padre, true);
             jdep.setVisible(true);
 
             recargarTabla();
@@ -348,25 +356,20 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     }
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JDialogAdministrarMenu().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
 }
 

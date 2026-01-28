@@ -4,15 +4,23 @@
  */
 package servix.Login_CRUD.Encargado;
 
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.awt.KeyboardFocusManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
+import servix.JFrameServix;
 import servix.Login_CRUD.Empleado.EliminarEmpleados;import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 import servix.Login_CRUD.Usuario.JDialogEditarUsuario;
 import servix.Login_CRUD.Usuario.Usuario;
@@ -34,16 +42,23 @@ public class JTableEmpleados extends javax.swing.JDialog {
     DefaultTableModel dtm;
     ArrayList<Usuario> lista = new ArrayList<>();
     EliminarEmpleados eliminar = new EliminarEmpleados();
+    JFrameServix padre;
     
-    public JTableEmpleados() {
+    public JTableEmpleados(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
+        this.padre = (JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
+        dtm.setColumnIdentifiers(new String[]{"ID", "Nombre", "Apellido1", "Apellido2", "Teléfono", "Correo", "Usuario"});
         jTableEmpleados.setModel(dtm);
         cargarEmpleados();
         aplicarFormato();
+
     }
 
     /**
@@ -150,13 +165,13 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
         String id = dtm.getValueAt(fila, 0).toString();
 
-        JDialogEditarUsuario jdee= new JDialogEditarUsuario(id);
+        JDialogEditarUsuario jdee= new JDialogEditarUsuario(id, padre, true);
         jdee.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
-        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado");
+        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", padre, true);
         jdau.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed
@@ -179,7 +194,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado();
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -236,25 +251,20 @@ public class JTableEmpleados extends javax.swing.JDialog {
     }
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the FlatLaf look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new JTableEmpleados().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            JFrameServix jfs = new JFrameServix();
+            jfs.setVisible(true);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
