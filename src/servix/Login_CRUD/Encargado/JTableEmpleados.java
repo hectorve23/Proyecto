@@ -21,7 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
-import servix.Login_CRUD.Empleado.EliminarEmpleados;import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
+import servix.Login_CRUD.Usuario.EliminarEmpleados;
+import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 import servix.Login_CRUD.Usuario.Usuario;
 
 /**

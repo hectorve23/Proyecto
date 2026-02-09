@@ -2,12 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servix.Login_CRUD.Empleado;
+package servix.Login_CRUD.Usuario;
 
 import java.sql.SQLException;
 import java.sql.*;
 import servix.ConexionBBDD;
-
 
 /**
  *
