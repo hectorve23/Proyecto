@@ -28,11 +28,15 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     int id;
     ConexionBBDD nueva;
     Connection conexion;
-    public JDialogBajaCliente(int id) {
+    JFrameServix padre;
+    
+    public JDialogBajaCliente(java.awt.Frame parent, boolean modal, int id) {
+        super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.id=id;
+        this.padre = (JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         this.setTitle("Servix");
@@ -136,7 +140,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazClientes jdic = new JDialogInterfazClientes(this, true, id);
+        JDialogInterfazClientes jdic = new JDialogInterfazClientes(padre, true, id);
         jdic.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 

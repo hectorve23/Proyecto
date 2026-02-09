@@ -34,12 +34,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     ConexionBBDD nueva;
     Connection conexion;
     int id;
-    
-    public JDialogInterfazClientes() {
-        
-        initComponents();
-    }
-    public JDialogInterfazClientes(java.awt.Dialog parent, boolean modal, int id) {
+    JFrameServix padre;
+   
+    public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
@@ -51,6 +48,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jTableReservas.setModel(dtm);
         jTableMenu.setModel(dtm2);
         this.id = id;
+        this.padre = (JFrameServix) parent;
         cargaTablaReservas();
         cargaTablaMenu();
         formatoTabla();
@@ -350,22 +348,23 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         else{
             try {
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
-                        + "(estado_reserva, n_comensales, hora, fecha, id_cliente)"
-                        + " VALUES (?, ?, ?, ?, ?)");
+                        + "(estado_reserva, n_comensales, fecha_hora, id_cliente)"
+                        + " VALUES (?, ?, ?, ?)");
                 
-                long lfecha = mfecha.getTime();
-                Date fecha = new Date(lfecha);
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-                String fechaSQL = formatoFecha.format(fecha);
-                
-                SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-                String horaSQL = formatoHora.format(jSpinnerHora.getValue());
+                String fechaStr = formatoFecha.format(mfecha);
+
+                SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+                String horaStr = formatoHora.format(valorHora);
+
+                // Crear el datetime combinado
+                String fechaHoraCompleta = fechaStr + " " + horaStr;
+                Timestamp fechaHoraSQL = Timestamp.valueOf(fechaHoraCompleta);
                 
                 ps.setString(1, "pendiente");
                 ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
-                ps.setString(3, horaSQL);
-                ps.setString(4, fechaSQL);
-                ps.setInt(5, id);
+                ps.setTimestamp(3, fechaHoraSQL);
+                ps.setInt(4, id);
 
                 int filas = ps.executeUpdate();
                 if(filas==1){
@@ -433,26 +432,55 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     //Este metodo abre el JDialog para editar la reserva seleccionada, si no ha seleccionado ninguna no hace nada
     private void jButtonEditarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarReservaActionPerformed
         if(jTableReservas.getSelectedRowCount() == 1){
-            
+
             int fila = jTableReservas.getSelectedRow();
-
             int id_reserva = Integer.parseInt(jTableReservas.getValueAt(fila, 0).toString());
-            String fecha = jTableReservas.getValueAt(fila, 1).toString();
-            String hora = jTableReservas.getValueAt(fila, 2).toString();
-            int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 3).toString());
+            Object fechaHoraObj = jTableReservas.getValueAt(fila, 1);
+            Timestamp fechaHora;
 
-            JDialogEditarReserva jdic = new JDialogEditarReserva(id_reserva, fecha, hora, n_comensales);
+            // Convertir a Timestamp dependiendo del tipo de dato que venga
+            if (fechaHoraObj instanceof Timestamp) {
+                fechaHora = (Timestamp) fechaHoraObj;
+            } else if (fechaHoraObj instanceof java.util.Date) {
+                fechaHora = new Timestamp(((java.util.Date) fechaHoraObj).getTime());
+            } else {
+                // Si viene como String, parsearlo
+                try {
+                    String fechaStr = fechaHoraObj.toString();
+                    SimpleDateFormat sdf;
+
+                    // Detectar formato
+                    if (fechaStr.contains("/")) {
+                        sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    } else {
+                        sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    }
+
+                    java.util.Date fecha = sdf.parse(fechaStr);
+                    fechaHora = new Timestamp(fecha.getTime());
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, 
+                        "Error al procesar la fecha: " + e.getMessage(), 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 2).toString());
+
+            JDialogEditarReserva jdic = new JDialogEditarReserva(padre, true, id_reserva, fechaHora, n_comensales, id);
             jdic.setVisible(true);
-
+            this.setVisible(false);
             recargarTabla();
-        
-        }      
+        }            
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
     //Este metodo abre el JDialog para borrar la cuenta de cliente
     private void jButtonBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaClienteActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogBajaCliente jdbc = new JDialogBajaCliente(id);
+        JDialogBajaCliente jdbc = new JDialogBajaCliente(padre, true, id);
         jdbc.setVisible(true);
     }//GEN-LAST:event_jButtonBajaClienteActionPerformed
 
@@ -511,7 +539,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT id_reserva AS Numero, fecha AS Fecha, hora AS Hora, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
+                    "SELECT id_reserva AS Numero, fecha_hora AS Fecha, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
             );
             ps.setInt(1, id);
             nueva.selectSQL(ps, dtm);
@@ -534,12 +562,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public void formatoTabla(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
-        FormatoTablas.FormatoHora formatoHora = new FormatoTablas.FormatoHora();
         
         jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
         jTableReservas.getColumnModel().getColumn(1).setCellRenderer(formatoFecha);
-        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoHora);
-        jTableReservas.getColumnModel().getColumn(3).setCellRenderer(formatoInt);
+        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
+        
+        jTableReservas.getColumnModel().getColumn(0).setPreferredWidth(80);  // ID
+        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(150); // Fecha y Hora (más ancho)
+        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(100); // Comensales
     }
     
 }

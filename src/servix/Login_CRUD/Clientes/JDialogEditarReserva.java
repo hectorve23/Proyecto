@@ -23,35 +23,34 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
      * Creates new form JDialogEditarReserva
      */
     private int idReserva;
-    private String fecha;
-    private String hora;
+    private Timestamp fechaHora;
     private int nComensales;
     private Connection conexion;
+    private JFrameServix padre;
+    private int id;
     
-    public JDialogEditarReserva(int idReserva, String fecha, String hora, int nComensales) {
+    public JDialogEditarReserva(java.awt.Frame parent, boolean modal, int idReserva, Timestamp fecha, int nComensales, int id) {
+        super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.idReserva = idReserva;
-        this.fecha = fecha;
-        this.hora = hora;
+        this.fechaHora = fecha;
         this.nComensales = nComensales;
+        this.padre = (JFrameServix) parent;
+        this.id = id;
         
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
-        
         cargarDatosReserva();
-        
     }
+    
     private void cargarDatosReserva() {
         try {
-           
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            jDateChooserFecha.setDate(sdf.parse(this.fecha));
-
-            SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm:ss");
-            jSpinnerHora.setValue(sdfHora.parse(this.hora));
+            java.util.Date fecha = new java.util.Date(fechaHora.getTime());
+            jDateChooserFecha.setDate(fechaHora);
+            jSpinnerHora.setValue(fechaHora);
 
             jSpinnerComensales.setValue(this.nComensales);
 
@@ -163,18 +162,21 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
             SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
             String horaSQL = formatoHora.format(valorHora);
 
+            //Datetime combinado
+            String fechaHoraCompleta = fechaSQL + " " + horaSQL;
+            Timestamp fechaHoraSQL = Timestamp.valueOf(fechaHoraCompleta);
+            
             PreparedStatement ps = conexion.prepareStatement(
-                "UPDATE reserva SET fecha=?, hora=?, n_comensales=? WHERE id_reserva=?");
+                "UPDATE reserva SET fecha_hora=?, n_comensales=? WHERE id_reserva=?");
 
-            ps.setString(1, fechaSQL);
-            ps.setString(2, horaSQL);
-            ps.setInt(3, Integer.parseInt(valorComensales.toString()));
-            ps.setInt(4, idReserva);
+            ps.setTimestamp(1, fechaHoraSQL);
+            ps.setInt(2, Integer.parseInt(valorComensales.toString()));
+            ps.setInt(3, idReserva);
 
             if(ps.executeUpdate() == 1){
                 JOptionPane.showMessageDialog(rootPane, "Reserva actualizada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                //JDialogInterfazClientes jdic = new JDialogInterfazClientes();
-                //jdic.recargarTabla();
+                JDialogInterfazClientes jdic = new JDialogInterfazClientes(padre, true, id);
+                jdic.recargarTabla();
                 this.dispose();
             }
 

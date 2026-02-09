@@ -22,7 +22,6 @@ import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
 import servix.Login_CRUD.Empleado.EliminarEmpleados;import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
-import servix.Login_CRUD.Usuario.JDialogEditarUsuario;
 import servix.Login_CRUD.Usuario.Usuario;
 
 /**
@@ -163,15 +162,15 @@ public class JTableEmpleados extends javax.swing.JDialog {
             return;
         }
 
-        String id = dtm.getValueAt(fila, 0).toString();
+        int id = Integer.parseInt(dtm.getValueAt(fila, 0).toString());
 
-        JDialogEditarUsuario jdee= new JDialogEditarUsuario(id, padre, true);
-        jdee.setVisible(true);
+        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", id, padre, true, true);
+        jdau.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
-        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", padre, true);
+        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", 0, padre, true, false);
         jdau.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed

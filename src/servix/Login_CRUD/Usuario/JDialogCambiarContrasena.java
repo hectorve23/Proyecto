@@ -42,7 +42,10 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         jLabel1.setText("Hola " + user + " cambia tu contraseña por favor");
-       
+        jLabel2.setText("<html>Nueva contraseña <font color='red'>*</font></html>");
+        jLabel3.setText("<html>Repita la contraseña <font color='red'>*</font></html>");
+        enterEnFormulario();
+        agregarListenersValidacion();
     }
 
     /**
@@ -74,10 +77,12 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
 
-        jLabel2.setText("Introduzca la nueva contraseña");
+        jLabel2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabel2.setText("Nueva contraseña");
         jPanel2.add(jLabel2);
         jPanel2.add(jPasswordFieldCtn1);
 
+        jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Repita la contraseña");
         jPanel2.add(jLabel3);
         jPanel2.add(jPasswordFieldCtn2);
@@ -132,6 +137,11 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         String stringContrasena1 = new String(contrasena);
         String stringContrasena2 = new String(contrasena2);
         if (stringContrasena1.isEmpty() ||stringContrasena2.isEmpty()) {
+            if(stringContrasena1.isEmpty()) { resaltarPassword(jPasswordFieldCtn1);
+            }else{ resetearPassword(jPasswordFieldCtn1); }
+            
+            if(stringContrasena2.isEmpty()) { resaltarPassword(jPasswordFieldCtn2);
+            }else{ resetearPassword(jPasswordFieldCtn2);}
             JOptionPane.showConfirmDialog(rootPane,
                                         "Debes rellenar los dos campos", 
                                         "Error", 
@@ -139,20 +149,33 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
                                         JOptionPane.ERROR_MESSAGE);
         }else{
            if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
-             String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); 
-              try {
-                String sql = "UPDATE Usuario SET contrasenya_login = ?, haIniciadoSesion= true WHERE usuario_login = ?";
-                PreparedStatement ps = conexion.prepareStatement(sql);
-                ps.setString(1, contrasenaEncriptada);
-                ps.setString(2, user);
+               String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); 
+               try {
+                    String sql = "UPDATE Usuario SET contrasenya_login = ?, haIniciadoSesion= true WHERE usuario_login = ?";
+                    PreparedStatement ps = conexion.prepareStatement(sql);
+                    ps.setString(1, contrasenaEncriptada);
+                    ps.setString(2, user);
 
-                ps.executeUpdate();
-                this.setVisible(false);
-                dispose();
-            } catch (SQLException ex) {
-                 System.getLogger(JDialogCambiarContrasena.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
+                    ps.executeUpdate();
+                    ps.close();
+                    
+                    JOptionPane.showMessageDialog(rootPane,
+                                                "Contraseña cambiada", 
+                                                "Éxito", 
+                                                JOptionPane.INFORMATION_MESSAGE);
+                    
+                    this.setVisible(false);
+                    dispose();
+                } catch (SQLException ex) {
+                    System.getLogger(JDialogCambiarContrasena.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    JOptionPane.showMessageDialog(rootPane,
+                                                "Error al cambiar la contraseña", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                }
             }else{
+                resaltarPassword(jPasswordFieldCtn1);
+                resaltarPassword(jPasswordFieldCtn2);
                 JOptionPane.showConfirmDialog(rootPane,
                                                      "Las contraseñas no coinciden", 
                                                      "Error", 
@@ -177,6 +200,68 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             JFrameServix jfs = new JFrameServix();
             jfs.setVisible(true);
+        });
+    }
+    
+    private void resaltarPassword(javax.swing.JPasswordField campo) {
+        campo.setBackground(new java.awt.Color(255, 200, 200));
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2)); 
+        campo.requestFocus();
+    }
+    
+     private void resetearPassword(javax.swing.JPasswordField campo) {
+        campo.setBackground(java.awt.Color.WHITE);
+        campo.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.GRAY, 1));
+    }
+    
+    public void enterEnFormulario(){
+        //Ctn1 --> Ctn2
+        jPasswordFieldCtn1.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jPasswordFieldCtn2.requestFocus();
+                }
+            }
+        });
+        
+        //Ctn2 --> Ctn1 - Ctn2 --> Aceptar
+        jPasswordFieldCtn2.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    jButtonAceptar.requestFocus(); 
+                }
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
+                     jPasswordFieldCtn1.requestFocus();
+                }
+            }
+        });
+        
+        //Aceptar --> Ctn2
+        jButtonAceptar.addKeyListener(new java.awt.event.KeyAdapter(){
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt){
+                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
+                    jPasswordFieldCtn2.requestFocus();
+                }
+            }
+        });
+    }
+    
+    private void agregarListenersValidacion() {
+        jPasswordFieldCtn1.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                resetearPassword(jPasswordFieldCtn1);
+            }
+        });
+        
+        jPasswordFieldCtn2.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                resetearPassword(jPasswordFieldCtn2);
+            }
         });
     }
     

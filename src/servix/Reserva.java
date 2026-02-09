@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package servix;
-
-import java.util.Date;
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -16,27 +14,24 @@ public class Reserva {
     int id_reserva;
     String estado_reserva;
     int n_comensales;
-    Time hora;
-    Date fecha;
+    LocalDateTime fecha_hora;
     int id_cliente;
     int id_mesa;
 
-    public Reserva(int id_reserva, String estado_reserva, int n_comensales, Time hora, Date fecha, int id_cliente, Integer id_mesa) {
+    public Reserva(int id_reserva, String estado_reserva, int n_comensales, LocalDateTime fecha_hora, int id_cliente, Integer id_mesa) {
         this.id_reserva = id_reserva;
         this.estado_reserva = estado_reserva;
         this.n_comensales = n_comensales;
-        this.hora = hora;
-        this.fecha = fecha;
+        this.fecha_hora = fecha_hora;
         this.id_cliente = id_cliente;
         this.id_mesa = id_mesa;
     }
 
     //Sin id
-    public Reserva(String estado_reserva, int n_comensales, Time hora, Date fecha, int id_cliente, Integer id_mesa) {
+    public Reserva(String estado_reserva, int n_comensales, LocalDateTime fecha_hora, int id_cliente, Integer id_mesa) {
         this.estado_reserva = estado_reserva;
         this.n_comensales = n_comensales;
-        this.hora = hora;
-        this.fecha = fecha;
+        this.fecha_hora = fecha_hora;
         this.id_cliente = id_cliente;
         this.id_mesa = id_mesa;
     }
@@ -65,20 +60,12 @@ public class Reserva {
         this.n_comensales = n_comensales;
     }
 
-    public Time getHora() {
-        return hora;
+    public LocalDateTime getFecha() {
+        return fecha_hora;
     }
 
-    public void setHora(Time hora) {
-        this.hora = hora;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha_hora = fecha;
     }
 
     public int getId_cliente() {
@@ -102,7 +89,6 @@ public class Reserva {
             "ID Reserva",
             "Estado",
             "Comensales",
-            "Hora",
             "Fecha",
             "ID Cliente",
             "ID Mesa"
@@ -114,8 +100,7 @@ public class Reserva {
             id_reserva,
             estado_reserva,
             n_comensales,
-            hora,
-            fecha,
+            fecha_hora,
             id_cliente,
             id_mesa
         };

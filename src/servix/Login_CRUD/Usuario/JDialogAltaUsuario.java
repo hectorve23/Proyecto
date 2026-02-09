@@ -34,8 +34,11 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
     Connection conexion;
     String rol;
     JFrameServix padre;
+    boolean editar;
+    String sql;
+    int id;
     
-    public JDialogAltaUsuario(String rol, java.awt.Frame parent, boolean modal) {
+    public JDialogAltaUsuario(String rol, int id, java.awt.Frame parent, boolean modal, boolean editar) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
@@ -47,10 +50,17 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         conexion=nueva.getConnection();
         this.rol = rol;
         this.padre=(JFrameServix) parent;
+        this.editar = editar;
+        this.id= id;
         comprobarLongitudTelefono();
         comprobarLongitudes();
         enterEnFormulario();
         camposObligatorios();
+        if(editar){
+            jLabel1.setText("Editar usuario");
+            cargarDatosUsuario(id);
+            jTextFieldUser.setEditable(false);
+        }
     }
 
     /**
@@ -247,19 +257,35 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
 
                                  try {
                                      nueva.conectar();
-                                     String sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?)";
-                                     PreparedStatement ps= conexion.prepareStatement(sql);
-                                     ps.setString(1, jTextFieldNombre.getText());
-                                     ps.setString(2, jTextFieldApellido1.getText());
-                                     ps.setString(3, jTextFieldApellido2.getText());
-                                     ps.setString(4, jTextFieldTelefono.getText());
-                                     ps.setString(5, jTextFieldCorreo.getText());
-                                     ps.setString(6, jTextFieldUser.getText());
-                                     ps.setString(7, contrasenaEncriptada);
-                                     ps.setString(8, rol);
+                                     if(editar){
+                                        sql = "UPDATE Usuario SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, correo = ?, contrasenya_login = ? WHERE usuario_login = ?";
+                                        PreparedStatement ps = conexion.prepareStatement(sql);
+                                        ps.setString(1, jTextFieldNombre.getText());
+                                        ps.setString(2, jTextFieldApellido1.getText());
+                                        ps.setString(3, jTextFieldApellido2.getText());
+                                        ps.setString(4, jTextFieldTelefono.getText());
+                                        ps.setString(5, jTextFieldCorreo.getText());
+                                        ps.setString(6, contrasenaEncriptada);
+                                        ps.setInt(7, id);
 
-                                     ps.executeUpdate();
-                                     ps.close();
+                                        ps.executeUpdate();
+                                        ps.close();
+
+                                     }else{
+                                        sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?)";
+                                        PreparedStatement ps= conexion.prepareStatement(sql);
+                                        ps.setString(1, jTextFieldNombre.getText());
+                                        ps.setString(2, jTextFieldApellido1.getText());
+                                        ps.setString(3, jTextFieldApellido2.getText());
+                                        ps.setString(4, jTextFieldTelefono.getText());
+                                        ps.setString(5, jTextFieldCorreo.getText());
+                                        ps.setString(6, jTextFieldUser.getText());
+                                        ps.setString(7, contrasenaEncriptada);
+                                        ps.setString(8, rol);
+                                        ps.executeUpdate();
+                                        ps.close();
+                                     }
+                                     
                                      conexion.close();
                                  } catch (SQLException ex) {
                                      System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -291,7 +317,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
                    }
                 } 
- 
             }
         }else{
             resaltarCampo(jTextFieldUser);
@@ -612,6 +637,32 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         });
     }
 
+   public void cargarDatosUsuario(int id) {
+        try {
+            nueva.conectar();
+            String sql = "SELECT * FROM Usuario WHERE id = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                jTextFieldNombre.setText(rs.getString("nombre"));
+                jTextFieldApellido1.setText(rs.getString("apellido1"));
+                jTextFieldApellido2.setText(rs.getString("apellido2"));
+                jTextFieldTelefono.setText(rs.getString("telefono"));
+                jTextFieldCorreo.setText(rs.getString("correo"));
+                jTextFieldUser.setText(rs.getString("usuario_login"));
+                // No cargamos la contraseña por seguridad
+            }
+
+            rs.close();
+            ps.close();
+            conexion.close();
+        } catch (SQLException ex) {
+            
+        }
+    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlta;
     private javax.swing.JButton jButtonCancelar;

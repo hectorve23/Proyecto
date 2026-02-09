@@ -161,7 +161,7 @@ public class JFrameServix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
-        JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente", this, true);
+        JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente", 0, this, true, false);
         jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
 
@@ -170,7 +170,7 @@ public class JFrameServix extends javax.swing.JFrame {
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
             if(rol.toLowerCase().equals("cliente")){
-                JDialogInterfazClientes jdic  = new JDialogInterfazClientes();
+                JDialogInterfazClientes jdic  = new JDialogInterfazClientes(this, true, id);
                 jdic.setVisible(true);
                 this.setVisible(false);
                 

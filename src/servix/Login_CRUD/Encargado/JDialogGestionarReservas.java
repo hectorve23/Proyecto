@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -69,7 +70,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             lista.clear();
             nueva.conectar();
 
-            String sql = "SELECT * FROM Reserva ORDER BY hora";
+            String sql = "SELECT * FROM Reserva ORDER BY fecha_hora";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -82,8 +83,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                     rs.getInt("id_reserva"),
                     rs.getString("estado_reserva"),
                     rs.getInt("n_comensales"),
-                    rs.getTime("hora"),
-                    rs.getDate("fecha"),
+                    rs.getObject("fecha_hora", LocalDateTime.class),
                     rs.getInt("id_cliente"),
                     rs.getInt("id_mesa")
                 );
@@ -334,28 +334,24 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     public void aplicarFormato(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
-        FormatoTablas.FormatoHora formatoHora = new FormatoTablas.FormatoHora();
         
         jTablePendientes.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
         jTablePendientes.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
-        jTablePendientes.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
-        jTablePendientes.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTablePendientes.getColumnModel().getColumn(3).setCellRenderer(formatoFecha);
+        jTablePendientes.getColumnModel().getColumn(4).setCellRenderer(formatoInt);
         jTablePendientes.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
-        jTablePendientes.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
         
         jTableConfirmadas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
         jTableConfirmadas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
-        jTableConfirmadas.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
-        jTableConfirmadas.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTableConfirmadas.getColumnModel().getColumn(3).setCellRenderer(formatoFecha);
+        jTableConfirmadas.getColumnModel().getColumn(4).setCellRenderer(formatoInt);
         jTableConfirmadas.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
-        jTableConfirmadas.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
         
         jTableCanceladas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
         jTableCanceladas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
-        jTableCanceladas.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
-        jTableCanceladas.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
+        jTableCanceladas.getColumnModel().getColumn(3).setCellRenderer(formatoFecha);
+        jTableCanceladas.getColumnModel().getColumn(4).setCellRenderer(formatoInt);
         jTableCanceladas.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
-        jTableCanceladas.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
         
     }
     public static void main(String args[]) {

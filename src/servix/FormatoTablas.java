@@ -7,6 +7,8 @@ package servix;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -29,8 +31,8 @@ public class FormatoTablas {
     }
     
    public static class FormatoFecha extends DefaultTableCellRenderer {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-
+         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    
         public FormatoFecha(){
             setHorizontalAlignment(CENTER);
         }
@@ -38,24 +40,14 @@ public class FormatoTablas {
         public void setValue(Object value){
             if (value instanceof java.util.Date){
                 value = formatoFecha.format(value);
+            } else if (value instanceof LocalDateTime) {
+                // Convertir LocalDateTime a Date para formatearlo
+                LocalDateTime ldt = (LocalDateTime) value;
+                Date date = Date.from(ldt.atZone(java.time.ZoneId.systemDefault()).toInstant());
+                value = formatoFecha.format(date);
             }
             super.setValue(value);
         }
     }
-   
-   public static class FormatoHora extends DefaultTableCellRenderer {
-    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-    
-    public FormatoHora(){
-            setHorizontalAlignment(CENTER);
-    }
-    
-    public void setValue(Object value){
-        if (value instanceof java.sql.Time){
-            value = formatoHora.format(value);
-        }
-        super.setValue(value);
-    }
-}
            
 }

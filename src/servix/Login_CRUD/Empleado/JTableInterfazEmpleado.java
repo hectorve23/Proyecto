@@ -14,6 +14,8 @@ import servix.Reserva;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import servix.FormatoTablas;
@@ -119,18 +121,21 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonBuscarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonBuscarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,9 +158,12 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
     
     private void jButtonBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarFechaActionPerformed
         Date mfecha = jDateChooserFecha.getDate();
-        long fecha = mfecha.getTime();
-        fecha_sql = new java.sql.Date(fecha);
-        escribirReservas(fecha_sql);
+        if(mfecha != null) {
+            LocalDate fecha = mfecha.toInstant()
+                .atZone(java.time.ZoneId.systemDefault())
+                .toLocalDate();
+            escribirReservas(fecha);
+        }
     }//GEN-LAST:event_jButtonBuscarFechaActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -173,13 +181,13 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         }        
     }//GEN-LAST:event_jButtonSalirActionPerformed
     
-    public void escribirReservas(java.sql.Date fecha){
+    public void escribirReservas(LocalDate fecha){
         try {
             lista.clear();
             nueva.conectar();
-            String sql = "SELECT * FROM Reserva WHERE fecha = ? ORDER BY hora";
+            String sql = "SELECT * FROM Reserva WHERE DATE(fecha_hora) = ? ";
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setDate(1, fecha);
+            ps.setObject(1, fecha);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -187,8 +195,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
                     rs.getInt("id_reserva"),
                     rs.getString("estado_reserva"),
                     rs.getInt("n_comensales"),
-                    rs.getTime("hora"),
-                    rs.getDate("fecha"),
+                    rs.getObject("fecha_hora", LocalDateTime.class),
                     rs.getInt("id_cliente"),
                     rs.getInt("id_mesa")
                 );
@@ -203,21 +210,25 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
     }
     
     public void rellenarDiaHoy(){
-        fecha_sql = new java.sql.Date(System.currentTimeMillis());
-        escribirReservas(fecha_sql);
+        escribirReservas(LocalDate.now());
     }
     
      public void aplicarFormato(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
-        FormatoTablas.FormatoHora formatoHora = new FormatoTablas.FormatoHora();
         
-        jTableReservasDelDia.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
-        jTableReservasDelDia.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
-        jTableReservasDelDia.getColumnModel().getColumn(3).setCellRenderer(formatoHora);
-        jTableReservasDelDia.getColumnModel().getColumn(4).setCellRenderer(formatoFecha);
-        jTableReservasDelDia.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
-        jTableReservasDelDia.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
+        jTableReservasDelDia.getColumnModel().getColumn(0).setCellRenderer(formatoInt); //ID Reserva
+        jTableReservasDelDia.getColumnModel().getColumn(2).setCellRenderer(formatoInt); //Comensales
+        jTableReservasDelDia.getColumnModel().getColumn(3).setCellRenderer(formatoFecha); //Fecha_hora
+        jTableReservasDelDia.getColumnModel().getColumn(4).setCellRenderer(formatoInt); //ID Cliente
+        jTableReservasDelDia.getColumnModel().getColumn(5).setCellRenderer(formatoInt); //ID Mesa
+        
+        jTableReservasDelDia.getColumnModel().getColumn(0).setPreferredWidth(80);  // ID Reserva
+        jTableReservasDelDia.getColumnModel().getColumn(1).setPreferredWidth(120); // Estado
+        jTableReservasDelDia.getColumnModel().getColumn(2).setPreferredWidth(100); // Comensales
+        jTableReservasDelDia.getColumnModel().getColumn(3).setPreferredWidth(150); // Fecha_Hora
+        jTableReservasDelDia.getColumnModel().getColumn(4).setPreferredWidth(90);  // ID Cliente
+        jTableReservasDelDia.getColumnModel().getColumn(5).setPreferredWidth(80);  // ID Mesa
      }
      
     public static void main(String args[]) {
