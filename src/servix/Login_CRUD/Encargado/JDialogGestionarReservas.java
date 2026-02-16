@@ -11,16 +11,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
 import servix.Reserva;
 import servix.mesas.AsignarMesa;
+
 
 /**
  *
@@ -120,9 +127,11 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jPanelAceptadas = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableConfirmadas = new javax.swing.JTable();
+        jButtonInformeConfirmadas = new javax.swing.JButton();
         jPanelRechazadas = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableCanceladas = new javax.swing.JTable();
+        jButtonInformeCanceladas = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -188,21 +197,32 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         ));
         jScrollPane5.setViewportView(jTableConfirmadas);
 
+        jButtonInformeConfirmadas.setText("Informe");
+        jButtonInformeConfirmadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInformeConfirmadasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAceptadasLayout = new javax.swing.GroupLayout(jPanelAceptadas);
         jPanelAceptadas.setLayout(jPanelAceptadasLayout);
         jPanelAceptadasLayout.setHorizontalGroup(
             jPanelAceptadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAceptadasLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelAceptadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonInformeConfirmadas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanelAceptadasLayout.setVerticalGroup(
             jPanelAceptadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAceptadasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonInformeConfirmadas)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Reservas confirmadas", jPanelAceptadas);
@@ -220,20 +240,31 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTableCanceladas);
 
+        jButtonInformeCanceladas.setText("Informe");
+        jButtonInformeCanceladas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInformeCanceladasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelRechazadasLayout = new javax.swing.GroupLayout(jPanelRechazadas);
         jPanelRechazadas.setLayout(jPanelRechazadasLayout);
         jPanelRechazadasLayout.setHorizontalGroup(
             jPanelRechazadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRechazadasLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelRechazadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonInformeCanceladas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanelRechazadasLayout.setVerticalGroup(
             jPanelRechazadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRechazadasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonInformeCanceladas)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -331,6 +362,24 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
+    private void jButtonInformeCanceladasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeCanceladasActionPerformed
+         try{
+            String fileJasper = "informes/ReservasCanceladas.jasper";
+            Map parameters = new HashMap();
+            //parameters.put("fechaActual", new java.util.Date());
+            JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            JasperViewer jviewer = new JasperViewer(print, false);
+            jviewer.setVisible(true);             
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Se produjo un error al leer el archivo .jasper");
+        } 
+    }//GEN-LAST:event_jButtonInformeCanceladasActionPerformed
+
+    private void jButtonInformeConfirmadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeConfirmadasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInformeConfirmadasActionPerformed
+
     public void aplicarFormato(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
@@ -373,6 +422,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonInformeCanceladas;
+    private javax.swing.JButton jButtonInformeConfirmadas;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
