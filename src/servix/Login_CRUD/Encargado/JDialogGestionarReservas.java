@@ -366,7 +366,6 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
          try{
             String fileJasper = "informes/ReservasCanceladas.jasper";
             Map parameters = new HashMap();
-            //parameters.put("fechaActual", new java.util.Date());
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             JasperViewer jviewer = new JasperViewer(print, false);
             jviewer.setVisible(true);             

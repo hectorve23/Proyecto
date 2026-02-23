@@ -170,9 +170,9 @@ public class JFrameServix extends javax.swing.JFrame {
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
             if(rol.toLowerCase().equals("cliente")){
+                this.setVisible(false);
                 JDialogInterfazClientes jdic  = new JDialogInterfazClientes(this, true, id);
                 jdic.setVisible(true);
-                this.setVisible(false);
                 
             }else{
                 if(comprobarInicioSesion(jTextFielduser.getText())==false){
@@ -180,13 +180,15 @@ public class JFrameServix extends javax.swing.JFrame {
                     jdcc.setVisible(true);
                 }else{
                     if(rol.toLowerCase().equals("empleado")){
+                        this.setVisible(false);
                         JTableInterfazEmpleado jdie = new JTableInterfazEmpleado("empleado", this, true);
                         jdie.setVisible(true);
+                        this.dispose();
                     }else{
                         if(rol.toLowerCase().equals("encargado")){
+                            this.setVisible(false);
                             JDialogInterfazEncargado jdie  = new JDialogInterfazEncargado(this, true);
                             jdie.setVisible(true);
-                            this.setVisible(false);
                         }
                     }
                 } 
