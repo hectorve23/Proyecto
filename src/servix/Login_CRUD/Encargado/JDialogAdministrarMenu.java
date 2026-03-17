@@ -59,6 +59,12 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanelPadre = new javax.swing.JPanel();
+        jPanelVerPlatos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMenu = new javax.swing.JTable();
+        jPanelModificar = new javax.swing.JPanel();
+        jButtonEditarPlato = new javax.swing.JButton();
+        jButtonEliminarPlato = new javax.swing.JButton();
         jPanelNuevoPlato = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombrePlato = new javax.swing.JTextField();
@@ -66,52 +72,16 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jSpinnerPrecio = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxCategoria = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButtonValidar = new javax.swing.JButton();
-        jPanelVerPlatos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableMenu = new javax.swing.JTable();
-        jPanelModificar = new javax.swing.JPanel();
-        jButtonEditarPlato = new javax.swing.JButton();
-        jButtonEliminarPlato = new javax.swing.JButton();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonNuevoPlato = new javax.swing.JButton();
         jButtonVerPlatos = new javax.swing.JButton();
+        jButtonVolver = new javax.swing.JButton();
+        jButtonValidar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanelPadre.setLayout(new java.awt.CardLayout());
-
-        jPanelNuevoPlato.setLayout(new java.awt.GridLayout(5, 0));
-
-        jLabel1.setText("Nombre");
-        jPanelNuevoPlato.add(jLabel1);
-        jPanelNuevoPlato.add(jTextFieldNombrePlato);
-
-        jLabel2.setText("Precio");
-        jPanelNuevoPlato.add(jLabel2);
-        jPanelNuevoPlato.add(jSpinnerPrecio);
-
-        jLabel3.setText("Categoria");
-        jPanelNuevoPlato.add(jLabel3);
-
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
-        jPanelNuevoPlato.add(jComboBoxCategoria);
-        jPanelNuevoPlato.add(jLabel4);
-        jPanelNuevoPlato.add(jLabel5);
-        jPanelNuevoPlato.add(jLabel6);
-
-        jButtonValidar.setText("Validar");
-        jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonValidarActionPerformed(evt);
-            }
-        });
-        jPanelNuevoPlato.add(jButtonValidar);
-
-        jPanelPadre.add(jPanelNuevoPlato, "card2");
 
         jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,24 +117,42 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jPanelVerPlatosLayout.setHorizontalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-            .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanelVerPlatosLayout.setVerticalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(36, 36, 36))
         );
 
         jPanelPadre.add(jPanelVerPlatos, "card3");
+
+        jPanelNuevoPlato.setLayout(new java.awt.GridLayout(3, 0));
+
+        jLabel1.setText("Nombre");
+        jPanelNuevoPlato.add(jLabel1);
+        jPanelNuevoPlato.add(jTextFieldNombrePlato);
+
+        jLabel2.setText("Precio");
+        jPanelNuevoPlato.add(jLabel2);
+        jPanelNuevoPlato.add(jSpinnerPrecio);
+
+        jLabel3.setText("Categoria");
+        jPanelNuevoPlato.add(jLabel3);
+
+        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
+        jPanelNuevoPlato.add(jComboBoxCategoria);
+
+        jPanelPadre.add(jPanelNuevoPlato, "card2");
 
         jButtonNuevoPlato.setText("Nuevo plato");
         jButtonNuevoPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -182,12 +170,37 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         });
         jPanelOpciones.add(jButtonVerPlatos);
 
+        jButtonVolver.setText("Volver");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
+
+        jButtonValidar.setText("Validar");
+        jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValidarActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Héctor Valdés");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPadre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +208,14 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 .addGap(24, 24, 24)
                 .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelPadre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,51 +234,6 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jPanelPadre.repaint();
         jPanelPadre.revalidate();
     }//GEN-LAST:event_actualizarPanel
-
-    private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
-        // TODO add your handling code here:
-        String categoria = (String) jComboBoxCategoria.getSelectedItem();
-        String nombrePlato = jTextFieldNombrePlato.getText();
-        int precio = (int) jSpinnerPrecio.getValue();
-
-        if(categoria.isEmpty() || nombrePlato.isEmpty() || precio<=0){
-            JOptionPane.showConfirmDialog(rootPane,
-                                            "Rellena todos los campos", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            try {
-                PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
-                        + "(nombre, precio, categoria)"
-                        + " VALUES (?, ?, ?)");
-                
-                ps.setString(1, nombrePlato);
-                ps.setDouble(2, precio);
-                ps.setString(3, categoria);
-
-                int filas = ps.executeUpdate();
-                if(filas==1){
-                   JOptionPane.showConfirmDialog(rootPane,
-                                                "Plato registrado", 
-                                                "", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.INFORMATION_MESSAGE);
-                   recargarTabla();
-                }
-                else{
-                    JOptionPane.showConfirmDialog(rootPane,
-                                                "Ha habido un error", 
-                                                "Error", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-            }
-        }
-    }//GEN-LAST:event_jButtonValidarActionPerformed
 
     private void jButtonEditarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarPlatoActionPerformed
         // TODO add your handling code here:
@@ -313,6 +288,59 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_jButtonEliminarPlatoActionPerformed
+
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+        jdie.setVisible(true); 
+    }//GEN-LAST:event_jButtonVolverActionPerformed
+
+    private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
+        // TODO add your handling code here:
+        String categoria = (String) jComboBoxCategoria.getSelectedItem();
+        String nombrePlato = jTextFieldNombrePlato.getText();
+        int precio = (int) jSpinnerPrecio.getValue();
+
+        if(categoria.isEmpty() || nombrePlato.isEmpty() || precio<=0){
+            JOptionPane.showConfirmDialog(rootPane,
+                                            "Rellena todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            try {
+                PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
+                        + "(nombre, precio, categoria)"
+                        + " VALUES (?, ?, ?)");
+                
+                ps.setString(1, nombrePlato);
+                ps.setDouble(2, precio);
+                ps.setString(3, categoria);
+
+                int filas = ps.executeUpdate();
+                if(filas==1){
+                   JOptionPane.showConfirmDialog(rootPane,
+                                                "Plato registrado", 
+                                                "", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.INFORMATION_MESSAGE);
+                   recargarTabla();
+                }
+                else{
+                    JOptionPane.showConfirmDialog(rootPane,
+                                                "Ha habido un error", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonValidarActionPerformed
     
     public void recargarTabla() {
         dtm.setRowCount(0);
@@ -327,13 +355,12 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButtonNuevoPlato;
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVerPlatos;
+    private javax.swing.JButton jButtonVolver;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelModificar;
     private javax.swing.JPanel jPanelNuevoPlato;
     private javax.swing.JPanel jPanelOpciones;

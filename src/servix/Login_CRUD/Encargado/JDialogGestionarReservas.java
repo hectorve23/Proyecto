@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDateTime;
-import static java.time.LocalDateTime.now;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
