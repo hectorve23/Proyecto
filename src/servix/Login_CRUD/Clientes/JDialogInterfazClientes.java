@@ -426,10 +426,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             int id_reserva = Integer.parseInt(id_reserva_objeto.toString());
              try {
                 conexion.setAutoCommit(false);
-                String sql = "DELETE FROM reserva WHERE id_reserva=? AND id_cliente=?";
+                String sql = "UPDATE reserva SET estado_reserva=? WHERE id_reserva=? AND id_cliente=?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
-                ps.setInt(1, id_reserva);
-                ps.setInt(2, id);
+                ps.setString(1, "cancelada");
+                ps.setInt(2, id_reserva);
+                ps.setInt(3, id);
                 int opcion = JOptionPane.showConfirmDialog(
                                                 null,
                                                 "¿Estas seguro de anular la reserva seleccionada?",

@@ -367,8 +367,12 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             String fileJasper = "informes/ReservasCanceladas.jasper";
             Map parameters = new HashMap();
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
-            JasperViewer jviewer = new JasperViewer(print, false);
-            jviewer.setVisible(true);             
+            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que NO sea modal
+            visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
+            visor.setSize(900, 700);
+            visor.setLocationRelativeTo(null);
+            visor.setTitle("Visor de Informe");
+            visor.setVisible(true);          
         }catch(Exception ex){
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null,"Se produjo un error al leer el archivo .jasper");

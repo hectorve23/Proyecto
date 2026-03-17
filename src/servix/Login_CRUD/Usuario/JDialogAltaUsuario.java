@@ -272,7 +272,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                                         ps.close();
 
                                      }else{
-                                        sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?)";
+                                        sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) VALUES (?,?,?,?,?,?,?,?, CURDATE())";
                                         PreparedStatement ps= conexion.prepareStatement(sql);
                                         ps.setString(1, jTextFieldNombre.getText());
                                         ps.setString(2, jTextFieldApellido1.getText());

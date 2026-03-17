@@ -5,8 +5,16 @@
 package servix.Login_CRUD.Encargado;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import servix.ConexionBBDD;
 import servix.JFrameServix;
 import servix.Login_CRUD.Empleado.JTableInterfazEmpleado;
 import servix.mesas.JTableAdministrarMesas;
@@ -22,6 +30,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
      * Creates new form JDialogInterfazEncargado
      */
     JFrameServix padre;
+    ConexionBBDD nueva;
+    Connection conexion;
     public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -29,6 +39,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.padre = (JFrameServix) parent;
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
     }
 
     /**
@@ -52,6 +64,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jButtonCerrarSesion = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jButtonInformeClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,6 +130,13 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jLabel9.setText("Alba Pallas");
 
+        jButtonInformeClientes.setText("Informe de clientes");
+        jButtonInformeClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInformeClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,8 +149,11 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jButtonInformeClientes)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -148,7 +171,9 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonInformeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -198,6 +223,24 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         JTableAdministrarMesas jtam = new JTableAdministrarMesas(padre, true);
         jtam.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
+
+    private void jButtonInformeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeClientesActionPerformed
+        // TODO add your handling code here:
+        try{
+            String fileJasper = "informes/Clientes.jasper";
+            Map parameters = new HashMap();
+            JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que NO sea modal
+            visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
+            visor.setSize(900, 700);
+            visor.setLocationRelativeTo(null);
+            visor.setTitle("Visor de Informe");
+            visor.setVisible(true);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Se produjo un error al leer el archivo .jasper");
+        } 
+    }//GEN-LAST:event_jButtonInformeClientesActionPerformed
     
    public static void main(String args[]) {
         /* Set the FlatLaf look and feel */
@@ -222,6 +265,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAdministrarMesas;
     private javax.swing.JButton jButtonAdministrarReservas;
     private javax.swing.JButton jButtonCerrarSesion;
+    private javax.swing.JButton jButtonInformeClientes;
     private javax.swing.JButton jButtonVerReservas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
