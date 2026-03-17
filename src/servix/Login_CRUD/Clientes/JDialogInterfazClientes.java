@@ -496,10 +496,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             }
 
             int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 2).toString());
-
+            
+            this.dispose();
             JDialogEditarReserva jdic = new JDialogEditarReserva(padre, true, id_reserva, fechaHora, n_comensales, id);
             jdic.setVisible(true);
-            this.setVisible(false);
             recargarTabla();
         }            
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
@@ -576,7 +576,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT fecha_hora AS Fecha, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
+                    "SELECT id_reserva as Nº, fecha_hora AS Fecha, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
             );
             ps.setInt(1, id);
             nueva.selectSQL(ps, dtm);
@@ -599,12 +599,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public void formatoTabla(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
-
-        jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoFecha);
-        jTableReservas.getColumnModel().getColumn(1).setCellRenderer(formatoInt);
+        
+        jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
+        jTableReservas.getColumnModel().getColumn(1).setCellRenderer(formatoFecha);
+        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
         
         jTableReservas.getColumnModel().getColumn(0).setPreferredWidth(150); // Fecha y Hora (más ancho)
-        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(100); // Comensales
+        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(100);// Comensales
     }
     
 }

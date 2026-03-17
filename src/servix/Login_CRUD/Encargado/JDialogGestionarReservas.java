@@ -331,11 +331,12 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
        
         int idReserva = (int) jTablePendientes.getValueAt(fila, 0);
         int n_comensales = (int) jTablePendientes.getValueAt(fila, 2);
-        java.sql.Date fecha = (java.sql.Date) jTablePendientes.getValueAt(fila, 4);
-        Time hora = (Time) jTablePendientes.getValueAt(fila, 3);
+        java.time.LocalDateTime ldt = (java.time.LocalDateTime) jTablePendientes.getValueAt(fila, 3);
+//      java.sql.Date fecha = (java.sql.Date) jTablePendientes.getValueAt(fila, 4);
+//      Time hora = (Time) jTablePendientes.getValueAt(fila, 3);
         
         AsignarMesa am = new AsignarMesa();
-        if(am.buscarMesa(idReserva, n_comensales, fecha, hora)){
+        if(am.buscarMesa(idReserva, n_comensales, ldt)){
             try {
                 String sql = "UPDATE Reserva SET estado_reserva = 'confirmada' WHERE id_reserva = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);

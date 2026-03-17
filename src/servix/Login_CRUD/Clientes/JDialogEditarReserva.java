@@ -76,16 +76,15 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         jSpinnerHora = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         jSpinnerComensales = new javax.swing.JSpinner();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jButtonValidar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonValidar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(5, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 2));
 
         jLabel2.setText("Fecha");
         jPanel1.add(jLabel2);
@@ -101,9 +100,18 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         jLabel3.setText("Comensales");
         jPanel1.add(jLabel3);
         jPanel1.add(jSpinnerComensales);
-        jPanel1.add(jLabel5);
-        jPanel1.add(jLabel6);
-        jPanel1.add(jLabel7);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("Editar reserva");
+        jPanel2.add(jLabel1);
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonCancelar);
 
         jButtonValidar.setText("Validar");
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,11 +119,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
                 jButtonValidarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonValidar);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Editar reserva");
-        jPanel2.add(jLabel1);
+        jPanel3.add(jButtonValidar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +128,9 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(154, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
@@ -133,14 +139,17 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
+        // TODO add your handling code here:
         java.util.Date mfecha = jDateChooserFecha.getDate();
         Object valorHora = jSpinnerHora.getValue();
         Object valorComensales = jSpinnerComensales.getValue();
@@ -154,6 +163,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
                                             "La fecha no puede ser anterior a hoy", 
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
+            return;
 }
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -175,19 +185,26 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
 
             if(ps.executeUpdate() == 1){
                 JOptionPane.showMessageDialog(rootPane, "Reserva actualizada", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
                 JDialogInterfazClientes jdic = new JDialogInterfazClientes(padre, true, id);
                 jdic.recargarTabla();
-                this.dispose();
+                jdic.setVisible(true);
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
-        
-        
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        JDialogInterfazClientes jdic = new JDialogInterfazClientes(padre, true, id);
+        jdic.setVisible(true);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -210,17 +227,16 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonValidar;
     private com.toedter.calendar.JDateChooser jDateChooserFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSpinner jSpinnerComensales;
     private javax.swing.JSpinner jSpinnerHora;
     // End of variables declaration//GEN-END:variables

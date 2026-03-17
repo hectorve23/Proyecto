@@ -24,10 +24,10 @@ public class AsignarMesa {
     ConexionBBDD nueva = new ConexionBBDD();
     Connection conexion=nueva.getConnection();
     
-    public boolean buscarMesa(int idReserva, int n_personas, java.sql.Date fecha, Time hora){
+    public boolean buscarMesa(int idReserva, int n_personas, java.time.LocalDateTime ldt){
         nueva.conectar();
         
-        int id_mesa = buscarMesaDisponible(n_personas, fecha, hora);
+        int id_mesa = buscarMesaDisponible(n_personas, ldt);
         if(id_mesa != -1){
             try {
                 String sql = "UPDATE Reserva SET id_mesa = ?, estado_reserva = ? WHERE id_reserva = ?";
@@ -47,8 +47,8 @@ public class AsignarMesa {
         }
     }
     
-    private String horario(Time hora){
-       LocalTime horaLocal = hora.toLocalTime();
+    private String horario(java.time.LocalDateTime ldt){
+       LocalTime horaLocal = ldt.toLocalTime();
        
        if (!horaLocal.isBefore(inicio_comida) && horaLocal.isBefore(fin_comida)) {
             return "comida";
@@ -59,7 +59,7 @@ public class AsignarMesa {
         }
     }
     
-    private int buscarMesaDisponible(int numPersonas, java.sql.Date fecha, Time hora){
+    private int buscarMesaDisponible(int numPersonas, java.time.LocalDateTime ldt){
         try {
             String sql ="SELECT m.id_mesa " +
                 "FROM Mesa m " +
@@ -67,8 +67,7 @@ public class AsignarMesa {
                 "AND NOT EXISTS ( " +
                 "    SELECT 1 FROM Reserva r " +
                 "    WHERE r.id_mesa = m.id_mesa " +
-                "      AND r.fecha = ? " +
-                "      AND ABS(TIMESTAMPDIFF(MINUTE, r.hora, ?)) < 120 " +   // margen 2 horas
+                "      AND ABS(TIMESTAMPDIFF(MINUTE, r.fecha_hora, ?)) < 120 " + // <-- r.fecha es tu nuevo campo DATETIME
                 "      AND r.estado_reserva IN ('confirmada', 'ocupada')" +
                 ") " +
                 "ORDER BY m.capacidad ASC " +
@@ -76,8 +75,7 @@ public class AsignarMesa {
 
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, numPersonas);
-            ps.setDate(2, fecha);
-            ps.setTime(3, hora);
+            ps.setTimestamp(2, java.sql.Timestamp.valueOf(ldt));
             
             ResultSet rs = ps.executeQuery();
         
