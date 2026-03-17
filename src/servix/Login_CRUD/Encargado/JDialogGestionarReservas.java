@@ -373,7 +373,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             String fileJasper = "informes/ReservasCanceladas.jasper";
             Map parameters = new HashMap();
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
-            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que NO sea modal
+            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
             visor.setSize(900, 700);
             visor.setLocationRelativeTo(null);
@@ -391,7 +391,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             String fileJasper = "informes/ReservasConfirmadas.jasper";
             Map parameters = new HashMap();
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
-            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que NO sea modal
+            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
             visor.setSize(900, 700);
             visor.setLocationRelativeTo(null);
