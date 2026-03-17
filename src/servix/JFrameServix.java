@@ -90,6 +90,8 @@ public class JFrameServix extends javax.swing.JFrame {
         jPanel3.add(jLabel4);
         jPanel3.add(jPasswordFieldContransena);
 
+        jButtonCrearCuenta.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonCrearCuenta.setForeground(new java.awt.Color(219, 219, 255));
         jButtonCrearCuenta.setText("Crear cuenta");
         jButtonCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +100,8 @@ public class JFrameServix extends javax.swing.JFrame {
         });
         jPanel3.add(jButtonCrearCuenta);
 
+        jButtonIniciarSesion.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonIniciarSesion.setForeground(new java.awt.Color(219, 219, 255));
         jButtonIniciarSesion.setText("Iniciar sesion");
         jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

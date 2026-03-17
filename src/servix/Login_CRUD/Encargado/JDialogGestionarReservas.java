@@ -140,6 +140,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        jButtonConfirmar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonConfirmar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -125,6 +125,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCrearCuenta">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="94" green="76" red="13" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="db" red="db" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Crear cuenta"/>
               </Properties>
               <Events>
@@ -133,6 +139,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonIniciarSesion">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="94" green="76" red="13" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="db" red="db" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Iniciar sesion"/>
               </Properties>
               <Events>

@@ -44,6 +44,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         this.dtm = new DefaultTableModel();
         this.padre = (JFrameServix) parent;
         jTableMenu.setModel(dtm);
+        jButtonVolver.setVisible(false);
+        jButtonValidar.setVisible(false);
         cargaTablaMenu();
     }
     
@@ -60,11 +62,11 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
         jPanelPadre = new javax.swing.JPanel();
         jPanelVerPlatos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableMenu = new javax.swing.JTable();
         jPanelModificar = new javax.swing.JPanel();
         jButtonEditarPlato = new javax.swing.JButton();
         jButtonEliminarPlato = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMenu = new javax.swing.JTable();
         jPanelNuevoPlato = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombrePlato = new javax.swing.JTextField();
@@ -83,19 +85,6 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
         jPanelPadre.setLayout(new java.awt.CardLayout());
 
-        jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableMenu);
-
         jButtonEditarPlato.setText("Editar");
         jButtonEditarPlato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,26 +101,39 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         });
         jPanelModificar.add(jButtonEliminarPlato);
 
+        jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableMenu);
+
         javax.swing.GroupLayout jPanelVerPlatosLayout = new javax.swing.GroupLayout(jPanelVerPlatos);
         jPanelVerPlatos.setLayout(jPanelVerPlatosLayout);
         jPanelVerPlatosLayout.setHorizontalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(jPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(150, 150, 150))
         );
         jPanelVerPlatosLayout.setVerticalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
+                .addContainerGap())
         );
 
         jPanelPadre.add(jPanelVerPlatos, "card3");
@@ -177,6 +179,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             }
         });
 
+        jButtonValidar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonValidar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonValidar.setText("Validar");
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,8 +231,16 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jPanelPadre.removeAll();
         if (jbutton == jButtonVerPlatos) {
             jPanelPadre.add(jPanelVerPlatos);
+            jButtonEditarPlato.setVisible(true);
+            jButtonEliminarPlato.setVisible(true);
+            jButtonVolver.setVisible(false);
+            jButtonValidar.setVisible(false);
         } else if (jbutton == jButtonNuevoPlato) {
             jPanelPadre.add(jPanelNuevoPlato);
+            jButtonVolver.setVisible(true);
+            jButtonValidar.setVisible(true);
+            jButtonEditarPlato.setVisible(false);
+            jButtonEliminarPlato.setVisible(false);
         }
         
         jPanelPadre.repaint();
@@ -243,7 +255,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
            
             String nombre = jTableMenu.getValueAt(fila, 0).toString();
-
+            
+            this.dispose();
             JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, padre, true);
             jdep.setVisible(true);
 

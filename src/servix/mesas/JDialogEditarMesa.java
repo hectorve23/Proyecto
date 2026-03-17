@@ -88,6 +88,8 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
         jPanel2.add(jLabel3);
         jPanel2.add(jTextFieldCapacidad);
 
+        jButtonAceptar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonAceptar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonAceptar.setText("Aceptar");
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

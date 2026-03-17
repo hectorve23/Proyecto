@@ -130,6 +130,8 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jLabel9.setText("Alba Pallas");
 
+        jButtonInformeClientes.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonInformeClientes.setForeground(new java.awt.Color(219, 219, 255));
         jButtonInformeClientes.setText("Informe de clientes");
         jButtonInformeClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

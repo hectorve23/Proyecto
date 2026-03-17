@@ -106,6 +106,8 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonVolver);
 
+        jButtonEliminar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonEliminar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
