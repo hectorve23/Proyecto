@@ -198,6 +198,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         ));
         jScrollPane5.setViewportView(jTableConfirmadas);
 
+        jButtonInformeConfirmadas.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonInformeConfirmadas.setForeground(new java.awt.Color(219, 219, 255));
         jButtonInformeConfirmadas.setText("Informe");
         jButtonInformeConfirmadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,6 +243,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTableCanceladas);
 
+        jButtonInformeCanceladas.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonInformeCanceladas.setForeground(new java.awt.Color(219, 219, 255));
         jButtonInformeCanceladas.setText("Informe");
         jButtonInformeCanceladas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,6 +387,20 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
 
     private void jButtonInformeConfirmadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeConfirmadasActionPerformed
         // TODO add your handling code here:
+        try{
+            String fileJasper = "informes/ReservasConfirmadas.jasper";
+            Map parameters = new HashMap();
+            JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que NO sea modal
+            visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
+            visor.setSize(900, 700);
+            visor.setLocationRelativeTo(null);
+            visor.setTitle("Visor de Informe");
+            visor.setVisible(true);          
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Se produjo un error al leer el archivo .jasper");
+        } 
     }//GEN-LAST:event_jButtonInformeConfirmadasActionPerformed
 
     public void aplicarFormato(){
