@@ -61,6 +61,10 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             cargarDatosUsuario(id);
             jTextFieldUser.setEditable(false);
         }
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_alta_usuario", JFrameServix.hs);
+        }
     }
 
     /**

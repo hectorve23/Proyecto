@@ -5,10 +5,16 @@
 package servix;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -35,9 +41,13 @@ public class JFrameServix extends javax.swing.JFrame {
     int id;
     String rol;
     
+    public static HelpBroker hb;
+    public static HelpSet hs;
+    
     public JFrameServix(){
         try {
             initComponents();
+            cargaAyuda();
             UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
             ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
             this.setIconImage(icon.getImage());
@@ -70,6 +80,7 @@ public class JFrameServix extends javax.swing.JFrame {
         jButtonIniciarSesion = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +131,8 @@ public class JFrameServix extends javax.swing.JFrame {
 
         jLabel1.setText("Héctor Valdes");
 
+        jLabel6.setText("Presiona F1 en cualquier momento para obtener ayuda");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -129,20 +142,24 @@ public class JFrameServix extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6))
                 .addContainerGap())
         );
 
@@ -167,7 +184,16 @@ public class JFrameServix extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void cargaAyuda() {
+        try {   
+            URL hsURL = getClass().getResource("/servix/help/help_set.hs");
+            hs = new HelpSet(getClass().getClassLoader(), hsURL);
+            hb = hs.createHelpBroker();
+            hb.enableHelpKey(this.getContentPane(), "main", hs);
+        } catch (HelpSetException ex) {
+            System.err.println("Error HelpSetException");
+        }
+    }
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
         JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente", 0, this, true, false);
         jdac.setVisible(true);
@@ -295,6 +321,7 @@ public class JFrameServix extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

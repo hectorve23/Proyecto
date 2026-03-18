@@ -52,6 +52,10 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         jTableMesas.setModel(dtm);
         dtm.setColumnIdentifiers(Mesa.getColumnas());
         cargarMesas();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_mesas", JFrameServix.hs);
+        }
     }
 
     /**

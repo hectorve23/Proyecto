@@ -57,6 +57,10 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         rellenarDiaHoy();
         jLabel1.setText("Bienvenido/a");
         aplicarFormato();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
+        }
     }
 
     /**

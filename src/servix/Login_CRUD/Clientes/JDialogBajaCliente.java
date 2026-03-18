@@ -40,6 +40,10 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         this.setTitle("Servix");
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_baja_cliente", JFrameServix.hs);
+        }
     }
 
     /**
@@ -171,7 +175,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         }
 
         try {
-            String sql = "SELECT usuario_login, contrasenya_login FROM Cliente WHERE id_cliente = ?";
+            String sql = "SELECT usuario_login, contrasenya_login FROM Usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -189,7 +193,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
                             JOptionPane.WARNING_MESSAGE);
 
                         if (opcion == JOptionPane.YES_OPTION) {
-                            String sqlBaja = "DELETE FROM Cliente WHERE id_cliente = ?";
+                            String sqlBaja = "DELETE FROM Usuario WHERE id = ?";
                             PreparedStatement psBaja = conexion.prepareStatement(sqlBaja);
                             psBaja.setInt(1, id);
 
@@ -201,6 +205,8 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
                                         "Info", JOptionPane.INFORMATION_MESSAGE);
                                 this.setVisible(false);
                                 this.dispose();
+                                JFrameServix jfs = new JFrameServix();
+                                jfs.setVisible(true);
                             } else {
                                 JOptionPane.showMessageDialog(this,
                                         "No se pudo eliminar la cuenta",

@@ -69,6 +69,10 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jTableCanceladas.setModel(dtmCanceladas);
         cargarDatos();
         aplicarFormato();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gestion_reservas", JFrameServix.hs);
+        }
     }
 
     public void cargarDatos(){

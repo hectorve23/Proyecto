@@ -172,6 +172,10 @@ public class JTableEmpleados extends javax.swing.JDialog {
         JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", id, padre, true, true);
         jdau.setVisible(true);
         recargarTabla();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_tabla_empleados", JFrameServix.hs);
+        }
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed

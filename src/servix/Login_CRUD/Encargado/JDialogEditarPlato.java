@@ -40,6 +40,10 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
         this.padre = (JFrameServix) parent;
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_plato", JFrameServix.hs);
+        }
     }
 
     /**

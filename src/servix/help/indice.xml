@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index version="1.0">
+    <indexitem text="Alta de usuarios" target="ayuda_alta_usuario"/>
+    <indexitem text="Baja de clientes" target="ayuda_baja_cliente"/>
+    <indexitem text="Cambiar contraseña" target="ayuda_password"/>
+    <indexitem text="Clientes - Gestión" target="ayuda_clientes"/>
+    <indexitem text="Empleados - Listado" target="ayuda_tabla_empleados"/>
+    <indexitem text="Encargado - Panel" target="ayuda_encargado"/>
+    <indexitem text="Menú - Administrar" target="ayuda_admin_menu"/>
+    <indexitem text="Mesas - Añadir" target="ayuda_anadir_mesa"/>
+    <indexitem text="Mesas - Editar" target="ayuda_editar_mesa"/>
+    <indexitem text="Mesas - Gestión" target="ayuda_mesas"/>
+    <indexitem text="Platos - Edición" target="ayuda_editar_plato"/>
+    <indexitem text="Principal - Ventana" target="principal"/>
+    <indexitem text="Reservas - Editar" target="ayuda_editar_reserva"/>
+    <indexitem text="Reservas - Gestión" target="ayuda_gestion_reservas"/>
+</index>
+
+

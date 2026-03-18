@@ -37,6 +37,9 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_anadir_mesa", JFrameServix.hs);
+        }
     }
 
     /**

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc version="1.0">
+   <tocitem text="Manual de Usuario Servix" target="main">
+      
+      <tocitem text="Gestión de Clientes" target="ayuda_clientes">
+         <tocitem text="Dar de baja cliente" target="ayuda_baja_cliente" />
+         <tocitem text="Editar Reservas" target="ayuda_editar_reserva" />
+      </tocitem>
+      
+      <tocitem text="Gestión de Personal" target="ayuda_encargado">
+         <tocitem text="Listado de Empleados" target="ayuda_tabla_empleados" />
+         <tocitem text="Administrar reservas" target="ayuda_gestion_reservas" />
+         <tocitem text="Administrar Menú" target="ayuda_admin_menu" />
+         <tocitem text="Editar Platos" target="ayuda_editar_plato" />
+      </tocitem>
+      
+      <tocitem text="Operaciones de Empleado" target="ayuda_interfaz_empleado" />
+      
+      <tocitem text="Control de Usuarios" target="ayuda_alta_usuario">
+         <tocitem text="Cambiar Contraseña" target="ayuda_password" />
+      </tocitem>
+      
+      <tocitem text="Gestión de Mesas" target="ayuda_mesas">
+         <tocitem text="Añadir nueva mesa" target="ayuda_anadir_mesa" />
+         <tocitem text="Modificar mesas" target="ayuda_editar_mesa" />
+      </tocitem>
+      
+   </tocitem>
+</toc>
+
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Servix - Editar Reserva</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="estilo.css">
+    </head>
+    <body>
+        <div class="contenedor">
+            <h1>Modificar mi Reserva</h1>
+            <p>Desde este formulario puede realizar cambios en la fecha, hora o el número de personas de una reserva ya existente.</p>
+
+            <div class="aviso">
+                <strong>Restricción de Horarios:</strong> Por política del restaurante, solo se permiten reservas en los siguientes periodos:
+                <ul>
+                    <li><strong>Comidas:</strong> De 12:00 a 16:00</li>
+                    <li><strong>Cenas:</strong> De 21:00 a 23:59</li>
+                </ul>
+            </div>
+
+            <h2>Campos a editar</h2>
+            <ul>
+                <li><strong>Fecha:</strong> Seleccione el día deseado en el calendario. No se permiten fechas anteriores al día actual.</li>
+                <li><strong>Hora:</strong> Ajuste la hora de llegada usando el selector (HH:mm).</li>
+                <li><strong>Comensales:</strong> Indique el número total de personas que asistirán.</li>
+            </ul>
+
+            <div class="nota">
+                Al pulsar <kbd>Validar</kbd>, el sistema comprobará la disponibilidad. Si los datos son correctos, su reserva se actualizará automáticamente y volverá al panel principal.
+            </div>
+
+            <h2>Validaciones del Sistema</h2>
+            <p>Si el sistema muestra un mensaje de error, compruebe lo siguiente:</p>
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Causa probable</th>
+                </tr>
+                <tr>
+                    <td>"Fecha anterior a hoy"</td>
+                    <td>Ha seleccionado un día que ya ha pasado.</td>
+                </tr>
+                <tr>
+                    <td>"Horario no permitido"</td>
+                    <td>La hora seleccionada está fuera de los tramos de cocina (comida/cena).</td>
+                </tr>
+                <tr>
+                    <td>"Rellena todos los campos"</td>
+                    <td>Falta algún dato obligatorio por introducir.</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

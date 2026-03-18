@@ -41,6 +41,10 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_encargado", JFrameServix.hs);
+        }
     }
 
     /**

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ayuda - Gestión de Reservas</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="estilo.css">
+    </head>
+    <body>
+        <div class="contenedor">
+            <h1>Gestión Integral de Reservas</h1>
+            <p>Este panel permite organizar las peticiones de mesa de los clientes mediante un sistema de pestañas por estado.</p>
+
+            <div class="seccion">
+                <h3>1. Pestaña de Reservas Pendientes</h3>
+                <p>Aquí aparecen las reservas que aún no tienen una mesa asignada.</p>
+                <ul>
+                    <li><strong>Proceso de Confirmación:</strong> Seleccione una reserva de la lista y pulse el botón <kbd>Confirmar</kbd>.</li>
+                    <li><strong>Validación automática:</strong> El sistema verificará si hay una mesa disponible con capacidad suficiente para la fecha y hora indicadas.</li>
+                    <li><em>Aviso:</em> Si el sistema muestra el mensaje "No hay mesa disponible", deberá esperar a que se libere espacio o gestionar la mesa manualmente.</li>
+                </ul>
+            </div>
+
+            <div class="seccion">
+                <h3>2. Pestaña de Reservas Confirmadas</h3>
+                <p>Muestra las reservas que ya tienen una mesa vinculada con éxito.</p>
+                <ul>
+                    <li>Pulse <kbd>Informe</kbd> para generar un listado detallado de todas las reservas aceptadas en el sistema.</li>
+                </ul>
+            </div>
+
+            <div class="seccion">
+                <h3>3. Pestaña de Reservas Rechazadas</h3>
+                <p>Histórico de reservas que fueron canceladas por el cliente o rechazadas por falta de aforo.</p>
+                <ul>
+                    <li>También permite generar un informe específico para análisis de pérdida de clientes.</li>
+                </ul>
+            </div>
+
+            <div class="nota">
+                Las tablas están ordenadas por fecha y hora de forma automática para facilitar la prioridad en el servicio.
+            </div>
+        </div>
+    </body>
+</html>

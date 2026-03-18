@@ -49,9 +49,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jTableMenu.setModel(dtm2);
         this.id = id;
         this.padre = (JFrameServix) parent;
+        
         cargaTablaReservas();
         cargaTablaMenu();
         formatoTabla();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
+        }
     }
     
     /**
@@ -349,7 +354,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         //true si entra en elhorario, false si no entra
         return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
                 (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
-}   
+    }   
     //Este boton valida la insercion de la reserva. Primero comprueba que ningun campo este vacio, despues que la fecha introducida
     //sea vigente, es decir, que el usuario no introduzca una fecha y hora que ya ha pasado, tras eso comprueba con el metodo anterior
     //que la hora sea valida. Si alguno de estas comprobaciones no es satisfactoria mostrara un JOptionPane indicando el error

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0">
+    <mapID target="main" url="html/main.html" />
+
+    <mapID target="ayuda_clientes" url="html/clientes_interfaz.html" />
+    <mapID target="ayuda_baja_cliente" url="html/clientes_baja.html" />
+    <mapID target="ayuda_editar_reserva" url="html/reservas_editar.html" />
+
+    <mapID target="ayuda_tabla_empleados" url="html/empleados_lista.html" />
+    <mapID target="ayuda_encargado" url="html/encargado_interfaz.html" />
+    <mapID target="ayuda_admin_menu" url="html/menu_administrar.html" />
+    <mapID target="ayuda_gestion_reservas" url="html/reservas_gestion.html" />
+    <mapID target="ayuda_editar_plato" url="html/plato_editar.html" />
+
+    <mapID target="ayuda_interfaz_empleado" url="html/empleado_interfaz.html" />
+
+    <mapID target="ayuda_alta_usuario" url="html/usuario_alta.html" />
+    <mapID target="ayuda_password" url="html/usuario_password.html" />
+
+    <mapID target="ayuda_mesas" url="html/mesas_interfaz.html" />
+    <mapID target="ayuda_anadir_mesa" url="html/mesas_anadir.html" />
+    <mapID target="ayuda_editar_mesa" url="html/mesas_editar.html" />
+</map>
+

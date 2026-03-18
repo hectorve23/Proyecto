@@ -45,6 +45,10 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
                 jComboBoxCambioID(evt);
              }
         });
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_mesa", JFrameServix.hs);
+        }
     }
 
     /**

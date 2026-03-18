@@ -47,6 +47,10 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jButtonVolver.setVisible(true);
         jButtonValidar.setVisible(false);
         cargaTablaMenu();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_admin_menu", JFrameServix.hs);
+        }
     }
     
    

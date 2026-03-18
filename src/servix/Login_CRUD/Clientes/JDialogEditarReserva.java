@@ -6,6 +6,7 @@ package servix.Login_CRUD.Clientes;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -44,6 +45,10 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
         cargarDatosReserva();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_reserva", JFrameServix.hs);
+        }
     }
     
     private void cargarDatosReserva() {
@@ -164,7 +169,23 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private boolean validarHorario(Object valorHora){
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+        String horaSQL = formatoHora.format(valorHora);
+        
+        //declaracion de margenes
+        LocalTime horaReserva = LocalTime.parse(horaSQL);
+        LocalTime inicioComida = LocalTime.of(12, 0);
+        LocalTime finComida = LocalTime.of(16, 0);
+        LocalTime inicioCena = LocalTime.of(21, 0);
+        LocalTime finCena = LocalTime.of(23, 59);
+        
+        //true si entra en elhorario, false si no entra
+        return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
+                (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
+    } 
+    
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
         java.util.Date mfecha = jDateChooserFecha.getDate();
@@ -181,7 +202,14 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
             return;
-}
+        }
+        else if(!validarHorario(valorHora)){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "La hora debe estar entre 12:00-16:00 o 21:00-23:59", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             String fechaSQL = formatoFecha.format(mfecha);

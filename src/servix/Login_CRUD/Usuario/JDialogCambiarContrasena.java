@@ -46,6 +46,10 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         jLabel3.setText("<html>Repita la contraseña <font color='red'>*</font></html>");
         enterEnFormulario();
         agregarListenersValidacion();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_password", JFrameServix.hs);
+        }
     }
 
     /**

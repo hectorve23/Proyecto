@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ayuda - Editar Plato</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="estilo.css">
+    </head>
+    <body>
+        <div class="contenedor">
+            <h1>Modificación de Platos</h1>
+            <p>Esta ventana permite actualizar la información de un plato seleccionado previamente en el menú. Los cambios realizados se verán reflejados inmediatamente en la base de datos del sistema.</p>
+
+            <div class="seccion">
+                <h3>Campos Disponibles</h3>
+                <p>Puede modificar cualquiera de los siguientes parámetros:</p>
+                <ul>
+                    <li><strong>Nombre:</strong> Permite cambiar el nombre del plato. Tenga en cuenta que si lo cambia, este será el nuevo identificador.</li>
+                    <li><strong>Precio:</strong> Utilice el control numérico para ajustar el coste del plato.</li>
+                    <li><strong>Categoría:</strong> Desplegable para reubicar el plato en una sección distinta (Bebidas, Entrantes, etc.).</li>
+                </ul>
+            </div>
+
+            <div class="seccion">
+                <h3>Acciones del Formulario</h3>
+                <p>Para finalizar la edición, dispone de dos opciones:</p>
+                <ul>
+                    <li><kbd>Validar</kbd>: Aplica los cambios y actualiza el registro en la base de datos. Si el proceso tiene éxito, se mostrará un mensaje de confirmación y volverá a la gestión del menú.</li>
+                    <li><kbd>Cancelar</kbd>: Cierra la ventana actual sin guardar ninguna modificación, regresando a la lista de platos.</li>
+                </ul>
+            </div>
+
+            <div class="aviso">
+                <strong>Validación de datos:</strong> Al igual que en la creación, el sistema requiere que el nombre no esté vacío y que el precio sea estrictamente <strong>mayor a 0</strong>.
+            </div>
+
+            <div class="nota">
+                Si el plato está siendo editado por error, puede pulsar <kbd>Cancelar</kbd> o cerrar la ventana para mantener los datos originales intactos.
+            </div>
+        </div>
+    </body>
+</html>
