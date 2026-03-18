@@ -63,29 +63,34 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jButtonCancelar = new javax.swing.JButton();
         jButtonValidar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
+        jLabel2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
         jPanel1.add(jTextFieldNombrePlato);
 
+        jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Precio");
         jPanel1.add(jLabel3);
         jPanel1.add(jSpinnerPrecio);
 
+        jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel4.setText("Categoria");
         jPanel1.add(jLabel4);
 
         jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
         jPanel1.add(jComboBoxCategoria);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Editar plato");
         jPanel2.add(jLabel1);
 
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +100,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         jPanel3.add(jButtonCancelar);
 
         jButtonValidar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonValidar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonValidar.setText("Validar");
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +110,8 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         });
         jPanel3.add(jButtonValidar);
 
+        jLabel5.setText("Héctor Valdés");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,9 +120,14 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(216, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(217, 217, 217))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(217, 217, 217))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(41, 41, 41))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +138,9 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105))
+                .addGap(83, 83, 83)
+                .addComponent(jLabel5)
+                .addContainerGap())
         );
 
         pack();
@@ -213,6 +228,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

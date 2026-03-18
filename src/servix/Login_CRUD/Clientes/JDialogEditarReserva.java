@@ -85,12 +85,14 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 2, 10, 10));
 
+        jLabel2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel2.setText("Fecha");
         jPanel1.add(jLabel2);
         jPanel1.add(jDateChooserFecha);
 
+        jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel4.setText("Hora");
         jPanel1.add(jLabel4);
 
@@ -98,14 +100,16 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         jSpinnerHora.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerHora, "HH:mm"));
         jPanel1.add(jSpinnerHora);
 
+        jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Comensales");
         jPanel1.add(jLabel3);
         jPanel1.add(jSpinnerComensales);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Editar reserva");
         jPanel2.add(jLabel1);
 
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,6 +119,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         jPanel3.add(jButtonCancelar);
 
         jButtonValidar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonValidar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonValidar.setText("Validar");
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {

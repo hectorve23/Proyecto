@@ -88,6 +88,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         jPanel2.add(jPasswordFieldCtn2);
 
         jButtonAceptar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonAceptar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonAceptar.setText("Aceptar");
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {

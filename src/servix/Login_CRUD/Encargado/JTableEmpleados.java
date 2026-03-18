@@ -94,6 +94,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableEmpleados);
 
+        jButtonAltaEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonAltaEmpleado.setText("Añadir");
         jButtonAltaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +103,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonAltaEmpleado);
 
+        jButtonBajaEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonBajaEmpleado.setText("Eliminar");
         jButtonBajaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +112,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonBajaEmpleado);
 
+        jButtonEditarEmpleado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonEditarEmpleado.setText("Editar");
         jButtonEditarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +121,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         });
         jPanel1.add(jButtonEditarEmpleado);
 
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonCancelar.setText("Volver");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

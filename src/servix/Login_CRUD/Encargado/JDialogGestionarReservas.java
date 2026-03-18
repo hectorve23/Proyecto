@@ -141,6 +141,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jButtonConfirmar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonConfirmar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +278,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
 
         jPanel1.add(jTabbedPane, java.awt.BorderLayout.PAGE_START);
 
+        jButtonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

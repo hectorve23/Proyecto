@@ -78,12 +78,14 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 2, 20, 20));
 
+        jLabel2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel2.setText("ID de la mesa");
         jPanel2.add(jLabel2);
 
         jComboBoxId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(jComboBoxId);
 
+        jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Capacidad");
         jPanel2.add(jLabel3);
         jPanel2.add(jTextFieldCapacidad);

@@ -148,10 +148,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jPanelNuevaReserva.setLayout(new java.awt.GridLayout(6, 2, 10, 10));
 
+        jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
         jPanelNuevaReserva.add(jLabel3);
         jPanelNuevaReserva.add(jDateChooser);
 
+        jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel4.setText("Hora");
         jPanelNuevaReserva.add(jLabel4);
 
@@ -159,11 +161,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jSpinnerHora.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerHora, "HH:mm"));
         jPanelNuevaReserva.add(jSpinnerHora);
 
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel5.setText("Numero de comensales");
         jPanelNuevaReserva.add(jLabel5);
         jPanelNuevaReserva.add(jTextFieldNumeroComensales);
         jPanelNuevaReserva.add(jLabel1);
 
+        jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonValidar.setText("VALIDAR");
         jButtonValidar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +216,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jPanelPadre.add(jPanelMenu, "card4");
 
+        jButtonNuevaReserva.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonNuevaReserva.setText("Nueva reserva");
         jButtonNuevaReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +225,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         });
         jPanelOpciones.add(jButtonNuevaReserva);
 
+        jButtonVerReservas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonVerReservas.setText("Ver reservas");
         jButtonVerReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,6 +234,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         });
         jPanelOpciones.add(jButtonVerReservas);
 
+        jButtonVerMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonVerMenu.setText("Ver menu");
         jButtonVerMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,6 +245,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
         jLabel7.setText("Héctor Valdes");
 
+        jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonCerrarSesion.setText("Cerrar sesion");
         jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,6 +253,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             }
         });
 
+        jButtonBajaCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonBajaCliente.setText("Eliminar cuenta");
         jButtonBajaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

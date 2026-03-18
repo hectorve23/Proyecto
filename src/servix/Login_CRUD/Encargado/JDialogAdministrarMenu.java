@@ -44,7 +44,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         this.dtm = new DefaultTableModel();
         this.padre = (JFrameServix) parent;
         jTableMenu.setModel(dtm);
-        jButtonVolver.setVisible(false);
+        jButtonVolver.setVisible(true);
         jButtonValidar.setVisible(false);
         cargaTablaMenu();
     }
@@ -138,7 +138,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
         jPanelPadre.add(jPanelVerPlatos, "card3");
 
-        jPanelNuevoPlato.setLayout(new java.awt.GridLayout(3, 0));
+        jPanelNuevoPlato.setLayout(new java.awt.GridLayout(3, 0, 10, 10));
 
         jLabel1.setText("Nombre");
         jPanelNuevoPlato.add(jLabel1);
@@ -156,6 +156,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
         jPanelPadre.add(jPanelNuevoPlato, "card2");
 
+        jButtonNuevoPlato.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonNuevoPlato.setText("Nuevo plato");
         jButtonNuevoPlato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +165,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         });
         jPanelOpciones.add(jButtonNuevoPlato);
 
+        jButtonVerPlatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonVerPlatos.setText("Ver platos");
         jButtonVerPlatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +174,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         });
         jPanelOpciones.add(jButtonVerPlatos);
 
+        jButtonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,6 +183,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         });
 
         jButtonValidar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonValidar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonValidar.setText("Validar");
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -210,8 +214,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -233,7 +237,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             jPanelPadre.add(jPanelVerPlatos);
             jButtonEditarPlato.setVisible(true);
             jButtonEliminarPlato.setVisible(true);
-            jButtonVolver.setVisible(false);
+            jButtonVolver.setVisible(true);
             jButtonValidar.setVisible(false);
         } else if (jbutton == jButtonNuevoPlato) {
             jPanelPadre.add(jPanelNuevoPlato);

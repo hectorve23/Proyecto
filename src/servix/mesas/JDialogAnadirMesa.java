@@ -67,10 +67,12 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 2, 30, 20));
 
+        Capacidad.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         Capacidad.setText("Capacidad");
         jPanel2.add(Capacidad);
         jPanel2.add(jTextFieldCapacidad);
 
+        jButtonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +81,7 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
         });
 
         jButtonAnadir.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonAnadir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonAnadir.setForeground(new java.awt.Color(219, 219, 255));
         jButtonAnadir.setText("Añadir");
         jButtonAnadir.addActionListener(new java.awt.event.ActionListener() {

@@ -89,6 +89,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="Capacidad">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Sans Serif Collection" size="14" style="0"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Capacidad"/>
           </Properties>
         </Component>
@@ -98,6 +101,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
@@ -108,6 +114,9 @@
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="94" green="76" red="13" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="db" red="db" type="rgb"/>

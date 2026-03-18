@@ -62,10 +62,11 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jButtonVolver = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ELIMINAR CUENTA DE CLIENTE");
 
@@ -75,8 +76,8 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(290, 290, 290))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(277, 277, 277))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,18 +87,21 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
                 .addGap(15, 15, 15))
         );
 
-        jPanel2.setLayout(new java.awt.GridLayout(4, 2));
+        jPanel2.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
 
+        jLabel2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel2.setText("Usuario");
         jPanel2.add(jLabel2);
         jPanel2.add(jTextFieldUser);
 
+        jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel4.setText("Contraseña");
         jPanel2.add(jLabel4);
         jPanel2.add(jTextFieldContrasena);
         jPanel2.add(jLabel3);
         jPanel2.add(jLabel5);
 
+        jButtonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonVolver.setText("Volver");
         jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +111,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         jPanel2.add(jButtonVolver);
 
         jButtonEliminar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonEliminar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonEliminar.setText("Eliminar");
         jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +121,8 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonEliminar);
 
+        jLabel6.setText("Alba Pallás");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,14 +131,20 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(228, 228, 228)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(31, 31, 31))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
                 .addContainerGap())
         );
 
@@ -242,6 +255,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldContrasena;

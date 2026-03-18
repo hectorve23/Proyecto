@@ -177,6 +177,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Sans Serif Collection" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Fecha"/>
               </Properties>
             </Component>
@@ -184,6 +187,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Sans Serif Collection" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Hora"/>
               </Properties>
             </Component>
@@ -199,6 +205,12 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Sans Serif Collection" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Numero de comensales"/>
               </Properties>
             </Component>
@@ -208,6 +220,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonValidar">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="VALIDAR"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
@@ -310,6 +325,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButtonNuevaReserva">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Nueva reserva"/>
           </Properties>
           <Events>
@@ -318,6 +336,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonVerReservas">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ver reservas"/>
           </Properties>
           <Events>
@@ -326,6 +347,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonVerMenu">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ver menu"/>
           </Properties>
           <Events>
@@ -341,6 +365,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCerrarSesion">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cerrar sesion"/>
       </Properties>
       <Events>
@@ -349,6 +376,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonBajaCliente">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Eliminar cuenta"/>
       </Properties>
       <Events>

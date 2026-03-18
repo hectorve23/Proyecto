@@ -81,11 +81,12 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido/a, consulta las reservas del día");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
+        jButtonSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonSalir.setText("Salir");
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +108,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTableReservasDelDia);
 
         jButtonBuscarFecha.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonBuscarFecha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonBuscarFecha.setForeground(new java.awt.Color(219, 219, 255));
         jButtonBuscarFecha.setText("Buscar fecha");
         jButtonBuscarFecha.addActionListener(new java.awt.event.ActionListener() {

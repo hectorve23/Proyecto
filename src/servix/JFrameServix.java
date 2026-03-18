@@ -82,15 +82,18 @@ public class JFrameServix extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.GridLayout(4, 2, 10, 10));
 
+        jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 12)); // NOI18N
         jLabel3.setText("Usuario");
         jPanel3.add(jLabel3);
         jPanel3.add(jTextFielduser);
 
+        jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 12)); // NOI18N
         jLabel4.setText("Contraseña");
         jPanel3.add(jLabel4);
         jPanel3.add(jPasswordFieldContransena);
 
         jButtonCrearCuenta.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonCrearCuenta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonCrearCuenta.setForeground(new java.awt.Color(219, 219, 255));
         jButtonCrearCuenta.setText("Crear cuenta");
         jButtonCrearCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +104,7 @@ public class JFrameServix extends javax.swing.JFrame {
         jPanel3.add(jButtonCrearCuenta);
 
         jButtonIniciarSesion.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonIniciarSesion.setForeground(new java.awt.Color(219, 219, 255));
         jButtonIniciarSesion.setText("Iniciar sesion");
         jButtonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
