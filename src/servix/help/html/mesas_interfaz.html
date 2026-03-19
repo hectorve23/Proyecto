@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>mesas_interfaz</div>
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda - Administrar Mesas</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Gestión de Mesas del Establecimiento</h1>
+        <p>Desde este panel, el encargado puede controlar la disposición y disponibilidad de las mesas en el sistema.</p>
+
+        <div class="seccion">
+            <h3>Acciones Disponibles</h3>
+            <ul>
+                <li><strong>Añadir mesa:</strong> Abre un formulario para dar de alta una nueva mesa indicando su capacidad.</li>
+                <li><strong>Editar mesa:</strong> Permite modificar la capacidad de la mesa seleccionada en la tabla.</li>
+                <li><strong>Eliminar mesa:</strong> Borra permanentemente la mesa seleccionada. <span style="color:red;">Atención:</span> Esta acción no se puede deshacer.</li>
+            </ul>
+        </div>
+
+        <div class="aviso">
+            <strong>Importante:</strong> Para editar o eliminar, primero debe hacer clic sobre la fila correspondiente en la tabla de datos.
+        </div>
+
+        <div class="seccion">
+            <h3>Interpretación de la Tabla</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Columna</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ID Mesa</td>
+                        <td>Identificador único numérico de la mesa.</td>
+                    </tr>
+                    <tr>
+                        <td>Capacidad</td>
+                        <td>Número máximo de comensales permitido.</td>
+                    </tr>
+                    <tr>
+                        <td>Estado</td>
+                        <td>Indica si la mesa está libre (true) u ocupada/reservada (false).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="nota">
+            La tabla se recarga automáticamente tras realizar cualquier operación para mostrar siempre la información real de la base de datos.
+        </div>
+ 
+    </div>
+</body>
 </html>

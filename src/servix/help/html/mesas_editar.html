@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>mesas_editar</div>
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda - Editar Mesa</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Edición de Mesas</h1>
+        <p>Este panel permite modificar las capacidad de las mesas ya registradas en el sistema.</p>
+
+        <div class="seccion">
+            <h3>Cómo editar una mesa</h3>
+            <ol>
+                <li><strong>Selección del ID:</strong> El desplegable muestra el ID de la mesa seleccionada inicialmente. Puede cambiarlo para editar una mesa distinta sin salir de la ventana.</li>
+                <li><strong>Carga de datos:</strong> Al cambiar el ID, el campo "Capacidad" se actualizará automáticamente con el valor actual almacenado en la base de datos.</li>
+                <li><strong>Modificación:</strong> Escriba el nuevo número de comensales en el cuadro de texto.</li>
+            </ol>
+        </div>
+
+        <div class="nota">
+            <strong>Información:</strong> Cambiar la capacidad de una mesa no afecta a su estado actual (Libre/Ocupada), solo a su ficha técnica.
+        </div>
+
+        <div class="seccion">
+            <h3>Confirmación</h3>
+            <ul>
+                <li>Pulse <kbd>Aceptar</kbd> para guardar los cambios permanentemente.</li>
+                <li>Pulse <kbd>Cancelar</kbd> para descartar las ediciones y volver al listado general.</li>
+            </ul>
+        </div>
+
+    </div>
+</body>
 </html>

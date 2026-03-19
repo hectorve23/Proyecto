@@ -1,15 +1,60 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Ayuda - Registro de Usuarios</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="estilo.css">
     </head>
     <body>
-        <div>usuario_alta</div>
+        <div class="contenedor">
+            <h1>Registro y Edición de Usuarios</h1>
+            <p>Este formulario permite dar de alta a nuevos miembros en el sistema o modificar los datos de usuarios existentes.</p>
+
+            <div class="aviso">
+                Los campos marcados con un asterisco rojo (<span style="color:red">*</span>) son <strong>obligatorios</strong>.
+            </div>
+
+            <div class="seccion">
+                <h3>Instrucciones de Llenado</h3>
+                <ul>
+                    <li><strong>Datos Personales:</strong> El nombre y los apellidos no deben superar los 30 caracteres.</li>
+                    <li><strong>Teléfono:</strong> Debe contener exactamente 9 dígitos numéricos. El sistema resaltará el campo en rojo si no cumple esta condición.</li>
+                    <li><strong>Correo Electrónico:</strong> Se requiere un formato válido (ejemplo: <em>usuario@dominio.com</em>)</li>
+                    <li><strong>Contraseña:</strong> Debe introducir la misma contraseña en ambos campos de seguridad para evitar errores de escritura.</li>
+                </ul>
+            </div>
+
+            <div class="nota">
+                <strong>Seguridad:</strong> Las contraseñas se almacenan de forma encriptada. Ni siquiera el administrador puede ver su contenido original.
+            </div>
+
+            <div class="seccion">
+                <h3>Atajos de Teclado</h3>
+                <p>Para agilizar la introducción de datos, puede navegar por el formulario usando:</p>
+                <ul>
+                    <li><kbd>Enter</kbd>: Salta al siguiente campo de texto.</li>
+                    <li><kbd>↑</kbd>: Desplaza el cursor hacia arriba entre los campos.</li>
+                </ul>
+            </div>
+
+            <div class="seccion">
+                <h3>Validación en Tiempo Real</h3>
+                <table>
+                    <tr>
+                        <th>Color de Fondo</th>
+                        <th>Significado</th>
+                    </tr>
+                    <tr>
+                        <td>Blanco</td>
+                        <td>Dato correcto o campo vacío antes de validar.</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ffc8c8;">Rojo claro</td>
+                        <td>Error de formato, exceso de caracteres (máx. 30) o campo vacío despues de validar.</td>
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
     </body>
 </html>

@@ -7,11 +7,15 @@
          <tocitem text="Editar Reservas" target="ayuda_editar_reserva" />
       </tocitem>
       
-      <tocitem text="Gestión de Personal" target="ayuda_encargado">
+      <tocitem text="Operaciones de encargado" target="ayuda_encargado">
          <tocitem text="Listado de Empleados" target="ayuda_tabla_empleados" />
          <tocitem text="Administrar reservas" target="ayuda_gestion_reservas" />
          <tocitem text="Administrar Menú" target="ayuda_admin_menu" />
          <tocitem text="Editar Platos" target="ayuda_editar_plato" />
+         <tocitem text="Gestión de Mesas" target="ayuda_mesas">
+            <tocitem text="Añadir nueva mesa" target="ayuda_anadir_mesa" />
+            <tocitem text="Modificar mesas" target="ayuda_editar_mesa" />
+         </tocitem>
       </tocitem>
       
       <tocitem text="Operaciones de Empleado" target="ayuda_interfaz_empleado" />
@@ -20,10 +24,7 @@
          <tocitem text="Cambiar Contraseña" target="ayuda_password" />
       </tocitem>
       
-      <tocitem text="Gestión de Mesas" target="ayuda_mesas">
-         <tocitem text="Añadir nueva mesa" target="ayuda_anadir_mesa" />
-         <tocitem text="Modificar mesas" target="ayuda_editar_mesa" />
-      </tocitem>
+      
       
    </tocitem>
 </toc>

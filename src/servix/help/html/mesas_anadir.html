@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>mesas_anadir</div>
-    </body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda - Añadir Mesa</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Nueva Mesa</h1>
+        <p>Utilice este formulario para registrar una nueva unidad de servicio en el restaurante.</p>
+
+        <div class="seccion">
+            <h3>Instrucciones de Llenado</h3>
+            <ul>
+                <li><strong>Capacidad:</strong> Ingrese el número total de personas que pueden sentarse en la mesa simultáneamente.</li>
+            </ul>
+        </div>
+
+        <div class="aviso">
+            <strong>Regla de Validación:</strong> El sistema no permitirá registrar mesas con capacidad 0 o campos vacíos. Debe ser un número entero positivo.
+        </div>
+
+        <div class="seccion">
+            <h3>Resultado de la Acción</h3>
+            <p>Al pulsar <strong>Añadir</strong>:</p>
+            <ol>
+                <li>La mesa se guardará en la base de datos.</li>
+                <li>El estado inicial será automáticamente <strong>"Disponible"</strong>.</li>
+                <li>La ventana se cerrará y la tabla principal se actualizará automáticamente.</li>
+            </ol>
+            <p>Si pulsa <strong>Cancelar</strong>, se cerrará el formulario sin guardar ningún cambio.</p>
+        </div>
+
+    </div>
+</body>
 </html>
