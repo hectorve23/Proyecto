@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toc version="1.0">
-   <tocitem text="Manual de Usuario Servix" target="index">
+   <tocitem text="Manual de Usuario Servix" target="main">
       
       <tocitem text="Gestión de Clientes" target="ayuda_clientes">
          <tocitem text="Dar de baja cliente" target="ayuda_baja_cliente" />
