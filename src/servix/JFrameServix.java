@@ -229,6 +229,12 @@ public class JFrameServix extends javax.swing.JFrame {
                
             }
         }
+        else{
+            JOptionPane.showMessageDialog(rootPane,
+                                            "Usuario o contraseña incorrectos", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
     private boolean comprobarDatos(String user, String contrasena) {
@@ -255,13 +261,6 @@ public class JFrameServix extends javax.swing.JFrame {
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
                         correcto= true;
                     }
-                }else{
-                     JOptionPane.showConfirmDialog(rootPane,
-                                            "Usuario o contraseña incorrectos", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
-                      correcto =  false;
                 }
 
                 rs.close();

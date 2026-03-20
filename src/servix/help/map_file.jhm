@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0">
-    <mapID target="main" url="html/index.html" />
+    <mapID target="main" url="html/main.html" />
 
     <mapID target="ayuda_clientes" url="html/clientes_interfaz.html" />
     <mapID target="ayuda_baja_cliente" url="html/clientes_baja.html" />

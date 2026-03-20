@@ -27,16 +27,21 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
      * Creates new form JDialogEditarPlato
      */
     String nombreCambiar;
+    double precioCambiar;
+    String cadenaCategoriaCambiar;
     Connection conexion;
     JFrameServix padre;
     
-    public JDialogEditarPlato(String nombreCambiar,java.awt.Frame parent, boolean modal) {
+    public JDialogEditarPlato(String nombreCambiar,double precioCambiar, String cadenaCategoriaCambiar, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.nombreCambiar=nombreCambiar;
+        this.precioCambiar=precioCambiar;
+        this.cadenaCategoriaCambiar=cadenaCategoriaCambiar;
+        cargarDatosPlato();
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
         this.padre = (JFrameServix) parent;
@@ -45,7 +50,11 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_plato", JFrameServix.hs);
         }
     }
-
+    private void cargarDatosPlato(){
+        jTextFieldNombrePlato.setText(nombreCambiar);
+        jSpinnerPrecio.setValue(precioCambiar);
+        jComboBoxCategoria.setSelectedItem(cadenaCategoriaCambiar);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,9 +165,17 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         String nombrePlato = jTextFieldNombrePlato.getText();
         int precio = (int) jSpinnerPrecio.getValue();
 
-        if(categoria.isEmpty() || nombrePlato.isEmpty() || precio<=0){
+        if(categoria.isEmpty() || nombrePlato.isEmpty()){
             JOptionPane.showConfirmDialog(rootPane,
                                             "Rellena todos los campos", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+            
+        }
+        else if(precio<=0){
+            JOptionPane.showConfirmDialog(rootPane,
+                                            "El precio tiene que ser mayor que 0", 
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
@@ -182,6 +199,8 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                    this.dispose();
+                   JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
+                   jdam.setVisible(true);
                 }
                 else{
                     JOptionPane.showConfirmDialog(rootPane,

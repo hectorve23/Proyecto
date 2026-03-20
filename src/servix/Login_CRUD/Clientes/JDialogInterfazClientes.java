@@ -435,7 +435,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private void jButtonAnularReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnularReservaActionPerformed
         // TODO add your handling code here:
       
-        if(jTableReservas.getSelectedRowCount()==1){//Si el usuario no ha seleccionado ninguna reserva en el JTable no hace nada
+        if(jTableReservas.getSelectedRowCount()==1){//Si el usuario no ha seleccionado ninguna reserva en el JTable muestra un mensaje
             int fila = jTableReservas.getSelectedRow();
             Object id_reserva_objeto = jTableReservas.getValueAt(fila, 0);
             int id_reserva = Integer.parseInt(id_reserva_objeto.toString());
@@ -471,8 +471,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione una reserva para anular.");
+        }
     }//GEN-LAST:event_jButtonAnularReservaActionPerformed
-    //Este metodo abre el JDialog para editar la reserva seleccionada, si no ha seleccionado ninguna no hace nada
+    //Este metodo abre el JDialog para editar la reserva seleccionada, si no ha seleccionado ninguna muestra un mensaje
     private void jButtonEditarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarReservaActionPerformed
         if(jTableReservas.getSelectedRowCount() == 1){
 
@@ -517,7 +520,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             JDialogEditarReserva jdic = new JDialogEditarReserva(padre, true, id_reserva, fechaHora, n_comensales, id);
             jdic.setVisible(true);
             recargarTabla();
-        }            
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione una reserva para editar.");
+        }
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
     //Este metodo abre el JDialog para borrar la cuenta de cliente
     private void jButtonBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaClienteActionPerformed

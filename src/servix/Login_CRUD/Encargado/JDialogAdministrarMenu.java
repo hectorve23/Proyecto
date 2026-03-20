@@ -263,13 +263,17 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
            
             String nombre = jTableMenu.getValueAt(fila, 0).toString();
+            double precio = Double.parseDouble(jTableMenu.getValueAt(fila, 1).toString());
+            String cadenaCategoria = jTableMenu.getValueAt(fila, 2).toString();
             
             this.dispose();
-            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, padre, true);
+            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, precio, cadenaCategoria, padre, true);
             jdep.setVisible(true);
 
             recargarTabla();
-        
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione un plato para editar.");
         }
         
     }//GEN-LAST:event_jButtonEditarPlatoActionPerformed
@@ -307,6 +311,9 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
+         else{
+             JOptionPane.showMessageDialog(this, "Seleccione un plato para eliminar.");
+         }
         
     }//GEN-LAST:event_jButtonEliminarPlatoActionPerformed
 
