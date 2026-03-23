@@ -83,7 +83,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jButtonVerPlatos = new javax.swing.JButton();
         jButtonVolver = new javax.swing.JButton();
         jButtonValidar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,7 +129,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150))
+                .addGap(145, 145, 145))
         );
         jPanelVerPlatosLayout.setVerticalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +196,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setText("Héctor Valdés");
+        jLabel4.setText("Héctor Valdés");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,14 +205,18 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +230,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                     .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
+                .addComponent(jLabel4)
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -290,7 +294,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 ps.setString(1, nombre_plato);
                 int opcion = JOptionPane.showConfirmDialog(
                                                 null,
-                                                "¿Estas seguro de anular la reserva seleccionada?",
+                                                "¿Estas seguro de eliminar el plato seleccionado?",
                                                 "Confirmación",
                                                 JOptionPane.OK_CANCEL_OPTION,
                                                 JOptionPane.QUESTION_MESSAGE
@@ -356,6 +360,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                    recargarTabla();
+                   jTextFieldNombrePlato.setText("");
+                   jSpinnerPrecio.setValue(0);
                 }
                 else{
                     JOptionPane.showConfirmDialog(rootPane,
@@ -388,7 +394,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanelModificar;
     private javax.swing.JPanel jPanelNuevoPlato;
     private javax.swing.JPanel jPanelOpciones;

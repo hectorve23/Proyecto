@@ -93,9 +93,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jButtonNuevaReserva = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
         jButtonVerMenu = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jButtonCerrarSesion = new javax.swing.JButton();
         jButtonBajaCliente = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -251,8 +251,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         });
         jPanelOpciones.add(jButtonVerMenu);
 
-        jLabel7.setText("Héctor Valdes");
-
         jButtonCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButtonCerrarSesion.setText("Cerrar sesion");
         jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -268,6 +266,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 jButtonBajaClienteActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Héctor Valdés");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -285,8 +285,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(26, 26, 26))
+                .addComponent(jLabel2)
+                .addGap(62, 62, 62))
             .addGroup(layout.createSequentialGroup()
                 .addGap(216, 216, 216)
                 .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,22 +297,23 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
-                        .addComponent(jButtonCerrarSesion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(15, 15, 15))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                                .addComponent(jButtonCerrarSesion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonBajaCliente)
-                                .addGap(17, 17, 17))))))
+                                .addGap(17, 17, 17))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(16, 16, 16))))
         );
 
         pack();
@@ -591,11 +592,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JButton jButtonVerReservas;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelBotonesDeleteUpdate;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelNuevaReserva;

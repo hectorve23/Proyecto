@@ -20,7 +20,7 @@ public class EliminarEmpleados {
         int pk =  Integer.parseInt(id);
         try {
             nueva.conectar();
-                    String sql = "DELETE FROM Camarero WHERE id_camarero = ? ";
+                    String sql = "DELETE FROM Usuario WHERE id = ? ";
                     PreparedStatement ps = conexion.prepareStatement(sql);
                     ps.setInt(1, pk);    
                     ps.executeUpdate();

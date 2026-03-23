@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +19,6 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
@@ -297,7 +295,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jLabel1.setText("Gestiona las reservas");
         jPanel2.add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setText("Alba Pallas");
+        jLabel2.setText("Alba Pallás");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,9 +309,9 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jButtonVolver))
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
@@ -325,9 +323,8 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonVolver)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel2))
         );
 
         pack();
@@ -362,7 +359,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 javax.swing.JOptionPane.showMessageDialog(this, "Error al confirmar la reserva.");
             }
         } else{
-            JOptionPane.showMessageDialog(rootPane, "No ha mesa disponible");
+            JOptionPane.showMessageDialog(rootPane, "No hay mesa disponible");
         }
         
     }//GEN-LAST:event_jButtonConfirmarActionPerformed

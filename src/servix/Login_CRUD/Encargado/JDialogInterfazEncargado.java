@@ -235,7 +235,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonInformeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeClientesActionPerformed
         // TODO add your handling code here:
         try{
-            String fileJasper = "informes/Clientes.jasper";
+            String fileJasper = "informes/Clientes_1.jasper";
             Map parameters = new HashMap();
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
