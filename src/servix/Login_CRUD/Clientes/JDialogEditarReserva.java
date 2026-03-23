@@ -95,6 +95,8 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel2.setText("Fecha");
         jPanel1.add(jLabel2);
+
+        jDateChooserFecha.setMinSelectableDate(new java.util.Date());
         jPanel1.add(jDateChooserFecha);
 
         jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
@@ -151,7 +153,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
                         .addGap(139, 139, 139))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(55, 55, 55))))
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,9 +164,9 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addGap(16, 16, 16))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();

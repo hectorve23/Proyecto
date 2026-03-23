@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -156,6 +157,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
         jPanelNuevaReserva.add(jLabel3);
+
+        jDateChooser.setMinSelectableDate(new java.util.Date());
         jPanelNuevaReserva.add(jDateChooser);
 
         jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
@@ -364,6 +367,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         java.util.Date mfecha = jDateChooser.getDate();
         Object valorHora = jSpinnerHora.getValue();
         
+        //Para la comprobacion exacta de fecha y hora
+        Calendar calHoy = Calendar.getInstance();
+        Calendar calElegida = Calendar.getInstance();
+        calElegida.setTime(mfecha);
+        
+        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        String horaStr = formatoHora.format(valorHora);
+        String[] partesHora = horaStr.split(":");
+        
+        calElegida.set(Calendar.HOUR_OF_DAY, Integer.parseInt(partesHora[0]));
+        calElegida.set(Calendar.MINUTE, Integer.parseInt(partesHora[1]));
+        calElegida.set(Calendar.SECOND, 0);
+        
         //Comprobacion de si algun campo esta vacio
         if(comensales.isEmpty() || mfecha==null || valorHora==null){
             JOptionPane.showConfirmDialog(rootPane,
@@ -373,9 +389,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                             JOptionPane.ERROR_MESSAGE);
         }
         //Comprobacion de fecha no pasada
-        else if(mfecha.before(new java.util.Date())){
+        else if(calElegida.before(calHoy)){
             JOptionPane.showMessageDialog(rootPane,
-                                            "La fecha no puede ser anterior a hoy", 
+                                            "La hora no puede ser anterior a la actual", 
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
         }
@@ -396,8 +412,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaStr = formatoFecha.format(mfecha);
 
-                SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-                String horaStr = formatoHora.format(valorHora);
+                //SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+                //String horaStr = formatoHora.format(valorHora);
 
                 // Crear el datetime combinado
                 String fechaHoraCompleta = fechaStr + " " + horaStr;
@@ -456,6 +472,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 if (opcion == JOptionPane.OK_OPTION) {
                     int resultado=ps.executeUpdate();
                     if(resultado==1){
+                        System.out.println("entra");
                         conexion.commit();
                         dtm.removeRow(fila);
                     }
@@ -598,9 +615,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT id_reserva as Nº, fecha_hora AS Fecha, n_comensales AS Comensales FROM reserva WHERE id_cliente=?"
+                    "SELECT id_reserva as Nº, fecha_hora AS Fecha, n_comensales AS Comensales FROM reserva WHERE id_cliente=? AND NOT estado_reserva=?"
             );
             ps.setInt(1, id);
+            ps.setString(2, "cancelada");
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
