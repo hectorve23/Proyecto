@@ -150,6 +150,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
         jLabel2.setText("Precio");
         jPanelNuevoPlato.add(jLabel2);
+
+        jSpinnerPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         jPanelNuevoPlato.add(jSpinnerPrecio);
 
         jLabel3.setText("Categoria");
@@ -333,7 +335,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
         String categoria = (String) jComboBoxCategoria.getSelectedItem();
         String nombrePlato = jTextFieldNombrePlato.getText();
-        int precio = (int) jSpinnerPrecio.getValue();
+        double precio = (Double) jSpinnerPrecio.getValue();
 
         if(categoria.isEmpty() || nombrePlato.isEmpty() || precio<=0){
             JOptionPane.showConfirmDialog(rootPane,

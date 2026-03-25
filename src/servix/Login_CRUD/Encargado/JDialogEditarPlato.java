@@ -90,6 +90,8 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Precio");
         jPanel1.add(jLabel3);
+
+        jSpinnerPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
         jPanel1.add(jSpinnerPrecio);
 
         jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
@@ -163,7 +165,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         // TODO add your handling code here:
         String categoria = (String) jComboBoxCategoria.getSelectedItem();
         String nombrePlato = jTextFieldNombrePlato.getText();
-        int precio = (int) jSpinnerPrecio.getValue();
+        double precio = (Double) jSpinnerPrecio.getValue();
 
         if(categoria.isEmpty() || nombrePlato.isEmpty()){
             JOptionPane.showConfirmDialog(rootPane,
