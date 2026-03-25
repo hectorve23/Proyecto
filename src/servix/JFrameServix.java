@@ -45,15 +45,16 @@ public class JFrameServix extends javax.swing.JFrame {
     public static HelpSet hs;
     
     public JFrameServix(){
-        try {
-            initComponents();
+         initComponents();
             cargaAyuda();
-            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
-            ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
             this.setIconImage(icon.getImage());
             nueva = new ConexionBBDD();
             conexion=nueva.getConnection();
             this.setTitle("Servix");
+        try {
+           
+            UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
         } catch (UnsupportedLookAndFeelException ex) {
             System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }

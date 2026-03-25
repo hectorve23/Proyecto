@@ -35,6 +35,8 @@
                   <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jButtonInformeClientes" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButtonImportarDatos" min="-2" pref="132" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButtonCerrarSesion" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
@@ -62,6 +64,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonCerrarSesion" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="jButtonInformeClientes" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="jButtonImportarDatos" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" pref="19" max="-2" attributes="0"/>
@@ -186,6 +189,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInformeClientesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonImportarDatos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Importar datos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonImportarDatosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
