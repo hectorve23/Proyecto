@@ -23,7 +23,7 @@ import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import servix.Login_CRUD.Usuario.JDialogCambiarContrasena;
 import servix.Login_CRUD.Empleado.JTableInterfazEmpleado;
 import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
-import servix.Login_CRUD.Gerente.JDialogAdministrarRestaurantes;
+import servix.Login_CRUD.Gerente.JDialogInterfazGerente;
 import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 
 /**
@@ -223,7 +223,7 @@ public class JFrameServix extends javax.swing.JFrame {
                     }else{
                         if(rol.toLowerCase().equals("gerente")){
                             this.setVisible(false);
-                            JDialogAdministrarRestaurantes jdar = new JDialogAdministrarRestaurantes(this, true);
+                            JDialogInterfazGerente jdar = new JDialogInterfazGerente(this, true);
                             jdar.setVisible(true);
                         }
                     }

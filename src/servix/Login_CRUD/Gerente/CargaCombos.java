@@ -1,0 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package servix.Login_CRUD.Gerente;
+
+import java.sql.Connection;
+import java.sql.*;
+import javax.swing.JComboBox;
+import servix.ConexionBBDD;
+
+/**
+ *
+ * @author usuario
+ */
+public class CargaCombos {
+    ConexionBBDD nueva = new ConexionBBDD();
+    Connection conexion=nueva.getConnection();
+    
+    public void cargaCombos(JComboBox jComboBoxRestaurantes, JComboBox jComboBoxEncargados){
+        try {
+            
+            jComboBoxRestaurantes.removeAllItems();
+            PreparedStatement ps1 = conexion.prepareStatement("SELECT nombre FROM restaurante WHERE id_restaurante NOT IN(SELECT id_restaurante FROM usuario_restaurante)");
+            
+            ResultSet r = ps1.executeQuery();
+            while(r.next()){
+                jComboBoxRestaurantes.addItem(r.getString("nombre"));
+            }
+            
+            jComboBoxEncargados.removeAllItems();
+            PreparedStatement ps2 = conexion.prepareStatement("SELECT nombre FROM usuario WHERE id NOT IN(SELECT id_usuario FROM usuario_restaurante)");
+            
+            ResultSet r2 = ps2.executeQuery();
+            while(r2.next()){
+                jComboBoxEncargados.addItem(r.getString("nombre"));
+            }
+            
+        } catch (SQLException ex) {
+            System.getLogger(CargaCombos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+}
