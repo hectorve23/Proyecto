@@ -559,7 +559,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel23">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Restaurantes con sus encargados asignados"/>
+                <Property name="text" type="java.lang.String" value="Encargados con sus restaurantes asignados"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCerrarSesion1">

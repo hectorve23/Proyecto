@@ -413,7 +413,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         });
         jPanel3.add(jButtonAsignar);
 
-        jLabel23.setText("Restaurantes con sus encargados asignados");
+        jLabel23.setText("Encargados con sus restaurantes asignados");
 
         jButtonCerrarSesion1.setText("Cerrar sesion");
         jButtonCerrarSesion1.addActionListener(new java.awt.event.ActionListener() {
