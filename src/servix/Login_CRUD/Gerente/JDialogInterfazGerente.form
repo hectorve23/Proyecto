@@ -68,7 +68,11 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButtonEliminarRestaurante" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jButtonEditarRestaurante" min="-2" pref="83" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jButtonEliminarRestaurante" min="-2" pref="81" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jScrollPane1" alignment="1" min="-2" pref="751" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -84,10 +88,13 @@
                           <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButtonCerrarSesion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButtonValidarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButtonEliminarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jButtonCerrarSesion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jButtonValidarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jButtonEliminarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButtonEditarRestaurante" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -197,6 +204,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCerrarSesionActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonEditarRestaurante">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarRestauranteActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

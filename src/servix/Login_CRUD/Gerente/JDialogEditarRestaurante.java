@@ -35,7 +35,8 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
     int apertura;
     int cierre;
     
-    public JDialogEditarRestaurante(java.awt.Frame parent, boolean modal, int id, String nombre, String direccion, String telefono, String correo, int capacidad, int apertura, int cierre) {
+    public JDialogEditarRestaurante(java.awt.Frame parent, boolean modal, int id, String nombre, String direccion, String telefono, String correo, 
+                                    int capacidad, int apertura, int cierre) {
         super(parent, modal);
         
         initComponents();

@@ -96,6 +96,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jTableRestaurantes = new javax.swing.JTable();
         jButtonEliminarRestaurante = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
+        jButtonEditarRestaurante = new javax.swing.JButton();
         jPanelEncargados = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEncargados = new javax.swing.JTable();
@@ -204,6 +205,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             }
         });
 
+        jButtonEditarRestaurante.setText("Editar");
+        jButtonEditarRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarRestauranteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelNuevoLayout = new javax.swing.GroupLayout(jPanelNuevo);
         jPanelNuevo.setLayout(jPanelNuevoLayout);
         jPanelNuevoLayout.setHorizontalGroup(
@@ -218,7 +226,10 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNuevoLayout.createSequentialGroup()
+                        .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -230,10 +241,12 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jTabbedPane.addTab("Restaurantes", jPanelNuevo);
@@ -635,7 +648,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     if(resultado==1){
                         System.out.println("entra");
                         conexion.commit();
-                        dtm.removeRow(fila);
+                        dtm3.removeRow(fila);
                         cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
                     }
                 }
@@ -757,11 +770,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             String usuario = jTableEncargados.getValueAt(fila, 6).toString();
             String contrasena = jTableEncargados.getValueAt(fila, 7).toString();
             
-            this.dispose();
+            this.setVisible(false);
             JDialogEditarEncargado jder = new JDialogEditarEncargado(padre, true, id_encargado, nombreEncargado, apellido1, apellido2, 
                                                                          telefonoEncargado, correoEncargado, usuario, contrasena);
             jder.setVisible(true);
+            jTabbedPane.setSelectedIndex(1);
             recargarTablaEncargados();
+            
             cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         }
         else{
@@ -796,6 +811,34 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_jButtonAsignarActionPerformed
+
+    private void jButtonEditarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarRestauranteActionPerformed
+        // TODO add your handling code here:
+        if(jTableRestaurantes.getSelectedRowCount() == 1){
+
+            int fila = jTableRestaurantes.getSelectedRow();
+            
+            int id_restaurante = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 0).toString());
+            String nombreRestaurante = jTableRestaurantes.getValueAt(fila, 1).toString();
+            String direccion = jTableRestaurantes.getValueAt(fila, 2).toString();
+            String telefonoRestaurante   = jTableRestaurantes.getValueAt(fila, 3).toString();
+            String correoRestaurante = jTableRestaurantes.getValueAt(fila, 4).toString();
+            int capacidad = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 5).toString());
+            int apertura = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 6).toString());
+            int cierre = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 7).toString());
+                                            
+            this.dispose();
+            JDialogEditarRestaurante jder = new JDialogEditarRestaurante(padre, true, id_restaurante, nombreRestaurante, direccion, telefonoRestaurante, 
+                                                                         correoRestaurante, capacidad, apertura, cierre);
+            jder.setVisible(true);
+            jTabbedPane.setSelectedIndex(0);
+            recargarTablaEncargados();
+            cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Selecciona una fila", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonEditarRestauranteActionPerformed
     public void recargarTablaRestaurantes() {
         dtm.setRowCount(0);
         dtm.setColumnCount(0);
@@ -840,7 +883,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         try {
             String sql = "SELECT " +
                      "CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) AS 'Encargado', " +
-                     "CONCAT(r.nombre, ' (', r.direccion, ')') AS 'Restaurante' " +
+                     "CONCAT(r.nombre, ' | ', r.direccion) AS 'Restaurante' " +
                      "FROM usuario_restaurante ur " +
                      "INNER JOIN usuario u ON ur.id_usuario = u.id " +
                      "INNER JOIN restaurante r ON ur.id_restaurante = r.id_restaurante "
@@ -902,6 +945,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonCerrarSesion1;
     private javax.swing.JButton jButtonEditarEncargado;
+    private javax.swing.JButton jButtonEditarRestaurante;
     private javax.swing.JButton jButtonEliminarAsignacion;
     private javax.swing.JButton jButtonEliminarEncargado;
     private javax.swing.JButton jButtonEliminarRestaurante;
