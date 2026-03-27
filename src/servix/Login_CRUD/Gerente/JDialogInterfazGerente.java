@@ -32,9 +32,11 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     
     DefaultTableModel dtm;
     DefaultTableModel dtm2;
+    DefaultTableModel dtm3;
     ConexionBBDD nueva;
     Connection conexion;
     JFrameServix padre;
+    CargaCombos cc;
     
     public JDialogInterfazGerente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -47,10 +49,15 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jTableRestaurantes.setModel(dtm);
         this.dtm2 = new DefaultTableModel();
         jTableEncargados.setModel(dtm2);
+        this.dtm3 = new DefaultTableModel();
+        jTableAsignaciones.setModel(dtm3);
         this.padre = (JFrameServix) parent;
+        this.cc = new CargaCombos();
+        cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         
         cargaTablaRestaurantes();
         cargaTablaEncargados();
+        cargaTablaAsignaciones();
         formatoTabla();
         
         /*if (JFrameServix.hb != null) {
@@ -87,7 +94,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jButtonValidarRestaurante = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableRestaurantes = new javax.swing.JTable();
-        jButtonEditarRestaurante = new javax.swing.JButton();
         jButtonEliminarRestaurante = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
         jPanelEncargados = new javax.swing.JPanel();
@@ -117,7 +123,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAsignaciones = new javax.swing.JTable();
-        jButtonEditarAsignacion = new javax.swing.JButton();
         jButtonEliminarAsignacion = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -185,13 +190,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableRestaurantes);
 
-        jButtonEditarRestaurante.setText("Editar");
-        jButtonEditarRestaurante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarRestauranteActionPerformed(evt);
-            }
-        });
-
         jButtonEliminarRestaurante.setText("Eliminar");
         jButtonEliminarRestaurante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,10 +218,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNuevoLayout.createSequentialGroup()
-                        .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -238,7 +233,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -372,13 +366,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(jTableAsignaciones);
 
-        jButtonEditarAsignacion.setText("Editar");
-        jButtonEditarAsignacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarAsignacionActionPerformed(evt);
-            }
-        });
-
         jButtonEliminarAsignacion.setText("Eliminar");
         jButtonEliminarAsignacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -437,8 +424,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonEditarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -457,9 +442,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(7, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
@@ -489,41 +472,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonEditarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarRestauranteActionPerformed
-        // TODO add your handling code here:
-        if(jTableRestaurantes.getSelectedRowCount() == 1){
-
-            int fila = jTableRestaurantes.getSelectedRow();
-            
-            int id_restaurante = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 0).toString());
-            String nombreRestaurante = jTableRestaurantes.getValueAt(fila, 1).toString();
-            String direccion = jTableRestaurantes.getValueAt(fila, 2).toString();
-            String telefonoRestaurante = jTableRestaurantes.getValueAt(fila, 3).toString();
-            String correoRestaurante = jTableRestaurantes.getValueAt(fila, 4).toString();
-            int capacidad = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 5).toString());
-            int apertura = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 6).toString());
-            int cierre = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 7).toString());
-            
-            this.dispose();
-            JDialogEditarRestaurante jder = new JDialogEditarRestaurante(padre, true, id_restaurante, nombreRestaurante, direccion, telefonoRestaurante, 
-                                                                         correoRestaurante, capacidad, apertura, cierre);
-            jder.setVisible(true);
-            recargarTablas();
-        }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Selecciona una fila", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonEditarRestauranteActionPerformed
-    public void recargarTablas() {
-        dtm.setRowCount(0);
-        dtm.setColumnCount(0);
-        cargaTablaRestaurantes();
-        
-        dtm2.setRowCount(0);
-        dtm2.setColumnCount(0);
-        cargaTablaEncargados();
-    }
+    
     private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -570,6 +519,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                    recargarTablaRestaurantes();
+                   cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
                    
                    jTextFieldCorreoRestaurante.setText("");
                    jTextFieldDireccion.setText("");
@@ -643,6 +593,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                    recargarTablaEncargados(); 
+                   cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
                 }
                 else{
                     JOptionPane.showConfirmDialog(rootPane,
@@ -659,6 +610,49 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
 
     private void jButtonEliminarAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarAsignacionActionPerformed
         // TODO add your handling code here:
+        if(jTableAsignaciones.getSelectedRowCount()==1){//Si el usuario no ha seleccionado ninguna reserva en el JTable muestra un mensaje
+            int fila = jTableAsignaciones.getSelectedRow();
+            String nombre_apellidos_usuario = String.valueOf(jTableAsignaciones.getValueAt(fila, 0));
+            String nombre_direccion_restaurante = String.valueOf(jTableAsignaciones.getValueAt(fila, 1));
+            
+             try {
+                conexion.setAutoCommit(false);
+                String sql = "DELETE FROM usuario_restaurante "
+                        + "WHERE id_usuario = (SELECT id FROM usuario WHERE CONCAT(nombre, ' ', apellido1, ' ', apellido2) = ?) "
+                        + "AND id_restaurante = (SELECT id_restaurante FROM restaurante WHERE CONCAT(nombre, ' | ', direccion) = ?)";
+                PreparedStatement ps = conexion.prepareStatement(sql);
+                ps.setString(1, nombre_apellidos_usuario);
+                ps.setString(2, nombre_direccion_restaurante);
+                int opcion = JOptionPane.showConfirmDialog(
+                                                null,
+                                                "¿Estas seguro de eliminar la asignacion seleccionada?",
+                                                "Confirmación",
+                                                JOptionPane.OK_CANCEL_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE
+                );
+                if (opcion == JOptionPane.OK_OPTION) {
+                    int resultado=ps.executeUpdate();
+                    if(resultado==1){
+                        System.out.println("entra");
+                        conexion.commit();
+                        dtm.removeRow(fila);
+                        cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                    }
+                }
+                
+                
+            } catch (SQLException ex) {
+                try {
+                    conexion.rollback();
+                } catch (SQLException ex1) {
+                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                }
+                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione una asignacion para eliminar.");
+        }
     }//GEN-LAST:event_jButtonEliminarAsignacionActionPerformed
 
     private void jButtonEliminarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarRestauranteActionPerformed
@@ -685,6 +679,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         System.out.println("entra");
                         conexion.commit();
                         dtm.removeRow(fila);
+                        cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
                     }
                 }
                 
@@ -728,6 +723,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         System.out.println("entra");
                         conexion.commit();
                         dtm2.removeRow(fila);
+                        cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
                     }
                 }
                 
@@ -765,19 +761,40 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             JDialogEditarEncargado jder = new JDialogEditarEncargado(padre, true, id_encargado, nombreEncargado, apellido1, apellido2, 
                                                                          telefonoEncargado, correoEncargado, usuario, contrasena);
             jder.setVisible(true);
-            recargarTablas();
+            recargarTablaEncargados();
+            cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Selecciona una fila", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarEncargadoActionPerformed
 
-    private void jButtonEditarAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarAsignacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarAsignacionActionPerformed
-
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
         // TODO add your handling code here:
+        try {
+            String sql = "INSERT INTO usuario_restaurante(id_usuario, id_restaurante) "
+                       + "SELECT u.id, r.id_restaurante "
+                       + "FROM Usuario u, Restaurante r "
+                       + "WHERE CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) = ? "
+                       + "AND CONCAT(r.nombre, ' | ', r.direccion ) = ?";
+
+            PreparedStatement ps = conexion.prepareStatement(sql);
+
+            ps.setString(1, jComboBoxEncargados.getSelectedItem().toString());
+            ps.setString(2, jComboBoxRestaurantes.getSelectedItem().toString());
+
+            int filas = ps.executeUpdate();
+
+            if(filas == 1) {
+                JOptionPane.showMessageDialog(rootPane, "Asignación confirmada");
+                recargarTablaAsignaciones();
+                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }//GEN-LAST:event_jButtonAsignarActionPerformed
     public void recargarTablaRestaurantes() {
         dtm.setRowCount(0);
@@ -788,6 +805,11 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         dtm2.setRowCount(0);
         dtm2.setColumnCount(0);
         cargaTablaEncargados();
+    }
+    public void recargarTablaAsignaciones() {
+        dtm3.setRowCount(0);
+        dtm3.setColumnCount(0);
+        cargaTablaAsignaciones();
     }
     public void cargaTablaRestaurantes(){
         try {
@@ -810,6 +832,22 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             );
             ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm2);
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    private void cargaTablaAsignaciones() {
+        try {
+            String sql = "SELECT " +
+                     "CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) AS 'Encargado', " +
+                     "CONCAT(r.nombre, ' (', r.direccion, ')') AS 'Restaurante' " +
+                     "FROM usuario_restaurante ur " +
+                     "INNER JOIN usuario u ON ur.id_usuario = u.id " +
+                     "INNER JOIN restaurante r ON ur.id_restaurante = r.id_restaurante "
+                    +" WHERE rol=?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, "encargado");
+            nueva.selectSQL(ps, dtm3);
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -863,9 +901,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAsignar;
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonCerrarSesion1;
-    private javax.swing.JButton jButtonEditarAsignacion;
     private javax.swing.JButton jButtonEditarEncargado;
-    private javax.swing.JButton jButtonEditarRestaurante;
     private javax.swing.JButton jButtonEliminarAsignacion;
     private javax.swing.JButton jButtonEliminarEncargado;
     private javax.swing.JButton jButtonEliminarRestaurante;

@@ -21,19 +21,22 @@ public class CargaCombos {
         try {
             
             jComboBoxRestaurantes.removeAllItems();
-            PreparedStatement ps1 = conexion.prepareStatement("SELECT nombre FROM restaurante WHERE id_restaurante NOT IN(SELECT id_restaurante FROM usuario_restaurante)");
+            PreparedStatement ps1 = conexion.prepareStatement("SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM restaurante "
+                                                            + "WHERE id_restaurante NOT IN(SELECT id_restaurante FROM usuario_restaurante)");
             
             ResultSet r = ps1.executeQuery();
             while(r.next()){
-                jComboBoxRestaurantes.addItem(r.getString("nombre"));
+                jComboBoxRestaurantes.addItem(r.getString("nombre_direccion"));
             }
             
             jComboBoxEncargados.removeAllItems();
-            PreparedStatement ps2 = conexion.prepareStatement("SELECT nombre FROM usuario WHERE id NOT IN(SELECT id_usuario FROM usuario_restaurante)");
+            PreparedStatement ps2 = conexion.prepareStatement("SELECT CONCAT(nombre, ' ', apellido1, ' ', apellido2) as nombre_apellidos "
+                                                            + "FROM usuario WHERE id NOT IN(SELECT id_usuario FROM usuario_restaurante) AND rol=?");
+            ps2.setString(1, "encargado");
             
             ResultSet r2 = ps2.executeQuery();
             while(r2.next()){
-                jComboBoxEncargados.addItem(r.getString("nombre"));
+                jComboBoxEncargados.addItem(r2.getString("nombre_apellidos"));
             }
             
         } catch (SQLException ex) {

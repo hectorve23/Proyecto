@@ -68,11 +68,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButtonEditarRestaurante" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonEliminarRestaurante" min="-2" pref="81" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jButtonEliminarRestaurante" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" alignment="1" min="-2" pref="751" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -91,7 +87,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonCerrarSesion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jButtonValidarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButtonEditarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jButtonEliminarRestaurante" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -188,14 +183,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonEditarRestaurante">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Editar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarRestauranteActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="jButtonEliminarRestaurante">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
@@ -419,8 +406,6 @@
                       <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButtonEditarAsignacion" min="-2" pref="81" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButtonEliminarAsignacion" min="-2" pref="86" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -445,10 +430,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="260" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButtonEliminarAsignacion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButtonEditarAsignacion" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jButtonEliminarAsignacion" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace pref="7" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -483,14 +465,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonEditarAsignacion">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Editar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarAsignacionActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="jButtonEliminarAsignacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
