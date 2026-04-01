@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,9 @@ import servix.FormatoTablas;
 import servix.JFrameServix;
 import servix.Login_CRUD.Clientes.JDialogEditarReserva;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
+import static servix.Login_CRUD.Usuario.JDialogAltaUsuario.validarEmail;
+import static servix.Login_CRUD.Usuario.JDialogAltaUsuario.validarTelefono;
+import servix.Seguridad;
 
 /**
  *
@@ -584,39 +588,44 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
         }
         else{
-            try {
-                String sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) "
-                        + " VALUES (?,?,?,?,?,?,?,?, CURDATE())";
-                PreparedStatement ps = conexion.prepareStatement(sql);
-                ps.setString(1, nombre);
-                ps.setString(2, apellido1);
-                ps.setString(3, apellido2);
-                ps.setString(4, telefono);
-                ps.setString(5, correo);
-                ps.setString(6, usuario);
-                ps.setString(7, contrasena);
-                ps.setString(8, "encargado");
-                
-                
-                int filas = ps.executeUpdate();
-                if(filas==1){
-                   JOptionPane.showConfirmDialog(rootPane,
-                                                "Encargado registrado", 
-                                                "", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.INFORMATION_MESSAGE);
-                   recargarTablaEncargados(); 
-                   cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+            if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
+                if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
+                    String contrasenaEncriptada = Seguridad.hashPassword(contrasena);
+                    try {
+                        String sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) "
+                                + " VALUES (?,?,?,?,?,?,?,?, CURDATE())";
+                        PreparedStatement ps = conexion.prepareStatement(sql);
+                        ps.setString(1, nombre);
+                        ps.setString(2, apellido1);
+                        ps.setString(3, apellido2);
+                        ps.setString(4, telefono);
+                        ps.setString(5, correo);
+                        ps.setString(6, usuario);
+                        ps.setString(7, contrasenaEncriptada);
+                        ps.setString(8, "encargado");
+
+
+                        int filas = ps.executeUpdate();
+                        if(filas==1){
+                           JOptionPane.showConfirmDialog(rootPane,
+                                                        "Encargado registrado", 
+                                                        "", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.INFORMATION_MESSAGE);
+                           recargarTablaEncargados(); 
+                           cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                        }
+                        else{
+                            JOptionPane.showConfirmDialog(rootPane,
+                                                        "Ha habido un error", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException ex) {
+                        System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    }
                 }
-                else{
-                    JOptionPane.showConfirmDialog(rootPane,
-                                                "Ha habido un error", 
-                                                "Error", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.ERROR_MESSAGE);
-                }
-            } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
     }//GEN-LAST:event_jButtonValidarEncargadoActionPerformed
@@ -910,6 +919,28 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         */
     }
     
+    private static final Pattern PATTERN_EMAIL = Pattern.compile( //Patron para validar el email
+        "^[A-Za-z0-9_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" // se permiten letras, simbolos, tiene que haber un @
+                                                          // y un . , el dominio tiene que tener 2 letras
+    );
+    
+    private static final Pattern PATTERN_TELEFONO = Pattern.compile( //Patron para validar el telefono
+        "^[0-9]{9}$" // 9 Numeros del 0-9
+    );
+
+     public static boolean validarEmail(String correo) { //Compobamos que el correo cumpla el patron
+        if (!PATTERN_EMAIL.matcher(correo).matches()) { 
+            return false;
+        }
+        return true;
+    }
+     
+    public static boolean validarTelefono(String telefono) { //Comprobamos que el telefono cumpla el patron
+        if (!PATTERN_TELEFONO.matcher(telefono).matches()) {
+            return false;
+        }
+        return true;
+    }
     
     /**
      * @param args the command line arguments
