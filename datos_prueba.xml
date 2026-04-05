@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <table name="Restaurante">
+    <Restaurante>
+      <id_restaurante>1</id_restaurante>
+      <nombre>El Rincón de Madrid</nombre>
+      <direccion>Calle Gran Vía 10, Madrid</direccion>
+      <telefono>911234567</telefono>
+      <correo>rincon@madrid.com</correo>
+      <capacidad>80</capacidad>
+      <apertura>9</apertura>
+      <cierre>23</cierre>
+    </Restaurante>
+    <Restaurante>
+      <id_restaurante>2</id_restaurante>
+      <nombre>La Terraza</nombre>
+      <direccion>Avenida Diagonal 45, Barcelona</direccion>
+      <telefono>931234567</telefono>
+      <correo>terraza@barcelona.com</correo>
+      <capacidad>60</capacidad>
+      <apertura>10</apertura>
+      <cierre>22</cierre>
+    </Restaurante>
+    <Restaurante>
+      <id_restaurante>3</id_restaurante>
+      <nombre>Sabores del Sur</nombre>
+      <direccion>Calle Larios 22, Málaga</direccion>
+      <telefono>951223344</telefono>
+      <correo>sabores@malaga.com</correo>
+      <capacidad>70</capacidad>
+      <apertura>12</apertura>
+      <cierre>23</cierre>
+    </Restaurante>
+    <Restaurante>
+      <id_restaurante>4</id_restaurante>
+      <nombre>El Buen Sabor</nombre>
+      <direccion>Plaza Mayor 5, Salamanca</direccion>
+      <telefono>923112233</telefono>
+      <correo>buen@sabor.com</correo>
+      <capacidad>50</capacidad>
+      <apertura>9</apertura>
+      <cierre>22</cierre>
+    </Restaurante>
+  </table>
+  <table name="Ingrediente">
+    <Ingrediente><nombre_ingrediente>Tomate</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Lechuga</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Pollo</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Queso</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Jamón</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Pasta</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Carne</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Pan</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Huevo</nombre_ingrediente></Ingrediente>
+    <Ingrediente><nombre_ingrediente>Chocolate</nombre_ingrediente></Ingrediente>
+  </table>
+ 
+  <table name="Plato">
+    <Plato>
+      <id_plato>1</id_plato>
+      <nombre>Ensalada César</nombre>
+      <precio>8.50</precio>
+      <categoria>entrante</categoria>
+      <id_restaurante>2</id_restaurante>
+    </Plato>
+    <Plato>
+      <id_plato>2</id_plato>
+      <nombre>Pechuga a la plancha</nombre>
+      <precio>12.00</precio>
+      <categoria>segundo_plato</categoria>
+      <id_restaurante>3</id_restaurante>
+    </Plato>
+    <Plato>
+      <id_plato>3</id_plato>
+      <nombre>Pasta carbonara</nombre>
+      <precio>10.50</precio>
+      <categoria>primer_plato</categoria>
+      <id_restaurante>2</id_restaurante>
+    </Plato>
+    <Plato>
+      <id_plato>4</id_plato>
+      <nombre>Tarta de queso</nombre>
+      <precio>5.00</precio>
+      <categoria>postre</categoria>
+      <id_restaurante>3</id_restaurante>
+    </Plato>
+    <Plato>
+      <id_plato>5</id_plato>
+      <nombre>Hamburguesa Especial</nombre>
+      <precio>11.00</precio>
+      <categoria>segundo_plato</categoria>
+      <id_restaurante>1</id_restaurante>
+    </Plato>
+    <Plato>
+      <id_plato>6</id_plato>
+      <nombre>Crema de verduras</nombre>
+      <precio>6.50</precio>
+      <categoria>entrante</categoria>
+      <id_restaurante>1</id_restaurante>
+    </Plato>
+    <Plato>
+      <id_plato>7</id_plato>
+      <nombre>Brownie de chocolate</nombre>
+      <precio>4.50</precio>
+      <categoria>postre</categoria>
+      <id_restaurante>1</id_restaurante>
+    </Plato>
+  </table>
+ 
+  <table name="ingrediente_plato">
+    <ingrediente_plato><id_plato>1</id_plato><nombre_ingrediente>Lechuga</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>1</id_plato><nombre_ingrediente>Tomate</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>1</id_plato><nombre_ingrediente>Queso</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>2</id_plato><nombre_ingrediente>Pollo</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>3</id_plato><nombre_ingrediente>Pasta</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>3</id_plato><nombre_ingrediente>Queso</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>4</id_plato><nombre_ingrediente>Queso</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>5</id_plato><nombre_ingrediente>Carne</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>5</id_plato><nombre_ingrediente>Pan</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>6</id_plato><nombre_ingrediente>Lechuga</nombre_ingrediente></ingrediente_plato>
+    <ingrediente_plato><id_plato>7</id_plato><nombre_ingrediente>Chocolate</nombre_ingrediente></ingrediente_plato>
+  </table>
+ 
+  <table name="Usuario">
+    <Usuario>
+      <id>1</id>
+      <nombre>Ana</nombre>
+      <apellido1>Gutierrez</apellido1>
+      <telefono>965467856</telefono>
+      <correo>ana@servix.com</correo>
+      <usuario_login>ana_g</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>cliente</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>2</id>
+      <nombre>Lucia</nombre>
+      <apellido1>Carrera</apellido1>
+      <apellido2>Salanova</apellido2>
+      <telefono>685321567</telefono>
+      <correo>lucia@servix.com</correo>
+      <usuario_login>lucia_c</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>empleado</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>3</id>
+      <nombre>Javier</nombre>
+      <apellido1>Lopez</apellido1>
+      <apellido2>Carruesco</apellido2>
+      <telefono>680742457</telefono>
+      <correo>javier.lopez@servix.com</correo>
+      <usuario_login>gerente</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>gerente</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>4</id>
+      <nombre>Carlos</nombre>
+      <apellido1>García</apellido1>
+      <apellido2>López</apellido2>
+      <telefono>600111222</telefono>
+      <correo>carlos@servix.com</correo>
+      <usuario_login>admin</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>encargado</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>5</id>
+      <nombre>María</nombre>
+      <apellido1>Martínez</apellido1>
+      <telefono>600333444</telefono>
+      <correo>maria@servix.com</correo>
+      <usuario_login>maria_m</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>cliente</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>6</id>
+      <nombre>Pedro</nombre>
+      <apellido1>Sánchez</apellido1>
+      <apellido2>Ruiz</apellido2>
+      <telefono>600555666</telefono>
+      <correo>pedro@servix.com</correo>
+      <usuario_login>pedro_s</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>empleado</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>7</id>
+      <nombre>Lucía</nombre>
+      <apellido1>Hernández</apellido1>
+      <apellido2>Gil</apellido2>
+      <telefono>600777888</telefono>
+      <correo>lucia@servix.com</correo>
+      <usuario_login>lucia_h</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>cliente</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+    <Usuario>
+      <id>8</id>
+      <nombre>Javier</nombre>
+      <apellido1>Ortega</apellido1>
+      <apellido2>Muñoz</apellido2>
+      <telefono>600999000</telefono>
+      <correo>javier.ortega@servix.com</correo>
+      <usuario_login>javier_o</usuario_login>
+      <contrasenya_login>$2a$10$85ynIKklbhUWSheMLk1gxeOW92fkHJ6cYzDDw0GVMh2HNzZI127b2</contrasenya_login>
+      <rol>empleado</rol>
+      <haIniciadoSesion>false</haIniciadoSesion>
+    </Usuario>
+  </table>
+ 
+  <table name="usuario_restaurante">
+    <usuario_restaurante><id_usuario>1</id_usuario><id_restaurante>1</id_restaurante></usuario_restaurante>
+    <usuario_restaurante><id_usuario>2</id_usuario><id_restaurante>1</id_restaurante></usuario_restaurante>
+    <usuario_restaurante><id_usuario>4</id_usuario><id_restaurante>1</id_restaurante></usuario_restaurante>
+    <usuario_restaurante><id_usuario>5</id_usuario><id_restaurante>1</id_restaurante></usuario_restaurante>
+    <usuario_restaurante><id_usuario>6</id_usuario><id_restaurante>1</id_restaurante></usuario_restaurante>
+    <usuario_restaurante><id_usuario>7</id_usuario><id_restaurante>2</id_restaurante></usuario_restaurante>
+    <usuario_restaurante><id_usuario>8</id_usuario><id_restaurante>4</id_restaurante></usuario_restaurante>
+  </table>
+ 
+  <table name="Mesa">
+    <Mesa><id_mesa>1</id_mesa><capacidad>4</capacidad><estado>false</estado><id_restaurante>1</id_restaurante></Mesa>
+    <Mesa><id_mesa>2</id_mesa><capacidad>2</capacidad><estado>false</estado><id_restaurante>1</id_restaurante></Mesa>
+    <Mesa><id_mesa>3</id_mesa><capacidad>6</capacidad><estado>false</estado><id_restaurante>2</id_restaurante></Mesa>
+    <Mesa><id_mesa>4</id_mesa><capacidad>4</capacidad><estado>false</estado><id_restaurante>3</id_restaurante></Mesa>
+    <Mesa><id_mesa>5</id_mesa><capacidad>8</capacidad><estado>true</estado><id_restaurante>3</id_restaurante></Mesa>
+    <Mesa><id_mesa>6</id_mesa><capacidad>2</capacidad><estado>false</estado><id_restaurante>4</id_restaurante></Mesa>
+  </table>
+ 
+  <table name="Reserva">
+    <Reserva>
+      <id_reserva>1</id_reserva>
+      <estado_reserva>confirmada</estado_reserva>
+      <n_comensales>3</n_comensales>
+      <fecha_hora>2026-04-01 20:00:00</fecha_hora>
+      <id_cliente>6</id_cliente>
+      <id_mesa>1</id_mesa>
+      <id_restaurante>1</id_restaurante>
+    </Reserva>
+    <Reserva>
+      <id_reserva>2</id_reserva>
+      <estado_reserva>pendiente</estado_reserva>
+      <n_comensales>2</n_comensales>
+      <fecha_hora>2026-04-02 14:00:00</fecha_hora>
+      <id_cliente>6</id_cliente>
+      <id_restaurante>1</id_restaurante>
+    </Reserva>
+    <Reserva>
+      <id_reserva>3</id_reserva>
+      <estado_reserva>confirmada</estado_reserva>
+      <n_comensales>4</n_comensales>
+      <fecha_hora>2026-04-03 21:00:00</fecha_hora>
+      <id_cliente>7</id_cliente>
+      <id_mesa>4</id_mesa>
+      <id_restaurante>3</id_restaurante>
+    </Reserva>
+    <Reserva>
+      <id_reserva>4</id_reserva>
+      <estado_reserva>cancelada</estado_reserva>
+      <n_comensales>2</n_comensales>
+      <fecha_hora>2026-04-05 13:30:00</fecha_hora>
+      <id_cliente>5</id_cliente>
+      <id_mesa>6</id_mesa>
+      <id_restaurante>4</id_restaurante>
+    </Reserva>
+    <Reserva>
+      <id_reserva>5</id_reserva>
+      <estado_reserva>pendiente</estado_reserva>
+      <n_comensales>5</n_comensales>
+      <fecha_hora>2026-04-10 20:00:00</fecha_hora>
+      <id_cliente>5</id_cliente>
+      <id_restaurante>1</id_restaurante>
+    </Reserva>
+  </table>
+</root>
