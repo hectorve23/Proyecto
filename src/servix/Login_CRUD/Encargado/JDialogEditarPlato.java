@@ -31,8 +31,9 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
     String cadenaCategoriaCambiar;
     Connection conexion;
     JFrameServix padre;
+    int restaurante, id;
     
-    public JDialogEditarPlato(String nombreCambiar,double precioCambiar, String cadenaCategoriaCambiar, java.awt.Frame parent, boolean modal) {
+    public JDialogEditarPlato(String nombreCambiar,double precioCambiar, String cadenaCategoriaCambiar, java.awt.Frame parent, boolean modal, int restaurante, int id) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
@@ -41,6 +42,8 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         this.nombreCambiar=nombreCambiar;
         this.precioCambiar=precioCambiar;
         this.cadenaCategoriaCambiar=cadenaCategoriaCambiar;
+        this.restaurante = restaurante;
+        this.id = id;
         cargarDatosPlato();
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
@@ -186,12 +189,13 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
             try {
                 PreparedStatement ps = conexion.prepareStatement("UPDATE plato"
                         + " SET nombre=?, precio=?, categoria=?"
-                        + " WHERE nombre=?");
+                        + " WHERE nombre=? AND id_restaurante = ?");
                 
                 ps.setString(1, nombrePlato);
                 ps.setDouble(2, precio);
                 ps.setString(3, categoria);
                 ps.setString(4, nombreCambiar);
+                ps.setInt(5, restaurante);
 
                 int filas = ps.executeUpdate();
                 if(filas==1){
@@ -201,7 +205,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
                    this.dispose();
-                   JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
+                   JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true, restaurante, id);
                    jdam.setVisible(true);
                 }
                 else{
@@ -221,7 +225,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
         this.dispose();
-        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true, restaurante, id);
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 

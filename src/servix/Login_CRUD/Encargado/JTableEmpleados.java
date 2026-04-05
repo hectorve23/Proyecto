@@ -43,14 +43,17 @@ public class JTableEmpleados extends javax.swing.JDialog {
     ArrayList<Usuario> lista = new ArrayList<>();
     EliminarEmpleados eliminar = new EliminarEmpleados();
     JFrameServix padre;
+    int restaurante, encargado;
     
-    public JTableEmpleados(java.awt.Frame parent, boolean modal) {
+    public JTableEmpleados(java.awt.Frame parent, boolean modal, int encargado, int restaurante) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
+        this.encargado = encargado;
+        this.restaurante = restaurante;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
@@ -204,7 +207,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, encargado);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -212,9 +215,10 @@ public class JTableEmpleados extends javax.swing.JDialog {
         try{
             lista.clear();
             nueva.conectar();
-            String sql = "SELECT * FROM Usuario WHERE rol = ?";
+            
+            String sql = "SELECT u.* FROM Usuario u JOIN usuario_restaurante ur ON u.id = ur.id_usuario WHERE ur.id_restaurante = ? AND u.rol = 'empleado'";
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, "empleado");
+            ps.setInt(1, restaurante);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

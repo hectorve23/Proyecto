@@ -6,6 +6,9 @@ package servix.Login_CRUD.Encargado;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -31,16 +34,18 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     JFrameServix padre;
     ConexionBBDD nueva;
     Connection conexion;
-    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal) {
+    int id, id_restaurante;
+    public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
         this.setTitle("Servix");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
         this.padre = (JFrameServix) parent;
+        this.id = id;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
+        seleccionarRestaurante(id);
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_encargado", JFrameServix.hs);
         }
@@ -68,7 +73,6 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         jButtonCerrarSesion = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jButtonInformeClientes = new javax.swing.JButton();
-        jButtonImportarDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,13 +149,6 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             }
         });
 
-        jButtonImportarDatos.setText("Importar datos");
-        jButtonImportarDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImportarDatosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,8 +164,6 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jButtonInformeClientes)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButtonImportarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,8 +185,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonInformeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonImportarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonInformeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -200,17 +194,33 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void seleccionarRestaurante(int id){
+        try {
+            String sql = "SELECT id_restaurante FROM usuario_restaurante WHERE id_usuario = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+           
+            if (rs.next()) {
+                id_restaurante = rs.getInt("id_restaurante");
+            }
+            
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableEmpleados jtee = new JTableEmpleados(padre, true);
+        JTableEmpleados jtee = new JTableEmpleados(padre, true, id, id_restaurante);
         jtee.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarEmpleadosActionPerformed
 
     private void jButtonVerReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableInterfazEmpleado jtie = new JTableInterfazEmpleado("encargado", padre, true);
+        JTableInterfazEmpleado jtie = new JTableInterfazEmpleado("encargado", padre, true, id, id_restaurante);
         jtie.setVisible(true);
     }//GEN-LAST:event_jButtonVerReservasActionPerformed
 
@@ -224,21 +234,21 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarReservasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(padre, true);
+        JDialogGestionarReservas jdgr= new JDialogGestionarReservas(padre, true, id, id_restaurante);
         jdgr.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarReservasActionPerformed
 
     private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true);
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true, id, id_restaurante);
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
     private void jButtonAdministrarMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMesasActionPerformed
         this.setVisible(false);
         this.dispose();
-        JTableAdministrarMesas jtam = new JTableAdministrarMesas(padre, true);
+        JTableAdministrarMesas jtam = new JTableAdministrarMesas(padre, true, id, id_restaurante);
         jtam.setVisible(true);
     }//GEN-LAST:event_jButtonAdministrarMesasActionPerformed
 
@@ -248,7 +258,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             String fileJasper = "informes/Clientes_1.jasper";
             Map parameters = new HashMap();
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
-            javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
+            javax.swing.JDialog visor = new javax.swing.JDialog(this, false);
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
             visor.setSize(900, 700);
             visor.setLocationRelativeTo(null);
@@ -259,11 +269,6 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Se produjo un error al leer el archivo .jasper");
         } 
     }//GEN-LAST:event_jButtonInformeClientesActionPerformed
-
-    private void jButtonImportarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportarDatosActionPerformed
-        JDialogDatosDePrueba jddp = new JDialogDatosDePrueba(padre, true);
-        jddp.setVisible(true);
-    }//GEN-LAST:event_jButtonImportarDatosActionPerformed
     
    public static void main(String args[]) {
         /* Set the FlatLaf look and feel */
@@ -288,7 +293,6 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAdministrarMesas;
     private javax.swing.JButton jButtonAdministrarReservas;
     private javax.swing.JButton jButtonCerrarSesion;
-    private javax.swing.JButton jButtonImportarDatos;
     private javax.swing.JButton jButtonInformeClientes;
     private javax.swing.JButton jButtonVerReservas;
     private javax.swing.JLabel jLabel1;

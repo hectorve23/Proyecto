@@ -40,8 +40,9 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
     java.sql.Date fecha_sql;
     JFrameServix padre;
     String rol;
+    int id, restaurante;
     
-    public JTableInterfazEmpleado(String rol, java.awt.Frame parent, boolean modal) {
+    public JTableInterfazEmpleado(String rol, java.awt.Frame parent, boolean modal, int id, int restaurante) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
@@ -49,6 +50,8 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
         this.rol= rol;
+        this.id = id;
+        this.restaurante = restaurante;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
@@ -179,7 +182,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
             jButtonSalir.setText("Volver");
             this.setVisible(false);
             this.dispose();
-            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+            JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, id);
             jdie.setVisible(true);
         }else if(rol.equalsIgnoreCase("empleado")){
             this.setVisible(false);
@@ -193,9 +196,10 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         try {
             lista.clear();
             nueva.conectar();
-            String sql = "SELECT * FROM Reserva WHERE DATE(fecha_hora) = ? ";
+            String sql = "SELECT * FROM Reserva WHERE DATE(fecha_hora) = ? AND id_restaurante = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setObject(1, fecha);
+            ps.setInt(2, restaurante);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -221,7 +225,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         escribirReservas(LocalDate.now());
     }
     
-     public void aplicarFormato(){
+    public void aplicarFormato(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
         

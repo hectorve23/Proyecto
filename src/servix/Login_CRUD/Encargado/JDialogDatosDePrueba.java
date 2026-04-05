@@ -144,13 +144,14 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
 
                     case "Plato": {
                         NodeList f = t.getElementsByTagName("Plato");
-                        try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO Plato (id_plato, nombre, precio, categoria) VALUES (?,?,?,?)")) {
+                        try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO Plato (id_plato, nombre, precio, categoria, id_restaurante) VALUES (?,?,?,?,?)")) {
                             for (int j = 0; j < f.getLength(); j++) {
                                 Element e = (Element) f.item(j);
                                 ps.setInt(1, Integer.parseInt(txt(e, "id_plato")));
                                 ps.setString(2, txt(e, "nombre"));
                                 ps.setBigDecimal(3, new BigDecimal(txt(e, "precio")));
                                 ps.setString(4, txt(e, "categoria"));
+                                ps.setInt(5, Integer.parseInt(txt(e, "id_restaurante")));
                                 ps.addBatch();
                             }
                             ps.executeBatch();
@@ -227,7 +228,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                     case "Reserva": {
                         NodeList f = t.getElementsByTagName("Reserva");
                         try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO Reserva "
-                                + "(id_reserva, estado_reserva, n_comensales, fecha_hora, id_cliente, id_mesa) VALUES (?,?,?,?,?,?)")) {
+                                + "(id_reserva, estado_reserva, n_comensales, fecha_hora, id_cliente, id_mesa, id_restaurante) VALUES (?,?,?,?,?,?,?)")) {
                             for (int j = 0; j < f.getLength(); j++) {
                                 Element e = (Element) f.item(j);
                                 ps.setInt(1, Integer.parseInt(txt(e, "id_reserva")));
@@ -241,6 +242,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                                 } else {
                                     ps.setInt(6, Integer.parseInt(idMesa));
                                 }
+                                ps.setInt(7, Integer.parseInt(txt(e, "id_restaurante")));
                                 ps.addBatch();
                             }
                             ps.executeBatch();
@@ -304,13 +306,14 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
 
             if (r.has("platos")) {
                 JSONArray a = r.getJSONArray("platos");
-                try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO Plato (id_plato, nombre, precio, categoria) VALUES (?,?,?,?)")) {
+                try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO Plato (id_plato, nombre, precio, categoria, id_restaurante) VALUES (?,?,?,?,?)")) {
                     for (int i = 0; i < a.length(); i++) {
                         JSONObject o = a.getJSONObject(i);
                         ps.setInt(1, o.getInt("id_plato"));
                         ps.setString(2, o.getString("nombre"));
                         ps.setBigDecimal(3, BigDecimal.valueOf(o.getDouble("precio")));
                         ps.setString(4, o.getString("categoria"));
+                        ps.setInt(5, o.getInt("id_restaurante"));
                         ps.addBatch();
                     }
                     ps.executeBatch();
@@ -383,7 +386,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
             if (r.has("reservas")) {
                 JSONArray arr = r.getJSONArray("reservas");
                 try (PreparedStatement ps = conexion.prepareStatement( "INSERT IGNORE INTO Reserva "
-                        + "(id_reserva, estado_reserva, n_comensales, fecha_hora, id_cliente, id_mesa) VALUES (?,?,?,?,?,?)")) {
+                        + "(id_reserva, estado_reserva, n_comensales, fecha_hora, id_cliente, id_mesa, id_restaurante) VALUES (?,?,?,?,?,?,?)")) {
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject o = arr.getJSONObject(i);
                         ps.setInt(1, o.getInt("id_reserva"));
@@ -396,6 +399,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                         } else {
                             ps.setInt(6, o.getInt("id_mesa"));
                         }
+                        ps.setInt(7, o.getInt("id_restaurante"));
                         ps.addBatch();
                     }
                     ps.executeBatch();
@@ -403,7 +407,6 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
             }
 
             conexion.commit();
-            JOptionPane.showMessageDialog(null,"Se han importado los datos de prueba");
             this.setVisible(false);
 
         } catch (Exception ex) {

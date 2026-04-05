@@ -28,13 +28,16 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
     ConexionBBDD nueva;
     Connection conexion;
     JFrameServix padre;
-    public JDialogEditarMesa(String id, java.awt.Frame parent, boolean modal) {
+    int restaurante;
+    
+    public JDialogEditarMesa(String id, java.awt.Frame parent, boolean modal, int restaurante) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.padre= (JFrameServix) parent;
+        this.restaurante = restaurante;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         cargarComboBox();
@@ -169,8 +172,9 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
 
     private void cargarComboBox() {
         try {
-            String sql = "SELECT id_mesa FROM Mesa";
+            String sql = "SELECT id_mesa FROM Mesa WHERE id_restaurante = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, restaurante);
             ResultSet rs = ps.executeQuery();
             jComboBoxId.removeAllItems();
             while (rs.next()) {

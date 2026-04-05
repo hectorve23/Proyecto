@@ -33,7 +33,9 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     ConexionBBDD nueva = null;
     Connection conexion = null;
     JFrameServix padre;
-    public JDialogAdministrarMenu(java.awt.Frame parent, boolean modal) {
+    int restaurante, id;
+    
+    public JDialogAdministrarMenu(java.awt.Frame parent, boolean modal, int restaurante, int id) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
@@ -43,6 +45,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
         this.padre = (JFrameServix) parent;
+        this.restaurante = restaurante;
+        this.id = id;
         jTableMenu.setModel(dtm);
         jButtonVolver.setVisible(true);
         jButtonValidar.setVisible(false);
@@ -273,7 +277,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             String cadenaCategoria = jTableMenu.getValueAt(fila, 2).toString();
             
             this.dispose();
-            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, precio, cadenaCategoria, padre, true);
+            JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, precio, cadenaCategoria, padre, true, restaurante, id);
             jdep.setVisible(true);
 
             recargarTabla();
@@ -291,9 +295,10 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             String nombre_plato = (String) jTableMenu.getValueAt(fila, 0);
              try {
                 conexion.setAutoCommit(false);
-                String sql = "DELETE FROM plato WHERE nombre=?";
+                String sql = "DELETE FROM plato WHERE nombre=? AND id_restaurante = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, nombre_plato);
+                ps.setInt(2, restaurante);
                 int opcion = JOptionPane.showConfirmDialog(
                                                 null,
                                                 "¿Estas seguro de eliminar el plato seleccionado?",
@@ -327,7 +332,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, id);
         jdie.setVisible(true); 
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
@@ -347,12 +352,13 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         else{
             try {
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
-                        + "(nombre, precio, categoria)"
-                        + " VALUES (?, ?, ?)");
+                        + "(nombre, precio, categoria, id_restaurante)"
+                        + " VALUES (?, ?, ?, ?)");
                 
                 ps.setString(1, nombrePlato);
                 ps.setDouble(2, precio);
                 ps.setString(3, categoria);
+                ps.setInt(4, restaurante);
 
                 int filas = ps.executeUpdate();
                 if(filas==1){
@@ -410,8 +416,9 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     public void cargaTablaMenu(){
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato ORDER BY categoria"
+                    "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato WHERE id_restaurante = ? ORDER BY categoria"
             );
+            ps.setInt(1, restaurante);
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

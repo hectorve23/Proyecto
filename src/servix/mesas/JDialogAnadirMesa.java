@@ -27,13 +27,16 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
     ConexionBBDD nueva;
     Connection conexion;
     JFrameServix padre;
-    public JDialogAnadirMesa(java.awt.Frame parent, boolean modal) {
+    int restaurante;
+    
+    public JDialogAnadirMesa(java.awt.Frame parent, boolean modal, int restaurante) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.padre=(JFrameServix) parent;
+        this.restaurante = restaurante;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         
@@ -137,10 +140,10 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
         }else{
            try {
                 nueva.conectar();
-                String sql= "INSERT INTO Mesa(capacidad, estado) VALUES (?, true)";
+                String sql= "INSERT INTO Mesa(capacidad, estado, id_restaurante) VALUES (?, true, ?)";
                 PreparedStatement ps= conexion.prepareStatement(sql);
                 ps.setString(1, capacidad);
-
+                ps.setInt(2, restaurante);
                 ps.executeUpdate();
                 
                 ps.close();

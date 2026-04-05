@@ -35,16 +35,18 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     Connection conexion;
     DefaultTableModel dtm;
     ArrayList<Mesa> lista = new ArrayList<>();
-    String user;
     EliminarMesa eliminar = new EliminarMesa();
     JFrameServix padre;
-    public JTableAdministrarMesas(java.awt.Frame parent, boolean modal) {
+    int id, restaurante;
+    
+    public JTableAdministrarMesas(java.awt.Frame parent, boolean modal, int id, int restaurante) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
-        this.user=user;
+        this.id = id;
+        this.restaurante = restaurante;
         this.padre=(JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
@@ -170,8 +172,9 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         try {
             lista.clear();
             nueva.conectar();
-            String sql = "SELECT * FROM Mesa";
+            String sql = "SELECT * FROM Mesa WHERE id_restaurante = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, restaurante);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -196,12 +199,12 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, id);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
     private void jButtonAnadirMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnadirMesaActionPerformed
-        JDialogAnadirMesa jdam = new JDialogAnadirMesa(padre, true);
+        JDialogAnadirMesa jdam = new JDialogAnadirMesa(padre, true, restaurante);
         jdam.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAnadirMesaActionPerformed
@@ -212,7 +215,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione una mesa para editar.");
         }else{
             String id = dtm.getValueAt(fila, 0).toString();
-            JDialogEditarMesa jdem= new JDialogEditarMesa(id, padre, true);
+            JDialogEditarMesa jdem= new JDialogEditarMesa(id, padre, true, restaurante);
             jdem.setVisible(true);
             recargarTabla();
         }      

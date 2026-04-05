@@ -44,14 +44,17 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     DefaultTableModel dtmCanceladas;
     ArrayList<Reserva> lista = new ArrayList<>();
     JFrameServix padre;
+    int id, restaurante;
     
-    public JDialogGestionarReservas(java.awt.Frame parent, boolean modal) {
+    public JDialogGestionarReservas(java.awt.Frame parent, boolean modal, int id, int id_restaurante) {
         super(parent, modal);
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
+        this.restaurante = id_restaurante;
+        this.id = id;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtmPendientes = new DefaultTableModel();
@@ -67,7 +70,6 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jTableCanceladas.setModel(dtmCanceladas);
         cargarDatos();
         aplicarFormato();
-        
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gestion_reservas", JFrameServix.hs);
         }
@@ -78,8 +80,9 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             lista.clear();
             nueva.conectar();
 
-            String sql = "SELECT * FROM Reserva ORDER BY fecha_hora";
+            String sql = "SELECT * FROM Reserva WHERE id_restaurante = ? ORDER BY fecha_hora";
             PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, restaurante);
             ResultSet rs = ps.executeQuery();
 
             dtmPendientes.setRowCount(0);
@@ -367,7 +370,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true);
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, id);
         jdie.setVisible(true);
     }//GEN-LAST:event_jButtonVolverActionPerformed
 
