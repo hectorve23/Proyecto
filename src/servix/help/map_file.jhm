@@ -5,6 +5,11 @@
     <mapID target="ayuda_clientes" url="html/clientes_interfaz.html" />
     <mapID target="ayuda_baja_cliente" url="html/clientes_baja.html" />
     <mapID target="ayuda_editar_reserva" url="html/reservas_editar.html" />
+    
+    <mapID target="ayuda_gerente" url="html/gerente_ayuda.html" />
+    <mapID target="ayuda_crud_restaurantes" url="html/gerente_restaurantes.html" />
+    <mapID target="ayuda_crud_encargados" url="html/gerente_encargados.html" />
+    <mapID target="ayuda_asignaciones" url="html/gerente_asignaciones.html" />
 
     <mapID target="ayuda_tabla_empleados" url="html/empleados_lista.html" />
     <mapID target="ayuda_encargado" url="html/encargado_interfaz.html" />

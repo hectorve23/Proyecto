@@ -3,17 +3,27 @@
     <indexitem text="Alta de usuarios" target="ayuda_alta_usuario"/>
     <indexitem text="Baja de clientes" target="ayuda_baja_cliente"/>
     <indexitem text="Cambiar contraseña" target="ayuda_password"/>
-    <indexitem text="Clientes - Gestión" target="ayuda_clientes"/>
-    <indexitem text="Empleados - Listado" target="ayuda_tabla_empleados"/>
-    <indexitem text="Encargado - Panel" target="ayuda_encargado"/>
-    <indexitem text="Menú - Administrar" target="ayuda_admin_menu"/>
-    <indexitem text="Mesas - Añadir" target="ayuda_anadir_mesa"/>
-    <indexitem text="Mesas - Editar" target="ayuda_editar_mesa"/>
-    <indexitem text="Mesas - Gestión" target="ayuda_mesas"/>
-    <indexitem text="Platos - Edición" target="ayuda_editar_plato"/>
-    <indexitem text="Principal - Ventana" target="principal"/>
-    <indexitem text="Reservas - Editar" target="ayuda_editar_reserva"/>
-    <indexitem text="Reservas - Gestión" target="ayuda_gestion_reservas"/>
+    <indexitem text="Gestion de clientes" target="ayuda_clientes"/>
+    
+    <indexitem text="Panel de gerente" target="ayuda_gerente"/>
+    <indexitem text="Gestion de restaurantes" target="ayuda_crud_restaurantes"/>
+    <indexitem text="Control de encargados" target="ayuda_crud_encargados"/>
+    <indexitem text="Gestion de asignaciones" target="ayuda_asignaciones"/>
+    
+    <indexitem text="Panel de encargado" target="ayuda_encargado"/>
+    <indexitem text="Listado de empleados" target="ayuda_tabla_empleados"/>
+    <indexitem text="Administracion del menú" target="ayuda_admin_menu"/>
+    <indexitem text="Edición de platos" target="ayuda_editar_plato"/>
+    
+    <indexitem text="Gestión de mesas" target="ayuda_mesas"/>
+    <indexitem text="Añadir mesas" target="ayuda_anadir_mesa"/>
+    <indexitem text="Edicion de mesas" target="ayuda_editar_mesa"/>
+    
+    <indexitem text="Gestión de reservas" target="ayuda_gestion_reservas"/>
+    <indexitem text="Edicion de reservas" target="ayuda_editar_reserva"/>
+    
+    <indexitem text="Panel de empleado" target="ayuda_interfaz_empleado"/>
+    
 </index>
 
 

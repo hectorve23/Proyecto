@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda - Gestión de Encargados</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+
+<div class="contenedor">
+    <h1>Gestión de Encargados</h1>
+    <p>El sistema permite al Gerente crear y administrar cuentas de usuario de tipo <strong>Encargado</strong>. Estas cuentas son esenciales para que el personal pueda acceder a sus funciones de gestión en sus respectivos locales.</p>
+
+    <div class="seccion">
+        <h3>Proceso de Alta y Validación</h3>
+        <p>Para garantizar la integridad de la base de datos, el sistema aplica las siguientes reglas automáticas antes de permitir el registro:</p>
+        <ul>
+            <li><strong>Campos Obligatorios:</strong> No se permiten campos vacíos (Nombre, Apellidos, Usuario, etc.).</li>
+            <li><strong>Validación de Teléfono:</strong> Debe contener exactamente 9 dígitos numéricos.</li>
+            <li><strong>Validación de Email:</strong> Debe seguir un formato estándar (ejemplo@dominio.com).</li>
+            <li><strong>Cotejo de Contraseña:</strong> Los campos de "Contraseña" y "Confirmación" deben coincidir exactamente.</li>
+        </ul>
+    </div>
+
+    <div class="seccion">
+        <h3>Seguridad de Acceso</h3>
+        <p>Servix prioriza la seguridad de los datos de acceso:</p>
+        <h2>Encriptación</h2>
+        <p>Al pulsar el botón <kbd>Validar Encargado</kbd>, el sistema utiliza un algoritmo de <strong>Hash</strong> para encriptar la contraseña antes de almacenarla en la base de datos. Esto impide que las contraseñas sean visibles en texto plano, incluso para el administrador de la base de datos.</p>
+        
+        <h2>Gestión de Perfiles</h2>
+        <p>Para modificar un encargado existente, selecciónelo en la tabla y pulse <kbd>Editar</kbd>. Esto abrirá un diálogo que permite actualizar sus datos personales o de contacto.</p>
+    </div>
+
+    <div class="aviso">
+        <strong>Atención:</strong> Si elimina a un encargado mediante el botón <kbd>Eliminar</kbd>, se perderá su acceso al sistema de forma inmediata. Asegúrese de que el usuario seleccionado es el correcto antes de confirmar la operación en el cuadro de diálogo.
+    </div>
+</div>
+
+</body>
+</html>

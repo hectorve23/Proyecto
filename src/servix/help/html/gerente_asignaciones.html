@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda - Asignaciones de Personal</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">   
+</head>
+<body>
+
+<div class="contenedor">
+    <h1>Asignaciones restaurante-encargado</h1>
+    <p>La herramienta de asignaciones permite vincular operativamente a los <strong>Encargados</strong> con los <strong>Restaurantes</strong>. Esta unión es fundamental para determinar qué locales puede gestionar cada empleado al iniciar sesión.</p>
+
+    <div class="seccion">
+        <h3>Proceso de Vinculación</h3>
+        <p>Para crear una nueva relación laboral, el sistema utiliza un método de selección simplificado:</p>
+        <ol>
+            <li><strong>Selección de Encargado:</strong> Elija al usuario desde el menú desplegable. El sistema muestra el nombre completo del personal disponible.</li>
+            <li><strong>Selección de Restaurante:</strong> Elija el establecimiento de destino. El listado muestra el nombre del local junto a su dirección para evitar confusiones.</li>
+            <li><strong>Confirmación:</strong> Pulse el botón <kbd>Asignar</kbd>.</li>
+        </ol>
+    </div>
+
+    <div class="seccion">
+        <h3>Control </h3>
+        <p>En la tabla podrá supervisar todas las asignaciones vigentes en tiempo real.</p>
+        
+        <h2>Eliminar Asignaciones</h2>
+        <p>Si un encargado deja de prestar servicio en un local, puede romper el vínculo seleccionando la fila correspondiente y pulsando <kbd>Eliminar Asignación</kbd>.</p>
+        <ul>
+            <li>Esta acción <strong>no elimina al usuario ni al restaurante</strong>, solo la relación entre ambos.</li>
+        </ul>
+    </div>
+
+    <div class="nota">
+        <strong>Actualización Dinámica:</strong> Tras cada asignación o eliminación, el sistema refresca los desplegables para evitar errores de selección.
+    </div>
+
+</div>
+
+</body>
+</html>

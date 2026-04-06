@@ -64,9 +64,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         cargaTablaAsignaciones();
         formatoTabla();
         
-        /*if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
-        }*/
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gerente", JFrameServix.hs);
+        }
     }
 
     /**
@@ -912,11 +912,19 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jTableRestaurantes.getColumnModel().getColumn(5).setCellRenderer(formatoInt);
         jTableRestaurantes.getColumnModel().getColumn(6).setCellRenderer(formatoInt);
         jTableRestaurantes.getColumnModel().getColumn(7).setCellRenderer(formatoInt);
-        /*
-        jTableRestaurantes.getColumnModel().getColumn(0).setPreferredWidth(150); // Fecha y Hora (más ancho)
-        jTableRestaurantes.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTableRestaurantes.getColumnModel().getColumn(2).setPreferredWidth(100);// Comensales
-        */
+        
+        // Ajuste de anchos de columna
+        // Columnas estrechas (numeros)
+        jTableRestaurantes.getColumnModel().getColumn(0).setPreferredWidth(40);  
+        jTableRestaurantes.getColumnModel().getColumn(5).setPreferredWidth(70);  
+        jTableRestaurantes.getColumnModel().getColumn(6).setPreferredWidth(60);  
+        jTableRestaurantes.getColumnModel().getColumn(7).setPreferredWidth(60);  
+
+        // Columnas anchas (lo demas)
+        jTableRestaurantes.getColumnModel().getColumn(1).setPreferredWidth(150); 
+        jTableRestaurantes.getColumnModel().getColumn(2).setPreferredWidth(200); 
+        jTableRestaurantes.getColumnModel().getColumn(3).setPreferredWidth(90);  
+        jTableRestaurantes.getColumnModel().getColumn(4).setPreferredWidth(180); 
     }
     
     private static final Pattern PATTERN_EMAIL = Pattern.compile( //Patron para validar el email

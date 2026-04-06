@@ -7,6 +7,12 @@
          <tocitem text="Editar Reservas" target="ayuda_editar_reserva" />
       </tocitem>
       
+      <tocitem text="Operaciones de gerente" target="ayuda_gerente">
+         <tocitem text="Alta y listado de restaurantes" target="ayuda_crud_restaurantes" />
+         <tocitem text="Alta y listado de encargados" target="ayuda_crud_encargados" />
+         <tocitem text="Gestion de asignaciones" target="ayuda_asignaciones" />
+      </tocitem>
+      
       <tocitem text="Operaciones de encargado" target="ayuda_encargado">
          <tocitem text="Listado de Empleados" target="ayuda_tabla_empleados" />
          <tocitem text="Administrar reservas" target="ayuda_gestion_reservas" />

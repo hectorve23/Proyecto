@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayuda - Gestión de Restaurantes</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+<div class="contenedor">
+    <h1>Gestión de Restaurantes</h1>
+    <p>Esta sección permite el control administrativo sobre la infraestructura física de <strong>Servix</strong>. Aquí podrá registrar nuevos locales o modificar la configuración operativa de los existentes.</p>
+
+    <div class="seccion">
+        <h3>Campos de Información</h3>
+        <p>Cada restaurante se define por los siguientes parámetros obligatorios:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Campo</th>
+                    <th>Descripción / Formato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td>Identificador único numérico (autogenerado).</td>
+                </tr>
+                <tr>
+                    <td><strong>Capacidad</strong></td>
+                    <td>Número máximo de comensales permitidos (valor entero).</td>
+                </tr>
+                <tr>
+                    <td><strong>Horarios</strong></td>
+                    <td>Rango de apertura y cierre gestionado mediante selectores numéricos.</td>
+                </tr>
+                <tr>
+                    <td><strong>Contacto</strong></td>
+                    <td>Teléfono (9 dígitos) y dirección de correo electrónico válida.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seccion">
+        <h3>Operaciones Disponibles</h3>
+        
+        <h2>1. Alta de Restaurante</h2>
+        <p>Para añadir un local, debe completar todos los campos de texto y ajustar los valores de capacidad y horario. El sistema lo insertará en la base de datos y actualizará la tabla automáticamente.</p>
+
+        <h2>2. Edición de Datos</h2>
+        <p>Para modificar un restaurante:</p>
+        <ol>
+            <li>Seleccione una fila en la tabla de restaurantes.</li>
+            <li>Pulse el botón <kbd>Editar</kbd>.</li>
+            <li>Se abrirá una ventana emergente con los datos cargados para su modificación.</li>
+        </ol>
+
+        <h2>3. Eliminación Directa</h2>
+        <p>Al pulsar <kbd>Eliminar</kbd>, el sistema identifica el ID seleccionado. Esta acción utiliza una <strong>transacción segura</strong> con opción de <em>Rollback</em> en caso de fallo crítico en la base de datos.</p>
+    </div>
+
+    <div class="nota">
+        <strong>Refresco Automático:</strong> Tras cualquier operación exitosa, el sistema se actualiza para asegurar que los datos mostrados son los más recientes.
+    </div>
+
+    <div class="aviso">
+        <strong>Aviso de Seguridad:</strong> La eliminación de un restaurante es permanente y afectará a todas las asignaciones de encargados vinculadas a dicho local.
+    </div>
+</div>
+
+</body>
+</html>
