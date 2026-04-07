@@ -43,4 +43,19 @@ public class CargaCombos {
             System.getLogger(CargaCombos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
+    public void cargaComboRestaurantes(JComboBox jComboBoxRestaurantes){//Metodo necesario para usarlo en la seleccion para crear reservas
+        try {
+            
+            jComboBoxRestaurantes.removeAllItems();
+            PreparedStatement ps1 = conexion.prepareStatement("SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM restaurante ");
+            
+            ResultSet r = ps1.executeQuery();
+            while(r.next()){
+                jComboBoxRestaurantes.addItem(r.getString("nombre_direccion"));
+            }
+            
+        } catch (SQLException ex) {
+            System.getLogger(CargaCombos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
 }

@@ -257,6 +257,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                         if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
                             if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
                                  String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                                 JOptionPane.showConfirmDialog(rootPane, "Cuenta creada con exito", "Exito", JOptionPane.OK_CANCEL_OPTION);
                                  this.setVisible(false);
 
                                  try {

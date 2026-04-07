@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
+import servix.Login_CRUD.Gerente.CargaCombos;
 
 /**
  *
@@ -36,6 +37,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     Connection conexion;
     int id;
     JFrameServix padre;
+    CargaCombos cc;
    
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
@@ -44,6 +46,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.setIconImage(icon.getImage());
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        cc = new CargaCombos();
+        cc.cargaComboRestaurantes(jComboBoxRestaurantes);
         this.dtm = new DefaultTableModel();
         this.dtm2 = new DefaultTableModel();
         jTableReservas.setModel(dtm);
@@ -77,6 +81,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jButtonAnularReserva = new javax.swing.JButton();
         jButtonEditarReserva = new javax.swing.JButton();
         jPanelNuevaReserva = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBoxRestaurantes = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
@@ -134,12 +140,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelVerReservas.setLayout(jPanelVerReservasLayout);
         jPanelVerReservasLayout.setHorizontalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
-                .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
-                    .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(97, 97, 97))
+            .addGroup(jPanelVerReservasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                        .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanelVerReservasLayout.setVerticalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,6 +162,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelPadre.add(jPanelVerReservas, "card2");
 
         jPanelNuevaReserva.setLayout(new java.awt.GridLayout(6, 2, 10, 10));
+
+        jLabel7.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabel7.setText("Restaurante");
+        jPanelNuevaReserva.add(jLabel7);
+
+        jComboBoxRestaurantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanelNuevaReserva.add(jComboBoxRestaurantes);
 
         jLabel3.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel3.setText("Fecha");
@@ -215,10 +231,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 316, Short.MAX_VALUE)
+            .addGap(0, 334, Short.MAX_VALUE)
             .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelMenuLayout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -287,31 +303,27 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(62, 62, 62))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(216, 216, 216)
-                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelOpciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
-                                .addComponent(jButtonCerrarSesion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonBajaCliente)
-                                .addGap(17, 17, 17))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonCerrarSesion)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonBajaCliente)
+                            .addGap(17, 17, 17)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(308, 308, 308)
                         .addComponent(jLabel2)
                         .addGap(16, 16, 16))))
         );
@@ -358,7 +370,30 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         //true si entra en elhorario, false si no entra
         return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
                 (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
-    }   
+    }
+    private int comboBoxIdRestaurante(){        
+        try {
+            
+            String contenido = jComboBoxRestaurantes.getItemAt(jComboBoxRestaurantes.getSelectedIndex());
+            PreparedStatement ps = conexion.prepareStatement("SELECT id_restaurante FROM restaurante "
+                    + "WHERE CONCAT(nombre, ' | ', direccion)=?");
+            ps.setString(1, contenido);
+            
+            ResultSet r = ps.executeQuery();
+            
+            int id_restaurante=0;
+            while(r.next()){
+                id_restaurante = r.getInt(1);
+            }
+            
+            return id_restaurante;
+            
+        } catch (SQLException ex) {
+            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            return 0;
+        }
+        
+    }
     //Este boton valida la insercion de la reserva. Primero comprueba que ningun campo este vacio, despues que la fecha introducida
     //sea vigente, es decir, que el usuario no introduzca una fecha y hora que ya ha pasado, tras eso comprueba con el metodo anterior
     //que la hora sea valida. Si alguno de estas comprobaciones no es satisfactoria mostrara un JOptionPane indicando el error
@@ -407,8 +442,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         else{
             try {
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
-                        + "(estado_reserva, n_comensales, fecha_hora, id_cliente)"
-                        + " VALUES (?, ?, ?, ?)");
+                        + "(estado_reserva, n_comensales, fecha_hora, id_cliente, id_restaurante)"
+                        + " VALUES (?, ?, ?, ?, ?)");
                 
                 SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaStr = formatoFecha.format(mfecha);
@@ -424,6 +459,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
                 ps.setTimestamp(3, fechaHoraSQL);
                 ps.setInt(4, id);
+                ps.setInt(5, comboBoxIdRestaurante());
 
                 int filas = ps.executeUpdate();
                 if(filas==1){
@@ -590,6 +626,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVerMenu;
     private javax.swing.JButton jButtonVerReservas;
+    private javax.swing.JComboBox<String> jComboBoxRestaurantes;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -597,6 +634,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelBotonesDeleteUpdate;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelNuevaReserva;
@@ -616,7 +654,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT id_reserva as Nº, fecha_hora AS Fecha, n_comensales AS Comensales FROM reserva WHERE id_cliente=? AND NOT estado_reserva=?"
+                    "SELECT CONCAT(restaurante.nombre, ' | ', restaurante.direccion) as Restaurante_direccion, id_reserva as Nº, fecha_hora AS Fecha, n_comensales AS Comensales "
+                   + "FROM reserva INNER JOIN restaurante "
+                   + "ON reserva.id_restaurante = restaurante.id_restaurante "
+                   + "WHERE id_cliente=? AND NOT estado_reserva=?"
             );
             ps.setInt(1, id);
             ps.setString(2, "cancelada");
@@ -640,6 +681,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public void formatoTabla(){
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
+        
+        // Ajuste de anchos de columna
+        // Columnas estrechas (numeros)
+        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(10);  
+        jTableReservas.getColumnModel().getColumn(3).setPreferredWidth(10);   
+
+        // Columnas anchas (lo demas)
+        jTableReservas.getColumnModel().getColumn(0).setPreferredWidth(300); 
+        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(200); 
         
         jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
         jTableReservas.getColumnModel().getColumn(1).setCellRenderer(formatoFecha);
