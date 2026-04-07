@@ -760,7 +760,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Seleccione una reserva para anular.");
+            JOptionPane.showMessageDialog(this, "Seleccione un encargado para eliminar.");
         }
     }//GEN-LAST:event_jButtonEliminarEncargadoActionPerformed
 
@@ -789,7 +789,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         }
         else{
-            JOptionPane.showMessageDialog(rootPane, "Selecciona una fila", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Selecciona un encargado para editarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarEncargadoActionPerformed
 
@@ -845,7 +845,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         }
         else{
-            JOptionPane.showMessageDialog(rootPane, "Selecciona una fila", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Selecciona un restaurante para editarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarRestauranteActionPerformed
     public void recargarTablaRestaurantes() {

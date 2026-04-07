@@ -26,7 +26,6 @@ import servix.Login_CRUD.Encargado.JDialogDatosDePrueba;
 import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
 import servix.Login_CRUD.Gerente.JDialogInterfazGerente;
 import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
-import static servix.Seguridad.hashPassword;
 
 /**
  *
@@ -245,7 +244,6 @@ public class JFrameServix extends javax.swing.JFrame {
                         }
                     }
                 } 
-               
             }
         }
         else{
@@ -271,7 +269,6 @@ public class JFrameServix extends javax.swing.JFrame {
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
             }else{   
-            
                 nueva.conectar();
                 String sql = "SELECT * FROM Usuario WHERE usuario_login = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);

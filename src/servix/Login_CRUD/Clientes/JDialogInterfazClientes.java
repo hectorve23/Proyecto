@@ -501,7 +501,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 ps.setInt(3, id);
                 int opcion = JOptionPane.showConfirmDialog(
                                                 null,
-                                                "¿Estas seguro de anular la reserva seleccionada?",
+                                                "¿Estas seguro de que quieres anular la reserva seleccionada?",
                                                 "Confirmación",
                                                 JOptionPane.OK_CANCEL_OPTION,
                                                 JOptionPane.QUESTION_MESSAGE
@@ -576,7 +576,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             recargarTabla();
         }
         else{
-            JOptionPane.showMessageDialog(this, "Seleccione una reserva para editar.");
+            JOptionPane.showMessageDialog(this, "Selecciona una reserva para editar.");
         }
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
     //Este metodo abre el JDialog para borrar la cuenta de cliente

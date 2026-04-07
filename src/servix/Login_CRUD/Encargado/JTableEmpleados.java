@@ -194,7 +194,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
 
         if (fila == -1) {
             JOptionPane.showConfirmDialog(rootPane,
-                                            "Debe seleccionar una linea para eliminar" , 
+                                            "Debe seleccionar un empleado para eliminar" , 
                                             "Error", 
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.QUESTION_MESSAGE);
