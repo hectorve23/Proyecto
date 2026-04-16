@@ -17,6 +17,7 @@ public class CargaCombos {
     ConexionBBDD nueva = new ConexionBBDD();
     Connection conexion=nueva.getConnection();
     
+    //Metodo para cargar los combos del gerente cada vez que se realice o modifique una asignacion de restaurante-encargado
     public void cargaCombos(JComboBox jComboBoxRestaurantes, JComboBox jComboBoxEncargados){
         try {
             
