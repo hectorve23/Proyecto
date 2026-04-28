@@ -376,8 +376,27 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
 
     private void jButtonInformeCanceladasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeCanceladasActionPerformed
          try{
+            
+            String nombre=""; 
+            String direccion="";
+            String telefono="";
+                    
+            String sql = "SELECT nombre, direccion, telefono FROM restaurante WHERE id_restaurante = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, restaurante);
+            ResultSet rs = ps.executeQuery();
+           
+            if (rs.next()) {
+                nombre = rs.getString("nombre");
+                direccion = rs.getString("direccion");
+                telefono = rs.getString("telefono");
+            }
+            
             String fileJasper = "informes/ReservasCanceladas.jasper";
             Map parameters = new HashMap();
+            parameters.put("p_nombre_restaurante", nombre); 
+            parameters.put("p_direccion_restaurante", direccion);
+            parameters.put("p_telefono_restaurante", telefono);
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
@@ -394,8 +413,26 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     private void jButtonInformeConfirmadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeConfirmadasActionPerformed
         // TODO add your handling code here:
         try{
+            String nombre=""; 
+            String direccion="";
+            String telefono="";
+                    
+            String sql = "SELECT nombre, direccion, telefono FROM restaurante WHERE id_restaurante = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, restaurante);
+            ResultSet rs = ps.executeQuery();
+           
+            if (rs.next()) {
+                nombre = rs.getString("nombre");
+                direccion = rs.getString("direccion");
+                telefono = rs.getString("telefono");
+            }
+            
             String fileJasper = "informes/ReservasConfirmadas.jasper";
             Map parameters = new HashMap();
+            parameters.put("p_nombre_restaurante", nombre); 
+            parameters.put("p_direccion_restaurante", direccion);
+            parameters.put("p_telefono_restaurante", telefono);
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));

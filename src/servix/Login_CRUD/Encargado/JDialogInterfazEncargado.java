@@ -255,8 +255,26 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonInformeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInformeClientesActionPerformed
         // TODO add your handling code here:
         try{
-            String fileJasper = "informes/Clientes_1.jasper";
+            String nombre=""; 
+            String direccion="";
+            String telefono="";
+                    
+            String sql = "SELECT nombre, direccion, telefono FROM restaurante WHERE id_restaurante = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id_restaurante);
+            ResultSet rs = ps.executeQuery();
+           
+            if (rs.next()) {
+                nombre = rs.getString("nombre");
+                direccion = rs.getString("direccion");
+                telefono = rs.getString("telefono");
+            }
+            
+            String fileJasper = "informes/Clientes.jasper";
             Map parameters = new HashMap();
+            parameters.put("p_nombre_restaurante", nombre); 
+            parameters.put("p_direccion_restaurante", direccion);
+            parameters.put("p_telefono_restaurante", telefono);
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false);
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
