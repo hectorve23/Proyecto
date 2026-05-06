@@ -145,18 +145,18 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				</reportElement>
 			</line>
 			<textField>
-				<reportElement x="85" y="3" width="160" height="30" uuid="c14c66f0-84d6-420d-99f6-096ef8a5ca3b"/>
+				<reportElement x="85" y="3" width="305" height="30" uuid="c14c66f0-84d6-420d-99f6-096ef8a5ca3b"/>
 				<textElement>
 					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{p_nombre_restaurante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="85" y="33" width="125" height="20" uuid="af730582-6a91-4257-9f0e-b637922440ca"/>
+				<reportElement x="85" y="33" width="185" height="20" uuid="af730582-6a91-4257-9f0e-b637922440ca"/>
 				<textFieldExpression><![CDATA[$P{p_direccion_restaurante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="130" y="54" width="100" height="19" uuid="557c709b-a55d-4c4a-ac5f-72bf1f3f9b2b"/>
+				<reportElement x="130" y="54" width="130" height="19" uuid="557c709b-a55d-4c4a-ac5f-72bf1f3f9b2b"/>
 				<textFieldExpression><![CDATA[$P{p_telefono_restaurante}]]></textFieldExpression>
 			</textField>
 			<staticText>

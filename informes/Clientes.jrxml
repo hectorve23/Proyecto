@@ -119,18 +119,18 @@ ORDER BY servix.usuario.fecha_creacion DESC]]>
 				<imageExpression><![CDATA["/logoInformes.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="95" y="10" width="160" height="30" uuid="c840eace-7be0-458c-81a9-dc5542d72815"/>
+				<reportElement x="95" y="10" width="295" height="30" uuid="c840eace-7be0-458c-81a9-dc5542d72815"/>
 				<textElement>
 					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{p_nombre_restaurante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="95" y="40" width="125" height="20" uuid="8df2c3db-4d45-4b46-b921-ab8a7bf8bd3a"/>
+				<reportElement x="95" y="40" width="195" height="20" uuid="8df2c3db-4d45-4b46-b921-ab8a7bf8bd3a"/>
 				<textFieldExpression><![CDATA[$P{p_direccion_restaurante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="140" y="61" width="100" height="19" uuid="31e38540-57a1-4816-a7c3-26f655e148d3"/>
+				<reportElement x="140" y="61" width="130" height="19" uuid="31e38540-57a1-4816-a7c3-26f655e148d3"/>
 				<textFieldExpression><![CDATA[$P{p_telefono_restaurante}]]></textFieldExpression>
 			</textField>
 			<staticText>
