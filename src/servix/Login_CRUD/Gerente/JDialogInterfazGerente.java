@@ -803,7 +803,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                        + "AND CONCAT(r.nombre, ' | ', r.direccion ) = ?";
 
             PreparedStatement ps = conexion.prepareStatement(sql);
-
+            
+            // Inserta en la tabla usuario_restaurante los id del restaurante y el usuario seleccionados en los combobox
             ps.setString(1, jComboBoxEncargados.getSelectedItem().toString());
             ps.setString(2, jComboBoxRestaurantes.getSelectedItem().toString());
 
@@ -812,7 +813,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             if(filas == 1) {
                 JOptionPane.showMessageDialog(rootPane, "Asignación confirmada");
                 recargarTablaAsignaciones();
-                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados); // Recarga los combobox porque al realizarse la asignacion tienen que desaparecer del mismo
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Error", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -906,7 +907,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-    public void formatoTabla(){
+    public void formatoTabla(){ // Configuracion para que los campos de la tabla se vea bien
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         
         jTableRestaurantes.getColumnModel().getColumn(0).setCellRenderer(formatoInt);

@@ -58,7 +58,7 @@ public class JDialogEditarEncargado extends javax.swing.JDialog {
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
     }
-    public void cargarCampos(){
+    public void cargarCampos(){ //Carga los campos del encargado seleccionado a los textField
         jTextFieldNombreEncargado.setText(nombreEncargado);
         jTextFieldApellido1.setText(apellido1);
         jTextFieldApellido2.setText(apellido2);
@@ -175,6 +175,7 @@ public class JDialogEditarEncargado extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
+        //Vuelve a la interfaz de gerente
         this.setVisible(false);
         JDialogInterfazGerente jdig = new JDialogInterfazGerente(padre, true);
         jdig.setVisible(true);
@@ -182,6 +183,7 @@ public class JDialogEditarEncargado extends javax.swing.JDialog {
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
+        //comprobaciones iniciales
         if(!(jTextFieldNombreEncargado.getText().isEmpty() || jTextFieldApellido1.getText().isEmpty() ||
              jTextFieldApellido2.getText().isEmpty() || jTextFieldCorreoEncargado.getText().isEmpty() ||
              jTextFieldTelefonoEncargado.getText().isEmpty() || jTextFieldUsuario.getText().isEmpty() ||
