@@ -852,11 +852,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         dtm.setRowCount(0);
         dtm.setColumnCount(0);
         cargaTablaRestaurantes();
+        formatoTabla();
     }
     public void recargarTablaEncargados() {
         dtm2.setRowCount(0);
         dtm2.setColumnCount(0);
         cargaTablaEncargados();
+        formatoTabla();
     }
     public void recargarTablaAsignaciones() {
         dtm3.setRowCount(0);
@@ -879,7 +881,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         try {
             PreparedStatement ps = conexion.prepareStatement(
                     "SELECT id as Id, nombre as Nombre, apellido1 as Primer_Apellido, apellido2 as Segundo_Apellido, telefono as Telefono, correo as Correo,"
-                            + " usuario_login as Usuario, contrasenya_login as Contraseña"
+                            + " usuario_login as Usuario"
                             + " FROM usuario WHERE rol=?"
             );
             ps.setString(1, "encargado");
@@ -925,6 +927,18 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jTableRestaurantes.getColumnModel().getColumn(2).setPreferredWidth(200); 
         jTableRestaurantes.getColumnModel().getColumn(3).setPreferredWidth(90);  
         jTableRestaurantes.getColumnModel().getColumn(4).setPreferredWidth(180); 
+        
+        // Columna estrecha (id)
+        jTableEncargados.getColumnModel().getColumn(0).setPreferredWidth(70);   // Id
+
+        // Columnas medias
+        jTableEncargados.getColumnModel().getColumn(1).setPreferredWidth(120);  // Nombre
+        jTableEncargados.getColumnModel().getColumn(2).setPreferredWidth(120);  // Primer_Apellido
+        jTableEncargados.getColumnModel().getColumn(3).setPreferredWidth(120);  // Segundo_Apellido
+        jTableEncargados.getColumnModel().getColumn(4).setPreferredWidth(90);   // Telefono
+
+        jTableEncargados.getColumnModel().getColumn(5).setPreferredWidth(200);  // Correo
+        jTableEncargados.getColumnModel().getColumn(6).setPreferredWidth(90);
     }
     
     private static final Pattern PATTERN_EMAIL = Pattern.compile( //Patron para validar el email

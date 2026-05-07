@@ -22,8 +22,13 @@ public class CargaCombos {
         try {
             
             jComboBoxRestaurantes.removeAllItems();
-            PreparedStatement ps1 = conexion.prepareStatement("SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM restaurante "
-                                                            + "WHERE id_restaurante NOT IN(SELECT id_restaurante FROM usuario_restaurante)");
+            PreparedStatement ps1 = conexion.prepareStatement(
+                "SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM restaurante " +
+                "WHERE id_restaurante NOT IN(" +
+                "   SELECT ur.id_restaurante FROM usuario_restaurante ur " +
+                "   JOIN usuario u ON ur.id_usuario = u.id " +
+                "   WHERE u.rol = 'encargado'" +
+                ")");
             
             ResultSet r = ps1.executeQuery();
             while(r.next()){
