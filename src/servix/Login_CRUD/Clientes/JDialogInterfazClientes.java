@@ -536,7 +536,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
             int fila = jTableReservas.getSelectedRow();
             int id_reserva = Integer.parseInt(jTableReservas.getValueAt(fila, 0).toString());
-            Object fechaHoraObj = jTableReservas.getValueAt(fila, 1);
+            Object fechaHoraObj = jTableReservas.getValueAt(fila, 2);
             Timestamp fechaHora;
 
             // Convertir a Timestamp dependiendo del tipo de dato que venga
@@ -569,7 +569,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 }
             }
 
-            int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 2).toString());
+            int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 3).toString());
             
             this.dispose();
             JDialogEditarReserva jdic = new JDialogEditarReserva(padre, true, id_reserva, fechaHora, n_comensales, id);
@@ -655,7 +655,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT CONCAT(restaurante.nombre, ' | ', restaurante.direccion) as Restaurante_direccion, id_reserva as Nº, fecha_hora AS Fecha, n_comensales AS Comensales "
+                    "SELECT id_reserva as Nº, CONCAT(restaurante.nombre, ' | ', restaurante.direccion) as Restaurante_direccion, fecha_hora AS Fecha, n_comensales AS Comensales "
                    + "FROM reserva INNER JOIN restaurante "
                    + "ON reserva.id_restaurante = restaurante.id_restaurante "
                    + "WHERE id_cliente=? AND NOT estado_reserva=?"
@@ -683,22 +683,20 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
         
-        // Ajuste de anchos de columna
-        // Columnas estrechas (numeros)
-        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(10);  
-        jTableReservas.getColumnModel().getColumn(3).setPreferredWidth(10);   
-
-        // Columnas anchas (lo demas)
-        jTableReservas.getColumnModel().getColumn(0).setPreferredWidth(300); 
-        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(200); 
-        
+        // Columna 0 - Nº reserva (estrecha)
+        jTableReservas.getColumnModel().getColumn(0).setPreferredWidth(40);
         jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
-        jTableReservas.getColumnModel().getColumn(1).setCellRenderer(formatoFecha);
-        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoInt);
-        
-        jTableReservas.getColumnModel().getColumn(0).setPreferredWidth(150); // Fecha y Hora (más ancho)
-        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(100);// Comensales
+
+        // Columna 1 - Restaurante y dirección (ancha)
+        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(250);
+
+        // Columna 2 - Fecha y hora (ancha)
+        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoFecha);
+
+        // Columna 3 - Comensales (estrecha)
+        jTableReservas.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTableReservas.getColumnModel().getColumn(3).setCellRenderer(formatoInt);
     }
     
 }
