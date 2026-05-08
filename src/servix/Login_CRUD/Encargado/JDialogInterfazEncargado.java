@@ -38,6 +38,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
         this.id = id;

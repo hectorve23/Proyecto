@@ -45,6 +45,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     public JDialogInterfazGerente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         nueva = new ConexionBBDD();

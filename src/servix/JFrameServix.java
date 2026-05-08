@@ -48,6 +48,7 @@ public class JFrameServix extends javax.swing.JFrame {
     
     public JFrameServix(){
          initComponents();
+         this.setLocationRelativeTo(null);
             cargaAyuda();
          ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
             this.setIconImage(icon.getImage());

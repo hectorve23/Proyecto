@@ -42,6 +42,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
     public JTableAdministrarMesas(java.awt.Frame parent, boolean modal, int id, int restaurante) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");

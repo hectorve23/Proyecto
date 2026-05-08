@@ -36,6 +36,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
     public JDialogEditarPlato(String nombreCambiar,double precioCambiar, String cadenaCategoriaCambiar, java.awt.Frame parent, boolean modal, int restaurante, int id) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");

@@ -42,6 +42,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         nueva = new ConexionBBDD();

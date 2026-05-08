@@ -31,6 +31,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
     public JDialogDatosDePrueba(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents(); 
+        this.setLocationRelativeTo(null);
         jfc = new JFileChooser();
         
         jFileChooser.setAcceptAllFileFilterUsed(false);

@@ -34,6 +34,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
     public JDialogCambiarContrasena(String user, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");

@@ -32,6 +32,7 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
     public JDialogAnadirMesa(java.awt.Frame parent, boolean modal, int restaurante) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");

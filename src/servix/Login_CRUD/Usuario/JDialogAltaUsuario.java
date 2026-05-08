@@ -41,6 +41,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
     public JDialogAltaUsuario(String rol, int id, java.awt.Frame parent, boolean modal, boolean editar) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
