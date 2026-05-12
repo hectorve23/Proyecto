@@ -37,9 +37,13 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
     JFrameServix padre;
     boolean editar;
     String sql;
-    int id;
+    int id, restauranteAsociado;
     
     public JDialogAltaUsuario(String rol, int id, java.awt.Frame parent, boolean modal, boolean editar) {
+        this(rol, id, parent, modal, editar, 0);
+    }
+    
+    public JDialogAltaUsuario(String rol, int id, java.awt.Frame parent, boolean modal, boolean editar, int restaurante) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -54,6 +58,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         this.padre=(JFrameServix) parent;
         this.editar = editar;
         this.id= id;
+        this.restauranteAsociado = restaurante;
         comprobarLongitudTelefono();
         comprobarLongitudes();
         enterEnFormulario();
@@ -226,6 +231,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
+        nueva.conectar();
         String nombre = jTextFieldNombre.getText();
         String apellido1 = jTextFieldApellido1.getText();
         String apellido2 = jTextFieldApellido2.getText();
@@ -238,8 +244,9 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         String stringContrasena1 = new String(contrasena);
         String stringContrasena2 = new String(contrasena2);
        
-        if(!existeUsuario(user)){
-            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || contrasena.length == 0 || contrasena2.length == 0){
+        if(editar || !existeUsuario(user)){
+            boolean contrasenaObligatoria = !editar || contrasena.length > 0; // en editar, solo valida si escribió algo
+            if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || (!editar && contrasena.length == 0) || (!editar && contrasena2.length == 0)){
                 if(nombre.isEmpty()) resaltarCampo(jTextFieldNombre); else resetearCampo(jTextFieldNombre);
                 if(apellido1.isEmpty()) resaltarCampo(jTextFieldApellido1); else resetearCampo(jTextFieldApellido1);
                 if(apellido2.isEmpty()) resaltarCampo(jTextFieldApellido2); else resetearCampo(jTextFieldApellido2);
@@ -272,28 +279,55 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                     if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
                         if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
                             if(stringContrasena1.equals(stringContrasena2)){ // Se comprueba que las contraseñas sean iguales
-                                 String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
-                                 JOptionPane.showConfirmDialog(rootPane, "Cuenta creada con exito", "Exito", JOptionPane.OK_CANCEL_OPTION);
+                                String contrasenaEncriptada = Seguridad.hashPassword(stringContrasena1); // contraseña ya encriptada
+                                if(editar){
+                                    JOptionPane.showMessageDialog(rootPane, "Usuario editado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                                } else {
+                                    JOptionPane.showMessageDialog(rootPane, "Cuenta creada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                                }
                                  this.setVisible(false);
 
                                  try {
-                                     nueva.conectar();
                                      if(editar){
-                                        sql = "UPDATE Usuario SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, correo = ?, contrasenya_login = ? WHERE usuario_login = ?";
-                                        PreparedStatement ps = conexion.prepareStatement(sql);
-                                        ps.setString(1, jTextFieldNombre.getText());
-                                        ps.setString(2, jTextFieldApellido1.getText());
-                                        ps.setString(3, jTextFieldApellido2.getText());
-                                        ps.setString(4, jTextFieldTelefono.getText());
-                                        ps.setString(5, jTextFieldCorreo.getText());
-                                        ps.setString(6, contrasenaEncriptada);
-                                        ps.setInt(7, id);
+                                        if(!stringContrasena1.isEmpty()){
+                                            sql = "UPDATE Usuario SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, correo = ?, contrasenya_login = ? WHERE id = ?";
 
-                                        ps.executeUpdate();
-                                        ps.close();
+                                            PreparedStatement ps = conexion.prepareStatement(sql);
 
-                                     }else{
-                                        sql= "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) VALUES (?,?,?,?,?,?,?,?, CURDATE())";
+                                            ps.setString(1, jTextFieldNombre.getText());
+                                            ps.setString(2, jTextFieldApellido1.getText());
+                                            ps.setString(3, jTextFieldApellido2.getText());
+                                            ps.setString(4, jTextFieldTelefono.getText());
+                                            ps.setString(5, jTextFieldCorreo.getText());
+                                            ps.setString(6, contrasenaEncriptada);
+                                            ps.setInt(7, id);
+
+                                            ps.executeUpdate();
+                                            ps.close();
+
+                                        }else{
+
+                                            sql = "UPDATE Usuario SET nombre = ?, apellido1 = ?, apellido2 = ?, telefono = ?, correo = ? WHERE id = ?";
+
+                                            PreparedStatement ps = conexion.prepareStatement(sql);
+
+                                            ps.setString(1, jTextFieldNombre.getText());
+                                            ps.setString(2, jTextFieldApellido1.getText());
+                                            ps.setString(3, jTextFieldApellido2.getText());
+                                            ps.setString(4, jTextFieldTelefono.getText());
+                                            ps.setString(5, jTextFieldCorreo.getText());
+                                            ps.setInt(6, id);
+
+                                            ps.executeUpdate();
+                                            ps.close();
+                                        }
+                                    }
+                                      else{
+                                        if (restauranteAsociado > 0) {
+                                           sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion, restaurante_asociado) VALUES (?,?,?,?,?,?,?,?, CURDATE(), ?)";
+                                        } else {
+                                           sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) VALUES (?,?,?,?,?,?,?,?, CURDATE())";
+                                        }
                                         PreparedStatement ps= conexion.prepareStatement(sql);
                                         ps.setString(1, jTextFieldNombre.getText());
                                         ps.setString(2, jTextFieldApellido1.getText());
@@ -303,11 +337,12 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                                         ps.setString(6, jTextFieldUser.getText());
                                         ps.setString(7, contrasenaEncriptada);
                                         ps.setString(8, rol);
+                                        if(restauranteAsociado> 0){
+                                            ps.setInt(9, restauranteAsociado);
+                                        }
                                         ps.executeUpdate();
                                         ps.close();
                                      }
-                                     
-                                     conexion.close();
                                  } catch (SQLException ex) {
                                      System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                                  }
@@ -356,7 +391,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
     public boolean existeUsuario(String usuario){
         boolean existe= false;
         try {    
-            nueva.conectar();
             String sql = "SELECT * FROM Usuario WHERE usuario_login = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, usuario);
@@ -660,7 +694,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
 
    public void cargarDatosUsuario(int id) {
         try {
-            nueva.conectar();
             String sql = "SELECT * FROM Usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -678,7 +711,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
 
             rs.close();
             ps.close();
-            conexion.close();
         } catch (SQLException ex) {
             
         }

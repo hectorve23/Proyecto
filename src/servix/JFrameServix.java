@@ -316,7 +316,7 @@ public class JFrameServix extends javax.swing.JFrame {
     
      private void seleccionarRestaurante(int id){
         try {
-            String sql = "SELECT id_restaurante FROM usuario_restaurante WHERE id_usuario = ?";
+            String sql = "SELECT restaurante_asociado FROM Usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

@@ -62,7 +62,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
         dtm= new DefaultTableModel();
         dtm.setColumnIdentifiers(new String[]{"ID", "Nombre", "Apellido1", "Apellido2", "Teléfono", "Correo", "Usuario"});
         jTableEmpleados.setModel(dtm);
-        
+        System.out.println(restaurante);
         cargarEmpleados();
         aplicarFormato();
         
@@ -219,7 +219,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonEditarEmpleadoActionPerformed
 
     private void jButtonAltaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaEmpleadoActionPerformed
-        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", 0, padre, true, false);
+        JDialogAltaUsuario jdau = new JDialogAltaUsuario("empleado", 0, padre, true, false, restaurante);
         jdau.setVisible(true);
         recargarTabla();
     }//GEN-LAST:event_jButtonAltaEmpleadoActionPerformed
@@ -260,7 +260,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
             lista.clear();
             nueva.conectar();
             
-            String sql = "SELECT u.* FROM Usuario u JOIN usuario_restaurante ur ON u.id = ur.id_usuario WHERE ur.id_restaurante = ? AND u.rol = 'empleado'";
+            String sql = "SELECT * FROM Usuario WHERE rol = 'empleado' AND restaurante_asociado = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, restaurante);
             ResultSet rs = ps.executeQuery();

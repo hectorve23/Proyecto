@@ -23,12 +23,12 @@ public class CargaCombos {
             
             jComboBoxRestaurantes.removeAllItems();
             PreparedStatement ps1 = conexion.prepareStatement(
-                "SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM restaurante " +
-                "WHERE id_restaurante NOT IN(" +
-                "   SELECT ur.id_restaurante FROM usuario_restaurante ur " +
-                "   JOIN usuario u ON ur.id_usuario = u.id " +
-                "   WHERE u.rol = 'encargado'" +
-                ")");
+                "SELECT CONCAT(nombre, ' | ', direccion) AS nombre_direccion " +
+                "FROM Restaurante " +
+                "WHERE id_restaurante NOT IN (" +
+                    "SELECT restaurante_asociado FROM Usuario " +
+                    "WHERE rol = 'encargado' AND restaurante_asociado IS NOT NULL)"
+            );
             
             ResultSet r = ps1.executeQuery();
             while(r.next()){
@@ -36,9 +36,8 @@ public class CargaCombos {
             }
             
             jComboBoxEncargados.removeAllItems();
-            PreparedStatement ps2 = conexion.prepareStatement("SELECT CONCAT(nombre, ' ', apellido1, ' ', apellido2) as nombre_apellidos "
-                                                            + "FROM usuario WHERE id NOT IN(SELECT id_usuario FROM usuario_restaurante) AND rol=?");
-            ps2.setString(1, "encargado");
+            PreparedStatement ps2 = conexion.prepareStatement("SELECT CONCAT(nombre, ' ', apellido1, ' ', apellido2) AS nombre_apellidos " +
+                                                                "FROM Usuario WHERE rol = 'encargado' AND restaurante_asociado IS NULL");
             
             ResultSet r2 = ps2.executeQuery();
             while(r2.next()){
@@ -53,7 +52,7 @@ public class CargaCombos {
         try {
             
             jComboBoxRestaurantes.removeAllItems();
-            PreparedStatement ps1 = conexion.prepareStatement("SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM restaurante ");
+            PreparedStatement ps1 = conexion.prepareStatement("SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM Restaurante ");
             
             ResultSet r = ps1.executeQuery();
             while(r.next()){

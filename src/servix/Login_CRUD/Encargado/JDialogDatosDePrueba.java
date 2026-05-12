@@ -176,7 +176,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                     case "Usuario": {
                         NodeList f = t.getElementsByTagName("Usuario");
                         try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO Usuario "
-                                + "(id, nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?,?)")) {
+                                + "(id, nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, restaurante_asociado) VALUES (?,?,?,?,?,?,?,?,?,?)")) {
                             for (int j = 0; j < f.getLength(); j++) {
                                 Element e = (Element) f.item(j);
                                 ps.setInt(1, Integer.parseInt(txt(e, "id")));
@@ -188,20 +188,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                                 ps.setString(7, txt(e, "usuario_login"));
                                 ps.setString(8, txt(e, "contrasenya_login"));
                                 ps.setString(9, txt(e, "rol"));
-                                ps.addBatch();
-                            }
-                            ps.executeBatch();
-                        }
-                        break;
-                    }
-
-                    case "usuario_restaurante": {
-                        NodeList f = t.getElementsByTagName("usuario_restaurante");
-                        try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO usuario_restaurante (id_usuario, id_restaurante) VALUES (?,?)")) {
-                            for (int j = 0; j < f.getLength(); j++) {
-                                Element e = (Element) f.item(j);
-                                ps.setInt(1, Integer.parseInt(txt(e, "id_usuario")));
-                                ps.setInt(2, Integer.parseInt(txt(e, "id_restaurante")));
+                                ps.setString(10, txtOpc(e, "restaurante_asociado"));
                                 ps.addBatch();
                             }
                             ps.executeBatch();
@@ -336,7 +323,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
             if (r.has("usuarios")) {
                 JSONArray a = r.getJSONArray("usuarios");
                 try (PreparedStatement ps = conexion.prepareStatement( "INSERT IGNORE INTO Usuario "
-                        + "(id, nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol) VALUES (?,?,?,?,?,?,?,?,?)")) {
+                        + "(id, nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, restaurante_asociado) VALUES (?,?,?,?,?,?,?,?,?,?)")) {
                     for (int i = 0; i < a.length(); i++) {
                         JSONObject o = a.getJSONObject(i);
                         ps.setInt(1, o.getInt("id"));
@@ -349,19 +336,8 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                         ps.setString(7, o.getString("usuario_login"));
                         ps.setString(8, o.getString("contrasenya_login"));
                         ps.setString(9, o.getString("rol"));
-                        ps.addBatch();
-                    }
-                    ps.executeBatch();
-                }
-            }
-
-            if (r.has("usuarios_restaurantes")) {
-                JSONArray a = r.getJSONArray("usuarios_restaurantes");
-                try (PreparedStatement ps = conexion.prepareStatement("INSERT IGNORE INTO usuario_restaurante (id_usuario, id_restaurante) VALUES (?,?)")) {
-                    for (int i = 0; i < a.length(); i++) {
-                        JSONObject o = a.getJSONObject(i);
-                        ps.setInt(1, o.getInt("id_usuario"));
-                        ps.setInt(2, o.getInt("id_restaurante"));
+                        if(o.isNull("restaurante_Asociado")){ps.setNull(10, Types.INTEGER);}
+                        else{ps.setInt(10, o.getInt("restaurante_asociado")); }
                         ps.addBatch();
                     }
                     ps.executeBatch();

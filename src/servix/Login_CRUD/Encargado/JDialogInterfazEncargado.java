@@ -209,13 +209,13 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
     private void seleccionarRestaurante(int id){
         try {
-            String sql = "SELECT id_restaurante FROM usuario_restaurante WHERE id_usuario = ?";
+            String sql = "SELECT restaurante_asociado FROM Usuario WHERE id = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
            
             if (rs.next()) {
-                id_restaurante = rs.getInt("id_restaurante");
+                id_restaurante = rs.getInt("restaurante_asociado");
             }
             
         } catch (SQLException ex) {
@@ -224,6 +224,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     }
     
     private void jButtonAdministrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarEmpleadosActionPerformed
+        System.out.println(id_restaurante);
         this.setVisible(false);
         this.dispose();
         JTableEmpleados jtee = new JTableEmpleados(padre, true, id, id_restaurante);

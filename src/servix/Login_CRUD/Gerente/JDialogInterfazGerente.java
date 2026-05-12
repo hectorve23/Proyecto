@@ -649,9 +649,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             
              try {
                 conexion.setAutoCommit(false);
-                String sql = "DELETE FROM usuario_restaurante "
-                        + "WHERE id_usuario = (SELECT id FROM usuario WHERE CONCAT(nombre, ' ', apellido1, ' ', apellido2) = ?) "
-                        + "AND id_restaurante = (SELECT id_restaurante FROM restaurante WHERE CONCAT(nombre, ' | ', direccion) = ?)";
+                String sql = "UPDATE Usuario SET restaurante_asociado = NULL " +
+                             "WHERE CONCAT(nombre,' ',apellido1,' ',apellido2) = ? " +
+                             "AND rol = 'encargado'";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, nombre_apellidos_usuario);
                 ps.setString(2, nombre_direccion_restaurante);
@@ -811,12 +811,10 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
         // TODO add your handling code here:
         try {
-            String sql = "INSERT INTO usuario_restaurante(id_usuario, id_restaurante) "
-                       + "SELECT u.id, r.id_restaurante "
-                       + "FROM Usuario u, Restaurante r "
-                       + "WHERE CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) = ? "
-                       + "AND CONCAT(r.nombre, ' | ', r.direccion ) = ?";
-
+            String sql = "UPDATE Usuario SET restaurante_asociado = " +
+                         "(SELECT id_restaurante FROM Restaurante WHERE CONCAT(nombre,' | ',direccion) = ?) " +
+                         "WHERE CONCAT(nombre,' ',apellido1,' ',apellido2) = ? " +
+                         "AND rol = 'encargado'";
             PreparedStatement ps = conexion.prepareStatement(sql);
             
             // Inserta en la tabla usuario_restaurante los id del restaurante y el usuario seleccionados en los combobox
@@ -908,13 +906,11 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     }
     private void cargaTablaAsignaciones() {
         try {
-            String sql = "SELECT " +
-                     "CONCAT(u.nombre, ' ', u.apellido1, ' ', u.apellido2) AS 'Encargado', " +
-                     "CONCAT(r.nombre, ' | ', r.direccion) AS 'Restaurante' " +
-                     "FROM usuario_restaurante ur " +
-                     "INNER JOIN usuario u ON ur.id_usuario = u.id " +
-                     "INNER JOIN restaurante r ON ur.id_restaurante = r.id_restaurante "
-                    +" WHERE rol=?";
+            String sql = "SELECT CONCAT(u.nombre,' ',u.apellido1,' ',u.apellido2) AS 'Encargado', " +
+                         "CONCAT(r.nombre,' | ',r.direccion) AS 'Restaurante' " +
+                         "FROM Usuario u " +
+                         "INNER JOIN Restaurante r ON u.restaurante_asociado = r.id_restaurante " +
+                         "WHERE u.rol = 'encargado' AND u.restaurante_asociado IS NOT NULL";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm3);
