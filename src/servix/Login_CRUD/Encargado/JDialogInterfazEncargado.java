@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -42,14 +43,25 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
         this.id = id;
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
+        
         seleccionarRestaurante(id);
+        
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_encargado", JFrameServix.hs);
         }
+        
+        // Escape - Cerrar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonCerrarSesion.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

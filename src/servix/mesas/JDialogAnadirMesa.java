@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
@@ -44,6 +45,13 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_anadir_mesa", JFrameServix.hs);
         }
+        
+        // Escape - Cerrar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonCancelar.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

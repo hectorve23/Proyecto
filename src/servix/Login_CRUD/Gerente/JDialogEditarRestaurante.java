@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
 
@@ -58,6 +59,17 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
         
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_crud_restaurantes", JFrameServix.hs);
+        }
+        
+        // Escape - Cerrar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonCancelar.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
     
     public void cargarCampos(){

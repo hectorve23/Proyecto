@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
@@ -59,6 +60,13 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_mesas", JFrameServix.hs);
         }
+        
+        // Escape - Cerrar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonVolver.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

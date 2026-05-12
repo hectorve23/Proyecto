@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.swing.ImageIcon;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import servix.FormatoTablas;
 import servix.JFrameServix;
@@ -65,6 +66,13 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
         }
+        
+        // Escape - Cerrar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonSalir.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

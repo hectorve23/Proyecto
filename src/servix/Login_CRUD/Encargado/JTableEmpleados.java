@@ -55,13 +55,27 @@ public class JTableEmpleados extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         this.encargado = encargado;
         this.restaurante = restaurante;
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
         dtm= new DefaultTableModel();
         dtm.setColumnIdentifiers(new String[]{"ID", "Nombre", "Apellido1", "Apellido2", "Teléfono", "Correo", "Usuario"});
         jTableEmpleados.setModel(dtm);
+        
         cargarEmpleados();
         aplicarFormato();
+        
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
+        }
+        
+        // Escape - Cerrar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonCancelar.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
 
     }
 
