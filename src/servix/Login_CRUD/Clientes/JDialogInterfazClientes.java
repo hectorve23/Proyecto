@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
@@ -47,14 +48,18 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.setIconImage(icon.getImage());
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        cc = new CargaCombos();
-        cc.cargaComboRestaurantes(jComboBoxRestaurantes);
+        
+        this.id = id;
+        this.padre = (JFrameServix) parent;
+        
         this.dtm = new DefaultTableModel();
         this.dtm2 = new DefaultTableModel();
         jTableReservas.setModel(dtm);
         jTableMenu.setModel(dtm2);
-        this.id = id;
-        this.padre = (JFrameServix) parent;
+        
+        cc = new CargaCombos();
+        cc.cargaComboRestaurantes(jComboBoxRestaurantes);
+        jComboBoxRestaurantes.addActionListener(e -> cargaTablaMenu());
         
         cargaTablaReservas();
         cargaTablaMenu();
@@ -142,14 +147,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jPanelVerReservasLayout.setHorizontalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelVerReservasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                        .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(97, 97, 97))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addContainerGap(85, Short.MAX_VALUE)
+                .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanelVerReservasLayout.setVerticalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +357,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public void recargarTabla() {
         dtm.setRowCount(0);
         dtm.setColumnCount(0);
+        dtm2.setRowCount(0);
         cargaTablaReservas();
+        formatoTabla();
     }
     //Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario en el que el restaurante
     //admite reservas utilizando LocalTime para cada margen y devolviendo true o false si esta dentro del horario o no
@@ -669,11 +675,23 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     }
     //Este metodo es el que se encarga de rellenar la tabla con la informacion del menu de la base de datos
     public void cargaTablaMenu(){
+        
+        String restauranteSeleccionado = (String) jComboBoxRestaurantes.getSelectedItem();
+        
+        dtm2.setRowCount(0);
+        dtm2.setColumnCount(0);
+        
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato ORDER BY categoria"
+                    "SELECT p.nombre AS Nombre, p.precio AS Precio, p.categoria AS Categoria "
+                  + "FROM plato p JOIN restaurante r ON p.id_restaurante = r.id_restaurante "
+                  + "WHERE CONCAT(r.nombre, ' | ', r.direccion) = ?"
+                  + "ORDER BY categoria"
             );
+            
+            ps.setString(1, restauranteSeleccionado);
             nueva.selectSQL(ps, dtm2);
+            
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -688,14 +706,14 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jTableReservas.getColumnModel().getColumn(0).setCellRenderer(formatoInt);
 
         // Columna 1 - Restaurante y dirección (ancha)
-        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(250);
+        jTableReservas.getColumnModel().getColumn(1).setPreferredWidth(200);
 
         // Columna 2 - Fecha y hora (ancha)
-        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTableReservas.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTableReservas.getColumnModel().getColumn(2).setCellRenderer(formatoFecha);
 
         // Columna 3 - Comensales (estrecha)
-        jTableReservas.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTableReservas.getColumnModel().getColumn(3).setPreferredWidth(20);
         jTableReservas.getColumnModel().getColumn(3).setCellRenderer(formatoInt);
     }
     

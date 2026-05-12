@@ -419,6 +419,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             PreparedStatement ps = conexion.prepareStatement(
                     "SELECT nombre AS Nombre, precio AS Precio, categoria AS Categoria FROM plato WHERE id_restaurante = ? ORDER BY categoria"
             );
+            System.out.println(restaurante);
+            System.out.println(id);
             ps.setInt(1, restaurante);
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {

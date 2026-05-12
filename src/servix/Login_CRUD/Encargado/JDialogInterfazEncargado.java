@@ -242,7 +242,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonAdministrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdministrarMenuActionPerformed
         this.setVisible(false);
         this.dispose();
-        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true, id, id_restaurante);
+        JDialogAdministrarMenu jdam = new JDialogAdministrarMenu(padre, true, id_restaurante, id);
         jdam.setVisible(true); 
     }//GEN-LAST:event_jButtonAdministrarMenuActionPerformed
 
