@@ -23,7 +23,7 @@ CREATE TABLE Plato(
     precio DECIMAL(6,2) NOT NULL,
     categoria ENUM("bebida", "entrante", "primer_plato", "segundo_plato", "postre") NOT NULL,
     id_restaurante INT,
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante)
+    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante) ON DELETE CASCADE
 );
 
 CREATE TABLE ingrediente_plato(
@@ -31,7 +31,7 @@ CREATE TABLE ingrediente_plato(
     nombre_ingrediente VARCHAR(30) NOT NULL,
     PRIMARY KEY (id_plato, nombre_ingrediente),
     FOREIGN KEY (id_plato) REFERENCES Plato(id_plato),
-    FOREIGN KEY (nombre_ingrediente) REFERENCES Ingrediente(nombre_ingrediente)
+    FOREIGN KEY (nombre_ingrediente) REFERENCES Ingrediente(nombre_ingrediente) ON DELETE CASCADE
 );
 
 CREATE TABLE Usuario(
@@ -45,15 +45,9 @@ CREATE TABLE Usuario(
     contrasenya_login VARCHAR(255) NOT NULL,
     rol ENUM ("cliente", "encargado", "empleado", "gerente") NOT NULL,
     haIniciadoSesion BOOLEAN DEFAULT FALSE,
-    fecha_creacion DATETIME DEFAULT current_timestamp
-);
-
-CREATE TABLE usuario_restaurante(
-	id_usuario INT,
-    id_restaurante INT,
-    PRIMARY KEY (id_usuario, id_restaurante),
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante)
+    fecha_creacion DATETIME DEFAULT current_timestamp,
+    restaurante_asociado INT,
+    FOREIGN KEY (restaurante_asociado) REFERENCES Restaurante(id_restaurante)
 );
 
 CREATE TABLE Mesa(
@@ -61,7 +55,7 @@ CREATE TABLE Mesa(
     capacidad INT NOT NULL,
     estado BOOLEAN NOT NULL,
     id_restaurante INT NOT NULL,
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante)
+    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante) ON DELETE CASCADE
 );
 
 CREATE TABLE Reserva(
@@ -72,8 +66,8 @@ CREATE TABLE Reserva(
     id_cliente INT NOT NULL,
     id_mesa INT,
     id_restaurante INT,
-    FOREIGN KEY (id_cliente) REFERENCES Usuario(id),
+    FOREIGN KEY (id_cliente) REFERENCES Usuario(id) ON DELETE CASCADE,
     FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa),
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante)
+    FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante) ON DELETE CASCADE
 );
 
