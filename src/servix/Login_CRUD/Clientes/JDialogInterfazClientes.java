@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import servix.ConexionBBDD;
@@ -66,16 +65,44 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         cargaTablaMenu();
         formatoTabla();
         
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCerrarSesion.doClick(),
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
+        
+        // Ctrl+G - Guardar/Validar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonValidar.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Ctrl+N - Nuevo
+        getRootPane().registerKeyboardAction(
+            e -> jButtonNuevaReserva.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Supr - Eliminar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonAnularReserva.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
 
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
-        }
+        // Ctrl+E - Editar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonEditarReserva.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
     
     /**
@@ -421,7 +448,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         //Para la comprobacion exacta de fecha y hora
         Calendar calHoy = Calendar.getInstance();
         Calendar calElegida = Calendar.getInstance();
-        calElegida.setTime(mfecha);
+        
+        if(mfecha!=null){
+            calElegida.setTime(mfecha);
+        }
         
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
         String horaStr = formatoHora.format(valorHora);

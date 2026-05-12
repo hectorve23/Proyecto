@@ -74,6 +74,13 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
+        
+        // Ctrl+G - Guardar/Validar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonAlta.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

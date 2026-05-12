@@ -76,6 +76,26 @@ public class JTableEmpleados extends javax.swing.JDialog {
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
+        // Ctrl+N - Nuevo
+        getRootPane().registerKeyboardAction(
+            e -> jButtonAltaEmpleado.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Supr - Eliminar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonBajaEmpleado.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+
+        // Ctrl+E - Editar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonEditarEmpleado.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
 
     }
 
@@ -214,8 +234,17 @@ public class JTableEmpleados extends javax.swing.JDialog {
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.QUESTION_MESSAGE);
         }else{    
-            eliminar.eliminarEmpleados((String) dtm.getValueAt(fila, 0));
-           recargarTabla();
+            int opcion = JOptionPane.showConfirmDialog(
+                                                null,
+                                                "¿Estas seguro de eliminar el empleado seleccionado?",
+                                                "Confirmación",
+                                                JOptionPane.OK_CANCEL_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE);
+            
+            if (opcion == JOptionPane.OK_OPTION) {
+                eliminar.eliminarEmpleados((String) dtm.getValueAt(fila, 0));
+                recargarTabla();
+            }
         }
 
     }//GEN-LAST:event_jButtonBajaEmpleadoActionPerformed
