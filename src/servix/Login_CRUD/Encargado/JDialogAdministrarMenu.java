@@ -43,13 +43,18 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
+        
         this.nueva = new ConexionBBDD();
         this.conexion = nueva.getConnection();
         this.dtm = new DefaultTableModel();
         this.padre = (JFrameServix) parent;
         this.restaurante = restaurante;
         this.id = id;
+        
         jTableMenu.setModel(dtm);
+        // Desactivar edicion de las tablas
+        jTableMenu.setDefaultEditor(Object.class, null);
+        
         jButtonVolver.setVisible(true);
         jButtonValidar.setVisible(false);
         cargaTablaMenu();

@@ -58,6 +58,8 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
         jTableReservasDelDia.setModel(dtm);
+        // Desactivar edicion de las tablas
+        jTableReservasDelDia.setDefaultEditor(Object.class, null);
         dtm.setColumnIdentifiers(Reserva.getColumnas());
         rellenarDiaHoy();
         jLabel1.setText("Bienvenido/a");

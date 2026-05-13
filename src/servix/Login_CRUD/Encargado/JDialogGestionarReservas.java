@@ -71,6 +71,11 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         jTableConfirmadas.setModel(dtmConfirmadas);
         jTableCanceladas.setModel(dtmCanceladas);
         
+        // Desactivar edicion de las tablas
+        jTablePendientes.setDefaultEditor(Object.class, null);
+        jTableConfirmadas.setDefaultEditor(Object.class, null);
+        jTableCanceladas.setDefaultEditor(Object.class, null);
+        
         cargarDatos();
         aplicarFormato();
         

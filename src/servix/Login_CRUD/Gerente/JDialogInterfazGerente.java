@@ -52,12 +52,18 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         this.setIconImage(icon.getImage());
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
         this.dtm = new DefaultTableModel();
         jTableRestaurantes.setModel(dtm);
         this.dtm2 = new DefaultTableModel();
         jTableEncargados.setModel(dtm2);
         this.dtm3 = new DefaultTableModel();
         jTableAsignaciones.setModel(dtm3);
+        // Desactivar edicion de las tablas
+        jTableRestaurantes.setDefaultEditor(Object.class, null);
+        jTableEncargados.setDefaultEditor(Object.class, null);
+        jTableAsignaciones.setDefaultEditor(Object.class, null);
+        
         this.padre = (JFrameServix) parent;
         this.cc = new CargaCombos();
         cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);

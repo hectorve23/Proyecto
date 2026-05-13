@@ -52,9 +52,12 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         this.padre=(JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
         dtm= new DefaultTableModel();
         jTableMesas.setModel(dtm);
         dtm.setColumnIdentifiers(Mesa.getColumnas());
+        // Desactivar edicion de las tablas
+        jTableMesas.setDefaultEditor(Object.class, null);
         cargarMesas();
         
         if (JFrameServix.hb != null) {

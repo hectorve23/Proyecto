@@ -62,6 +62,9 @@ public class JTableEmpleados extends javax.swing.JDialog {
         dtm= new DefaultTableModel();
         dtm.setColumnIdentifiers(new String[]{"ID", "Nombre", "Apellido1", "Apellido2", "Teléfono", "Correo", "Usuario"});
         jTableEmpleados.setModel(dtm);
+        // Desactivar edicion de las tablas
+        jTableEmpleados.setDefaultEditor(Object.class, null);
+        
         System.out.println(restaurante);
         cargarEmpleados();
         aplicarFormato();

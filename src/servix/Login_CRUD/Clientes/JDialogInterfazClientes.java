@@ -56,6 +56,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.dtm2 = new DefaultTableModel();
         jTableReservas.setModel(dtm);
         jTableMenu.setModel(dtm2);
+        // Desactivar edicion de las tablas
+        jTableReservas.setDefaultEditor(Object.class, null);
+        jTableMenu.setDefaultEditor(Object.class, null);
         
         cc = new CargaCombos();
         cc.cargaComboRestaurantes(jComboBoxRestaurantes);
@@ -741,6 +744,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     }
     
     public void formatoTabla(){
+        
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         FormatoTablas.FormatoFecha formatoFecha = new FormatoTablas.FormatoFecha();
         
