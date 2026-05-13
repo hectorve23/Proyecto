@@ -20,7 +20,7 @@ public class CargaCombos {
     //Metodo para cargar los combos del gerente cada vez que se realice o modifique una asignacion de restaurante-encargado
     public void cargaCombos(JComboBox jComboBoxRestaurantes, JComboBox jComboBoxEncargados){
         try {
-            
+            nueva.conectar();
             jComboBoxRestaurantes.removeAllItems();
             PreparedStatement ps1 = conexion.prepareStatement(
                 "SELECT CONCAT(nombre, ' | ', direccion) AS nombre_direccion " +
@@ -50,7 +50,7 @@ public class CargaCombos {
     }
     public void cargaComboRestaurantes(JComboBox jComboBoxRestaurantes){//Metodo necesario para usarlo en la seleccion para crear reservas
         try {
-            
+            nueva.conectar();
             jComboBoxRestaurantes.removeAllItems();
             PreparedStatement ps1 = conexion.prepareStatement("SELECT CONCAT(nombre, ' | ', direccion) as nombre_direccion FROM Restaurante ");
             

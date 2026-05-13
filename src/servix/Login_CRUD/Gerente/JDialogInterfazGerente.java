@@ -695,6 +695,20 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                     }
                 }
+                else{
+                    JOptionPane.showConfirmDialog(rootPane,
+                                                        "Formato de correo no valido", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                JOptionPane.showConfirmDialog(rootPane,
+                                                        "Formato de telefono no valido", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButtonValidarEncargadoActionPerformed
@@ -704,7 +718,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         if(jTableAsignaciones.getSelectedRowCount()==1){//Si el usuario no ha seleccionado ninguna reserva en el JTable muestra un mensaje
             int fila = jTableAsignaciones.getSelectedRow();
             String nombre_apellidos_usuario = String.valueOf(jTableAsignaciones.getValueAt(fila, 0));
-            String nombre_direccion_restaurante = String.valueOf(jTableAsignaciones.getValueAt(fila, 1));
+            //String nombre_direccion_restaurante = String.valueOf(jTableAsignaciones.getValueAt(fila, 1));
             
              try {
                 conexion.setAutoCommit(false);
@@ -713,7 +727,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                              "AND rol = 'encargado'";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, nombre_apellidos_usuario);
-                ps.setString(2, nombre_direccion_restaurante);
+                //ps.setString(2, nombre_direccion_restaurante);
                 int opcion = JOptionPane.showConfirmDialog(
                                                 null,
                                                 "¿Estas seguro de eliminar la asignacion seleccionada?",
@@ -726,6 +740,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     if(resultado==1){
                         System.out.println("entra");
                         conexion.commit();
+                        conexion.setAutoCommit(true);
                         dtm3.removeRow(fila);
                         cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
                     }
@@ -870,6 +885,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignarActionPerformed
         // TODO add your handling code here:
         try {
+            conexion.setAutoCommit(true);
             String sql = "UPDATE Usuario SET restaurante_asociado = " +
                          "(SELECT id_restaurante FROM Restaurante WHERE CONCAT(nombre,' | ',direccion) = ?) " +
                          "WHERE CONCAT(nombre,' ',apellido1,' ',apellido2) = ? " +

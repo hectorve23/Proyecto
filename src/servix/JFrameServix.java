@@ -41,7 +41,7 @@ public class JFrameServix extends javax.swing.JFrame {
      */
     ConexionBBDD nueva;
     Connection conexion;
-    int id, id_restaurante;
+    int id, restaurante_asociado;
     String rol;
     
     public static HelpBroker hb;
@@ -236,7 +236,7 @@ public class JFrameServix extends javax.swing.JFrame {
                 }else{
                     if(rol.toLowerCase().equals("empleado")){
                         this.setVisible(false);
-                        JTableInterfazEmpleado jdie = new JTableInterfazEmpleado("empleado", this, true, id, id_restaurante);
+                        JTableInterfazEmpleado jdie = new JTableInterfazEmpleado("empleado", this, true, id, restaurante_asociado);
                         jdie.setVisible(true);
                         this.dispose();
                     }else{
@@ -287,10 +287,20 @@ public class JFrameServix extends javax.swing.JFrame {
                 if (rs.next()) {
                     id = rs.getInt("id");
                     rol = rs.getString("rol");
+                    restaurante_asociado = rs.getInt("restaurante_asociado");
+                    boolean sinRestaurante = rs.wasNull();
                     String contrasenaHash = rs.getString("contrasenya_login");
                     if (id != 0 && Seguridad.checkPassword(contrasena, contrasenaHash)) {
+                        if(rol.equalsIgnoreCase("encargado") && sinRestaurante){
+                            JOptionPane.showMessageDialog(rootPane,
+                                "Tu cuenta aún no tiene un restaurante asignado.\nContacta con el gerente.",
+                                "Acceso denegado",
+                                JOptionPane.WARNING_MESSAGE);
+                            return correcto;
+                        }
                         correcto= true;
                     }
+                    
                 }
 
                 rs.close();
@@ -330,7 +340,7 @@ public class JFrameServix extends javax.swing.JFrame {
             ResultSet rs = ps.executeQuery();
            
             if (rs.next()) {
-                id_restaurante = rs.getInt("id_restaurante");
+                restaurante_asociado = rs.getInt("restaurante_asociado");
             }
             
         } catch (SQLException ex) {
