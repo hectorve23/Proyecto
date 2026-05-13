@@ -77,7 +77,58 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
+        
+        atajosTeclado();
+        
     }
+    
+    private void atajosTeclado() {
+    
+        // Ctrl+G - Validar/Asignar según pestaña
+        getRootPane().registerKeyboardAction(e -> {
+            switch (jTabbedPane.getSelectedIndex()) {
+                case 0 -> jButtonValidarRestaurante.doClick();
+                case 1 -> jButtonValidarEncargado.doClick();
+                case 2 -> jButtonAsignar.doClick();
+            }
+        }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+           javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        // Ctrl+E - Editar según pestaña
+        getRootPane().registerKeyboardAction(e -> {
+            switch (jTabbedPane.getSelectedIndex()) {
+                case 0 -> jButtonEditarRestaurante.doClick();
+                case 1 -> jButtonEditarEncargado.doClick();
+            }
+        }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+           javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        // Supr - Eliminar según pestaña
+        getRootPane().registerKeyboardAction(e -> {
+            switch (jTabbedPane.getSelectedIndex()) {
+                case 0 -> jButtonEliminarRestaurante.doClick();
+                case 1 -> jButtonEliminarEncargado.doClick();
+                case 2 -> jButtonEliminarAsignacion.doClick();
+            }
+        }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0),
+           javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        // Escape - Cerrar sesión (igual en todas las pestañas)
+        getRootPane().registerKeyboardAction(e -> jButtonCerrarSesion.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        // Ctrl+1/2/3 - Cambiar de pestaña
+        getRootPane().registerKeyboardAction(e -> jTabbedPane.setSelectedIndex(0),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        getRootPane().registerKeyboardAction(e -> jTabbedPane.setSelectedIndex(1),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        getRootPane().registerKeyboardAction(e -> jTabbedPane.setSelectedIndex(2),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -617,13 +668,21 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
 
                         int filas = ps.executeUpdate();
                         if(filas==1){
-                           JOptionPane.showConfirmDialog(rootPane,
+                            JOptionPane.showConfirmDialog(rootPane,
                                                         "Encargado registrado", 
                                                         "", 
                                                         JOptionPane.OK_CANCEL_OPTION, 
                                                         JOptionPane.INFORMATION_MESSAGE);
-                           recargarTablaEncargados(); 
-                           cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                            recargarTablaEncargados(); 
+                            cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                            jTextFieldNombreEncargado.setText("");
+                            jTextFieldApellido1.setText("");
+                            jTextFieldApellido2.setText("");
+                            jTextFieldTelefonoEncargado.setText("");
+                            jTextFieldCorreoEncargado.setText("");
+                            jTextFieldUsuario.setText("");
+                            jTextFieldContrasena.setText("");
+                            jTextFieldConfirmacionContrasena.setText("");
                         }
                         else{
                             JOptionPane.showConfirmDialog(rootPane,
@@ -818,8 +877,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             PreparedStatement ps = conexion.prepareStatement(sql);
             
             // Inserta en la tabla usuario_restaurante los id del restaurante y el usuario seleccionados en los combobox
-            ps.setString(1, jComboBoxEncargados.getSelectedItem().toString());
-            ps.setString(2, jComboBoxRestaurantes.getSelectedItem().toString());
+            ps.setString(1, jComboBoxRestaurantes.getSelectedItem().toString());
+            ps.setString(2, jComboBoxEncargados.getSelectedItem().toString());
 
             int filas = ps.executeUpdate();
 
@@ -912,7 +971,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                          "INNER JOIN Restaurante r ON u.restaurante_asociado = r.id_restaurante " +
                          "WHERE u.rol = 'encargado' AND u.restaurante_asociado IS NOT NULL";
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, "encargado");
+            //ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm3);
         } catch (SQLException ex) {
             System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

@@ -17,6 +17,7 @@ import javax.help.HelpSet;
 import javax.help.HelpSetException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
@@ -61,6 +62,13 @@ public class JFrameServix extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
+        
+        // Ctrl+G - Guardar/Validar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonIniciarSesion.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

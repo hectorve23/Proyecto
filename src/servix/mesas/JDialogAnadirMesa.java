@@ -46,10 +46,22 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_anadir_mesa", JFrameServix.hs);
         }
         
+        atajosTeclado();
+        
+    }
+    
+    private void atajosTeclado(){
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCancelar.doClick(),
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Ctrl+G - Guardar/Validar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonAnadir.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
     }

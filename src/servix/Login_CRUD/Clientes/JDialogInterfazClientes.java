@@ -69,6 +69,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
         }
         
+        atajosTeclado();
+        
+    }
+    
+    private void atajosTeclado(){
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCerrarSesion.doClick(),

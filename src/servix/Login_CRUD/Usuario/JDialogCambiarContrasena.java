@@ -12,6 +12,7 @@ import servix.Seguridad;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import servix.JFrameServix;
 
@@ -51,6 +52,13 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_password", JFrameServix.hs);
         }
+        
+        // Ctrl+G - Guardar/Validar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonAceptar.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
     }
 
     /**

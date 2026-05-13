@@ -70,6 +70,11 @@ public class JTableEmpleados extends javax.swing.JDialog {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
         }
         
+        atajosTeclado();
+
+    }
+    
+    private void atajosTeclado(){
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCancelar.doClick(),
@@ -96,7 +101,6 @@ public class JTableEmpleados extends javax.swing.JDialog {
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
-
     }
 
     /**

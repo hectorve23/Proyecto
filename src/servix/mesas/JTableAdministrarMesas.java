@@ -61,10 +61,35 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_mesas", JFrameServix.hs);
         }
         
+        atajosTeclado();
+    }
+    
+    private void atajosTeclado(){
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonVolver.doClick(),
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Ctrl+N - Nuevo
+        getRootPane().registerKeyboardAction(
+            e -> jButtonAnadirMesa.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Supr - Eliminar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonEliminarMesa.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0),
+            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
+        );
+        
+        // Ctrl+E - Editar
+        getRootPane().registerKeyboardAction(
+            e -> jButtonEditarMesa.doClick(),
+            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
     }
