@@ -747,8 +747,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         System.out.println("entra");
                         conexion.commit();
                         conexion.setAutoCommit(true);
-                        dtm3.removeRow(fila);
+                        //dtm3.removeRow(fila);
                         cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                        recargarTablaAsignaciones();
                     }
                 }
                 
@@ -792,6 +793,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         conexion.commit();
                         dtm.removeRow(fila);
                         cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                        recargarTablaAsignaciones();
                     }
                 }
                 
@@ -836,6 +838,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         conexion.commit();
                         dtm2.removeRow(fila);
                         cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                        recargarTablaAsignaciones();
                     }
                 }
                 
@@ -880,7 +883,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             
             jTabbedPane.setSelectedIndex(1);
             recargarTablaEncargados();
-            
+            recargarTablaAsignaciones();
             cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         }
         else{
@@ -937,6 +940,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             jder.setVisible(true);
             jTabbedPane.setSelectedIndex(0);
             recargarTablaEncargados();
+            recargarTablaAsignaciones();
             cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
         }
         else{
