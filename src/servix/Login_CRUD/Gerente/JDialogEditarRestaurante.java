@@ -242,7 +242,7 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
                 }
   
             } catch (SQLException ex) {
-                System.getLogger(JDialogEditarEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                System.getLogger(JDialogEditarRestaurante.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             } 
         }
         else{

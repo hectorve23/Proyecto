@@ -860,22 +860,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private void jButtonEditarEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEncargadoActionPerformed
         // TODO add your handling code here:
         if(jTableEncargados.getSelectedRowCount() == 1){
-            /*
-            int fila = jTableEncargados.getSelectedRow();
-            
-            int id_encargado = Integer.parseInt(jTableEncargados.getValueAt(fila, 0).toString());
-            String nombreEncargado = jTableEncargados.getValueAt(fila, 1).toString();
-            String apellido1 = jTableEncargados.getValueAt(fila, 2).toString();
-            String apellido2   = jTableEncargados.getValueAt(fila, 3).toString();
-            String telefonoEncargado = jTableEncargados.getValueAt(fila, 4).toString();
-            String correoEncargado = jTableEncargados.getValueAt(fila, 5).toString();
-            String usuario = jTableEncargados.getValueAt(fila, 6).toString();
-            String contrasena = jTableEncargados.getValueAt(fila, 7).toString();
-            */
-            //this.setVisible(false);
-            //JDialogEditarEncargado jder = new JDialogEditarEncargado(padre, true, id_encargado, nombreEncargado, apellido1, apellido2, 
-            //                                                             telefonoEncargado, correoEncargado, usuario, contrasena);
-            //jder.setVisible(true);
             int fila = jTableEncargados.getSelectedRow();
             int id_encargado = Integer.parseInt(jTableEncargados.getValueAt(fila, 0).toString());
             JDialogAltaUsuario jdau = new JDialogAltaUsuario("encargado", id_encargado, padre, true, true);
