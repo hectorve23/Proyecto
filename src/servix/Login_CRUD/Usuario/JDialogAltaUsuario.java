@@ -254,7 +254,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty() || user.isEmpty() || (!editar && contrasena.length == 0) || (!editar && contrasena2.length == 0)){
                 if(nombre.isEmpty()) resaltarCampo(jTextFieldNombre); else resetearCampo(jTextFieldNombre);
                 if(apellido1.isEmpty()) resaltarCampo(jTextFieldApellido1); else resetearCampo(jTextFieldApellido1);
-                if(apellido2.isEmpty()) resaltarCampo(jTextFieldApellido2); else resetearCampo(jTextFieldApellido2);
                 if(telefono.isEmpty()) resaltarCampo(jTextFieldTelefono); else resetearCampo(jTextFieldTelefono);
                 if(correo.isEmpty()) resaltarCampo(jTextFieldCorreo); else resetearCampo(jTextFieldCorreo);
                 if(user.isEmpty()) resaltarCampo(jTextFieldUser); else resetearCampo(jTextFieldUser);

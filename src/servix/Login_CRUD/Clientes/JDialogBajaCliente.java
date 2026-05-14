@@ -82,7 +82,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldContrasena = new javax.swing.JTextField();
+        jPasswordField = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButtonVolver = new javax.swing.JButton();
@@ -122,7 +122,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel4.setText("Contraseña");
         jPanel2.add(jLabel4);
-        jPanel2.add(jTextFieldContrasena);
+        jPanel2.add(jPasswordField);
         jPanel2.add(jLabel3);
         jPanel2.add(jLabel5);
 
@@ -166,7 +166,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel6)))
@@ -187,9 +187,10 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
         String user = jTextFieldUser.getText();
-        String pass = jTextFieldContrasena.getText();
+        char[] contrasena = jPasswordField.getPassword();
+        String stringContrasena = new String(contrasena);
 
-        if (user.isEmpty() || pass.isEmpty()) {
+        if (user.isEmpty() || stringContrasena.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos.",
                     "Campos vacíos", JOptionPane.WARNING_MESSAGE);
             return;
@@ -204,9 +205,9 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
             if (rs.next()) {
                 String userBD = rs.getString("usuario_login");
                 String ctnBD = rs.getString("contrasenya_login");
-
+                
                 if (userBD.equals(user)) {
-                    if (servix.Seguridad.checkPassword(pass, ctnBD)) {
+                    if (servix.Seguridad.checkPassword(stringContrasena, ctnBD)) {
                         int opcion = JOptionPane.showConfirmDialog(this,
                             "¿Está seguro de que desea eliminar su cuenta?",
                             "Confirmar eliminación",
@@ -285,7 +286,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextFieldContrasena;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldUser;
     // End of variables declaration//GEN-END:variables
 }
