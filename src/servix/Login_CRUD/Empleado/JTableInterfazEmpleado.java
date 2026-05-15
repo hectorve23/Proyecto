@@ -65,6 +65,11 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         jLabel1.setText("Bienvenido/a");
         aplicarFormato();
         
+        atajosTeclado();
+    }
+    
+    private void atajosTeclado(){
+        //Ayuda
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
         }
@@ -76,7 +81,6 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -52,6 +52,12 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         
         seleccionarRestaurante(id);
         
+        atajosTeclado();
+        
+    }
+    
+    private void atajosTeclado(){
+        //Ayuda
         if (JFrameServix.hb != null) {
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_encargado", JFrameServix.hs);
         }
@@ -63,7 +69,6 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

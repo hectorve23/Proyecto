@@ -60,14 +60,15 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         jTableMesas.setDefaultEditor(Object.class, null);
         cargarMesas();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_mesas", JFrameServix.hs);
-        }
-        
         atajosTeclado();
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_mesas", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonVolver.doClick(),

@@ -69,15 +69,16 @@ public class JTableEmpleados extends javax.swing.JDialog {
         cargarEmpleados();
         aplicarFormato();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
-        }
-        
         atajosTeclado();
 
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_interfaz_empleado", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCancelar.doClick(),

@@ -48,15 +48,15 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         this.conexion = nuevaConexion.getConnection();
         cargarDatosReserva();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_reserva", JFrameServix.hs);
-        }
-        
         atajosTeclado();
         
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_reserva", JFrameServix.hs);
+        }
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCancelar.doClick(),

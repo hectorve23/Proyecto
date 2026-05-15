@@ -42,15 +42,16 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_anadir_mesa", JFrameServix.hs);
-        }
-        
         atajosTeclado();
         
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_anadir_mesa", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCancelar.doClick(),

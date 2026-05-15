@@ -62,21 +62,22 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         cc = new CargaCombos();
         cc.cargaComboRestaurantes(jComboBoxRestaurantes);
-        jComboBoxRestaurantes.addActionListener(e -> cargaTablaMenu());
+        cc.cargaComboRestaurantes(jComboBoxSeleccionMenu);
+        jComboBoxSeleccionMenu.addActionListener(e -> cargaTablaMenu());
         
         cargaTablaReservas();
         cargaTablaMenu();
         formatoTabla();
-        
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
-        }
-        
+       
         atajosTeclado();
         
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_clientes", JFrameServix.hs);
+        }
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCerrarSesion.doClick(),
@@ -137,13 +138,15 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jLabel4 = new javax.swing.JLabel();
         jSpinnerHora = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldNumeroComensales = new javax.swing.JTextField();
+        jSpinnerComensales = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMenu = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBoxSeleccionMenu = new javax.swing.JComboBox<>();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonNuevaReserva = new javax.swing.JButton();
         jButtonVerReservas = new javax.swing.JButton();
@@ -237,7 +240,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jLabel5.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel5.setText("Numero de comensales");
         jPanelNuevaReserva.add(jLabel5);
-        jPanelNuevaReserva.add(jTextFieldNumeroComensales);
+        jPanelNuevaReserva.add(jSpinnerComensales);
         jPanelNuevaReserva.add(jLabel1);
 
         jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -266,24 +269,34 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         ));
         jScrollPane1.setViewportView(jTableMenu);
 
+        jLabel8.setText("Desplega para elegir menu:");
+
+        jComboBoxSeleccionMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
         jPanelMenu.setLayout(jPanelMenuLayout);
         jPanelMenuLayout.setHorizontalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
-            .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelMenuLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(23, Short.MAX_VALUE)))
+            .addGroup(jPanelMenuLayout.createSequentialGroup()
+                .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMenuLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxSeleccionMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelMenuLayout.setVerticalGroup(
             jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
-            .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanelMenuLayout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(jPanelMenuLayout.createSequentialGroup()
+                .addGroup(jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSeleccionMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanelPadre.add(jPanelMenu, "card4");
@@ -341,15 +354,11 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonBajaCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButtonCerrarSesion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButtonCerrarSesion)
+                            .addComponent(jButtonBajaCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
                         .addComponent(jLabel2)))
@@ -360,20 +369,21 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonCerrarSesion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBajaCliente)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel2))
                             .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 334, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCerrarSesion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBajaCliente)
+                        .addGap(17, 17, 17))))
         );
 
         pack();
@@ -449,7 +459,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     //que la hora sea valida. Si alguno de estas comprobaciones no es satisfactoria mostrara un JOptionPane indicando el error
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        String comensales = jTextFieldNumeroComensales.getText();
+        int comensales = Integer.parseInt(String.valueOf(jSpinnerComensales.getValue()));
         java.util.Date mfecha = jDateChooser.getDate();
         Object valorHora = jSpinnerHora.getValue();
         
@@ -470,7 +480,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         calElegida.set(Calendar.SECOND, 0);
         
         //Comprobacion de si algun campo esta vacio
-        if(comensales.isEmpty() || mfecha==null || valorHora==null){
+        if(mfecha==null || valorHora==null){
             JOptionPane.showConfirmDialog(rootPane,
                                             "Rellena todos los campos", 
                                             "Error", 
@@ -488,6 +498,12 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         else if(!validarHorario(valorHora)){
             JOptionPane.showMessageDialog(rootPane,
                                             "La hora debe estar entre 12:00-16:00 o 21:00-23:59", 
+                                            "Error", 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
+        else if(comensales<=0 || comensales>20){
+            JOptionPane.showMessageDialog(rootPane,
+                                            "El numero de comensales tiene que estar entre 1 y 20", 
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
         }
@@ -509,19 +525,27 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 Timestamp fechaHoraSQL = Timestamp.valueOf(fechaHoraCompleta);
                 
                 ps.setString(1, "pendiente");
-                ps.setInt(2, Integer.parseInt(jTextFieldNumeroComensales.getText()));
+                ps.setInt(2, comensales);
                 ps.setTimestamp(3, fechaHoraSQL);
                 ps.setInt(4, id);
                 ps.setInt(5, comboBoxIdRestaurante());
 
                 int filas = ps.executeUpdate();
                 if(filas==1){
-                   JOptionPane.showConfirmDialog(rootPane,
+                    JOptionPane.showConfirmDialog(rootPane,
                                                 "Reserva registrada", 
                                                 "", 
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.INFORMATION_MESSAGE);
-                   recargarTabla(); //Metodo para que la nueva reserva aparezca en el JTable de reservas
+                    recargarTabla(); //Metodo para que la nueva reserva aparezca en el JTable de reservas
+                    jSpinnerComensales.setValue(0);
+                    jDateChooser.setDate(null);
+                    Calendar reset = Calendar.getInstance();
+                    reset.set(Calendar.HOUR_OF_DAY, 0);
+                    reset.set(Calendar.MINUTE, 0);
+                    reset.set(Calendar.SECOND, 0);
+                    jSpinnerHora.setValue(reset.getTime());
+                   
                 }
                 else{
                     JOptionPane.showConfirmDialog(rootPane,
@@ -680,6 +704,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JButton jButtonVerMenu;
     private javax.swing.JButton jButtonVerReservas;
     private javax.swing.JComboBox<String> jComboBoxRestaurantes;
+    private javax.swing.JComboBox<String> jComboBoxSeleccionMenu;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -688,6 +713,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanelBotonesDeleteUpdate;
     private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelNuevaReserva;
@@ -696,10 +722,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     private javax.swing.JPanel jPanelVerReservas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinnerComensales;
     private javax.swing.JSpinner jSpinnerHora;
     private javax.swing.JTable jTableMenu;
     private javax.swing.JTable jTableReservas;
-    private javax.swing.JTextField jTextFieldNumeroComensales;
     // End of variables declaration//GEN-END:variables
     
     //Este metodo es el que se encarga de rellenar la tabla con la informacion de las reservas de la base de datos
@@ -722,7 +748,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     //Este metodo es el que se encarga de rellenar la tabla con la informacion del menu de la base de datos
     public void cargaTablaMenu(){
         
-        String restauranteSeleccionado = (String) jComboBoxRestaurantes.getSelectedItem();
+        String restauranteSeleccionado = (String) jComboBoxSeleccionMenu.getSelectedItem();
         
         dtm2.setRowCount(0);
         dtm2.setColumnCount(0);

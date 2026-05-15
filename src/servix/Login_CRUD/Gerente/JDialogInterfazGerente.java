@@ -73,23 +73,16 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         cargaTablaAsignaciones();
         formatoTabla();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gerente", JFrameServix.hs);
-        }
-        
-        // Escape - Cerrar
-        getRootPane().registerKeyboardAction(
-            e -> jButtonCerrarSesion.doClick(),
-            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),
-            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
-        );
-        
         atajosTeclado();
         
     }
     
     private void atajosTeclado() {
-    
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gerente", JFrameServix.hs);
+        }
+        
         // Ctrl+G - Validar/Asignar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {

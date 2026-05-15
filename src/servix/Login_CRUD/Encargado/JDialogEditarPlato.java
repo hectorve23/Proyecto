@@ -51,15 +51,16 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         this.conexion = nuevaConexion.getConnection();
         this.padre = (JFrameServix) parent;
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_plato", JFrameServix.hs);
-        }
-        
         atajosTeclado();
         
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_editar_plato", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonCancelar.doClick(),

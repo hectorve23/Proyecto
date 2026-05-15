@@ -79,15 +79,16 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         cargarDatos();
         aplicarFormato();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gestion_reservas", JFrameServix.hs);
-        }
-        
         atajosTeclado();
         
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_gestion_reservas", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonVolver.doClick(),

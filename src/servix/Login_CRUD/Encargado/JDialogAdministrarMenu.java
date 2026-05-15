@@ -59,14 +59,16 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jButtonValidar.setVisible(false);
         cargaTablaMenu();
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_admin_menu", JFrameServix.hs);
-        }
         
         atajosTeclado();
         
     }
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_admin_menu", JFrameServix.hs);
+        }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonVolver.doClick(),

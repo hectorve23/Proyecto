@@ -211,6 +211,8 @@ public class JFrameServix extends javax.swing.JFrame {
             hs = new HelpSet(getClass().getClassLoader(), hsURL);
             hb = hs.createHelpBroker();
             hb.enableHelpKey(this.getContentPane(), "main", hs);
+            System.out.println("hb: " + JFrameServix.hb);
+            System.out.println("hs: " + JFrameServix.hs);
         } catch (HelpSetException ex) {
             System.err.println("Error HelpSetException");
         }

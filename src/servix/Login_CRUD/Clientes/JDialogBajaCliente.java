@@ -43,15 +43,15 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         conexion=nueva.getConnection();
         this.setTitle("Servix");
         
-        if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_baja_cliente", JFrameServix.hs);
-        }
-        
         atajosTeclado();
         
     }
     
     private void atajosTeclado(){
+        //Ayuda
+        if (JFrameServix.hb != null) {
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_baja_cliente", JFrameServix.hs);
+        }
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonVolver.doClick(),
