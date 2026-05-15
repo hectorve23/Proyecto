@@ -42,6 +42,8 @@ public class CargaCombos {
             ResultSet r2 = ps2.executeQuery();
             while(r2.next()){
                 jComboBoxEncargados.addItem(r2.getString("nombre_apellidos"));
+
+                
             }
             
         } catch (SQLException ex) {
