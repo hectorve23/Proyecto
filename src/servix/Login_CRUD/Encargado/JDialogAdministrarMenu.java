@@ -399,6 +399,12 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         }
         else{
             try {
+                if      (categoria.equalsIgnoreCase("bebida"))        categoria = "Bebida";
+else if (categoria.equalsIgnoreCase("entrante"))      categoria = "Entrante";
+else if (categoria.equalsIgnoreCase("primer_plato"))  categoria = "Plato principal";
+else if (categoria.equalsIgnoreCase("segundo_plato")) categoria = "Segundo Plato";
+else if (categoria.equalsIgnoreCase("postre"))        categoria = "Postre";
+                
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
                         + "(nombre, precio, categoria, id_restaurante)"
                         + " VALUES (?, ?, ?, ?)");

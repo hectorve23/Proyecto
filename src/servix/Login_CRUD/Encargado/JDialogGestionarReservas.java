@@ -426,6 +426,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             parameters.put("p_nombre_restaurante", nombre); 
             parameters.put("p_direccion_restaurante", direccion);
             parameters.put("p_telefono_restaurante", telefono);
+            parameters.put("p_id_restaurante", restaurante);
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
@@ -462,6 +463,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
             parameters.put("p_nombre_restaurante", nombre); 
             parameters.put("p_direccion_restaurante", direccion);
             parameters.put("p_telefono_restaurante", telefono);
+            parameters.put("p_id_restaurante", restaurante);
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));

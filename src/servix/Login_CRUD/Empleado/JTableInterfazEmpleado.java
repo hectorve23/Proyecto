@@ -185,9 +185,14 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
     private void jButtonBuscarFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarFechaActionPerformed
         Date mfecha = jDateChooserFecha.getDate();
         if(mfecha != null) {
-            LocalDate fecha = mfecha.toInstant()
-                .atZone(java.time.ZoneId.systemDefault())
-                .toLocalDate();
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(mfecha);
+            LocalDate fecha = LocalDate.of(
+                cal.get(java.util.Calendar.YEAR),
+                cal.get(java.util.Calendar.MONTH) + 1,
+                cal.get(java.util.Calendar.DAY_OF_MONTH)
+            );
+            System.out.println(fecha);
             escribirReservas(fecha);
         }
     }//GEN-LAST:event_jButtonBuscarFechaActionPerformed
@@ -210,6 +215,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
     public void escribirReservas(LocalDate fecha){
         try {
             lista.clear();
+            dtm.setRowCount(0);
             nueva.conectar();
             String sql = "SELECT * FROM Reserva WHERE DATE(fecha_hora) = ? AND id_restaurante = ?";
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -228,8 +234,17 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
                 );
                 lista.add(r);
             }
-            for (int i = 0; i < lista.size(); i++) {
-                dtm.addRow(lista.get(i).devuelveFila());
+            if (lista.isEmpty()) { // <-- Aviso si no hay reservas
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "No se han encontrado reservas para la fecha seleccionada.",
+                    "Sin reservas",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                for (int i = 0; i < lista.size(); i++) {
+                    dtm.addRow(lista.get(i).devuelveFila());
+                }
             }
         } catch (SQLException ex) {
             System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
