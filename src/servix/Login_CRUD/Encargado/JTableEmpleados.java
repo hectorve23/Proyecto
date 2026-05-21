@@ -56,6 +56,13 @@ public class JTableEmpleados extends javax.swing.JDialog {
         this.encargado = encargado;
         this.restaurante = restaurante;
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JTableEmpleados.this, padre);
+            }
+        });
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         

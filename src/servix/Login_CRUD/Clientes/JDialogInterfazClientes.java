@@ -52,6 +52,13 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         this.id = id;
         this.padre = (JFrameServix) parent;
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogInterfazClientes.this, padre);
+            }
+        });
+        
         this.dtm = new DefaultTableModel();
         this.dtm2 = new DefaultTableModel();
         jTableReservas.setModel(dtm);

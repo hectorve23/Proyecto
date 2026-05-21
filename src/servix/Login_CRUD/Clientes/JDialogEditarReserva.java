@@ -44,6 +44,13 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         this.id = id;
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogEditarReserva.this, padre);
+            }
+        });
+        
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
         cargarDatosReserva();

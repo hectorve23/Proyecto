@@ -57,6 +57,13 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
         this.cierre = cierre;
         cargarCampos();
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogEditarRestaurante.this, padre);
+            }
+        });
+        
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();
         

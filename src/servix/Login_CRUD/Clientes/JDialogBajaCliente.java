@@ -38,6 +38,14 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.id=id;
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogBajaCliente.this, padre);
+            }
+        });
+        
         this.padre = (JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();

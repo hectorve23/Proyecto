@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -50,13 +49,20 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
     public JDialogGestionarReservas(java.awt.Frame parent, boolean modal, int id, int id_restaurante) {
         super(parent, modal);
         initComponents();
+        
         this.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
         this.restaurante = id_restaurante;
         this.id = id;
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogGestionarReservas.this, padre);
+            }
+        });
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtmPendientes = new DefaultTableModel();

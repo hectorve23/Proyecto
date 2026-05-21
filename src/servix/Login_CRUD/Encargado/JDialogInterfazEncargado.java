@@ -39,16 +39,21 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     public JDialogInterfazEncargado(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
         this.setLocationRelativeTo(null);
         this.setTitle("Servix");
         this.padre = (JFrameServix) parent;
         this.id = id;
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogInterfazEncargado.this, padre);
+            }
+        });    
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
         
         seleccionarRestaurante(id);
         
@@ -246,6 +251,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
         this.setVisible(false);
         this.dispose();
+        padre.dispose();
         JFrameServix jfs = new JFrameServix();
         jfs.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
@@ -316,7 +322,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             JFrameServix jfs = new JFrameServix();

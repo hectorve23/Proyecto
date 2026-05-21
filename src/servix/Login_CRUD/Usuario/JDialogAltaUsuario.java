@@ -59,6 +59,14 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         this.editar = editar;
         this.id= id;
         this.restauranteAsociado = restaurante;
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogAltaUsuario.this, padre);
+            }
+        });
+        
         comprobarLongitudTelefono();
         comprobarLongitudes();
         enterEnFormulario();

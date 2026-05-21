@@ -17,11 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
-import servix.Login_CRUD.Clientes.JDialogEditarReserva;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
-import static servix.Login_CRUD.Usuario.JDialogAltaUsuario.validarEmail;
-import static servix.Login_CRUD.Usuario.JDialogAltaUsuario.validarTelefono;
 import servix.Seguridad;
 
 /**
@@ -63,6 +60,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jTableRestaurantes.setDefaultEditor(Object.class, null);
         jTableEncargados.setDefaultEditor(Object.class, null);
         jTableAsignaciones.setDefaultEditor(Object.class, null);
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogInterfazGerente.this, padre);
+            }
+        });
         
         this.padre = (JFrameServix) parent;
         this.cc = new CargaCombos();

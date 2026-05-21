@@ -240,7 +240,6 @@ public class JFrameServix extends javax.swing.JFrame {
                         this.setVisible(false);
                         JTableInterfazEmpleado jdie = new JTableInterfazEmpleado("empleado", this, true, id, restaurante_asociado);
                         jdie.setVisible(true);
-                        this.dispose();
                     }else{
                         if(rol.toLowerCase().equals("gerente")){
                             this.setVisible(false);
@@ -248,7 +247,7 @@ public class JFrameServix extends javax.swing.JFrame {
                             jdar.setVisible(true);
                         }else{
                             if(rol.toLowerCase().equals("encargado")){
-                                this.setVisible(false);
+                                this.setExtendedState(javax.swing.JFrame.ICONIFIED);
                                 JDialogInterfazEncargado jdien = new JDialogInterfazEncargado(this, true, id);
                                 jdien.setVisible(true);
                             }
@@ -333,22 +332,15 @@ public class JFrameServix extends javax.swing.JFrame {
         }
         return true;
     }
-    
-     private void seleccionarRestaurante(int id){
-        try {
-            String sql = "SELECT restaurante_asociado FROM Usuario WHERE id = ?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-           
-            if (rs.next()) {
-                restaurante_asociado = rs.getInt("restaurante_asociado");
-            }
-            
-        } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+     
+     
+    public static void cerrarYReiniciar(java.awt.Window ventana, java.awt.Frame padre) {
+        ventana.dispose();
+        if (padre != null) padre.dispose();
+        System.exit(0);
     }
+    
+    
      
     /**
      * @param args the command line arguments

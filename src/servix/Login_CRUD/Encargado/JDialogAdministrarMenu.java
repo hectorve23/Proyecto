@@ -51,6 +51,13 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         this.restaurante = restaurante;
         this.id = id;
         
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogAdministrarMenu.this, padre);
+            }
+        });
+        
         jTableMenu.setModel(dtm);
         // Desactivar edicion de las tablas
         jTableMenu.setDefaultEditor(Object.class, null);

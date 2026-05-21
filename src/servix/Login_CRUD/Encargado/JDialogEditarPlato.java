@@ -46,6 +46,14 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         this.cadenaCategoriaCambiar=cadenaCategoriaCambiar;
         this.restaurante = restaurante;
         this.id = id;
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogEditarPlato.this, padre);
+            }
+        });
+        
         cargarDatosPlato();
         ConexionBBDD nuevaConexion = new ConexionBBDD();
         this.conexion = nuevaConexion.getConnection();

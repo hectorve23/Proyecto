@@ -54,6 +54,14 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         this.rol= rol;
         this.id = id;
         this.restaurante = restaurante;
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JTableInterfazEmpleado.this, padre);
+            }
+        });
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         dtm= new DefaultTableModel();
