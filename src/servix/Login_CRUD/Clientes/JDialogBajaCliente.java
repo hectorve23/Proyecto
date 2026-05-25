@@ -37,25 +37,25 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         this.setTitle("Servix");
         this.setLocationRelativeTo(null); //Hace que la ventana este centrada en la pantalla
-        
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage()); //Añade el logo a la ventana
         this.id=id;
         
+        // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
+        padre.setLocation(-10000, -10000);
+        padre.setSize(0, 0);
+
+        // Al cerrar el dialog cerrar el padre
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
                 JFrameServix.cerrarYReiniciar(JDialogBajaCliente.this, padre);
             }
         });
-        
+                
         //Conexion a base de datos
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         
-        
         atajosTeclado();
-        
     }
     
     private void atajosTeclado(){

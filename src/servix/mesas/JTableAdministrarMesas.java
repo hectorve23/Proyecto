@@ -44,14 +44,24 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.id = id;
         this.restaurante = restaurante;
         this.padre=(JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
+        
+        // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
+        padre.setLocation(-10000, -10000);
+        padre.setSize(0, 0);
+
+        // Al cerrar el dialog cerrar el padre
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JTableAdministrarMesas.this, padre);
+            }
+        });
         
         dtm= new DefaultTableModel();
         jTableMesas.setModel(dtm);

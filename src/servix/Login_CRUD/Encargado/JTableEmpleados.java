@@ -55,7 +55,10 @@ public class JTableEmpleados extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         this.encargado = encargado;
         this.restaurante = restaurante;
-        
+        // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
+        padre.setLocation(-10000, -10000);
+        padre.setSize(0, 0);
+
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {

@@ -47,8 +47,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
         this.setTitle("Servix");
         this.getContentPane().setBackground(Color.decode("#EFF7FB"));
         jPanel1.setBackground(Color.decode("#FAFAFA"));
@@ -60,6 +58,10 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         this.id= id;
         this.restauranteAsociado = restaurante;
         
+        // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
+        padre.setLocation(-10000, -10000);
+        padre.setSize(0, 0);
+
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {

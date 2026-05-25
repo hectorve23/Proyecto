@@ -55,6 +55,10 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
         this.id = id;
         this.restaurante = restaurante;
         
+        // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
+        padre.setLocation(-10000, -10000);
+        padre.setSize(0, 0);
+
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
@@ -201,7 +205,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
                 cal.get(java.util.Calendar.DAY_OF_MONTH)
             );
             System.out.println(fecha);
-            escribirReservas(fecha);
+            buscarReservas(fecha);
         }
     }//GEN-LAST:event_jButtonBuscarFechaActionPerformed
 
@@ -221,6 +225,37 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSalirActionPerformed
     
     public void escribirReservas(LocalDate fecha){
+        try {
+            lista.clear();
+            dtm.setRowCount(0);
+            nueva.conectar();
+            String sql = "SELECT * FROM Reserva WHERE DATE(fecha_hora) = ? AND id_restaurante = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setObject(1, fecha);
+            ps.setInt(2, restaurante);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Reserva r = new Reserva(
+                    rs.getInt("id_reserva"),
+                    rs.getString("estado_reserva"),
+                    rs.getInt("n_comensales"),
+                    rs.getObject("fecha_hora", LocalDateTime.class),
+                    rs.getInt("id_cliente"),
+                    rs.getInt("id_mesa")
+                );
+                lista.add(r);
+            }
+            
+            for (int i = 0; i < lista.size(); i++) {
+                dtm.addRow(lista.get(i).devuelveFila());
+            }
+        } catch (SQLException ex) {
+            System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }
+    
+    public void buscarReservas(LocalDate fecha){
         try {
             lista.clear();
             dtm.setRowCount(0);
