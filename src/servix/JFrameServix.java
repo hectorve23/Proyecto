@@ -251,7 +251,8 @@ public class JFrameServix extends javax.swing.JFrame {
                         }else{
                             if(rol.toLowerCase().equals("encargado")){
                                 // /////
-                                this.setMinimumSize(new java.awt.Dimension(0, 0));
+                                // Coloca el jFrame al minimo tamaño y lo manda a una esquina cuando se reabre la aplicacion
+                                // aunque al reabrir la aplicacion, abrir un jdialog distinto y volver al de la interfaz de encargado, el jFrame desaparece al fin
                                 this.setBounds(-10000, -10000, 0, 0);
                                 // /////
                                 this.setExtendedState(javax.swing.JFrame.ICONIFIED);
