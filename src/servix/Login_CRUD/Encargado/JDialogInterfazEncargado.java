@@ -295,12 +295,15 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 telefono = rs.getString("telefono");
             }
             
-            String fileJasper = "informes/Clientes.jasper";
+            String fileJasper = "informes/GraficoReservas.jasper";
+            
             Map parameters = new HashMap();
             parameters.put("p_nombre_restaurante", nombre); 
             parameters.put("p_direccion_restaurante", direccion);
             parameters.put("p_telefono_restaurante", telefono);
+            parameters.put("p_id_restaurante", id_restaurante);
             JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false);
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
             visor.setSize(900, 700);

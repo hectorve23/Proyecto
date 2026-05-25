@@ -61,13 +61,6 @@
 	<parameter name="p_nombre_restaurante" class="java.lang.String"/>
 	<parameter name="p_direccion_restaurante" class="java.lang.String"/>
 	<parameter name="p_telefono_restaurante" class="java.lang.String"/>
-	<parameter name="unAnyoAtras" class="java.lang.Object">
-		<defaultValueExpression><![CDATA["DATE_SUB(NOW(), INTERVAL 1 YEAR)"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="hoy" class="java.lang.Object">
-		<defaultValueExpression><![CDATA[NOW( )]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Parameter" class="java.lang.Object"/>
 	<parameter name="fechaInicio6Meses" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(new java.util.Date().getTime() - 183L * 24 * 60 * 60 * 1000))]]></defaultValueExpression>
 	</parameter>
@@ -85,8 +78,7 @@ WHERE
     AND estado_reserva IN ('confirmada', 'cancelada')
     AND id_restaurante = $P{p_id_restaurante}
 GROUP BY DATE_FORMAT(fecha_hora, '%Y-%m'), 
-estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')
-]]>
+estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')]]>
 	</queryString>
 	<field name="mes" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="mes"/>
@@ -132,7 +124,7 @@ estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')
 				<text><![CDATA[Teléfono:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="149" y="81" width="107" height="17" forecolor="#FFFFFF" uuid="d6e4b00e-e2d5-405a-a90a-3bb2a1737c38"/>
+				<reportElement x="150" y="80" width="107" height="17" forecolor="#FFFFFF" uuid="d6e4b00e-e2d5-405a-a90a-3bb2a1737c38"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -170,11 +162,11 @@ estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')
 			</staticText>
 		</band>
 	</title>
-	<detail>
-		<band height="330">
+	<summary>
+		<band height="300">
 			<barChart>
 				<chart evaluationTime="Report">
-					<reportElement x="50" y="40" width="455" height="200" uuid="9ebe0515-adca-4619-9555-db53b0ffa4e1"/>
+					<reportElement x="0" y="40" width="534" height="260" uuid="9ebe0515-adca-4619-9555-db53b0ffa4e1"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -198,5 +190,5 @@ estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')
 				</barPlot>
 			</barChart>
 		</band>
-	</detail>
+	</summary>
 </jasperReport>
