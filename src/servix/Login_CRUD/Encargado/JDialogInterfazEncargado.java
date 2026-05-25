@@ -45,12 +45,29 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         this.id = id;
         
+        /*
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
                 JFrameServix.cerrarYReiniciar(JDialogInterfazEncargado.this, padre);
             }
-        });    
+        });
+        */
+        // //////////////////////////////////////////////////////////////////////
+        
+        // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
+        padre.setLocation(-10000, -10000);
+        padre.setSize(0, 0);
+
+        // Al cerrar el dialog, eliminar el padre limpiamente
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                JFrameServix.cerrarYReiniciar(JDialogInterfazEncargado.this, padre);
+            }
+        });
+        
+        // //////////////////////////////////////////////////////////////////////
         
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();

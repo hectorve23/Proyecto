@@ -47,6 +47,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         
@@ -56,6 +57,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jTableEncargados.setModel(dtm2);
         this.dtm3 = new DefaultTableModel();
         jTableAsignaciones.setModel(dtm3);
+        
         // Desactivar edicion de las tablas
         jTableRestaurantes.setDefaultEditor(Object.class, null);
         jTableEncargados.setDefaultEditor(Object.class, null);

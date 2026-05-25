@@ -39,17 +39,25 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     public JDialogAdministrarMenu(java.awt.Frame parent, boolean modal, int restaurante, int id) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
+        this.setLocationRelativeTo(null); //Hace que la ventana este centrada en la pantalla
         this.setTitle("Servix");
         
-        this.nueva = new ConexionBBDD();
-        this.conexion = nueva.getConnection();
-        this.dtm = new DefaultTableModel();
         this.padre = (JFrameServix) parent;
         this.restaurante = restaurante;
         this.id = id;
+        
+        //Añade el logo a la ventana
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
+        this.setIconImage(icon.getImage());
+        
+        //Conexion a base de datos
+        this.nueva = new ConexionBBDD();
+        this.conexion = nueva.getConnection();
+        
+        this.dtm = new DefaultTableModel();
+        jTableMenu.setModel(dtm);
+        jTableMenu.setDefaultEditor(Object.class, null);// Desactiva edicion de las tablas
+        cargaTablaMenu();
         
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -58,13 +66,9 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             }
         });
         
-        jTableMenu.setModel(dtm);
-        // Desactivar edicion de las tablas
-        jTableMenu.setDefaultEditor(Object.class, null);
-        
         jButtonVolver.setVisible(true);
         jButtonValidar.setVisible(false);
-        cargaTablaMenu();
+        
         
         
         atajosTeclado();
@@ -73,6 +77,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     private void atajosTeclado(){
         //Ayuda
         if (JFrameServix.hb != null) {
+            // Referencia para que al pulsar F1 salga en la pagina correspondiente de ayuda
             JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_admin_menu", JFrameServix.hs);
         }
         
@@ -300,6 +305,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
     private void actualizarPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPanel
         // TODO add your handling code here:
+        // Al cambiar de panel se añaden o quitan los botones que correspondan, porque no se utilizan los mismos en cada panel
         JButton jbutton = (JButton) evt.getSource();
         jPanelPadre.removeAll();
         if (jbutton == jButtonVerPlatos) {
@@ -326,7 +332,6 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             
             int fila = jTableMenu.getSelectedRow();
 
-           
             String nombre = jTableMenu.getValueAt(fila, 0).toString();
             double precio = Double.parseDouble(jTableMenu.getValueAt(fila, 1).toString());
             String cadenaCategoria = jTableMenu.getValueAt(fila, 2).toString();
@@ -407,10 +412,10 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         else{
             try {
                 if      (categoria.equalsIgnoreCase("bebida"))        categoria = "Bebida";
-else if (categoria.equalsIgnoreCase("entrante"))      categoria = "Entrante";
-else if (categoria.equalsIgnoreCase("primer_plato"))  categoria = "Plato principal";
-else if (categoria.equalsIgnoreCase("segundo_plato")) categoria = "Segundo Plato";
-else if (categoria.equalsIgnoreCase("postre"))        categoria = "Postre";
+                else if (categoria.equalsIgnoreCase("entrante"))      categoria = "Entrante";
+                else if (categoria.equalsIgnoreCase("primer_plato"))  categoria = "Plato principal";
+                else if (categoria.equalsIgnoreCase("segundo_plato")) categoria = "Segundo Plato";
+                else if (categoria.equalsIgnoreCase("postre"))        categoria = "Postre";
                 
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
                         + "(nombre, precio, categoria, id_restaurante)"

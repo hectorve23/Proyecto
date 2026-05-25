@@ -48,16 +48,19 @@ public class JFrameServix extends javax.swing.JFrame {
     public static HelpSet hs;
     
     public JFrameServix(){
-         initComponents();
-         this.setLocationRelativeTo(null);
-            cargaAyuda();
-         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-            this.setIconImage(icon.getImage());
-            nueva = new ConexionBBDD();
-            conexion=nueva.getConnection();
-            this.setTitle("Servix");
+        initComponents();
+        this.setLocationRelativeTo(null); //Hace que la ventana este centrada en la pantalla
+        this.setTitle("Servix");
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png")); 
+        this.setIconImage(icon.getImage()); //Añade el logo a la ventana
+        
+        //Conexion a base de datos
+        nueva = new ConexionBBDD();
+        conexion=nueva.getConnection();
+        
+        //Aqui se implementa el look and feel
         try {
-           
             UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
         } catch (UnsupportedLookAndFeelException ex) {
             System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -69,6 +72,8 @@ public class JFrameServix extends javax.swing.JFrame {
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
+        
+        cargaAyuda();
     }
 
     /**
@@ -205,14 +210,12 @@ public class JFrameServix extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void cargaAyuda() {
+    private void cargaAyuda() { //Metodo en el que se implementa la ayuda de JavaHelp, la ayuda de los JDialog desciende de aqui, se le llama en el constructor
         try {   
             URL hsURL = getClass().getResource("/servix/help/help_set.hs");
             hs = new HelpSet(getClass().getClassLoader(), hsURL);
             hb = hs.createHelpBroker();
-            hb.enableHelpKey(this.getContentPane(), "main", hs);
-            System.out.println("hb: " + JFrameServix.hb);
-            System.out.println("hs: " + JFrameServix.hs);
+            hb.enableHelpKey(this.getContentPane(), "main", hs); // Referencia para que al pulsar F1 salga en la pagina correspondiente de ayuda
         } catch (HelpSetException ex) {
             System.err.println("Error HelpSetException");
         }
@@ -237,16 +240,20 @@ public class JFrameServix extends javax.swing.JFrame {
                     jdcc.setVisible(true);
                 }else{
                     if(rol.toLowerCase().equals("empleado")){
-                        this.setVisible(false);
+                        this.setExtendedState(javax.swing.JFrame.ICONIFIED);
                         JTableInterfazEmpleado jdie = new JTableInterfazEmpleado("empleado", this, true, id, restaurante_asociado);
                         jdie.setVisible(true);
                     }else{
                         if(rol.toLowerCase().equals("gerente")){
-                            this.setVisible(false);
+                            this.setExtendedState(javax.swing.JFrame.ICONIFIED);
                             JDialogInterfazGerente jdar = new JDialogInterfazGerente(this, true);
                             jdar.setVisible(true);
                         }else{
                             if(rol.toLowerCase().equals("encargado")){
+                                // /////
+                                this.setMinimumSize(new java.awt.Dimension(0, 0));
+                                this.setBounds(-10000, -10000, 0, 0);
+                                // /////
                                 this.setExtendedState(javax.swing.JFrame.ICONIFIED);
                                 JDialogInterfazEncargado jdien = new JDialogInterfazEncargado(this, true, id);
                                 jdien.setVisible(true);

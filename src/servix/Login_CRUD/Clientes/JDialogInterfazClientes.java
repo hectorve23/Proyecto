@@ -43,14 +43,16 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        this.id = id;
+        this.padre = (JFrameServix) parent;
         this.setLocationRelativeTo(null);
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         
-        this.id = id;
-        this.padre = (JFrameServix) parent;
         
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -399,6 +401,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     //Metodo que actualiza el panel del card layout segun el boton que pulses
     private void actualizarPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPanel
         // TODO add your handling code here:
+        // Dependiendo del boton pulsado (tienen el mismo actionPerformed, es decir este) seleccionara un panel u otro
         JButton jbutton = (JButton) evt.getSource();
         jPanelPadre.removeAll();
         if (jbutton == jButtonVerReservas) {
@@ -421,8 +424,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         cargaTablaReservas();
         formatoTabla();
     }
-    //Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario en el que el restaurante
-    //admite reservas utilizando LocalTime para cada margen y devolviendo true o false si esta dentro del horario o no
+    /* Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario en el que el restaurante
+       admite reservas utilizando LocalTime para cada margen y devolviendo true o false si esta dentro del horario o no*/
     private boolean validarHorario(Object valorHora){
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
         String horaSQL = formatoHora.format(valorHora);
@@ -438,7 +441,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
                 (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
     }
-    private int comboBoxIdRestaurante(){        
+    private int comboBoxIdRestaurante(){ 
+        //Este metodo recoje el id_restaurante de la seleccion del combobox, se utiliza en la insercion de reserva
         try {
             
             String contenido = jComboBoxRestaurantes.getItemAt(jComboBoxRestaurantes.getSelectedIndex());

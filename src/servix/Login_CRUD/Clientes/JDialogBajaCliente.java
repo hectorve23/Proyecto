@@ -34,9 +34,12 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     public JDialogBajaCliente(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.padre = (JFrameServix) parent;
+        this.setTitle("Servix");
+        this.setLocationRelativeTo(null); //Hace que la ventana este centrada en la pantalla
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
-        this.setIconImage(icon.getImage());
+        this.setIconImage(icon.getImage()); //Añade el logo a la ventana
         this.id=id;
         
         this.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -46,10 +49,10 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
             }
         });
         
-        this.padre = (JFrameServix) parent;
+        //Conexion a base de datos
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        this.setTitle("Servix");
+        
         
         atajosTeclado();
         
@@ -58,8 +61,10 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
     private void atajosTeclado(){
         //Ayuda
         if (JFrameServix.hb != null) {
-            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_baja_cliente", JFrameServix.hs);
+            // Referencia para que al pulsar F1 salga en la pagina correspondiente de ayuda
+            JFrameServix.hb.enableHelpKey(this.getContentPane(), "ayuda_baja_cliente", JFrameServix.hs); 
         }
+        
         // Escape - Cerrar
         getRootPane().registerKeyboardAction(
             e -> jButtonVolver.doClick(),
