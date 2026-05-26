@@ -566,6 +566,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
         this.dispose();
+        padre.dispose(); // Esta linea evita que se acumulen ventanas de JFrame en la barra de tareas, se añade solo en los botones de cerrar sesion
         JFrameServix jfs = new JFrameServix();
         jfs.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed

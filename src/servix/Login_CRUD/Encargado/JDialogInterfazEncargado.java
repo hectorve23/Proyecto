@@ -255,7 +255,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
     private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarSesionActionPerformed
         this.setVisible(false);
         this.dispose();
-        padre.dispose();
+        padre.dispose(); // Esta linea evita que se acumulen ventanas de JFrame en la barra de tareas, se añade solo en los botones de cerrar sesion
         JFrameServix jfs = new JFrameServix();
         jfs.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
