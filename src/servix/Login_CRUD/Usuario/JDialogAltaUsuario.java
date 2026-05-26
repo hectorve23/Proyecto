@@ -76,9 +76,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         if(editar){
             jLabel1.setText("Editar usuario");
             cargarDatosUsuario(id);
-            jTextFieldUser.setEditable(false);
         }
-        
         atajosTeclado();
         
     }
@@ -609,19 +607,34 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             }
         });
 
-        // Correo -> Usuario - Correo -> Telefono
-        jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-                    jTextFieldUser.requestFocus();
+        if(!editar){
+            // Correo -> Usuario - Correo -> Telefono
+            jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyPressed(java.awt.event.KeyEvent evt) {
+                    if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                        jTextFieldUser.requestFocus();
+                    }
+                    if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                        jTextFieldTelefono.requestFocus();
+                    }
                 }
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
-                    jTextFieldTelefono.requestFocus();
+            });
+        }else{
+            // Correo -> Usuario - Correo -> Telefono
+            jTextFieldCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyPressed(java.awt.event.KeyEvent evt) {
+                    if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                        jButtonAlta.requestFocus();
+                    }
+                    if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                        jTextFieldTelefono.requestFocus();
+                    }
                 }
-            }
-        });
-
+            });
+        }
+        
         // User -> Contraseña1 - User -> Correo
         jTextFieldUser.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -660,42 +673,23 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                 }
             }
         });
-        
-        //Aceptar -> Cancelar - Aceptar -> Contraseña2
-        jButtonAlta.addKeyListener(new java.awt.event.KeyAdapter(){
-            @Override
-            public void keyPressed(java.awt.event.KeyEvent evt){
-                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT){
-                    jButtonCancelar.requestFocus();
-                }   
-                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
-                    jPasswordFieldContrasena2.requestFocus();
-                }
-            }
-        });
-        
-        //Cancelar -> Aceptar - Cancelar -> Contraeña2
-        jButtonCancelar.addKeyListener(new java.awt.event.KeyAdapter(){
-            @Override
-            public void keyPressed(java.awt.event.KeyEvent evt){
-                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT){
-                    jButtonAlta.requestFocus();
-                }   
-                if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP){
-                    jPasswordFieldContrasena2.requestFocus();
-                }
-            }
-        });
     }
     
     private void camposObligatorios(){
-    jLabelNombre.setText("<html>Nombre <font color='red'>*</font></html>");
-    jLabelApellido1.setText("<html>Primer apellido <font color='red'>*</font></html>");
-    jLabelTelefono.setText("<html>Telefono <font color='red'>*</font></html>");
-    jLabelCorreo.setText("<html>Correo <font color='red'>*</font></html>");
-    jLabelUsuario.setText("<html>Usuario <font color='red'>*</font></html>");
-    jLabelContrasena1.setText("<html>Contraseña <font color='red'>*</font></html>");
-    jLabelContrasena2.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
+        jLabelNombre.setText("<html>Nombre <font color='red'>*</font></html>");
+        jLabelApellido1.setText("<html>Primer apellido <font color='red'>*</font></html>");
+        jLabelTelefono.setText("<html>Telefono <font color='red'>*</font></html>");
+        jLabelCorreo.setText("<html>Correo <font color='red'>*</font></html>");
+
+        if(!editar){
+            jLabelUsuario.setText("<html>Usuario <font color='red'>*</font></html>");
+            jLabelContrasena1.setText("<html>Contraseña <font color='red'>*</font></html>");
+            jLabelContrasena2.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
+        }else{
+            jTextFieldUser.setEnabled(false);
+            jPasswordFieldContrasena1.setEnabled(false);
+            jPasswordFieldContrasena2.setEnabled(false);
+        }
     }
     
     /**
