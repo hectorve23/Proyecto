@@ -221,6 +221,7 @@ public class JFrameServix extends javax.swing.JFrame {
         }
     }
     private void jButtonCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCuentaActionPerformed
+        //this.setExtendedState(javax.swing.JFrame.ICONIFIED);
         JDialogAltaUsuario jdac= new JDialogAltaUsuario("cliente", 0, this, true, false);
         jdac.setVisible(true);
     }//GEN-LAST:event_jButtonCrearCuentaActionPerformed
@@ -230,7 +231,7 @@ public class JFrameServix extends javax.swing.JFrame {
         String stringContrasena = new String(contrasena);
         if(comprobarDatos(jTextFielduser.getText(), stringContrasena)){
             if(rol.toLowerCase().equals("cliente")){
-                this.setVisible(false);
+                this.setExtendedState(javax.swing.JFrame.ICONIFIED);
                 JDialogInterfazClientes jdic  = new JDialogInterfazClientes(this, true, id);
                 jdic.setVisible(true);
                 
@@ -250,11 +251,6 @@ public class JFrameServix extends javax.swing.JFrame {
                             jdar.setVisible(true);
                         }else{
                             if(rol.toLowerCase().equals("encargado")){
-                                // /////
-                                // Coloca el jFrame al minimo tamaño y lo manda a una esquina cuando se reabre la aplicacion
-                                // aunque al reabrir la aplicacion, abrir un jdialog distinto y volver al de la interfaz de encargado, el jFrame desaparece al fin
-                                this.setBounds(-10000, -10000, 0, 0);
-                                // /////
                                 this.setExtendedState(javax.swing.JFrame.ICONIFIED);
                                 JDialogInterfazEncargado jdien = new JDialogInterfazEncargado(this, true, id);
                                 jdien.setVisible(true);

@@ -48,6 +48,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         
+        this.padre = (JFrameServix) parent;
+        
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
         

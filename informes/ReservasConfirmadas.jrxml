@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReservasCanceladas" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReservasConfirmadas" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" whenResourceMissingType="Empty" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
@@ -66,14 +66,12 @@
 	<parameter name="p_telefono_restaurante" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT id_reserva,
-	estado_reserva,
-	fecha_hora,
-	n_comensales,
-	id_cliente
+    estado_reserva,
+    DATE_FORMAT(fecha_hora, '%d/%m/%Y %H:%i') AS fecha_hora,
+    n_comensales,
+    id_cliente
 FROM servix.reserva
-WHERE 
-	 'fecha_hora' >= $P{fechaActual} 
-	 AND servix.reserva.estado_reserva = 'confirmada' 
+WHERE servix.reserva.estado_reserva = 'confirmada'
 ORDER BY servix.reserva.fecha_hora ASC]]>
 	</queryString>
 	<field name="id_reserva" class="java.lang.Integer">
@@ -96,7 +94,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 		<property name="com.jaspersoft.studio.field.label" value="id_cliente"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="reserva"/>
 	</field>
-	<field name="fecha_hora" class="java.sql.Timestamp"/>
+	<field name="fecha_hora" class="java.lang.String"/>
 	<variable name="id_reserva1" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{id_reserva}]]></variableExpression>
 	</variable>
@@ -107,9 +105,49 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 		<variableExpression><![CDATA[$F{id_reserva}]]></variableExpression>
 	</variable>
 	<title>
-		<band height="127" splitType="Stretch">
+		<band height="168" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="120" forecolor="#137694" backcolor="#137694" uuid="565f638d-4b90-4839-84aa-f826a2b5a863"/>
+			</rectangle>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="17" width="89" height="83" uuid="5e36f2e3-d68c-4e8d-99ac-f5764611956e"/>
+				<imageExpression><![CDATA["logoInformes.png"]]></imageExpression>
+			</image>
+			<textField pattern="EEEEE dd MMMMM, yyyy">
+				<reportElement x="420" y="29" width="125" height="20" forecolor="#FFFFFF" uuid="aa46c9c6-a458-473a-aedb-15f807323be8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="90" y="49" width="465" height="1" forecolor="#FFFFFF" uuid="03f1ad23-1ff8-4683-80f0-6de472acc791">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="90" y="60" width="199" height="20" forecolor="#FFFFFF" uuid="24396bfd-4c2d-44fb-b6c8-1da81caeb513"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{p_direccion_restaurante}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="0" y="90" width="368" height="25" uuid="57aed2b1-4f4e-40a3-a6ad-54dae8dd4c5a">
+				<reportElement x="90" y="81" width="59" height="20" forecolor="#FFFFFF" uuid="e11288d3-02cb-4e27-b3e7-a4ec6351ba30"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Teléfono:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="149" y="81" width="107" height="17" forecolor="#FFFFFF" uuid="c266602d-e658-4495-a010-d7ea3762ffa3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{p_telefono_restaurante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="130" width="368" height="25" uuid="1f40a588-5006-4fcc-8cf9-0c787ce66aeb">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -118,57 +156,25 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				</textElement>
 				<text><![CDATA[Reservas confirmadas para los proximos dias]]></text>
 			</staticText>
-			<line>
-				<reportElement x="0" y="80" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
-			<staticText>
-				<reportElement x="410" y="25" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
-				<box rightPadding="4"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="460" y="25" width="84" height="20" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="65" height="60" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
-				<imageExpression><![CDATA["logoInformes.png"]]></imageExpression>
-			</image>
-			<line>
-				<reportElement x="-1" y="117" width="556" height="1" uuid="7e565ae8-2e7c-4274-8df4-a2e5d925d411">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
 			<textField>
-				<reportElement x="85" y="3" width="305" height="30" uuid="c14c66f0-84d6-420d-99f6-096ef8a5ca3b"/>
+				<reportElement x="90" y="17" width="310" height="32" forecolor="#FFFFFF" uuid="74c35a4a-0a39-450b-a144-dab3ba210d4f"/>
 				<textElement>
-					<font size="20" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{p_nombre_restaurante}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="85" y="33" width="185" height="20" uuid="af730582-6a91-4257-9f0e-b637922440ca"/>
-				<textFieldExpression><![CDATA[$P{p_direccion_restaurante}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="130" y="54" width="130" height="19" uuid="557c709b-a55d-4c4a-ac5f-72bf1f3f9b2b"/>
-				<textFieldExpression><![CDATA[$P{p_telefono_restaurante}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="85" y="53" width="44" height="20" uuid="b39d820b-1525-4f8c-ac7f-366a76162d25"/>
-				<text><![CDATA[Teléfono:]]></text>
-			</staticText>
+			<line>
+				<reportElement x="0" y="155" width="555" height="1" uuid="bfb50607-aeea-402e-86cc-4d47fe4751c8">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="20">
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="25" y="0" width="40" height="20" forecolor="#000000" uuid="ae8d02a0-8161-4f93-b5af-e612df0ea938">
+				<reportElement style="Column header" positionType="Float" x="0" y="0" width="40" height="20" forecolor="#000000" uuid="ae8d02a0-8161-4f93-b5af-e612df0ea938">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2dcb5361-69a1-4c10-9a8b-253c03aa1483"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -177,7 +183,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="65" y="0" width="127" height="20" forecolor="#000000" uuid="a0ea63e8-30ad-4de5-bbf6-a40de1d6f238">
+				<reportElement style="Column header" positionType="Float" x="50" y="0" width="127" height="20" forecolor="#000000" uuid="a0ea63e8-30ad-4de5-bbf6-a40de1d6f238">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5b3fe86-3345-400d-9192-0bc42e6d5251"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -186,7 +192,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				<text><![CDATA[Estado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" positionType="Float" x="192" y="0" width="78" height="20" forecolor="#000000" uuid="2c63b2d6-9ee7-43f0-be11-b15e64df547d">
+				<reportElement style="Column header" positionType="Float" x="200" y="0" width="78" height="20" forecolor="#000000" uuid="2c63b2d6-9ee7-43f0-be11-b15e64df547d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6d83bd4c-6b6b-401b-b32e-35bd5d99037f"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -217,7 +223,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 	<detail>
 		<band height="35">
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="25" y="0" width="40" height="20" uuid="5bfdcb18-13a1-4c5d-85f8-65c348ed332b">
+				<reportElement style="Detail" positionType="Float" x="0" y="0" width="40" height="20" uuid="5bfdcb18-13a1-4c5d-85f8-65c348ed332b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2dcb5361-69a1-4c10-9a8b-253c03aa1483"/>
 				</reportElement>
 				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
@@ -227,7 +233,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				<textFieldExpression><![CDATA[$F{id_reserva}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="65" y="0" width="127" height="20" uuid="f1a89107-f440-4aeb-96a3-81bb1d566eb7">
+				<reportElement style="Detail" positionType="Float" x="55" y="0" width="127" height="20" uuid="f1a89107-f440-4aeb-96a3-81bb1d566eb7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5b3fe86-3345-400d-9192-0bc42e6d5251"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -236,7 +242,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				<textFieldExpression><![CDATA[$F{estado_reserva}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement style="Detail" positionType="Float" x="192" y="0" width="78" height="20" uuid="158a70bd-f779-4862-bee4-5225f8c1ba90">
+				<reportElement style="Detail" positionType="Float" x="200" y="0" width="78" height="20" uuid="158a70bd-f779-4862-bee4-5225f8c1ba90">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6d83bd4c-6b6b-401b-b32e-35bd5d99037f"/>
 				</reportElement>
 				<box rightPadding="11"/>

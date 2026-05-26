@@ -130,16 +130,8 @@ estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{p_telefono_restaurante}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="410" y="30" width="50" height="20" forecolor="#FFFFFF" uuid="c6631082-51c5-4a1f-bbda-1dfa3d5ba229"/>
-				<box rightPadding="4"/>
-				<textElement textAlignment="Right">
-					<font size="12"/>
-				</textElement>
-				<text><![CDATA[Fecha:]]></text>
-			</staticText>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="460" y="30" width="95" height="20" forecolor="#FFFFFF" uuid="5cf62e05-9c9f-4e6a-a1be-c88dab5feebe"/>
+			<textField pattern="EEEEE dd MMMMM, yyyy">
+				<reportElement x="420" y="30" width="135" height="20" forecolor="#FFFFFF" uuid="5cf62e05-9c9f-4e6a-a1be-c88dab5feebe"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>

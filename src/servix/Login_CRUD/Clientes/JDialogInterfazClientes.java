@@ -750,7 +750,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                     "SELECT id_reserva as Nº, CONCAT(restaurante.nombre, ' | ', restaurante.direccion) as Restaurante_direccion, fecha_hora AS Fecha, n_comensales AS Comensales "
                    + "FROM reserva INNER JOIN restaurante "
                    + "ON reserva.id_restaurante = restaurante.id_restaurante "
-                   + "WHERE id_cliente=? AND NOT estado_reserva=?"
+                   + "WHERE id_cliente=? AND NOT estado_reserva=? AND fecha_hora >= NOW()"
             );
             ps.setInt(1, id);
             ps.setString(2, "cancelada");

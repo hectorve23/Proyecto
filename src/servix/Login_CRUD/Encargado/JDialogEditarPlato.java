@@ -41,6 +41,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
+        this.padre = (JFrameServix) parent;
         this.nombreCambiar=nombreCambiar;
         this.precioCambiar=precioCambiar;
         this.cadenaCategoriaCambiar=cadenaCategoriaCambiar;

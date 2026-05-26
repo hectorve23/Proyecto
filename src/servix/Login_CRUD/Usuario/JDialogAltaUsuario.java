@@ -59,8 +59,8 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         this.restauranteAsociado = restaurante;
         
         // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
-        padre.setLocation(-10000, -10000);
-        padre.setSize(0, 0);
+        //padre.setLocation(-10000, -10000);
+        //padre.setSize(0, 0);
 
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -300,7 +300,12 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                                 } else {
                                     JOptionPane.showMessageDialog(rootPane, "Cuenta creada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                                 }
-                                 this.setVisible(false);
+                                this.setVisible(false);
+                                /*
+                                this.dispose();
+                                JFrameServix jfs = new JFrameServix();
+                                jfs.setVisible(true);
+                                */
 
                                  try {
                                      if(editar){
@@ -400,7 +405,13 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        this.setVisible(false);
+        /*
         this.dispose();
+        JFrameServix jfs = new JFrameServix();
+        jfs.setVisible(true);
+        */
+        
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public boolean existeUsuario(String usuario){
