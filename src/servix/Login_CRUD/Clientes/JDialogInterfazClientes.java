@@ -521,23 +521,40 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
         }
-        //Si las comprobaciones son correctas realiza la insercion
+        //Si las comprobaciones son correctas, pasa a comprobar que en la base de datos no haya una reserva dos horas antes o despues del mismo usuario
         else{
             try {
+                // Comprobacion de reserva solapada (2 horas antes o despues)
+                PreparedStatement psCheck = conexion.prepareStatement(
+                    "SELECT COUNT(*) FROM reserva " +
+                    "WHERE id_cliente = ? " +
+                    "AND NOT estado_reserva = 'cancelada' " +
+                    "AND ABS(TIMESTAMPDIFF(MINUTE, fecha_hora, ?)) < 120"
+                );
+
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaStr = formatoFecha.format(mfecha);
+                String fechaHoraCompleta = fechaStr + " " + horaStr;
+                Timestamp fechaHoraSQL = Timestamp.valueOf(fechaHoraCompleta);
+
+                psCheck.setInt(1, id);
+                psCheck.setTimestamp(2, fechaHoraSQL);
+                ResultSet rs = psCheck.executeQuery();
+                rs.next();
+                int reservasSolapadas = rs.getInt(1);
+
+                if(reservasSolapadas > 0){
+                    JOptionPane.showMessageDialog(rootPane,
+                        "Ya tienes una reserva en ese intervalo de tiempo.\nDebe haber al menos 2 horas entre reservas.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
                 PreparedStatement ps = conexion.prepareStatement("INSERT INTO reserva"
                         + "(estado_reserva, n_comensales, fecha_hora, id_cliente, id_restaurante)"
                         + " VALUES (?, ?, ?, ?, ?)");
-                
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-                String fechaStr = formatoFecha.format(mfecha);
-
-                //SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
-                //String horaStr = formatoHora.format(valorHora);
-
-                // Crear el datetime combinado
-                String fechaHoraCompleta = fechaStr + " " + horaStr;
-                Timestamp fechaHoraSQL = Timestamp.valueOf(fechaHoraCompleta);
-                
+            
                 ps.setString(1, "pendiente");
                 ps.setInt(2, comensales);
                 ps.setTimestamp(3, fechaHoraSQL);
