@@ -60,6 +60,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jTableMenu.setModel(dtm);
         jTableMenu.setDefaultEditor(Object.class, null);// Desactiva edicion de las tablas
         cargaTablaMenu();
+        
         // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
         padre.setLocation(-10000, -10000);
         padre.setSize(0, 0);

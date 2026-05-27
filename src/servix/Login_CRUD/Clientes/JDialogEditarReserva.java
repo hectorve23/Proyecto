@@ -83,7 +83,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         );
     }
     
-    private void cargarDatosReserva() {
+    private void cargarDatosReserva() { // Carga los datos de la reserva a editar seleccionada
         try {
             java.util.Date fecha = new java.util.Date(fechaHora.getTime());
             jDateChooserFecha.setDate(fechaHora);
@@ -204,7 +204,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private boolean validarHorario(Object valorHora){
+    private boolean validarHorario(Object valorHora){ //Metodo para comprobar si la reserva entra dentro del horario
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
         String horaSQL = formatoHora.format(valorHora);
         
