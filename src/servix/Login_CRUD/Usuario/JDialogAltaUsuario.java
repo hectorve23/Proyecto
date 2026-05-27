@@ -404,12 +404,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.setVisible(false);
-        /*
-        this.dispose();
-        JFrameServix jfs = new JFrameServix();
-        jfs.setVisible(true);
-        */
-        
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     public boolean existeUsuario(String usuario){

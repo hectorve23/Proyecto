@@ -7,6 +7,7 @@ package servix.Login_CRUD.Encargado;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.JFrameServix;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
+import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 
 /**
  *
@@ -421,39 +423,74 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 else if (categoria.equalsIgnoreCase("segundo_plato")) categoria = "Segundo Plato";
                 else if (categoria.equalsIgnoreCase("postre"))        categoria = "Postre";
                 */
-                PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
+                if(existePlato(nombrePlato, restaurante)){
+                    JOptionPane.showConfirmDialog(rootPane,
+                    "Ya existe un plato con el nombre \"" + nombrePlato + "\"",
+                    "Error",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
                         + "(nombre, precio, categoria, id_restaurante)"
                         + " VALUES (?, ?, ?, ?)");
                 
-                ps.setString(1, nombrePlato);
-                ps.setDouble(2, precio);
-                ps.setString(3, categoria);
-                ps.setInt(4, restaurante);
+                    ps.setString(1, nombrePlato);
+                    ps.setDouble(2, precio);
+                    ps.setString(3, categoria);
+                    ps.setInt(4, restaurante);
 
-                int filas = ps.executeUpdate();
-                if(filas==1){
-                   JOptionPane.showConfirmDialog(rootPane,
-                                                "Plato registrado", 
-                                                "", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.INFORMATION_MESSAGE);
-                   recargarTabla();
-                   jTextFieldNombrePlato.setText("");
-                   jSpinnerPrecio.setValue(0);
+                    int filas = ps.executeUpdate();
+                    if(filas==1){
+                       JOptionPane.showConfirmDialog(rootPane,
+                                                    "Plato registrado", 
+                                                    "", 
+                                                    JOptionPane.OK_CANCEL_OPTION, 
+                                                    JOptionPane.INFORMATION_MESSAGE);
+                       recargarTabla();
+                       jTextFieldNombrePlato.setText("");
+                       jSpinnerPrecio.setValue(0);
+                    }
+                    else{
+                        JOptionPane.showConfirmDialog(rootPane,
+                                                    "Ha habido un error", 
+                                                    "Error", 
+                                                    JOptionPane.OK_CANCEL_OPTION, 
+                                                    JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-                else{
-                    JOptionPane.showConfirmDialog(rootPane,
-                                                "Ha habido un error", 
-                                                "Error", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.ERROR_MESSAGE);
-                }
+                
             } catch (SQLException ex) {
                 System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
     
+    public boolean existePlato(String nombrePlato, int id_restaurante){
+        // Comprobar si ya existe un plato con el mismo nombre en este restaurante
+        boolean existe= false;
+        
+        try {    
+            PreparedStatement ps = conexion.prepareStatement(
+                "SELECT COUNT(*) FROM plato WHERE nombre = ? AND id_restaurante = ?"
+            );
+            ps.setString(1, nombrePlato);
+            ps.setInt(2, restaurante);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // Ya existe un plato con ese nombre
+                existe=true;
+            }
+            rs.close();
+            ps.close();
+                        
+            
+        } catch (SQLException ex) {
+            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return existe;
+    }
     public void recargarTabla() {
         dtm.setRowCount(0);
         dtm.setColumnCount(0);
