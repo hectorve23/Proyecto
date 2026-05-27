@@ -111,7 +111,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 			</rectangle>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="0" y="17" width="89" height="83" uuid="5e36f2e3-d68c-4e8d-99ac-f5764611956e"/>
-				<imageExpression><![CDATA["logoInformes.png"]]></imageExpression>
+				<imageExpression><![CDATA[getClass().getResource("/informes/logoInformes.png")]]></imageExpression>
 			</image>
 			<textField pattern="EEEEE dd MMMMM, yyyy">
 				<reportElement x="420" y="29" width="125" height="20" forecolor="#FFFFFF" uuid="aa46c9c6-a458-473a-aedb-15f807323be8"/>

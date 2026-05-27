@@ -5,6 +5,7 @@
 package servix.Login_CRUD.Encargado;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -299,14 +300,14 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
                 telefono = rs.getString("telefono");
             }
             
-            String fileJasper = "informes/GraficoReservas.jasper";
-            
+            //String fileJasper = "src/informes/GraficoReservas.jasper";
+            InputStream streamJasper = getClass().getResourceAsStream("/informes/GraficoReservas.jasper");
             Map parameters = new HashMap();
             parameters.put("p_nombre_restaurante", nombre); 
             parameters.put("p_direccion_restaurante", direccion);
             parameters.put("p_telefono_restaurante", telefono);
             parameters.put("p_id_restaurante", id_restaurante);
-            JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            JasperPrint print = JasperFillManager.fillReport(streamJasper, parameters, nueva.getConnection());
             
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false);
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));

@@ -5,6 +5,7 @@
 package servix.Login_CRUD.Encargado;
 
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -431,13 +432,13 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 telefono = rs.getString("telefono");
             }
             
-            String fileJasper = "informes/ReservasCanceladas.jasper";
+            InputStream streamJasper = getClass().getResourceAsStream("/informes/ReservasCanceladas.jasper");
             Map parameters = new HashMap();
             parameters.put("p_nombre_restaurante", nombre); 
             parameters.put("p_direccion_restaurante", direccion);
             parameters.put("p_telefono_restaurante", telefono);
             parameters.put("p_id_restaurante", restaurante);
-            JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            JasperPrint print = JasperFillManager.fillReport(streamJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
             visor.setSize(900, 700);
@@ -468,13 +469,13 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 telefono = rs.getString("telefono");
             }
             
-            String fileJasper = "informes/ReservasConfirmadas.jasper";
+            InputStream streamJasper = getClass().getResourceAsStream("/informes/ReservasConfirmadas.jasper");
             Map parameters = new HashMap();
             parameters.put("p_nombre_restaurante", nombre); 
             parameters.put("p_direccion_restaurante", direccion);
             parameters.put("p_telefono_restaurante", telefono);
             parameters.put("p_id_restaurante", restaurante);
-            JasperPrint print = JasperFillManager.fillReport(fileJasper, parameters, nueva.getConnection());
+            JasperPrint print = JasperFillManager.fillReport(streamJasper, parameters, nueva.getConnection());
             javax.swing.JDialog visor = new javax.swing.JDialog(this, false); // false hace que no sea modal
             visor.getContentPane().add(new net.sf.jasperreports.swing.JRViewer(print));
             visor.setSize(900, 700);

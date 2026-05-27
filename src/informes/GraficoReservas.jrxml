@@ -100,7 +100,7 @@ estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')]]>
 			</rectangle>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="0" y="17" width="89" height="83" uuid="0e86d150-f9d1-4f7a-843a-f4de7723e64b"/>
-				<imageExpression><![CDATA["logoInformes.png"]]></imageExpression>
+				<imageExpression><![CDATA[getClass().getResource("/informes/logoInformes.png")]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="90" y="17" width="310" height="32" forecolor="#FFFFFF" uuid="bfd1255a-8256-4c7d-b521-1c1d3416474b"/>
