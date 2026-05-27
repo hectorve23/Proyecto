@@ -1,0 +1,537 @@
+:root {
+    --principal: #137694; 
+    --secundario: #1ba0c5;
+    --fondo: #f4f7f8;
+    --texto: #333;
+    --blanco: #ffffff;
+}
+
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+}
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: var(--fondo); 
+    color: var(--texto); 
+    scroll-behavior: smooth; 
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background: var(--blanco);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Enlaces centrados */
+.nav-links {
+    display: flex;
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* Estilo para el texto de los enlaces del centro */
+.nav-links a {
+    text-decoration: none; 
+    color: var(--texto);    
+    font-weight: 400;
+    transition: 0.3s;      
+}
+
+/* Color al pasar el raton */
+.nav-links a:hover {
+    color: var(--principal);
+}
+.nav-links li {
+    margin: 0 15px;
+}
+
+/* Boton de instalacion */
+.nav-boton-derecha {
+    margin-left: auto; 
+}
+
+.btn-instalacion {
+    background-color: var(--principal); 
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    border: 2px solid var(--principal);
+}
+
+.btn-instalacion:hover {
+    background-color: var(--secundario); 
+    border-color: var(--secundario);
+}
+
+/* Portada */
+.portada {
+    height: 100vh; 
+    background: linear-gradient(rgba(19, 118, 148, 0.8), rgba(19, 118, 148, 0.8)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover; 
+    background-position: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    color: var(--blanco);
+}
+.portada h1 { 
+    font-size: 3rem; margin-bottom: 20px; 
+}
+.portada p { 
+    font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; 
+}
+
+.btn-principal { 
+    background: var(--blanco); 
+    color: var(--principal); 
+    padding: 12px 30px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    margin: 10px; 
+    display: inline-block; 
+}
+.btn-secundario { 
+    border: 2px solid var(--blanco); 
+    color: var(--blanco); 
+    padding: 10px 30px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    margin: 10px; 
+    display: inline-block; 
+}
+
+footer { 
+    background: #333; 
+    color: #ccc; 
+    text-align: center; 
+    padding: 30px; 
+    font-size: 0.9rem; 
+}
+
+/* =========================================
+   Estilos Específicos para Nosotros.html
+   ========================================= */
+
+.nosotros-seccion {
+    margin-top: 80px; 
+    padding-bottom: 100px;
+}
+
+.nosotros-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.nosotros-header h1 {
+    font-size: 2.8rem;
+    color: var(--principal);
+    margin-bottom: 10px;
+}
+
+.nosotros-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Contenedor de las Tarjetas de Equipo */
+.equipo-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+/* Tarjeta de Perfil Individual */
+.perfil-card {
+    background: var(--blanco);
+    border-radius: 15px;
+    padding: 40px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);  
+    
+}
+
+
+/* Contenedor del Icono */
+.icon-container {
+    background-color: #e6f7ff; 
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    border: 3px solid #b3e5fc;
+}
+
+.icon-container i {
+    font-size: 3rem;
+    color: var(--principal); 
+}
+
+.perfil-card h3 {
+    font-size: 1.6rem;
+    color: var(--texto);
+    margin-bottom: 5px;
+}
+
+.perfil-card .rol {
+    color: var(--secundario);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.perfil-card .descripcion {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Sección de Información del Proyecto */
+.proyecto-info {
+    background: var(--blanco);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.proyecto-info h2 {
+    color: var(--principal);
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.proyecto-info p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+}
+
+/* Sección de Funcionalidades */
+.features-section {
+    padding: 100px 0;
+    background-color: var(--blanco);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 200px;
+    gap: 60px;
+}
+
+/* Invertir el orden en las filas pares o con clase .reverse */
+.feature-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.feature-image {
+    flex: 1.5;
+    position: relative;
+}
+
+.feature-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.feature-text {
+    flex: 1;
+}
+
+.feature-text h2 {
+    font-size: 2.5rem;
+    color: var(--principal);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.feature-text p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.7;
+}
+/* =============================================
+    Página de Instalación
+    ============================================= */
+
+.portada-instalacion {
+    min-height: 100vh;
+    padding-top: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--fondo);
+}
+
+.contenido-instalacion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+    max-width: 1100px;
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* ---- Columna izquierda: texto ---- */
+.texto-instalacion {
+    flex: 1;
+    animation: entradaIzquierda 0.6s ease both;
+}
+
+.etiqueta-version {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(19,118,148,0.1);
+    color: var(--principal);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(19,118,148,0.2);
+}
+.etiqueta-version span {
+    width: 7px;
+    height: 7px;
+    background: var(--principal);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulso 2s infinite;
+}
+
+.texto-instalacion h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+.texto-instalacion h1 em {
+    font-style: normal;
+    color: var(--principal);
+}
+
+.texto-instalacion p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 480px;
+}
+
+/* ---- Botón de descarga principal ---- */
+.btn-descarga {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--principal);
+    color: #fff;
+    padding: 18px 36px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(19,118,148,0.35);
+    position: relative;
+    overflow: hidden;
+}
+.btn-descarga::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+}
+.btn-descarga:hover {
+    background: #0e5f78;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(19,118,148,0.45);
+}
+.btn-descarga:active {
+    transform: translateY(0);
+}
+
+.btn-descarga .icono-boton {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.btn-descarga .icono-boton svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.btn-descarga .etiqueta-boton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+.btn-descarga .etiqueta-boton small {
+    font-size: 0.72rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+.btn-descarga .etiqueta-boton strong {
+    font-size: 1.05rem;
+}
+
+/* Metadatos del archivo */
+.meta-archivo {
+    margin-top: 18px;
+    display: flex;
+    gap: 20px;
+    font-size: 0.82rem;
+    color: #888;
+}
+.meta-archivo span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.meta-archivo svg {
+    width: 14px; height: 14px;
+    fill: none; stroke: #aaa; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+/* ---- Columna derecha: tarjeta visual ---- */
+.contenedor-tarjeta {
+    flex: 0 0 400px;
+    animation: entradaDerecha 0.6s ease 0.2s both;
+}
+
+.tarjeta-instalacion {
+    background: #fff;
+    border-radius: 28px;
+    padding: 40px 36px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+.tarjeta-instalacion::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--principal), var(--secundario));
+    border-radius: 28px 28px 0 0;
+}
+
+.tarjeta-instalacion h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+/* Separador con punto de estado */
+.pasos-instalacion {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f0f0f0;
+}
+.pasos-instalacion h4 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    margin-bottom: 16px;
+}
+.fila-paso {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.numero-paso {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--principal);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+.fila-paso p {
+    font-size: 0.87rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ---- Animaciones ---- */
+@keyframes entradaIzquierda {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes entradaDerecha {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulso {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+    .contenido-instalacion {
+        flex-direction: column;
+        gap: 50px;
+        padding: 20px;
+    }
+    .contenedor-tarjeta { flex: unset; width: 100%; max-width: 440px; align-self: center; }
+    .texto-instalacion h1 { font-size: 2.5rem; }
+}
