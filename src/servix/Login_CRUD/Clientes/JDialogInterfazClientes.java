@@ -428,23 +428,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         cargaTablaReservas();
         formatoTabla();
     }
-    /* Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario en el que el restaurante
-       admite reservas utilizando LocalTime para cada margen y devolviendo true o false si esta dentro del horario o no*/
-    private boolean validarHorario(Object valorHora){
-        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-        String horaSQL = formatoHora.format(valorHora);
-        
-        //declaracion de margenes
-        LocalTime horaReserva = LocalTime.parse(horaSQL);
-        LocalTime inicioComida = LocalTime.of(12, 0);
-        LocalTime finComida = LocalTime.of(16, 0);
-        LocalTime inicioCena = LocalTime.of(21, 0);
-        LocalTime finCena = LocalTime.of(23, 59);
-        
-        //true si entra en elhorario, false si no entra
-        return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
-                (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
-    }
+    
     private int comboBoxIdRestaurante(){ 
         //Este metodo recoje el id_restaurante de la seleccion del combobox, se utiliza en la insercion de reserva
         try {
@@ -468,6 +452,10 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             return 0;
         }
         
+    }
+    // Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario del restaurante, entre apertura y cierre
+    private boolean validarHorario(Object valorHora){
+        return true;
     }
     //Este boton valida la insercion de la reserva. Primero comprueba que ningun campo este vacio, despues que la fecha introducida
     //sea vigente, es decir, que el usuario no introduzca una fecha y hora que ya ha pasado, tras eso comprueba con el metodo anterior
@@ -522,9 +510,33 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
         }
-        //Si las comprobaciones son correctas, pasa a comprobar que en la base de datos no haya una reserva dos horas antes o despues del mismo usuario
+        //Si las comprobaciones son correctas, pasa a comprobar que en la base de datos no haya una reserva dos horas antes o despues del mismo usuario y que este dentro del 
+        //horario de apertura y cierre del restaurante
         else{
             try {
+                // Obtener horario del restaurante (consulta que ya necesitas para el INSERT)
+                int idRestaurante = comboBoxIdRestaurante();
+                PreparedStatement psHorario = conexion.prepareStatement(
+                    "SELECT apertura, cierre FROM Restaurante WHERE id_restaurante = ?"
+                );
+                psHorario.setInt(1, idRestaurante);
+                ResultSet rsHorario = psHorario.executeQuery();
+
+                if (rsHorario.next()) {
+                    int apertura = rsHorario.getInt("apertura");
+                    int cierre = rsHorario.getInt("cierre");
+                    int horaElegida = Integer.parseInt(partesHora[0]);
+
+                    if (horaElegida < apertura || horaElegida >= cierre) {
+                        JOptionPane.showMessageDialog(rootPane,
+                            "La hora debe estar entre las " + apertura + ":00 y las " + cierre + ":00",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+                rsHorario.close();
+                psHorario.close();
                 // Comprobacion de reserva solapada (2 horas antes o despues)
                 PreparedStatement psCheck = conexion.prepareStatement(
                     "SELECT COUNT(*) FROM reserva " +

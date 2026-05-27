@@ -132,7 +132,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				<imageExpression><![CDATA[getClass().getResource("/informes/logoInformes.png")]]></imageExpression>
 			</image>
 			<textField pattern="EEEEE dd MMMMM, yyyy">
-				<reportElement x="420" y="30" width="135" height="20" forecolor="#FFFFFF" uuid="410d8446-632a-410d-84c0-4fabb578040a"/>
+				<reportElement x="410" y="29" width="135" height="20" forecolor="#FFFFFF" uuid="410d8446-632a-410d-84c0-4fabb578040a"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -165,7 +165,7 @@ ORDER BY servix.reserva.fecha_hora ASC]]>
 				<textFieldExpression><![CDATA[$P{p_telefono_restaurante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="90" y="17" width="310" height="32" forecolor="#FFFFFF" uuid="dac58c60-fef7-4f08-a9c7-bf02d6739421"/>
+				<reportElement x="90" y="17" width="300" height="32" forecolor="#FFFFFF" uuid="dac58c60-fef7-4f08-a9c7-bf02d6739421"/>
 				<textElement>
 					<font size="24" isBold="true"/>
 				</textElement>

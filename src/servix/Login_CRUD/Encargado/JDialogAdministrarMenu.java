@@ -415,6 +415,13 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                                             JOptionPane.OK_CANCEL_OPTION, 
                                             JOptionPane.ERROR_MESSAGE);
         }
+        else if(precio<=0){
+            JOptionPane.showConfirmDialog(rootPane,
+                                            "El precio no puede ser 0", 
+                                            "Error", 
+                                            JOptionPane.OK_CANCEL_OPTION, 
+                                            JOptionPane.ERROR_MESSAGE);
+        }
         else{
             try {
                 /*

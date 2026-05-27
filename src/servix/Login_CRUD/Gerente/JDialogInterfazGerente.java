@@ -7,6 +7,7 @@ package servix.Login_CRUD.Gerente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
@@ -661,70 +662,100 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
         }
         else{
-            if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
-                if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
-                    String contrasenaEncriptada = Seguridad.hashPassword(contrasena);
-                    try {
-                        String sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) "
-                                + " VALUES (?,?,?,?,?,?,?,?, CURDATE())";
-                        PreparedStatement ps = conexion.prepareStatement(sql);
-                        ps.setString(1, nombre);
-                        ps.setString(2, apellido1);
-                        ps.setString(3, apellido2);
-                        ps.setString(4, telefono);
-                        ps.setString(5, correo);
-                        ps.setString(6, usuario);
-                        ps.setString(7, contrasenaEncriptada);
-                        ps.setString(8, "encargado");
+            if(existeUsuario(usuario)){
+            JOptionPane.showConfirmDialog(rootPane,
+                                                "El usuario " + usuario + " ya existe", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
+            jTextFieldUsuario.setText("");
+            }
+            else{
+                if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
+                    if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
+                        String contrasenaEncriptada = Seguridad.hashPassword(contrasena);
+                        try {
+                            String sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) "
+                                    + " VALUES (?,?,?,?,?,?,?,?, CURDATE())";
+                            PreparedStatement ps = conexion.prepareStatement(sql);
+                            ps.setString(1, nombre);
+                            ps.setString(2, apellido1);
+                            ps.setString(3, apellido2);
+                            ps.setString(4, telefono);
+                            ps.setString(5, correo);
+                            ps.setString(6, usuario);
+                            ps.setString(7, contrasenaEncriptada);
+                            ps.setString(8, "encargado");
 
 
-                        int filas = ps.executeUpdate();
-                        if(filas==1){
-                            JOptionPane.showConfirmDialog(rootPane,
-                                                        "Encargado registrado", 
-                                                        "", 
-                                                        JOptionPane.OK_CANCEL_OPTION, 
-                                                        JOptionPane.INFORMATION_MESSAGE);
-                            recargarTablaEncargados(); 
-                            cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
-                            jTextFieldNombreEncargado.setText("");
-                            jTextFieldApellido1.setText("");
-                            jTextFieldApellido2.setText("");
-                            jTextFieldTelefonoEncargado.setText("");
-                            jTextFieldCorreoEncargado.setText("");
-                            jTextFieldUsuario.setText("");
-                            jTextFieldContrasena.setText("");
-                            jTextFieldConfirmacionContrasena.setText("");
+                            int filas = ps.executeUpdate();
+                            if(filas==1){
+                                JOptionPane.showConfirmDialog(rootPane,
+                                                            "Encargado registrado", 
+                                                            "", 
+                                                            JOptionPane.OK_CANCEL_OPTION, 
+                                                            JOptionPane.INFORMATION_MESSAGE);
+                                recargarTablaEncargados(); 
+                                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                                jTextFieldNombreEncargado.setText("");
+                                jTextFieldApellido1.setText("");
+                                jTextFieldApellido2.setText("");
+                                jTextFieldTelefonoEncargado.setText("");
+                                jTextFieldCorreoEncargado.setText("");
+                                jTextFieldUsuario.setText("");
+                                jTextFieldContrasena.setText("");
+                                jTextFieldConfirmacionContrasena.setText("");
+                            }
+                            else{
+                                JOptionPane.showConfirmDialog(rootPane,
+                                                            "Ha habido un error", 
+                                                            "Error", 
+                                                            JOptionPane.OK_CANCEL_OPTION, 
+                                                            JOptionPane.ERROR_MESSAGE);
+                            }
+                        } catch (SQLException ex) {
+                            System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                         }
-                        else{
-                            JOptionPane.showConfirmDialog(rootPane,
-                                                        "Ha habido un error", 
-                                                        "Error", 
-                                                        JOptionPane.OK_CANCEL_OPTION, 
-                                                        JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (SQLException ex) {
-                        System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    }
+                    else{
+                        JOptionPane.showConfirmDialog(rootPane,
+                                                            "Formato de correo no valido", 
+                                                            "Error", 
+                                                            JOptionPane.OK_CANCEL_OPTION, 
+                                                            JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
                     JOptionPane.showConfirmDialog(rootPane,
-                                                        "Formato de correo no valido", 
-                                                        "Error", 
-                                                        JOptionPane.OK_CANCEL_OPTION, 
-                                                        JOptionPane.ERROR_MESSAGE);
+                                                            "Formato de telefono no valido", 
+                                                            "Error", 
+                                                            JOptionPane.OK_CANCEL_OPTION, 
+                                                            JOptionPane.ERROR_MESSAGE);
                 }
             }
-            else{
-                JOptionPane.showConfirmDialog(rootPane,
-                                                        "Formato de telefono no valido", 
-                                                        "Error", 
-                                                        JOptionPane.OK_CANCEL_OPTION, 
-                                                        JOptionPane.ERROR_MESSAGE);
-            }
+            
         }
     }//GEN-LAST:event_jButtonValidarEncargadoActionPerformed
 
+    public boolean existeUsuario(String usuario){
+        boolean existe= false;
+        try {    
+            String sql = "SELECT * FROM Usuario WHERE usuario_login = ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) 
+                existe = true;
+                        
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return existe;
+    }
+    
     private void jButtonEliminarAsignacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarAsignacionActionPerformed
         // TODO add your handling code here:
         if(jTableAsignaciones.getSelectedRowCount()==1){//Si el usuario no ha seleccionado ninguna reserva en el JTable muestra un mensaje
