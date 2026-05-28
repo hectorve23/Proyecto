@@ -49,6 +49,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
+        this.setTitle("Servix");
         
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();

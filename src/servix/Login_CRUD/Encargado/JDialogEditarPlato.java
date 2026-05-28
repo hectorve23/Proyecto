@@ -8,7 +8,6 @@ import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
