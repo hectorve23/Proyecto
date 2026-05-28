@@ -64,6 +64,9 @@
 	<parameter name="p_nombre_restaurante" class="java.lang.String"/>
 	<parameter name="p_direccion_restaurante" class="java.lang.String"/>
 	<parameter name="p_telefono_restaurante" class="java.lang.String"/>
+	<parameter name="p_id_restaurante" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[2]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT id_reserva,
 	estado_reserva,
@@ -73,7 +76,8 @@
 FROM servix.reserva
 WHERE 
 	 'fecha_hora' >= $P{fechaActual} 
-	 AND servix.reserva.estado_reserva = 'cancelada' 
+	 AND servix.reserva.estado_reserva = 'cancelada'
+	 AND id_restaurante = $P{p_id_restaurante} 
 ORDER BY servix.reserva.fecha_hora ASC]]>
 	</queryString>
 	<field name="id_reserva" class="java.lang.Integer">

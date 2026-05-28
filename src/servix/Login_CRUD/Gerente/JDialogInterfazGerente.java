@@ -191,9 +191,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jLabel13 = new javax.swing.JLabel();
         jTextFieldUsuario = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextFieldContrasena = new javax.swing.JTextField();
+        jPasswordFieldContrasenya = new javax.swing.JPasswordField();
         jLabel15 = new javax.swing.JLabel();
-        jTextFieldConfirmacionContrasena = new javax.swing.JTextField();
+        jPasswordFieldConfirmar = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButtonValidarEncargado = new javax.swing.JButton();
         jButtonEditarEncargado = new javax.swing.JButton();
@@ -242,10 +242,16 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
 
         jLabel6.setText("Apertura");
         jPanelRestaurantes.add(jLabel6);
+
+        jSpinnerApertura.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerApertura.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerApertura, "HH:mm"));
         jPanelRestaurantes.add(jSpinnerApertura);
 
         jLabel7.setText("Cierre");
         jPanelRestaurantes.add(jLabel7);
+
+        jSpinnerCierre.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerCierre.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerCierre, "HH:mm"));
         jPanelRestaurantes.add(jSpinnerCierre);
 
         jButtonValidarRestaurante.setText("Validar");
@@ -296,34 +302,39 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             .addGroup(jPanelNuevoLayout.createSequentialGroup()
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelNuevoLayout.createSequentialGroup()
-                        .addComponent(jButtonCerrarSesion)
-                        .addGap(62, 62, 62)
-                        .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE))
-                    .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNuevoLayout.createSequentialGroup()
-                        .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addGroup(jPanelNuevoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNuevoLayout.createSequentialGroup()
+                                .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNuevoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCerrarSesion)))
                 .addContainerGap())
         );
         jPanelNuevoLayout.setVerticalGroup(
             jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelNuevoLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
 
         jTabbedPane.addTab("Restaurantes", jPanelNuevo);
@@ -369,11 +380,11 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
 
         jLabel14.setText("Contraseña");
         jPanel1.add(jLabel14);
-        jPanel1.add(jTextFieldContrasena);
+        jPanel1.add(jPasswordFieldContrasenya);
 
         jLabel15.setText("Confirmar contraseña");
         jPanel1.add(jLabel15);
-        jPanel1.add(jTextFieldConfirmacionContrasena);
+        jPanel1.add(jPasswordFieldConfirmar);
 
         jButton1.setText("Cerrar sesion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -409,33 +420,35 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEncargadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelEncargadosLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(62, 62, 62)
-                        .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
                     .addGroup(jPanelEncargadosLayout.createSequentialGroup()
+                        .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+                            .addGroup(jPanelEncargadosLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonEditarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEncargadosLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonEditarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanelEncargadosLayout.setVerticalGroup(
             jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEncargadosLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jButtonEditarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -533,7 +546,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -642,8 +655,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         String telefono = jTextFieldTelefonoEncargado.getText();
         String correo = jTextFieldCorreoEncargado.getText();
         String usuario = jTextFieldUsuario.getText();
-        String contrasena = jTextFieldContrasena.getText();
-        String confirmacion_contrasena = jTextFieldConfirmacionContrasena.getText();
+        String contrasena = jPasswordFieldContrasenya.getText();
+        String confirmacion_contrasena = jPasswordFieldConfirmar.getText();
         
         
         if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty()
@@ -703,8 +716,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                 jTextFieldTelefonoEncargado.setText("");
                                 jTextFieldCorreoEncargado.setText("");
                                 jTextFieldUsuario.setText("");
-                                jTextFieldContrasena.setText("");
-                                jTextFieldConfirmacionContrasena.setText("");
+                                jPasswordFieldContrasenya.setText("");
+                                jPasswordFieldConfirmar.setText("");
                             }
                             else{
                                 JOptionPane.showConfirmDialog(rootPane,
@@ -1153,6 +1166,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelEncargados;
     private javax.swing.JPanel jPanelNuevo;
     private javax.swing.JPanel jPanelRestaurantes;
+    private javax.swing.JPasswordField jPasswordFieldConfirmar;
+    private javax.swing.JPasswordField jPasswordFieldContrasenya;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1165,8 +1180,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private javax.swing.JTable jTableRestaurantes;
     private javax.swing.JTextField jTextFieldApellido1;
     private javax.swing.JTextField jTextFieldApellido2;
-    private javax.swing.JTextField jTextFieldConfirmacionContrasena;
-    private javax.swing.JTextField jTextFieldContrasena;
     private javax.swing.JTextField jTextFieldCorreoEncargado;
     private javax.swing.JTextField jTextFieldCorreoRestaurante;
     private javax.swing.JTextField jTextFieldDireccion;

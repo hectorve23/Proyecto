@@ -221,7 +221,8 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jLabel2.setText("Precio");
         jPanelNuevoPlato.add(jLabel2);
 
-        jSpinnerPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
+        jSpinnerPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        jSpinnerPrecio.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerPrecio, "0.00"));
         jPanelNuevoPlato.add(jSpinnerPrecio);
 
         jLabel3.setText("Categoria");
