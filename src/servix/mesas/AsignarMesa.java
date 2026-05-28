@@ -39,7 +39,7 @@ public class AsignarMesa {
                 
                 return true;
             } catch (SQLException ex) {
-                System.getLogger(AsignarMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(AsignarMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 return false;
             }  
         }else{
@@ -85,7 +85,7 @@ public class AsignarMesa {
         
         
         } catch (SQLException ex) {
-            System.getLogger(AsignarMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(AsignarMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         return -1;
     }

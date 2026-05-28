@@ -187,7 +187,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
                     this.setVisible(false);
                     dispose();
                 } catch (SQLException ex) {
-                    System.getLogger(JDialogCambiarContrasena.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    java.util.logging.Logger.getLogger(JDialogCambiarContrasena.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(rootPane,
                                                 "Error al cambiar la contraseña", 
                                                 "Error", 

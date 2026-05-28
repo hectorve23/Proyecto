@@ -239,7 +239,7 @@ public class JTableAdministrarMesas extends javax.swing.JDialog {
                 dtm.addRow(lista.get(i).devuelveFila());
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableAdministrarMesas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JTableAdministrarMesas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
     }

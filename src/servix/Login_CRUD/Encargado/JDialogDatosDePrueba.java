@@ -388,8 +388,7 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
         } catch (Exception ex) {
             try { conexion.rollback(); } 
             catch (SQLException rb) { System.out.println("Error al hacer rollback"); }
-            System.getLogger(JDialogDatosDePrueba.class.getName())
-                    .log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogDatosDePrueba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } finally {
             try { conexion.setAutoCommit(true); } catch (SQLException ignored) {}
         }

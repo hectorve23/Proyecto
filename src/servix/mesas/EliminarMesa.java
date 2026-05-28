@@ -27,7 +27,7 @@ public class EliminarMesa {
 
                     ps.close();
         } catch (SQLException ex) {
-             System.getLogger(EliminarMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);   
+             java.util.logging.Logger.getLogger(EliminarMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);  
         }
     }
 }

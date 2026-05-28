@@ -47,7 +47,7 @@ public class CargaCombos {
             }
             
         } catch (SQLException ex) {
-            System.getLogger(CargaCombos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(CargaCombos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     public void cargaComboRestaurantes(JComboBox jComboBoxRestaurantes){//Metodo aislado para restaurantes para usarlo en la seleccion para crear reservas
@@ -62,7 +62,7 @@ public class CargaCombos {
             }
             
         } catch (SQLException ex) {
-            System.getLogger(CargaCombos.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(CargaCombos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 }

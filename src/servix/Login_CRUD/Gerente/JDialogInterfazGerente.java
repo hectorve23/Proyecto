@@ -99,9 +99,15 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // Ctrl+G - Validar/Asignar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {
-                case 0 -> jButtonValidarRestaurante.doClick();
-                case 1 -> jButtonValidarEncargado.doClick();
-                case 2 -> jButtonAsignar.doClick();
+                case 0:
+                    jButtonValidarRestaurante.doClick();
+                    break;
+                case 1:
+                    jButtonValidarEncargado.doClick();
+                    break;
+                case 2:
+                    jButtonAsignar.doClick();
+                    break;
             }
         }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -109,8 +115,12 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // Ctrl+E - Editar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {
-                case 0 -> jButtonEditarRestaurante.doClick();
-                case 1 -> jButtonEditarEncargado.doClick();
+                case 0:
+                    jButtonEditarRestaurante.doClick();
+                    break;
+                case 1:
+                    jButtonEditarEncargado.doClick();
+                    break;
             }
         }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -118,9 +128,15 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // Supr - Eliminar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {
-                case 0 -> jButtonEliminarRestaurante.doClick();
-                case 1 -> jButtonEliminarEncargado.doClick();
-                case 2 -> jButtonEliminarAsignacion.doClick();
+                case 0:
+                    jButtonEliminarRestaurante.doClick();
+                    break;
+                case 1:
+                    jButtonEliminarEncargado.doClick();
+                    break;
+                case 2:
+                    jButtonEliminarAsignacion.doClick();
+                    break;
             }
         }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0),
            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -629,7 +645,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonValidarRestauranteActionPerformed
@@ -714,7 +730,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                             JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (SQLException ex) {
-                            System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                         }
                     }
                     else{
@@ -750,9 +766,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         
             rs.close();
             ps.close();
-        } catch (SQLException ex) {
-            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+    } catch (Exception ex) {
+        java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
         return existe;
     }
     
@@ -794,10 +810,10 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             } catch (SQLException ex) {
                 try {
                     conexion.rollback();
-                } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                }catch (SQLException e) {
+                    java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -839,9 +855,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                    java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex1);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -884,9 +900,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                    java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex1);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -936,7 +952,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonAsignarActionPerformed
 
@@ -994,7 +1010,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             );
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     private void cargaTablaEncargados() {
@@ -1007,7 +1023,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm2);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     private void cargaTablaAsignaciones() {
@@ -1021,7 +1037,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             //ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm3);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     public void formatoTabla(){ // Configuracion para que los campos de la tabla se vea bien

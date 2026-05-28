@@ -234,7 +234,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             }
             
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     

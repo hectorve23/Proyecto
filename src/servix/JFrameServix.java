@@ -63,7 +63,8 @@ public class JFrameServix extends javax.swing.JFrame {
         try {
             UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
         } catch (UnsupportedLookAndFeelException ex) {
-            System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JFrameServix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         }
         
         // Ctrl+G - Guardar/Validar
@@ -312,7 +313,7 @@ public class JFrameServix extends javax.swing.JFrame {
                 ps.close();
             }
         } catch (SQLException ex) {
-             System.getLogger(JFrameServix.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+             java.util.logging.Logger.getLogger(JFrameServix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
            return correcto;
     } //comprobar datos
@@ -332,7 +333,7 @@ public class JFrameServix extends javax.swing.JFrame {
                 return true;
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JFrameServix.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         return true;
     }

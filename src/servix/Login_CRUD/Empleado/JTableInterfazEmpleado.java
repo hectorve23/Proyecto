@@ -252,7 +252,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
                 dtm.addRow(lista.get(i).devuelveFila());
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JTableInterfazEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     
@@ -291,7 +291,7 @@ public class JTableInterfazEmpleado extends javax.swing.JDialog {
                 }
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableInterfazEmpleado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JTableInterfazEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     

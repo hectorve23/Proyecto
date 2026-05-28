@@ -448,7 +448,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             return id_restaurante;
             
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             return 0;
         }
         
@@ -599,7 +599,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                                                 JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         
@@ -641,9 +641,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                    java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex1);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -787,7 +787,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             ps.setString(2, "cancelada");
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     //Este metodo es el que se encarga de rellenar la tabla con la informacion del menu de la base de datos
@@ -810,7 +810,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             nueva.selectSQL(ps, dtm2);
             
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     

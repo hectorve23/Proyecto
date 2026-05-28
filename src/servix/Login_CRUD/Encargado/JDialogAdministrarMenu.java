@@ -383,9 +383,9 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                    java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex1);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
          else{
@@ -469,7 +469,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 }
                 
             } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
@@ -495,7 +495,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                         
             
         } catch (SQLException ex) {
-            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         return existe;
     }
@@ -538,7 +538,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             ps.setInt(1, restaurante);
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     
