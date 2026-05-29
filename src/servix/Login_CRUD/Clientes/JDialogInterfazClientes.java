@@ -179,7 +179,6 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         jButtonBajaCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1002, 439));
 
         jLabel2.setText("Hector Valdes");
 
@@ -223,20 +222,19 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelVerReservasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)))
         );
         jPanelVerReservasLayout.setVerticalGroup(
             jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerReservasLayout.createSequentialGroup()
-                .addContainerGap(287, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(jPanelBotonesDeleteUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(21, 21, 21))
             .addGroup(jPanelVerReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelVerReservasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(78, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(83, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Mis reservas", jPanelVerReservas);
@@ -295,8 +293,8 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelNuevaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jPanelNuevaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nueva Reserva", jPanel1);

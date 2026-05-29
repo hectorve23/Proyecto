@@ -157,7 +157,7 @@ estado_reserva, DATE_FORMAT(fecha_hora, '%b %Y')]]>
 	<summary>
 		<band height="300">
 			<barChart>
-				<chart evaluationTime="Report">
+				<chart evaluationTime="Report" customizerClass="informes.AjusteDeGrafico">
 					<reportElement x="0" y="40" width="534" height="260" uuid="9ebe0515-adca-4619-9555-db53b0ffa4e1"/>
 					<chartTitle/>
 					<chartSubtitle/>
