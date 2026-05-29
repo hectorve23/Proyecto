@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -62,10 +63,21 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
         //padre.setLocation(-10000, -10000);
         //padre.setSize(0, 0);
 
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // Sirve para la confirmacion de cerrar la aplicacion
+        // Al cerrar el dialog muestra confirmacion para cerrar, cierra tambien el padre
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                JFrameServix.cerrarYReiniciar(JDialogAltaUsuario.this, padre);
+                int opcion = JOptionPane.showConfirmDialog(
+                    JDialogAltaUsuario.this,
+                    "¿Seguro que quieres cerrar la aplicación?",
+                    "Confirmar cierre",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
+                if (opcion == JOptionPane.YES_OPTION) {
+                    JFrameServix.cerrarYReiniciar(JDialogAltaUsuario.this, padre);
+                }
             }
         });
         

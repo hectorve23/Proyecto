@@ -72,11 +72,6 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             }
         });
         
-        jButtonVolver.setVisible(true);
-        jButtonValidar.setVisible(false);
-        
-        
-        
         atajosTeclado();
         
     }
@@ -98,13 +93,6 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         getRootPane().registerKeyboardAction(
             e -> jButtonValidar.doClick(),
             KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
-            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
-        );
-        
-        // Ctrl+N - Nuevo
-        getRootPane().registerKeyboardAction(
-            e -> jButtonNuevoPlato.doClick(),
-            KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK),
             javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW
         );
         
@@ -134,46 +122,29 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelPadre = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelVerPlatos = new javax.swing.JPanel();
-        jPanelModificar = new javax.swing.JPanel();
-        jButtonEditarPlato = new javax.swing.JButton();
-        jButtonEliminarPlato = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMenu = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonEditarPlato = new javax.swing.JButton();
+        jButtonEliminarPlato = new javax.swing.JButton();
+        jButtonVolver1 = new javax.swing.JButton();
         jPanelNuevoPlato = new javax.swing.JPanel();
+        jPanelNuevoPlato1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombrePlato = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jSpinnerPrecio = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxCategoria = new javax.swing.JComboBox<String>();
-        jPanelOpciones = new javax.swing.JPanel();
-        jButtonNuevoPlato = new javax.swing.JButton();
-        jButtonVerPlatos = new javax.swing.JButton();
-        jButtonVolver = new javax.swing.JButton();
+        jComboBoxCategoria = new javax.swing.JComboBox<>();
         jButtonValidar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jButtonVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanelPadre.setLayout(new java.awt.CardLayout());
-
-        jButtonEditarPlato.setText("Editar");
-        jButtonEditarPlato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarPlatoActionPerformed(evt);
-            }
-        });
-        jPanelModificar.add(jButtonEditarPlato);
-
-        jButtonEliminarPlato.setText("Eliminar");
-        jButtonEliminarPlato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEliminarPlatoActionPerformed(evt);
-            }
-        });
-        jPanelModificar.add(jButtonEliminarPlato);
+        jLabel4.setText("Héctor Valdés");
 
         jTableMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,76 +159,77 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableMenu);
 
+        jButtonEditarPlato.setText("Editar");
+        jButtonEditarPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarPlatoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonEditarPlato);
+
+        jButtonEliminarPlato.setText("Eliminar");
+        jButtonEliminarPlato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarPlatoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonEliminarPlato);
+
+        jButtonVolver1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonVolver1.setText("Volver");
+        jButtonVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelVerPlatosLayout = new javax.swing.GroupLayout(jPanelVerPlatos);
         jPanelVerPlatos.setLayout(jPanelVerPlatosLayout);
         jPanelVerPlatosLayout.setHorizontalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
+                .addContainerGap()
+                .addGroup(jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
+                        .addComponent(jButtonVolver1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 205, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanelVerPlatosLayout.setVerticalGroup(
             jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVerPlatosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanelVerPlatosLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelVerPlatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonVolver1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanelPadre.add(jPanelVerPlatos, "card3");
+        jTabbedPane1.addTab("Platos", jPanelVerPlatos);
 
-        jPanelNuevoPlato.setLayout(new java.awt.GridLayout(3, 0, 10, 10));
+        jPanelNuevoPlato1.setLayout(new java.awt.GridLayout(3, 0, 10, 10));
 
         jLabel1.setText("Nombre");
-        jPanelNuevoPlato.add(jLabel1);
-        jPanelNuevoPlato.add(jTextFieldNombrePlato);
+        jPanelNuevoPlato1.add(jLabel1);
+        jPanelNuevoPlato1.add(jTextFieldNombrePlato);
 
         jLabel2.setText("Precio");
-        jPanelNuevoPlato.add(jLabel2);
+        jPanelNuevoPlato1.add(jLabel2);
 
         jSpinnerPrecio.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
         jSpinnerPrecio.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerPrecio, "0.00"));
-        jPanelNuevoPlato.add(jSpinnerPrecio);
+        jPanelNuevoPlato1.add(jSpinnerPrecio);
 
         jLabel3.setText("Categoria");
-        jPanelNuevoPlato.add(jLabel3);
+        jPanelNuevoPlato1.add(jLabel3);
 
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
-        jPanelNuevoPlato.add(jComboBoxCategoria);
-
-        jPanelPadre.add(jPanelNuevoPlato, "card2");
-
-        jButtonNuevoPlato.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonNuevoPlato.setText("Nuevo plato");
-        jButtonNuevoPlato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarPanel(evt);
-            }
-        });
-        jPanelOpciones.add(jButtonNuevoPlato);
-
-        jButtonVerPlatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonVerPlatos.setText("Ver platos");
-        jButtonVerPlatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarPanel(evt);
-            }
-        });
-        jPanelOpciones.add(jButtonVerPlatos);
-
-        jButtonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonVolver.setText("Volver");
-        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVolverActionPerformed(evt);
-            }
-        });
+        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
+        jPanelNuevoPlato1.add(jComboBoxCategoria);
 
         jButtonValidar.setBackground(new java.awt.Color(19, 118, 148));
         jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -269,80 +241,76 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setText("Héctor Valdés");
+        jButtonVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonVolver.setText("Volver");
+        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVolverActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelNuevoPlatoLayout = new javax.swing.GroupLayout(jPanelNuevoPlato);
+        jPanelNuevoPlato.setLayout(jPanelNuevoPlatoLayout);
+        jPanelNuevoPlatoLayout.setHorizontalGroup(
+            jPanelNuevoPlatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNuevoPlatoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelNuevoPlatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelNuevoPlato1, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                    .addGroup(jPanelNuevoPlatoLayout.createSequentialGroup()
+                        .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanelNuevoPlatoLayout.setVerticalGroup(
+            jPanelNuevoPlatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNuevoPlatoLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jPanelNuevoPlato1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(jPanelNuevoPlatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Nuevo", jPanelNuevoPlato);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(31, 31, 31))))
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jPanelPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void actualizarPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPanel
-        // TODO add your handling code here:
-        // Al cambiar de panel se añaden o quitan los botones que correspondan, porque no se utilizan los mismos en cada panel
-        JButton jbutton = (JButton) evt.getSource();
-        jPanelPadre.removeAll();
-        if (jbutton == jButtonVerPlatos) {
-            jPanelPadre.add(jPanelVerPlatos);
-            jButtonEditarPlato.setVisible(true);
-            jButtonEliminarPlato.setVisible(true);
-            jButtonVolver.setVisible(true);
-            jButtonValidar.setVisible(false);
-        } else if (jbutton == jButtonNuevoPlato) {
-            jPanelPadre.add(jPanelNuevoPlato);
-            jButtonVolver.setVisible(true);
-            jButtonValidar.setVisible(true);
-            jButtonEditarPlato.setVisible(false);
-            jButtonEliminarPlato.setVisible(false);
-        }
-        
-        jPanelPadre.repaint();
-        jPanelPadre.revalidate();
-    }//GEN-LAST:event_actualizarPanel
-
     private void jButtonEditarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarPlatoActionPerformed
         // TODO add your handling code here:
         if(jTableMenu.getSelectedRowCount() == 1){
-            
+
             int fila = jTableMenu.getSelectedRow();
 
             String nombre = jTableMenu.getValueAt(fila, 0).toString();
             double precio = Double.parseDouble(jTableMenu.getValueAt(fila, 1).toString());
             String cadenaCategoria = jTableMenu.getValueAt(fila, 2).toString();
-            
+
             this.dispose();
             JDialogEditarPlato jdep = new JDialogEditarPlato(nombre, precio, cadenaCategoria, padre, true, restaurante, id);
             jdep.setVisible(true);
@@ -352,26 +320,26 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         else{
             JOptionPane.showMessageDialog(this, "Seleccione un plato para editar.");
         }
-        
+
     }//GEN-LAST:event_jButtonEditarPlatoActionPerformed
 
     private void jButtonEliminarPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarPlatoActionPerformed
         // TODO add your handling code here:
-         if(jTableMenu.getSelectedRowCount()==1){
+        if(jTableMenu.getSelectedRowCount()==1){
             int fila = jTableMenu.getSelectedRow();
             String nombre_plato = (String) jTableMenu.getValueAt(fila, 0);
-             try {
+            try {
                 conexion.setAutoCommit(false);
                 String sql = "DELETE FROM plato WHERE nombre=? AND id_restaurante = ?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
                 ps.setString(1, nombre_plato);
                 ps.setInt(2, restaurante);
                 int opcion = JOptionPane.showConfirmDialog(
-                                                null,
-                                                "¿Estas seguro de eliminar el plato seleccionado?",
-                                                "Confirmación",
-                                                JOptionPane.OK_CANCEL_OPTION,
-                                                JOptionPane.QUESTION_MESSAGE
+                    null,
+                    "¿Estas seguro de eliminar el plato seleccionado?",
+                    "Confirmación",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
                 );
                 if (opcion == JOptionPane.OK_OPTION) {
                     int resultado=ps.executeUpdate();
@@ -389,19 +357,11 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
-         else{
-             JOptionPane.showMessageDialog(this, "Seleccione un plato para eliminar.");
-         }
-        
-    }//GEN-LAST:event_jButtonEliminarPlatoActionPerformed
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione un plato para eliminar.");
+        }
 
-    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        this.dispose();
-        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, id);
-        jdie.setVisible(true); 
-    }//GEN-LAST:event_jButtonVolverActionPerformed
+    }//GEN-LAST:event_jButtonEliminarPlatoActionPerformed
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
@@ -411,17 +371,17 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
         if(categoria.isEmpty() || nombrePlato.isEmpty() || precio<=0){
             JOptionPane.showConfirmDialog(rootPane,
-                                            "Rellena todos los campos", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
+                "Rellena todos los campos",
+                "Error",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.ERROR_MESSAGE);
         }
         else if(precio<=0){
             JOptionPane.showConfirmDialog(rootPane,
-                                            "El precio no puede ser 0", 
-                                            "Error", 
-                                            JOptionPane.OK_CANCEL_OPTION, 
-                                            JOptionPane.ERROR_MESSAGE);
+                "El precio no puede ser 0",
+                "Error",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.ERROR_MESSAGE);
         }
         else{
             try {
@@ -434,16 +394,16 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                 */
                 if(existePlato(nombrePlato, restaurante)){
                     JOptionPane.showConfirmDialog(rootPane,
-                    "Ya existe un plato con el nombre \"" + nombrePlato + "\"",
-                    "Error",
-                    JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.ERROR_MESSAGE);
+                        "Ya existe un plato con el nombre \"" + nombrePlato + "\"",
+                        "Error",
+                        JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.ERROR_MESSAGE);
                 }
                 else{
                     PreparedStatement ps = conexion.prepareStatement("INSERT INTO plato"
                         + "(nombre, precio, categoria, id_restaurante)"
                         + " VALUES (?, ?, ?, ?)");
-                
+
                     ps.setString(1, nombrePlato);
                     ps.setDouble(2, precio);
                     ps.setString(3, categoria);
@@ -451,29 +411,37 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
 
                     int filas = ps.executeUpdate();
                     if(filas==1){
-                       JOptionPane.showConfirmDialog(rootPane,
-                                                    "Plato registrado", 
-                                                    "", 
-                                                    JOptionPane.OK_CANCEL_OPTION, 
-                                                    JOptionPane.INFORMATION_MESSAGE);
-                       recargarTabla();
-                       jTextFieldNombrePlato.setText("");
-                       jSpinnerPrecio.setValue(0);
+                        JOptionPane.showConfirmDialog(rootPane,
+                            "Plato registrado",
+                            "",
+                            JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE);
+                        recargarTabla();
+                        jTextFieldNombrePlato.setText("");
+                        jSpinnerPrecio.setValue(0);
                     }
                     else{
                         JOptionPane.showConfirmDialog(rootPane,
-                                                    "Ha habido un error", 
-                                                    "Error", 
-                                                    JOptionPane.OK_CANCEL_OPTION, 
-                                                    JOptionPane.ERROR_MESSAGE);
+                            "Ha habido un error",
+                            "Error",
+                            JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                
+
             } catch (SQLException ex) {
                 java.util.logging.Logger.getLogger(JDialogAdministrarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
+
+    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        JDialogInterfazEncargado jdie = new JDialogInterfazEncargado(padre, true, id);
+        jdie.setVisible(true); 
+    }//GEN-LAST:event_jButtonVolverActionPerformed
     
     public boolean existePlato(String nombrePlato, int id_restaurante){
         // Comprobar si ya existe un plato con el mismo nombre en este restaurante
@@ -510,22 +478,21 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEditarPlato;
     private javax.swing.JButton jButtonEliminarPlato;
-    private javax.swing.JButton jButtonNuevoPlato;
     private javax.swing.JButton jButtonValidar;
-    private javax.swing.JButton jButtonVerPlatos;
     private javax.swing.JButton jButtonVolver;
+    private javax.swing.JButton jButtonVolver1;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanelModificar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelNuevoPlato;
-    private javax.swing.JPanel jPanelOpciones;
-    private javax.swing.JPanel jPanelPadre;
+    private javax.swing.JPanel jPanelNuevoPlato1;
     private javax.swing.JPanel jPanelVerPlatos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinnerPrecio;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableMenu;
     private javax.swing.JTextField jTextFieldNombrePlato;
     // End of variables declaration//GEN-END:variables

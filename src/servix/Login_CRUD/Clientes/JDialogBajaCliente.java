@@ -10,6 +10,7 @@ import servix.ConexionBBDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -36,6 +37,7 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         initComponents();
         this.padre = (JFrameServix) parent;
         this.setTitle("Servix");
+       
         this.setLocationRelativeTo(null); //Hace que la ventana este centrada en la pantalla
         this.id=id;
         
@@ -43,11 +45,21 @@ public class JDialogBajaCliente extends javax.swing.JDialog {
         padre.setLocation(-10000, -10000);
         padre.setSize(0, 0);
 
-        // Al cerrar el dialog cerrar el padre
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // Sirve para la confirmacion de cerrar la aplicacion
+        // Al cerrar el dialog muestra confirmacion para cerrar, cierra tambien el padre
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                JFrameServix.cerrarYReiniciar(JDialogBajaCliente.this, padre);
+                int opcion = JOptionPane.showConfirmDialog(
+                    JDialogBajaCliente.this,
+                    "¿Seguro que quieres cerrar la aplicación?",
+                    "Confirmar cierre",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
+                if (opcion == JOptionPane.YES_OPTION) {
+                    JFrameServix.cerrarYReiniciar(JDialogBajaCliente.this, padre);
+                }
             }
         });
                 

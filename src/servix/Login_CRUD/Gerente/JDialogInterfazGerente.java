@@ -8,17 +8,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
-import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 import servix.Seguridad;
 
@@ -46,6 +47,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        //setSize(1031, 420);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
         this.setTitle("Servix");
@@ -71,10 +73,21 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         padre.setLocation(-10000, -10000);
         padre.setSize(0, 0);
 
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // Sirve para la confirmacion de cerrar la aplicacion
+        // Al cerrar el dialog muestra confirmacion para cerrar, cierra tambien el padre
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                JFrameServix.cerrarYReiniciar(JDialogInterfazGerente.this, padre);
+                int opcion = JOptionPane.showConfirmDialog(
+                    JDialogInterfazGerente.this,
+                    "¿Seguro que quieres cerrar la aplicación?",
+                    "Confirmar cierre",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
+                if (opcion == JOptionPane.YES_OPTION) {
+                    JFrameServix.cerrarYReiniciar(JDialogInterfazGerente.this, padre);
+                }
             }
         });
         
@@ -338,7 +351,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         );
         jPanelNuevoLayout.setVerticalGroup(
             jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelNuevoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNuevoLayout.createSequentialGroup()
                 .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,42 +546,42 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonCerrarSesion1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel23)
+                            .addGap(158, 158, 158))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel23)
-                .addGap(152, 152, 152))
+                .addComponent(jButtonCerrarSesion1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel23))
+                    .addComponent(jButtonCerrarSesion1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCerrarSesion1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Asignaciones", jPanel2);
@@ -608,12 +621,19 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         String telefono = jTextFieldTelefonoRestaurante.getText();
         String correo = jTextFieldCorreoRestaurante.getText();
         int capacidad = (int) jSpinnerCapacidad.getValue();
-        int apertura = (int) jSpinnerApertura.getValue();
-        int cierre = (int) jSpinnerCierre.getValue();
+        Time apertura = new Time(((java.util.Date) jSpinnerApertura.getValue()).getTime());
+        Time cierre = new Time(((java.util.Date) jSpinnerCierre.getValue()).getTime());
         
-        if(nombre.isEmpty() || direccion.isEmpty() || capacidad<=0 || apertura <=0 || cierre<=0){
+        if(nombre.isEmpty() || direccion.isEmpty() || capacidad<=0){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "No puede haber campos vacios o que sean menor o igual a 0", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
+        }
+        else if(apertura.getTime()>=(cierre.getTime())){
+            JOptionPane.showConfirmDialog(rootPane,
+                                                "La hora de apertura no puede ser posterior a la de cierre", 
                                                 "Error", 
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.ERROR_MESSAGE);
@@ -629,8 +649,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         ps.setString(3, telefono);
                         ps.setString(4, correo);
                         ps.setInt(5, capacidad);
-                        ps.setInt(6, apertura);
-                        ps.setInt(7, cierre);
+                        ps.setTime(6, apertura);
+                        ps.setTime(7, cierre);
 
                         int filas = ps.executeUpdate();
                         if(filas==1){
@@ -646,9 +666,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                            jTextFieldDireccion.setText("");
                            jTextFieldNombreRestaurante.setText("");
                            jTextFieldTelefonoRestaurante.setText("");
-                           jSpinnerApertura.setValue(0);
                            jSpinnerCapacidad.setValue(0);
-                           jSpinnerCierre.setValue(0);
+                           jSpinnerApertura.setValue(new java.util.Date(0));
+                           jSpinnerCierre.setValue(new java.util.Date(0));
 
                         }
                         else{
@@ -891,7 +911,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Seleccione una reserva para anular.");
+            JOptionPane.showMessageDialog(this, "Seleccione un restaurante para eliminar.");
         }
     }//GEN-LAST:event_jButtonEliminarRestauranteActionPerformed
 
@@ -1046,7 +1066,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private void cargaTablaEncargados() {
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT id as Id, nombre as Nombre, apellido1 as Primer_Apellido, apellido2 as Segundo_Apellido, telefono as Telefono, correo as Correo,"
+                    "SELECT id as Id, nombre as Nombre, apellido1 as Apellido_1, apellido2 as Apellido_2, telefono as Telefono, correo as Correo,"
                             + " usuario_login as Usuario"
                             + " FROM usuario WHERE rol=?"
             );

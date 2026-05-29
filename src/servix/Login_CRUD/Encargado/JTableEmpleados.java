@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -55,14 +56,26 @@ public class JTableEmpleados extends javax.swing.JDialog {
         this.padre = (JFrameServix) parent;
         this.encargado = encargado;
         this.restaurante = restaurante;
+        
         // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
         padre.setLocation(-10000, -10000);
         padre.setSize(0, 0);
 
+        setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // Sirve para la confirmacion de cerrar la aplicacion
+        // Al cerrar el dialog muestra confirmacion para cerrar, cierra tambien el padre
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent e) {
-                JFrameServix.cerrarYReiniciar(JTableEmpleados.this, padre);
+                int opcion = JOptionPane.showConfirmDialog(
+                    JTableEmpleados.this,
+                    "¿Seguro que quieres cerrar la aplicación?",
+                    "Confirmar cierre",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+                );
+                if (opcion == JOptionPane.YES_OPTION) {
+                    JFrameServix.cerrarYReiniciar(JTableEmpleados.this, padre);
+                }
             }
         });
         

@@ -16,6 +16,7 @@ import javax.help.HelpBroker;
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -49,6 +50,7 @@ public class JFrameServix extends javax.swing.JFrame {
     
     public JFrameServix(){
         initComponents();
+        
         this.setLocationRelativeTo(null); //Hace que la ventana este centrada en la pantalla
         this.setTitle("Servix");
         
