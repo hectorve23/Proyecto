@@ -170,7 +170,7 @@ public class JDialogAnadirMesa extends javax.swing.JDialog {
                 conexion.close();
                 this.setVisible(false);
             } catch (SQLException ex) {
-                System.getLogger(JDialogAnadirMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogAnadirMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             } 
         }
     }

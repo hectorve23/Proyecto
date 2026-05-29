@@ -8,7 +8,6 @@ import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
@@ -251,7 +250,7 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogEditarPlato.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed

@@ -43,7 +43,6 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
         this.padre=(JFrameServix) parent;
         nueva = new ConexionBBDD();
         conexion=nueva.getConnection();
-        jLabel1.setText("Hola " + user + " cambia tu contraseña por favor");
         jLabel2.setText("<html>Nueva contraseña <font color='red'>*</font></html>");
         jLabel3.setText("<html>Repita la contraseña <font color='red'>*</font></html>");
         enterEnFormulario();
@@ -90,6 +89,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Cambia tu contraseña");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
@@ -139,10 +139,10 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAceptar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addContainerGap())
         );
@@ -187,7 +187,7 @@ public class JDialogCambiarContrasena extends javax.swing.JDialog {
                     this.setVisible(false);
                     dispose();
                 } catch (SQLException ex) {
-                    System.getLogger(JDialogCambiarContrasena.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    java.util.logging.Logger.getLogger(JDialogCambiarContrasena.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(rootPane,
                                                 "Error al cambiar la contraseña", 
                                                 "Error", 

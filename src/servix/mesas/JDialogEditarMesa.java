@@ -181,7 +181,7 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            System.getLogger(JDialogEditarMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogEditarMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         dispose();
     }//GEN-LAST:event_jButtonAceptarActionPerformed
@@ -219,7 +219,7 @@ public class JDialogEditarMesa extends javax.swing.JDialog {
                       jTextFieldCapacidad.setText(rs.getString("capacidad"));
                  }
            } catch (SQLException ex) {
-               System.getLogger(JDialogEditarMesa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+               java.util.logging.Logger.getLogger(JDialogEditarMesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
            }
        }
     }    

@@ -48,6 +48,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icon.png"));
         this.setIconImage(icon.getImage());
+        this.setTitle("Servix");
         
         this.padre = (JFrameServix) parent;
         
@@ -85,9 +86,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         cargaTablaEncargados();
         cargaTablaAsignaciones();
         formatoTabla();
-        
+        camposObligatorios();
         atajosTeclado();
-        
     }
     
     private void atajosTeclado() {
@@ -99,9 +99,15 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // Ctrl+G - Validar/Asignar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {
-                case 0 -> jButtonValidarRestaurante.doClick();
-                case 1 -> jButtonValidarEncargado.doClick();
-                case 2 -> jButtonAsignar.doClick();
+                case 0:
+                    jButtonValidarRestaurante.doClick();
+                    break;
+                case 1:
+                    jButtonValidarEncargado.doClick();
+                    break;
+                case 2:
+                    jButtonAsignar.doClick();
+                    break;
             }
         }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_DOWN_MASK),
            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -109,8 +115,12 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // Ctrl+E - Editar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {
-                case 0 -> jButtonEditarRestaurante.doClick();
-                case 1 -> jButtonEditarEncargado.doClick();
+                case 0:
+                    jButtonEditarRestaurante.doClick();
+                    break;
+                case 1:
+                    jButtonEditarEncargado.doClick();
+                    break;
             }
         }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK),
            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -118,9 +128,15 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         // Supr - Eliminar según pestaña
         getRootPane().registerKeyboardAction(e -> {
             switch (jTabbedPane.getSelectedIndex()) {
-                case 0 -> jButtonEliminarRestaurante.doClick();
-                case 1 -> jButtonEliminarEncargado.doClick();
-                case 2 -> jButtonEliminarAsignacion.doClick();
+                case 0:
+                    jButtonEliminarRestaurante.doClick();
+                    break;
+                case 1:
+                    jButtonEliminarEncargado.doClick();
+                    break;
+                case 2:
+                    jButtonEliminarAsignacion.doClick();
+                    break;
             }
         }, KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0),
            javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -595,8 +611,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         int apertura = (int) jSpinnerApertura.getValue();
         int cierre = (int) jSpinnerCierre.getValue();
         
-        if(nombre.isEmpty() || direccion.isEmpty() || telefono.isEmpty() || correo.isEmpty()
-                || capacidad<=0 || apertura <=0 || cierre<=0){
+        if(nombre.isEmpty() || direccion.isEmpty() || capacidad<=0 || apertura <=0 || cierre<=0){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "No puede haber campos vacios o que sean menor o igual a 0", 
                                                 "Error", 
@@ -604,45 +619,63 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
         }
         else{
-            try {
-                PreparedStatement ps = conexion.prepareStatement("INSERT INTO restaurante (nombre, direccion, telefono, correo, capacidad, apertura, cierre)"
-                                                                + " VALUES (?,?,?,?,?,?,?)");
-                ps.setString(1, nombre);
-                ps.setString(2, direccion);
-                ps.setString(3, telefono);
-                ps.setString(4, correo);
-                ps.setInt(5, capacidad);
-                ps.setInt(6, apertura);
-                ps.setInt(7, cierre);
-                
-                int filas = ps.executeUpdate();
-                if(filas==1){
-                   JOptionPane.showConfirmDialog(rootPane,
-                                                "Restaurante registrado", 
-                                                "", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.INFORMATION_MESSAGE);
-                   recargarTablaRestaurantes();
-                   cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
-                   
-                   jTextFieldCorreoRestaurante.setText("");
-                   jTextFieldDireccion.setText("");
-                   jTextFieldNombreRestaurante.setText("");
-                   jTextFieldTelefonoRestaurante.setText("");
-                   jSpinnerApertura.setValue(0);
-                   jSpinnerCapacidad.setValue(0);
-                   jSpinnerCierre.setValue(0);
+            if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
+                if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
+                    try {
+                        PreparedStatement ps = conexion.prepareStatement("INSERT INTO restaurante (nombre, direccion, telefono, correo, capacidad, apertura, cierre)"
+                                                                        + " VALUES (?,?,?,?,?,?,?)");
+                        ps.setString(1, nombre);
+                        ps.setString(2, direccion);
+                        ps.setString(3, telefono);
+                        ps.setString(4, correo);
+                        ps.setInt(5, capacidad);
+                        ps.setInt(6, apertura);
+                        ps.setInt(7, cierre);
 
+                        int filas = ps.executeUpdate();
+                        if(filas==1){
+                           JOptionPane.showConfirmDialog(rootPane,
+                                                        "Restaurante registrado", 
+                                                        "", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.INFORMATION_MESSAGE);
+                           recargarTablaRestaurantes();
+                           cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+
+                           jTextFieldCorreoRestaurante.setText("");
+                           jTextFieldDireccion.setText("");
+                           jTextFieldNombreRestaurante.setText("");
+                           jTextFieldTelefonoRestaurante.setText("");
+                           jSpinnerApertura.setValue(0);
+                           jSpinnerCapacidad.setValue(0);
+                           jSpinnerCierre.setValue(0);
+
+                        }
+                        else{
+                            JOptionPane.showConfirmDialog(rootPane,
+                                                        "Ha habido un error", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException ex) {
+                        java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    }
                 }
                 else{
                     JOptionPane.showConfirmDialog(rootPane,
-                                                "Ha habido un error", 
-                                                "Error", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.ERROR_MESSAGE);
+                                                        "Formato de correo no valido", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (SQLException ex) {
-                System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+            else{
+                JOptionPane.showConfirmDialog(rootPane,
+                                                        "Formato de telefono no valido", 
+                                                        "Error", 
+                                                        JOptionPane.OK_CANCEL_OPTION, 
+                                                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButtonValidarRestauranteActionPerformed
@@ -727,7 +760,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                             JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (SQLException ex) {
-                            System.getLogger(JDialogInterfazGerente.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                         }
                     }
                     else{
@@ -763,9 +796,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         
             rs.close();
             ps.close();
-        } catch (SQLException ex) {
-            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
+    } catch (Exception ex) {
+        java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    }
         return existe;
     }
     
@@ -807,10 +840,10 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             } catch (SQLException ex) {
                 try {
                     conexion.rollback();
-                } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                }catch (SQLException e) {
+                    java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -852,9 +885,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                    java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex1);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -897,9 +930,9 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 try {
                     conexion.rollback();
                 } catch (SQLException ex1) {
-                    System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex1);
+                    java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex1);
                 }
-                System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
         }
         else{
@@ -949,7 +982,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonAsignarActionPerformed
 
@@ -1007,7 +1040,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             );
             nueva.selectSQL(ps, dtm);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     private void cargaTablaEncargados() {
@@ -1020,7 +1053,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm2);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     private void cargaTablaAsignaciones() {
@@ -1034,9 +1067,26 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             //ps.setString(1, "encargado");
             nueva.selectSQL(ps, dtm3);
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
+    
+    private void camposObligatorios(){
+        jLabel1.setText("<html>Nombre <font color='red'>*</font></html>");
+        jLabel2.setText("<html>Direccion <font color='red'>*</font></html>");
+        jLabel5.setText("<html>Capacidad <font color='red'>*</font></html>");
+        jLabel6.setText("<html>Apertura <font color='red'>*</font></html>");
+        jLabel7.setText("<html>Cierre <font color='red'>*</font></html>");
+        jLabel8.setText("<html>Nombre <font color='red'>*</font></html>");
+        jLabel9.setText("<html>Primer apellido <font color='red'>*</font></html>");
+        jLabel11.setText("<html>Telefono <font color='red'>*</font></html>");
+        jLabel12.setText("<html>Correo <font color='red'>*</font></html>");
+        jLabel13.setText("<html>Usuario <font color='red'>*</font></html>");
+        jLabel14.setText("<html>Contraseña <font color='red'>*</font></html>");
+        jLabel15.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
+        
+    }
+    
     public void formatoTabla(){ // Configuracion para que los campos de la tabla se vea bien
         FormatoTablas.FormatoInteger formatoInt = new FormatoTablas.FormatoInteger();
         

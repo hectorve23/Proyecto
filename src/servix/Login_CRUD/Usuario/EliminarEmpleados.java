@@ -27,7 +27,7 @@ public class EliminarEmpleados {
 
                     ps.close();
         } catch (SQLException ex) {
-             System.getLogger(EliminarEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);   
+             java.util.logging.Logger.getLogger(EliminarEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
 

@@ -302,7 +302,7 @@ public class JTableEmpleados extends javax.swing.JDialog {
                     dtm.addRow(lista.get(i).devuelveFila());
             }
         } catch (SQLException ex) {
-            System.getLogger(JTableEmpleados.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JTableEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     

@@ -108,7 +108,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Bienvenido/a!!\n");
+        jLabel1.setText("Servix");
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         jLabel2.setText("¿Qué deseas hacer?");
@@ -234,7 +234,7 @@ public class JDialogInterfazEncargado extends javax.swing.JDialog {
             }
             
         } catch (SQLException ex) {
-            System.getLogger(JDialogInterfazEncargado.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogInterfazEncargado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     

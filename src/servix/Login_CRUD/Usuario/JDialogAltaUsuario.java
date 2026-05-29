@@ -362,7 +362,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
                                         ps.close();
                                      }
                                  } catch (SQLException ex) {
-                                     System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                                     java.util.logging.Logger.getLogger(JDialogAltaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                                  }
                             }else{
                                 resaltarPassword(jPasswordFieldContrasena1);
@@ -420,7 +420,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             rs.close();
             ps.close();
         } catch (SQLException ex) {
-            System.getLogger(JDialogAltaUsuario.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            java.util.logging.Logger.getLogger(JDialogAltaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         return existe;
     }
