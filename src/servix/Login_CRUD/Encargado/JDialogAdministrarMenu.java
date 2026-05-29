@@ -147,7 +147,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jSpinnerPrecio = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxCategoria = new javax.swing.JComboBox<>();
+        jComboBoxCategoria = new javax.swing.JComboBox<String>();
         jPanelOpciones = new javax.swing.JPanel();
         jButtonNuevoPlato = new javax.swing.JButton();
         jButtonVerPlatos = new javax.swing.JButton();
@@ -228,7 +228,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         jLabel3.setText("Categoria");
         jPanelNuevoPlato.add(jLabel3);
 
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
+        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "bebida", "entrante", "primer_plato", "segundo_plato", "postre" }));
         jPanelNuevoPlato.add(jComboBoxCategoria);
 
         jPanelPadre.add(jPanelNuevoPlato, "card2");
@@ -304,7 +304,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
                     .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
