@@ -1018,8 +1018,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             String telefonoRestaurante   = jTableRestaurantes.getValueAt(fila, 3).toString();
             String correoRestaurante = jTableRestaurantes.getValueAt(fila, 4).toString();
             int capacidad = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 5).toString());
-            int apertura = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 6).toString());
-            int cierre = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 7).toString());
+            String apertura = jTableRestaurantes.getValueAt(fila, 6).toString();
+            String cierre = jTableRestaurantes.getValueAt(fila, 7).toString();
                                             
             this.dispose();
             JDialogEditarRestaurante jder = new JDialogEditarRestaurante(padre, true, id_restaurante, nombreRestaurante, direccion, telefonoRestaurante, 

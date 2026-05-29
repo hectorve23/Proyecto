@@ -7,6 +7,8 @@ package servix.Login_CRUD.Gerente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -35,11 +37,11 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
     String telefono;
     String correo;
     int capacidad;
-    int apertura;
-    int cierre;
+    String apertura;
+    String cierre;
     
     public JDialogEditarRestaurante(java.awt.Frame parent, boolean modal, int id, String nombre, String direccion, String telefono, String correo, 
-                                    int capacidad, int apertura, int cierre) {
+                                    int capacidad, String apertura, String cierre) {
         super(parent, modal);
         
         initComponents();
@@ -115,8 +117,14 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
         jTextFieldCorreoRestaurante.setText(correo);
         jTextFieldTelefonoRestaurante.setText(telefono);
         jSpinnerCapacidad.setValue(capacidad);
-        jSpinnerApertura.setValue(apertura);
-        jSpinnerCierre.setValue(cierre);
+        
+        // Normalizar a HH:mm:ss independientemente del formato que llegue
+        String aperturaCompleta = apertura.length() == 5 ? apertura + ":00" : apertura;
+        String cierreCompleto   = cierre.length()   == 5 ? cierre   + ":00" : cierre;
+
+        jSpinnerApertura.setValue(new java.util.Date(Time.valueOf(aperturaCompleta).getTime()));
+        jSpinnerCierre.setValue(new java.util.Date(Time.valueOf(cierreCompleto).getTime()));
+        
     }
 
     /**
@@ -129,54 +137,75 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
         jTextFieldNombreRestaurante = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelApellido1 = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelApellido2 = new javax.swing.JLabel();
         jTextFieldTelefonoRestaurante = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelTelefono = new javax.swing.JLabel();
         jTextFieldCorreoRestaurante = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelCorreo = new javax.swing.JLabel();
         jSpinnerCapacidad = new javax.swing.JSpinner();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
         jSpinnerApertura = new javax.swing.JSpinner();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelContrasena1 = new javax.swing.JLabel();
         jSpinnerCierre = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
         jButtonCancelar = new javax.swing.JButton();
         jButtonValidar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(7, 2, 10, 10));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(14, 168, 219), 1, true));
+        jPanel1.setForeground(new java.awt.Color(250, 250, 250));
+        jPanel1.setToolTipText("");
+        jPanel1.setLayout(new java.awt.GridLayout(7, 2, 30, 10));
 
-        jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1);
+        jLabelNombre.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelNombre.setText("Nombre");
+        jPanel1.add(jLabelNombre);
         jPanel1.add(jTextFieldNombreRestaurante);
 
-        jLabel2.setText("Direccion");
-        jPanel1.add(jLabel2);
+        jLabelApellido1.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelApellido1.setText("Direccion");
+        jPanel1.add(jLabelApellido1);
         jPanel1.add(jTextFieldDireccion);
 
-        jLabel3.setText("Telefono");
-        jPanel1.add(jLabel3);
+        jLabelApellido2.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelApellido2.setText("Telefono");
+        jPanel1.add(jLabelApellido2);
         jPanel1.add(jTextFieldTelefonoRestaurante);
 
-        jLabel4.setText("Correo");
-        jPanel1.add(jLabel4);
+        jLabelTelefono.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelTelefono.setText("Correo");
+        jPanel1.add(jLabelTelefono);
         jPanel1.add(jTextFieldCorreoRestaurante);
 
-        jLabel5.setText("Capacidad");
-        jPanel1.add(jLabel5);
+        jLabelCorreo.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelCorreo.setText("Capacidad");
+        jPanel1.add(jLabelCorreo);
         jPanel1.add(jSpinnerCapacidad);
 
-        jLabel6.setText("Apertura");
-        jPanel1.add(jLabel6);
+        jLabelUsuario.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelUsuario.setText("Apertura");
+        jPanel1.add(jLabelUsuario);
+
+        jSpinnerApertura.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerApertura.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerApertura, "HH:mm"));
         jPanel1.add(jSpinnerApertura);
 
-        jLabel7.setText("Cierre");
-        jPanel1.add(jLabel7);
+        jLabelContrasena1.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        jLabelContrasena1.setText("Cierre");
+        jPanel1.add(jLabelContrasena1);
+
+        jSpinnerCierre.setModel(new javax.swing.SpinnerDateModel());
+        jSpinnerCierre.setEditor(new javax.swing.JSpinner.DateEditor(jSpinnerCierre, "HH:mm"));
         jPanel1.add(jSpinnerCierre);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Editar restaurante");
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -185,6 +214,9 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
             }
         });
 
+        jButtonValidar.setBackground(new java.awt.Color(19, 118, 148));
+        jButtonValidar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonValidar.setForeground(new java.awt.Color(219, 219, 255));
         jButtonValidar.setText("Validar");
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,27 +228,34 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(497, Short.MAX_VALUE)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161))
+                .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(80, 80, 80)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(72, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(84, 84, 84)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(88, Short.MAX_VALUE)))
         );
 
         pack();
@@ -227,33 +266,50 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
         this.setVisible(false);
         JDialogInterfazGerente jdig = new JDialogInterfazGerente(padre, true);
         jdig.setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
-        if(!(jTextFieldNombreRestaurante.getText().isEmpty() || jTextFieldDireccion.getText().isEmpty() ||
-             Integer.parseInt(String.valueOf(jSpinnerCapacidad.getValue()))<=0 || jTextFieldCorreoRestaurante.getText().isEmpty() ||
-             Integer.parseInt(String.valueOf(jSpinnerApertura.getValue()))<=0 || Integer.parseInt(String.valueOf(jSpinnerCierre.getValue()))<=0)){
-            
-            
+        Time aperturaTiempo = new Time(((java.util.Date) jSpinnerApertura.getValue()).getTime());
+        Time cierreTiempo = new Time(((java.util.Date) jSpinnerCierre.getValue()).getTime());
+
+        if(jTextFieldNombreRestaurante.getText().isEmpty() || jTextFieldDireccion.getText().isEmpty() ||
+            Integer.parseInt(String.valueOf(jSpinnerCapacidad.getValue())) <= 0 || 
+            jTextFieldCorreoRestaurante.getText().isEmpty()){
+
+            JOptionPane.showConfirmDialog(rootPane,
+                "No puede haber campos vacios",
+                "Error",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.ERROR_MESSAGE);
+
+        }
+        else if(aperturaTiempo.getTime() >= cierreTiempo.getTime()){
+            JOptionPane.showConfirmDialog(rootPane,
+                "La hora de apertura no puede ser posterior a la de cierre",
+                "Error",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.ERROR_MESSAGE);
+        }
+        else{
             try {
                 conexion.setAutoCommit(false);
                 String sql = "UPDATE restaurante SET nombre=?, direccion=?, telefono=?, correo=?, capacidad=?, apertura=?, cierre=?"
-                    + " WHERE id_restaurante=?";
+                + " WHERE id_restaurante=?";
                 PreparedStatement ps = conexion.prepareStatement(sql);
-                
+
                 ps.setString(1, jTextFieldNombreRestaurante.getText());
                 ps.setString(2, jTextFieldDireccion.getText());
                 ps.setString(3, jTextFieldTelefonoRestaurante.getText());
                 ps.setString(4, jTextFieldCorreoRestaurante.getText());
                 ps.setInt(5, Integer.parseInt(String.valueOf(jSpinnerCapacidad.getValue())));
-                ps.setInt(6, Integer.parseInt(String.valueOf(jSpinnerApertura.getValue())));
-                ps.setInt(7, Integer.parseInt(String.valueOf(jSpinnerCierre.getValue())));
+                ps.setTime(6, aperturaTiempo);
+                ps.setTime(7, cierreTiempo);
                 ps.setInt(8, id);
-                
+
                 int filas = ps.executeUpdate();
-                
+
                 if(filas==1){
                     conexion.commit();
                     JOptionPane.showMessageDialog(rootPane, "Restaurante actualizado", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -265,17 +321,10 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
                 else{
                     JOptionPane.showMessageDialog(rootPane, "Ha habido un error", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-  
+
             } catch (SQLException ex) {
                 java.util.logging.Logger.getLogger(JDialogEditarRestaurante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } 
-        }
-        else{
-            JOptionPane.showConfirmDialog(rootPane,
-                                                "No puede haber campos vacios", 
-                                                "Error", 
-                                                JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
 
@@ -311,12 +360,13 @@ public class JDialogEditarRestaurante extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelApellido1;
+    private javax.swing.JLabel jLabelApellido2;
+    private javax.swing.JLabel jLabelContrasena1;
+    private javax.swing.JLabel jLabelCorreo;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner jSpinnerApertura;
     private javax.swing.JSpinner jSpinnerCapacidad;
