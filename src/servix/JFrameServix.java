@@ -24,7 +24,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import servix.Login_CRUD.Clientes.JDialogInterfazClientes;
 import servix.Login_CRUD.Usuario.JDialogCambiarContrasena;
 import servix.Login_CRUD.Empleado.JTableInterfazEmpleado;
-import servix.Login_CRUD.Encargado.JDialogDatosDePrueba;
+import servix.Login_CRUD.Gerente.JDialogDatosDePrueba;
 import servix.Login_CRUD.Encargado.JDialogInterfazEncargado;
 import servix.Login_CRUD.Gerente.JDialogInterfazGerente;
 import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
@@ -98,7 +98,6 @@ public class JFrameServix extends javax.swing.JFrame {
         jPasswordFieldContransena = new javax.swing.JPasswordField();
         jButtonCrearCuenta = new javax.swing.JButton();
         jButtonIniciarSesion = new javax.swing.JButton();
-        jButtonImportarDatos = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -145,14 +144,6 @@ public class JFrameServix extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButtonIniciarSesion);
-
-        jButtonImportarDatos.setText("Importar datos");
-        jButtonImportarDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonImportarDatosActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButtonImportarDatos);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -271,11 +262,6 @@ public class JFrameServix extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonIniciarSesionActionPerformed
 
-    private void jButtonImportarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportarDatosActionPerformed
-        JDialogDatosDePrueba jddp = new JDialogDatosDePrueba(this, true);
-        jddp.setVisible(true);
-    }//GEN-LAST:event_jButtonImportarDatosActionPerformed
-
     private boolean comprobarDatos(String user, String contrasena) {
         boolean correcto=false;
         try {
@@ -371,7 +357,6 @@ public class JFrameServix extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCrearCuenta;
-    private javax.swing.JButton jButtonImportarDatos;
     private javax.swing.JButton jButtonIniciarSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

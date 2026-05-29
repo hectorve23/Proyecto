@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package servix.Login_CRUD.Encargado;
+package servix.Login_CRUD.Gerente;
 
 import java.io.File;
 import java.io.IOException;
@@ -120,8 +120,8 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                                 ps.setString(4, txtOpc(e, "telefono"));
                                 ps.setString(5, txtOpc(e, "correo"));
                                 ps.setInt(6, Integer.parseInt(txt(e, "capacidad")));
-                                ps.setInt(7, Integer.parseInt(txt(e, "apertura")));
-                                ps.setInt(8, Integer.parseInt(txt(e, "cierre")));
+                                ps.setTime(7, java.sql.Time.valueOf(txt(e, "apertura")));
+                                ps.setTime(8, java.sql.Time.valueOf(txt(e, "cierre")));
                                 ps.addBatch();
                             }
                             ps.executeBatch();
@@ -272,8 +272,8 @@ public class JDialogDatosDePrueba extends javax.swing.JDialog {
                         ps.setString(4, o.optString("telefono", null));
                         ps.setString(5, o.optString("correo", null));
                         ps.setInt(6, o.getInt("capacidad"));
-                        ps.setInt(7, o.getInt("apertura"));
-                        ps.setInt(8, o.getInt("cierre"));
+                        ps.setTime(7, java.sql.Time.valueOf(o.getString("apertura")));
+                        ps.setTime(8, java.sql.Time.valueOf(o.getString("cierre")));
                         ps.addBatch();
                     }
                     ps.executeBatch();

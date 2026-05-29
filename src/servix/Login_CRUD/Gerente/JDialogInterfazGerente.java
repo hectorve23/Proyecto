@@ -203,6 +203,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jButtonEliminarRestaurante = new javax.swing.JButton();
         jButtonCerrarSesion = new javax.swing.JButton();
         jButtonEditarRestaurante = new javax.swing.JButton();
+        jButtonImportarDatos = new javax.swing.JButton();
         jPanelEncargados = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEncargados = new javax.swing.JTable();
@@ -227,6 +228,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jButtonValidarEncargado = new javax.swing.JButton();
         jButtonEditarEncargado = new javax.swing.JButton();
         jButtonEliminarEncargado = new javax.swing.JButton();
+        jButtonImportarDatos1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAsignaciones = new javax.swing.JTable();
@@ -324,6 +326,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             }
         });
 
+        jButtonImportarDatos.setText("Importar datos");
+        jButtonImportarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImportarDatosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelNuevoLayout = new javax.swing.GroupLayout(jPanelNuevo);
         jPanelNuevo.setLayout(jPanelNuevoLayout);
         jPanelNuevoLayout.setHorizontalGroup(
@@ -332,9 +341,11 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelNuevoLayout.createSequentialGroup()
                         .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelNuevoLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonImportarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,11 +366,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                 .addComponent(jButtonCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(jPanelRestaurantes, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonValidarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonImportarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButtonEditarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonEliminarRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -443,6 +456,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             }
         });
 
+        jButtonImportarDatos1.setText("Importar datos");
+        jButtonImportarDatos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImportarDatos1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelEncargadosLayout = new javax.swing.GroupLayout(jPanelEncargados);
         jPanelEncargados.setLayout(jPanelEncargadosLayout);
         jPanelEncargadosLayout.setHorizontalGroup(
@@ -453,12 +473,16 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     .addGroup(jPanelEncargadosLayout.createSequentialGroup()
                         .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
                             .addGroup(jPanelEncargadosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonImportarDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelEncargadosLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE))
+                            .addGroup(jPanelEncargadosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonEditarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -477,9 +501,11 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jButtonEliminarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonEditarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelEncargadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonValidarEncargado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonImportarDatos1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -557,7 +583,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                             .addGap(158, 158, 158))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addContainerGap()))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -581,7 +607,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEliminarAsignacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Asignaciones", jPanel2);
@@ -1034,6 +1060,23 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Selecciona un restaurante para editarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarRestauranteActionPerformed
+
+    private void jButtonImportarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportarDatosActionPerformed
+        JDialogDatosDePrueba jddp = new JDialogDatosDePrueba(padre, true);
+        jddp.setVisible(true);
+        recargarTablaRestaurantes();
+        recargarTablaEncargados();
+        recargarTablaAsignaciones();
+    }//GEN-LAST:event_jButtonImportarDatosActionPerformed
+
+    private void jButtonImportarDatos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImportarDatos1ActionPerformed
+        JDialogDatosDePrueba jddp = new JDialogDatosDePrueba(padre, true);
+        jddp.setVisible(true);
+        recargarTablaRestaurantes();
+        recargarTablaEncargados();
+        recargarTablaAsignaciones();
+    }//GEN-LAST:event_jButtonImportarDatos1ActionPerformed
+    
     public void recargarTablaRestaurantes() {
         dtm.setRowCount(0);
         dtm.setColumnCount(0);
@@ -1203,6 +1246,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private javax.swing.JButton jButtonEliminarAsignacion;
     private javax.swing.JButton jButtonEliminarEncargado;
     private javax.swing.JButton jButtonEliminarRestaurante;
+    private javax.swing.JButton jButtonImportarDatos;
+    private javax.swing.JButton jButtonImportarDatos1;
     private javax.swing.JButton jButtonValidarEncargado;
     private javax.swing.JButton jButtonValidarRestaurante;
     private javax.swing.JComboBox<String> jComboBoxEncargados;
