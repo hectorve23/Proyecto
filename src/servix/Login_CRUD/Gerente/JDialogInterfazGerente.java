@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -20,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
 import servix.ConexionBBDD;
 import servix.FormatoTablas;
 import servix.JFrameServix;
-import servix.Login_CRUD.Usuario.JDialogAltaUsuario;
 import servix.Seguridad;
 
 /**
@@ -667,6 +665,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         int capacidad = (int) jSpinnerCapacidad.getValue();
         Time apertura = new Time(((java.util.Date) jSpinnerApertura.getValue()).getTime());
         Time cierre = new Time(((java.util.Date) jSpinnerCierre.getValue()).getTime());
+        java.time.LocalTime horaApertura = apertura.toLocalTime();
+        java.time.LocalTime horaCierre = cierre.toLocalTime();
         
         if(nombre.isEmpty() || direccion.isEmpty() || capacidad<=0){
             JOptionPane.showConfirmDialog(rootPane,
@@ -675,7 +675,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.ERROR_MESSAGE);
         }
-        else if(apertura.getTime()>=(cierre.getTime())){
+        else if(!horaApertura.isBefore(horaCierre)){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "La hora de apertura no puede ser posterior a la de cierre", 
                                                 "Error", 

@@ -43,6 +43,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
     int id;
     JFrameServix padre;
     CargaCombos cc;
+    String msgApertura = "";
+    String msgCierre = "";
+    
    
     public JDialogInterfazClientes(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
@@ -452,33 +455,26 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
     private void jButtonEditarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarReservaActionPerformed
         if(jTableReservas.getSelectedRowCount() == 1){
-
             int fila = jTableReservas.getSelectedRow();
             int id_reserva = Integer.parseInt(jTableReservas.getValueAt(fila, 0).toString());
             Object fechaHoraObj = jTableReservas.getValueAt(fila, 2);
             Timestamp fechaHora;
 
-            // Convertir a Timestamp dependiendo del tipo de dato que venga
             if (fechaHoraObj instanceof Timestamp) {
                 fechaHora = (Timestamp) fechaHoraObj;
             } else if (fechaHoraObj instanceof java.util.Date) {
                 fechaHora = new Timestamp(((java.util.Date) fechaHoraObj).getTime());
             } else {
-                // Si viene como String, parsearlo
                 try {
                     String fechaStr = fechaHoraObj.toString();
                     SimpleDateFormat sdf;
-
-                    // Detectar formato
                     if (fechaStr.contains("/")) {
                         sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     } else {
                         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     }
-
                     java.util.Date fecha = sdf.parse(fechaStr);
                     fechaHora = new Timestamp(fecha.getTime());
-
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(rootPane,
                         "Error al procesar la fecha: " + e.getMessage(),
@@ -490,14 +486,29 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
 
             int n_comensales = Integer.parseInt(jTableReservas.getValueAt(fila, 3).toString());
 
+            // Obtener id_restaurante de la reserva
+            int id_restaurante_reserva = 0;
+            try {
+                PreparedStatement psR = conexion.prepareStatement(
+                    "SELECT id_restaurante FROM reserva WHERE id_reserva = ?"
+                );
+                psR.setInt(1, id_reserva);
+                ResultSet rsR = psR.executeQuery();
+                if (rsR.next()) id_restaurante_reserva = rsR.getInt(1);
+                rsR.close();
+                psR.close();
+            } catch (SQLException ex) {
+                logger.log(java.util.logging.Level.SEVERE, null, ex);
+            }
+
             this.dispose();
-            JDialogEditarReserva jdic = new JDialogEditarReserva(padre, true, id_reserva, fechaHora, n_comensales, id);
+            JDialogEditarReserva jdic = new JDialogEditarReserva(padre, true, id_reserva, fechaHora, n_comensales, id, id_restaurante_reserva);
             jdic.setVisible(true);
             recargarTabla();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Selecciona una reserva para editar.");
         }
+        
     }//GEN-LAST:event_jButtonEditarReservaActionPerformed
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
@@ -540,7 +551,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         //Comprobacion de horario valido
         else if (!validarHorario(valorHora, comboBoxIdRestaurante())) {
             JOptionPane.showMessageDialog(rootPane,
-                "La hora debe estar dentro del horario del restaurante",
+                "La hora debe estar dentro del horario del restaurante ("+msgApertura+" - "+msgCierre+")",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
         }
@@ -686,6 +697,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         if (rsHorario.next()) {
             Time apertura = rsHorario.getTime("apertura");
             Time cierre = rsHorario.getTime("cierre");
+            
+            msgApertura = apertura.toLocalTime().toString().substring(0, 5); // ← añadir
+            msgCierre = cierre.toLocalTime().toString().substring(0, 5);     // ← añadir
 
             SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
             String horaStr = formatoHora.format((java.util.Date) valorHora);

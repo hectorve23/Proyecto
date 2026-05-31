@@ -216,7 +216,13 @@ public class JDialogEditarPlato extends javax.swing.JDialog {
         String categoria = (String) jComboBoxCategoria.getSelectedItem();
         String nombrePlato = jTextFieldNombrePlato.getText();
         double precio = (Double) jSpinnerPrecio.getValue();
-
+        
+        if      (categoria.equalsIgnoreCase("bebida"))        categoria = "Bebida";
+                else if (categoria.equalsIgnoreCase("entrante"))      categoria = "Entrante";
+                else if (categoria.equalsIgnoreCase("primer_plato"))  categoria = "Plato principal";
+                else if (categoria.equalsIgnoreCase("segundo_plato")) categoria = "Segundo Plato";
+                else if (categoria.equalsIgnoreCase("postre"))        categoria = "Postre";
+        
         if(categoria.isEmpty() || nombrePlato.isEmpty()){
             JOptionPane.showConfirmDialog(rootPane,
                                             "Rellena todos los campos", 

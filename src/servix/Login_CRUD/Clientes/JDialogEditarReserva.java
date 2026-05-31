@@ -31,8 +31,11 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     private Connection conexion;
     private JFrameServix padre;
     private int id;
+    private int id_restaurante;
+    String msgApertura = "";  
+    String msgCierre = ""; 
     
-    public JDialogEditarReserva(java.awt.Frame parent, boolean modal, int idReserva, Timestamp fecha, int nComensales, int id) {
+    public JDialogEditarReserva(java.awt.Frame parent, boolean modal, int idReserva, Timestamp fecha, int nComensales, int id, int id_restaurante) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -44,6 +47,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         this.nComensales = nComensales;
         this.padre = (JFrameServix) parent;
         this.id = id;
+        this.id_restaurante=id_restaurante;
         
         // Mover el JFrame fuera de la pantalla para que no sea visible aunque se restaure
         padre.setLocation(-10000, -10000);
@@ -217,20 +221,29 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
     
     private boolean validarHorario(Object valorHora){ //Metodo para comprobar si la reserva entra dentro del horario
-        SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-        String horaSQL = formatoHora.format(valorHora);
-        
-        //declaracion de margenes
-        LocalTime horaReserva = LocalTime.parse(horaSQL);
-        LocalTime inicioComida = LocalTime.of(12, 0);
-        LocalTime finComida = LocalTime.of(16, 0);
-        LocalTime inicioCena = LocalTime.of(21, 0);
-        LocalTime finCena = LocalTime.of(23, 59);
-        
-        //true si entra en elhorario, false si no entra
-        return (horaReserva.compareTo(inicioComida) >= 0 && horaReserva.compareTo(finComida) <= 0) || 
-                (horaReserva.compareTo(inicioCena) >= 0 && horaReserva.compareTo(finCena) <= 0);
-    } 
+        try {
+            PreparedStatement psHorario = conexion.prepareStatement(
+                "SELECT apertura, cierre FROM Restaurante WHERE id_restaurante = ?"
+            );
+            psHorario.setInt(1, id_restaurante);
+            ResultSet rsHorario = psHorario.executeQuery();
+            if (rsHorario.next()) {
+                Time apertura = rsHorario.getTime("apertura");
+                Time cierre = rsHorario.getTime("cierre");
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
+                Time horaElegida = Time.valueOf(fmt.format((java.util.Date) valorHora));
+                int elegida = horaElegida.toLocalTime().toSecondOfDay();
+                int apert   = apertura.toLocalTime().toSecondOfDay();
+                int cierr   = cierre.toLocalTime().toSecondOfDay();
+                msgApertura = apertura.toLocalTime().toString().substring(0, 5);
+                msgCierre   = cierre.toLocalTime().toString().substring(0, 5);
+                return cierr == 0 ? elegida >= apert : elegida >= apert && elegida < cierr;
+            }
+        } catch (SQLException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        return false;
+        } 
     
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
@@ -251,7 +264,7 @@ public class JDialogEditarReserva extends javax.swing.JDialog {
         }
         else if(!validarHorario(valorHora)){
             JOptionPane.showMessageDialog(rootPane,
-                                            "La hora debe estar entre 12:00-16:00 o 21:00-23:59", 
+                                            "La hora debe estar dentro del horario del restaurante ("+msgApertura+" - "+msgCierre+")", 
                                             "Error", 
                                             JOptionPane.ERROR_MESSAGE);
             return;

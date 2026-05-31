@@ -378,6 +378,7 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         // TODO add your handling code here:
         String categoria = (String) jComboBoxCategoria.getSelectedItem();
+        System.out.println(categoria);
         String nombrePlato = jTextFieldNombrePlato.getText();
         double precio = (Double) jSpinnerPrecio.getValue();
 
@@ -397,13 +398,13 @@ public class JDialogAdministrarMenu extends javax.swing.JDialog {
         }
         else{
             try {
-                /*
+                
                 if      (categoria.equalsIgnoreCase("bebida"))        categoria = "Bebida";
                 else if (categoria.equalsIgnoreCase("entrante"))      categoria = "Entrante";
                 else if (categoria.equalsIgnoreCase("primer_plato"))  categoria = "Plato principal";
                 else if (categoria.equalsIgnoreCase("segundo_plato")) categoria = "Segundo Plato";
                 else if (categoria.equalsIgnoreCase("postre"))        categoria = "Postre";
-                */
+                
                 if(existePlato(nombrePlato, restaurante)){
                     JOptionPane.showConfirmDialog(rootPane,
                         "Ya existe un plato con el nombre \"" + nombrePlato + "\"",
