@@ -693,8 +693,6 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             jLabelContrasena2.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
         }else{
             jTextFieldUser.setEnabled(false);
-            jPasswordFieldContrasena1.setEnabled(false);
-            jPasswordFieldContrasena2.setEnabled(false);
         }
     }
     
