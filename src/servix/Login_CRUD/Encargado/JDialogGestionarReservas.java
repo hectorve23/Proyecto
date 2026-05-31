@@ -131,7 +131,16 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
         try {
             lista.clear();
             nueva.conectar();
-
+            
+            // Cancelar automáticamente las reservas pendientes con fecha anterior a hoy
+            String sqlCancelar = "UPDATE Reserva SET estado_reserva = 'cancelada' " +
+                                 "WHERE id_restaurante = ? " +
+                                 "AND estado_reserva = 'pendiente' " +
+                                 "AND fecha_hora < NOW()";
+            PreparedStatement psCancelar = conexion.prepareStatement(sqlCancelar);
+            psCancelar.setInt(1, restaurante);
+            psCancelar.executeUpdate();
+        
             String sql = "SELECT * FROM Reserva WHERE id_restaurante = ? ORDER BY fecha_hora";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, restaurante);
