@@ -641,7 +641,23 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         JFrameServix jfs = new JFrameServix();
         jfs.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarSesionActionPerformed
-
+    private boolean direccionExiste(String direccion, int idExcluir) {
+        try {
+            String sql = "SELECT COUNT(*) FROM Restaurante WHERE direccion = ? AND id_restaurante != ?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, direccion);
+            ps.setInt(2, idExcluir); // Si es -1 excluye un id que no existe, es decir no excluye nada
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            rs.close();
+            ps.close();
+            return count > 0;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            return false;
+        }
+    }
     private void jButtonValidarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarRestauranteActionPerformed
         // TODO add your handling code here:
         String nombre = jTextFieldNombreRestaurante.getText();
@@ -662,6 +678,13 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         else if(apertura.getTime()>=(cierre.getTime())){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "La hora de apertura no puede ser posterior a la de cierre", 
+                                                "Error", 
+                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.ERROR_MESSAGE);
+        }
+        else if(direccionExiste(direccion, editando ? idRestaurante : -1)){
+            JOptionPane.showConfirmDialog(rootPane,
+                                                "Ya existe un restaurante con esa dirección", 
                                                 "Error", 
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.ERROR_MESSAGE);
