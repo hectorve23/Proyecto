@@ -42,6 +42,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     Connection conexion;
     JFrameServix padre;
     CargaCombos cc;
+    boolean editando = false;
+    int idEncargado = 0, idRestaurante = 0;
     
     public JDialogInterfazGerente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -668,41 +670,54 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
             if(validarTelefono(telefono)){ //Comprobamos si el formato de telefono es valido
                 if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
                     try {
-                        PreparedStatement ps = conexion.prepareStatement("INSERT INTO restaurante (nombre, direccion, telefono, correo, capacidad, apertura, cierre)"
-                                                                        + " VALUES (?,?,?,?,?,?,?)");
-                        ps.setString(1, nombre);
-                        ps.setString(2, direccion);
-                        ps.setString(3, telefono);
-                        ps.setString(4, correo);
-                        ps.setInt(5, capacidad);
-                        ps.setTime(6, apertura);
-                        ps.setTime(7, cierre);
+                        if (editando) {
+                            // UPDATE
+                            String sql = "UPDATE restaurante SET nombre=?, direccion=?, telefono=?, correo=?, " +
+                                         "capacidad=?, apertura=?, cierre=? WHERE id_restaurante=?";
+                            PreparedStatement ps = conexion.prepareStatement(sql);
+                            ps.setString(1, nombre);
+                            ps.setString(2, direccion);
+                            ps.setString(3, telefono);
+                            ps.setString(4, correo);
+                            ps.setInt(5, capacidad);
+                            ps.setTime(6, apertura);
+                            ps.setTime(7, cierre);
+                            ps.setInt(8, idRestaurante);
 
-                        int filas = ps.executeUpdate();
-                        if(filas==1){
-                           JOptionPane.showConfirmDialog(rootPane,
-                                                        "Restaurante registrado", 
-                                                        "", 
-                                                        JOptionPane.OK_CANCEL_OPTION, 
-                                                        JOptionPane.INFORMATION_MESSAGE);
-                           recargarTablaRestaurantes();
-                           cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                            int filas = ps.executeUpdate();
+                            if (filas == 1) {
+                                JOptionPane.showMessageDialog(rootPane, "Restaurante actualizado");
+                                editando = false;
+                                idRestaurante = -1;
+                                jButtonValidarRestaurante.setText("Validar");
+                                recargarTablaRestaurantes();
+                                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                                limpiarFormularioRestaurante();
+                            }
 
-                           jTextFieldCorreoRestaurante.setText("");
-                           jTextFieldDireccion.setText("");
-                           jTextFieldNombreRestaurante.setText("");
-                           jTextFieldTelefonoRestaurante.setText("");
-                           jSpinnerCapacidad.setValue(0);
-                           jSpinnerApertura.setValue(new java.util.Date(0));
-                           jSpinnerCierre.setValue(new java.util.Date(0));
+                        } else {
+                            // INSERT - tu código original
+                            PreparedStatement ps = conexion.prepareStatement(
+                                "INSERT INTO restaurante (nombre, direccion, telefono, correo, capacidad, apertura, cierre) " +
+                                "VALUES (?,?,?,?,?,?,?)"
+                            );
+                            ps.setString(1, nombre);
+                            ps.setString(2, direccion);
+                            ps.setString(3, telefono);
+                            ps.setString(4, correo);
+                            ps.setInt(5, capacidad);
+                            ps.setTime(6, apertura);
+                            ps.setTime(7, cierre);
 
-                        }
-                        else{
-                            JOptionPane.showConfirmDialog(rootPane,
-                                                        "Ha habido un error", 
-                                                        "Error", 
-                                                        JOptionPane.OK_CANCEL_OPTION, 
-                                                        JOptionPane.ERROR_MESSAGE);
+                            int filas = ps.executeUpdate();
+                            if (filas == 1) {
+                                JOptionPane.showMessageDialog(rootPane, "Restaurante registrado");
+                                recargarTablaRestaurantes();
+                                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                                limpiarFormularioRestaurante();
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Ha habido un error", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     } catch (SQLException ex) {
                         java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -739,12 +754,16 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         
         
         if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty()
-                || usuario.isEmpty() || contrasena.isEmpty() || apellido2.isEmpty()){
+                || usuario.isEmpty() || apellido2.isEmpty()){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "No puede haber campos vacios", 
                                                 "Error", 
                                                 JOptionPane.OK_CANCEL_OPTION, 
                                                 JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!editando && contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "La contraseña no puede estar vacia", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         else if(!(contrasena.equals(confirmacion_contrasena))){
             JOptionPane.showConfirmDialog(rootPane,
@@ -754,7 +773,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                                 JOptionPane.ERROR_MESSAGE);
         }
         else{
-            if(existeUsuario(usuario)){
+            if(!editando && existeUsuario(usuario)){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "El usuario " + usuario + " ya existe", 
                                                 "Error", 
@@ -767,43 +786,87 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                     if(validarEmail(correo)){ //Comprobamos si el formato de correo es valido
                         String contrasenaEncriptada = Seguridad.hashPassword(contrasena);
                         try {
-                            String sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) "
-                                    + " VALUES (?,?,?,?,?,?,?,?, CURDATE())";
-                            PreparedStatement ps = conexion.prepareStatement(sql);
-                            ps.setString(1, nombre);
-                            ps.setString(2, apellido1);
-                            ps.setString(3, apellido2);
-                            ps.setString(4, telefono);
-                            ps.setString(5, correo);
-                            ps.setString(6, usuario);
-                            ps.setString(7, contrasenaEncriptada);
-                            ps.setString(8, "encargado");
+                            if (editando) {
+                                // UPDATE
+                                String sql;
+                                PreparedStatement ps;
+
+                                if (!contrasena.isEmpty()) {
+                                    // Actualiza también la contraseña
+                                    sql = "UPDATE Usuario SET nombre=?, apellido1=?, apellido2=?, telefono=?, correo=?, " +
+                                          "usuario_login=?, contrasenya_login=? WHERE id=? AND rol='encargado'";
+                                    ps = conexion.prepareStatement(sql);
+                                    ps.setString(1, nombre);
+                                    ps.setString(2, apellido1);
+                                    ps.setString(3, apellido2);
+                                    ps.setString(4, telefono);
+                                    ps.setString(5, correo);
+                                    ps.setString(6, usuario);
+                                    ps.setString(7, Seguridad.hashPassword(contrasena));
+                                    ps.setInt(8, idEncargado);
+                                } else {
+                                    // No cambia la contraseña
+                                    sql = "UPDATE Usuario SET nombre=?, apellido1=?, apellido2=?, telefono=?, correo=?, " +
+                                          "usuario_login=? WHERE id=? AND rol='encargado'";
+                                    ps = conexion.prepareStatement(sql);
+                                    ps.setString(1, nombre);
+                                    ps.setString(2, apellido1);
+                                    ps.setString(3, apellido2);
+                                    ps.setString(4, telefono);
+                                    ps.setString(5, correo);
+                                    ps.setString(6, usuario);
+                                    ps.setInt(7, idEncargado);
+                                }
+
+                                int filas = ps.executeUpdate();
+                                if (filas == 1) {
+                                    JOptionPane.showMessageDialog(rootPane, "Encargado actualizado");
+                                    editando = false;
+                                    idEncargado = -1;
+                                    jButtonValidarEncargado.setText("Validar");
+                                    recargarTablaEncargados();
+                                    cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                                    limpiarFormularioEncargado();
+                                }
+                            } else {
+                                String sql = "INSERT INTO Usuario(nombre, apellido1, apellido2, telefono, correo, usuario_login, contrasenya_login, rol, fecha_creacion) "
+                                        + " VALUES (?,?,?,?,?,?,?,?, CURDATE())";
+                                PreparedStatement ps = conexion.prepareStatement(sql);
+                                ps.setString(1, nombre);
+                                ps.setString(2, apellido1);
+                                ps.setString(3, apellido2);
+                                ps.setString(4, telefono);
+                                ps.setString(5, correo);
+                                ps.setString(6, usuario);
+                                ps.setString(7, contrasenaEncriptada);
+                                ps.setString(8, "encargado");
 
 
-                            int filas = ps.executeUpdate();
-                            if(filas==1){
-                                JOptionPane.showConfirmDialog(rootPane,
-                                                            "Encargado registrado", 
-                                                            "", 
-                                                            JOptionPane.OK_CANCEL_OPTION, 
-                                                            JOptionPane.INFORMATION_MESSAGE);
-                                recargarTablaEncargados(); 
-                                cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
-                                jTextFieldNombreEncargado.setText("");
-                                jTextFieldApellido1.setText("");
-                                jTextFieldApellido2.setText("");
-                                jTextFieldTelefonoEncargado.setText("");
-                                jTextFieldCorreoEncargado.setText("");
-                                jTextFieldUsuario.setText("");
-                                jPasswordFieldContrasenya.setText("");
-                                jPasswordFieldConfirmar.setText("");
-                            }
-                            else{
-                                JOptionPane.showConfirmDialog(rootPane,
-                                                            "Ha habido un error", 
-                                                            "Error", 
-                                                            JOptionPane.OK_CANCEL_OPTION, 
-                                                            JOptionPane.ERROR_MESSAGE);
+                                int filas = ps.executeUpdate();
+                                if(filas==1){
+                                    JOptionPane.showConfirmDialog(rootPane,
+                                                                "Encargado registrado", 
+                                                                "", 
+                                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                                JOptionPane.INFORMATION_MESSAGE);
+                                    recargarTablaEncargados(); 
+                                    cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
+                                    jTextFieldNombreEncargado.setText("");
+                                    jTextFieldApellido1.setText("");
+                                    jTextFieldApellido2.setText("");
+                                    jTextFieldTelefonoEncargado.setText("");
+                                    jTextFieldCorreoEncargado.setText("");
+                                    jTextFieldUsuario.setText("");
+                                    jPasswordFieldContrasenya.setText("");
+                                    jPasswordFieldConfirmar.setText("");
+                                }
+                                else{
+                                    JOptionPane.showConfirmDialog(rootPane,
+                                                                "Ha habido un error", 
+                                                                "Error", 
+                                                                JOptionPane.OK_CANCEL_OPTION, 
+                                                                JOptionPane.ERROR_MESSAGE);
+                                }
                             }
                         } catch (SQLException ex) {
                             java.util.logging.Logger.getLogger(JDialogInterfazGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -987,19 +1050,22 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonEliminarEncargadoActionPerformed
 
     private void jButtonEditarEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEncargadoActionPerformed
-        // TODO add your handling code here:
-        if(jTableEncargados.getSelectedRowCount() == 1){
+        if (jTableEncargados.getSelectedRowCount() == 1) {
             int fila = jTableEncargados.getSelectedRow();
-            int id_encargado = Integer.parseInt(jTableEncargados.getValueAt(fila, 0).toString());
-            JDialogAltaUsuario jdau = new JDialogAltaUsuario("encargado", id_encargado, padre, true, true);
-            jdau.setVisible(true);
-            
-            jTabbedPane.setSelectedIndex(1);
-            recargarTablaEncargados();
-            recargarTablaAsignaciones();
-            cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
-        }
-        else{
+            idEncargado = Integer.parseInt(jTableEncargados.getValueAt(fila, 0).toString());
+
+            jTextFieldNombreEncargado.setText(jTableEncargados.getValueAt(fila, 1).toString());
+            jTextFieldApellido1.setText(jTableEncargados.getValueAt(fila, 2).toString());
+            jTextFieldApellido2.setText(jTableEncargados.getValueAt(fila, 3).toString());
+            jTextFieldTelefonoEncargado.setText(jTableEncargados.getValueAt(fila, 4).toString());
+            jTextFieldCorreoEncargado.setText(jTableEncargados.getValueAt(fila, 5).toString());
+            jTextFieldUsuario.setText(jTableEncargados.getValueAt(fila, 6).toString());
+            jPasswordFieldContrasenya.setText("");
+            jPasswordFieldConfirmar.setText("");
+
+            editando = true;
+            jButtonValidarEncargado.setText("Actualizar");
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Selecciona un encargado para editarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarEncargadoActionPerformed
@@ -1033,30 +1099,28 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAsignarActionPerformed
 
     private void jButtonEditarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarRestauranteActionPerformed
-        // TODO add your handling code here:
-        if(jTableRestaurantes.getSelectedRowCount() == 1){
-
+        if (jTableRestaurantes.getSelectedRowCount() == 1) {
             int fila = jTableRestaurantes.getSelectedRow();
-            
-            int id_restaurante = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 0).toString());
-            String nombreRestaurante = jTableRestaurantes.getValueAt(fila, 1).toString();
-            String direccion = jTableRestaurantes.getValueAt(fila, 2).toString();
-            String telefonoRestaurante   = jTableRestaurantes.getValueAt(fila, 3).toString();
-            String correoRestaurante = jTableRestaurantes.getValueAt(fila, 4).toString();
-            int capacidad = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 5).toString());
-            String apertura = jTableRestaurantes.getValueAt(fila, 6).toString();
-            String cierre = jTableRestaurantes.getValueAt(fila, 7).toString();
-                                            
-            this.dispose();
-            JDialogEditarRestaurante jder = new JDialogEditarRestaurante(padre, true, id_restaurante, nombreRestaurante, direccion, telefonoRestaurante, 
-                                                                         correoRestaurante, capacidad, apertura, cierre);
-            jder.setVisible(true);
-            jTabbedPane.setSelectedIndex(0);
-            recargarTablaEncargados();
-            recargarTablaAsignaciones();
-            cc.cargaCombos(jComboBoxRestaurantes, jComboBoxEncargados);
-        }
-        else{
+            idRestaurante = Integer.parseInt(jTableRestaurantes.getValueAt(fila, 0).toString());
+
+            jTextFieldNombreRestaurante.setText(jTableRestaurantes.getValueAt(fila, 1).toString());
+            jTextFieldDireccion.setText(jTableRestaurantes.getValueAt(fila, 2).toString());
+            jTextFieldTelefonoRestaurante.setText(jTableRestaurantes.getValueAt(fila, 3).toString());
+            jTextFieldCorreoRestaurante.setText(jTableRestaurantes.getValueAt(fila, 4).toString());
+            jSpinnerCapacidad.setValue(Integer.parseInt(jTableRestaurantes.getValueAt(fila, 5).toString()));
+
+            // Cargar apertura y cierre en los spinners
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                jSpinnerApertura.setValue(sdf.parse(jTableRestaurantes.getValueAt(fila, 6).toString()));
+                jSpinnerCierre.setValue(sdf.parse(jTableRestaurantes.getValueAt(fila, 7).toString()));
+            } catch (Exception e) {
+                logger.log(java.util.logging.Level.SEVERE, null, e);
+            }
+
+            editando = true;
+            jButtonValidarRestaurante.setText("Actualizar");
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Selecciona un restaurante para editarlo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarRestauranteActionPerformed
@@ -1208,6 +1272,26 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         return true;
     }
     
+    private void limpiarFormularioEncargado() {
+        jTextFieldNombreEncargado.setText("");
+        jTextFieldApellido1.setText("");
+        jTextFieldApellido2.setText("");
+        jTextFieldTelefonoEncargado.setText("");
+        jTextFieldCorreoEncargado.setText("");
+        jTextFieldUsuario.setText("");
+        jPasswordFieldContrasenya.setText("");
+        jPasswordFieldConfirmar.setText("");
+    }
+    
+    private void limpiarFormularioRestaurante() {
+        jTextFieldNombreRestaurante.setText("");
+        jTextFieldDireccion.setText("");
+        jTextFieldTelefonoRestaurante.setText("");
+        jTextFieldCorreoRestaurante.setText("");
+        jSpinnerCapacidad.setValue(0);
+        jSpinnerApertura.setValue(new java.util.Date(0));
+        jSpinnerCierre.setValue(new java.util.Date(0));
+    }
     /**
      * @param args the command line arguments
      */

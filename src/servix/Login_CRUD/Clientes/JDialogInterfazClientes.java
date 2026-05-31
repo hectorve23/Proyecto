@@ -378,19 +378,16 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(48, 48, 48))
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCerrarSesion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonBajaCliente))
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,7 +513,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         if(mfecha!=null){
             calElegida.setTime(mfecha);
         }
-
+        
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
         String horaStr = formatoHora.format(valorHora);
         String[] partesHora = horaStr.split(":");
@@ -541,9 +538,9 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
                 JOptionPane.ERROR_MESSAGE);
         }
         //Comprobacion de horario valido
-        else if(!validarHorario(valorHora)){
+        else if (!validarHorario(valorHora, comboBoxIdRestaurante())) {
             JOptionPane.showMessageDialog(rootPane,
-                "La hora debe estar entre 12:00-16:00 o 21:00-23:59",
+                "La hora debe estar dentro del horario del restaurante",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
         }
@@ -557,32 +554,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         //horario de apertura y cierre del restaurante
         else{
             try {
-                // Obtener horario del restaurante (consulta que ya necesitas para el INSERT)
-                int idRestaurante = comboBoxIdRestaurante();
-                PreparedStatement psHorario = conexion.prepareStatement(
-                    "SELECT apertura, cierre FROM Restaurante WHERE id_restaurante = ?"
-                );
-                psHorario.setInt(1, idRestaurante);
-                ResultSet rsHorario = psHorario.executeQuery();
-
-                if (rsHorario.next()) {
-                    Time apertura = rsHorario.getTime("apertura");
-                    Time cierre = rsHorario.getTime("cierre");
-
-                    // Convertimos la hora elegida a Time para comparar
-                    Time horaElegidaTime = Time.valueOf(partesHora[0] + ":" + partesHora[1] + ":00");
-
-                    SimpleDateFormat formatoMostrar = new SimpleDateFormat("HH:mm");
-                    if (horaElegidaTime.getTime() < apertura.getTime() || horaElegidaTime.getTime() >= cierre.getTime()) {
-                        JOptionPane.showMessageDialog(rootPane,
-                            "La hora debe estar dentro del horario del restaurante (" + formatoMostrar.format(apertura) + " - " + formatoMostrar.format(cierre) + ")",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
-                rsHorario.close();
-                psHorario.close();
+                
                 // Comprobacion de reserva solapada (2 horas antes o despues)
                 PreparedStatement psCheck = conexion.prepareStatement(
                     "SELECT COUNT(*) FROM reserva " +
@@ -703,9 +675,39 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
     }
     // Este metodo sirve para controlar si la hora introducida por el usuario entra dentro del horario del restaurante, entre apertura y cierre
-    private boolean validarHorario(Object valorHora){
-        return true;
+    private boolean validarHorario(Object valorHora, int idRestaurante) {
+    try {
+        PreparedStatement psHorario = conexion.prepareStatement(
+            "SELECT apertura, cierre FROM Restaurante WHERE id_restaurante = ?"
+        );
+        psHorario.setInt(1, idRestaurante);
+        ResultSet rsHorario = psHorario.executeQuery();
+
+        if (rsHorario.next()) {
+            Time apertura = rsHorario.getTime("apertura");
+            Time cierre = rsHorario.getTime("cierre");
+
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+            String horaStr = formatoHora.format((java.util.Date) valorHora);
+            Time horaElegida = Time.valueOf(horaStr);
+
+            // Comparar solo horas, minutos y segundos ignorando la fecha
+            int elegida = horaElegida.toLocalTime().toSecondOfDay();
+            int apert   = apertura.toLocalTime().toSecondOfDay();
+            int cierr   = cierre.toLocalTime().toSecondOfDay();
+
+            if (cierr == 0) {
+                return elegida >= apert;
+            } else {
+                return elegida >= apert && elegida < cierr;
+            }
+        }
+    } catch (SQLException ex) {
+        logger.log(java.util.logging.Level.SEVERE, null, ex);
     }
+    return false;
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -763,7 +765,7 @@ public class JDialogInterfazClientes extends javax.swing.JDialog{
         
         try {
             PreparedStatement ps = conexion.prepareStatement(
-                    "SELECT id_reserva as Nº, CONCAT(restaurante.nombre, ' | ', restaurante.direccion) as Restaurante_direccion, fecha_hora AS Fecha, n_comensales AS Comensales "
+                    "SELECT id_reserva as Nº, CONCAT(restaurante.nombre, ' | ', restaurante.direccion) as 'Dirección del restaurante', fecha_hora AS Fecha, n_comensales AS Comensales "
                    + "FROM reserva INNER JOIN restaurante "
                    + "ON reserva.id_restaurante = restaurante.id_restaurante "
                    + "WHERE id_cliente=? AND NOT estado_reserva=? AND fecha_hora >= NOW()"

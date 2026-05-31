@@ -331,7 +331,7 @@ public class JDialogGestionarReservas extends javax.swing.JDialog {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jTabbedPane.addTab("Reservas rechazadas", jPanelRechazadas);
+        jTabbedPane.addTab("Reservas canceladas", jPanelRechazadas);
 
         jPanel1.add(jTabbedPane, java.awt.BorderLayout.PAGE_START);
 
