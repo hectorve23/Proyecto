@@ -456,7 +456,7 @@ public class JDialogAltaUsuario extends javax.swing.JDialog {
             }
             
             private void comprobarLongitud(){
-                if(jTextFieldTelefono.getText().length() < 9){
+                if(jTextFieldTelefono.getText().length() != 9){
                     jTextFieldTelefono.setBackground(new java.awt.Color(255, 200, 200));
                     jTextFieldTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.RED, 2));
                 }else{
