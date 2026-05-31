@@ -777,7 +777,7 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         
         
         if(nombre.isEmpty() || apellido1.isEmpty() || telefono.isEmpty() || correo.isEmpty()
-                || usuario.isEmpty() || apellido2.isEmpty()){
+                || usuario.isEmpty()){
             JOptionPane.showConfirmDialog(rootPane,
                                                 "No puede haber campos vacios", 
                                                 "Error", 
@@ -840,7 +840,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
                                     ps.setString(6, usuario);
                                     ps.setInt(7, idEncargado);
                                 }
-
+                                jLabel14.setText("<html>Contraseña <font color='red'>*</font></html>");
+                                jLabel15.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
                                 int filas = ps.executeUpdate();
                                 if (filas == 1) {
                                     JOptionPane.showMessageDialog(rootPane, "Encargado actualizado");
@@ -1074,6 +1075,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
 
     private void jButtonEditarEncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEncargadoActionPerformed
         if (jTableEncargados.getSelectedRowCount() == 1) {
+            jLabel14.setText("<html>Contraseña</html>");
+            jLabel15.setText("<html>Introduzca de nuevo la contraseña</html>");
             int fila = jTableEncargados.getSelectedRow();
             idEncargado = Integer.parseInt(jTableEncargados.getValueAt(fila, 0).toString());
 
@@ -1224,6 +1227,8 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
     private void camposObligatorios(){
         jLabel1.setText("<html>Nombre <font color='red'>*</font></html>");
         jLabel2.setText("<html>Direccion <font color='red'>*</font></html>");
+        jLabel3.setText("<html>Telefono <font color='red'>*</font></html>");
+        jLabel4.setText("<html>Correo <font color='red'>*</font></html>");
         jLabel5.setText("<html>Capacidad <font color='red'>*</font></html>");
         jLabel6.setText("<html>Apertura <font color='red'>*</font></html>");
         jLabel7.setText("<html>Cierre <font color='red'>*</font></html>");
@@ -1234,7 +1239,6 @@ public class JDialogInterfazGerente extends javax.swing.JDialog {
         jLabel13.setText("<html>Usuario <font color='red'>*</font></html>");
         jLabel14.setText("<html>Contraseña <font color='red'>*</font></html>");
         jLabel15.setText("<html>Introduzca de nuevo la contraseña <font color='red'>*</font></html>");
-        
     }
     
     public void formatoTabla(){ // Configuracion para que los campos de la tabla se vea bien
